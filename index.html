@@ -4,11 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>王宇錡 Max Wang — 專案作品集</title>
-<meta name="description" content="王宇錡 Max Wang 的個人作品集：AI 與程式專案（APCS 評分系統、Claude Code 簡報技能、CV App）與自然科學探究實作成果。">
+<meta name="description" content="王宇錡 Max Wang 的程式作品集：APCS 多語言評分系統 apcs-judge、Claude Code 簡報製作 skill ppt-creater。">
 <meta name="author" content="王宇錡 Max Wang">
 <meta property="og:type" content="profile">
 <meta property="og:title" content="王宇錡 Max Wang — 專案作品集">
-<meta property="og:description" content="以「持續探索與進步」為信念。AI × 程式專案與自然科學探究實作。">
+<meta property="og:description" content="apcs-judge、ppt-creater — 在 GitHub 上公開的程式專案。">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/266498311?v=4">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#14130F">
@@ -83,17 +83,7 @@
   }
   .hero h1 em{font-style:normal;color:var(--accent)}
   .hero h1 .en{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(16px,2.4vw,30px);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60);margin-top:clamp(12px,1.6vw,20px);line-height:1.3}
-  .hero__grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,5vw,64px);align-items:start}
-  @media(max-width:880px){.hero__grid{grid-template-columns:1fr}}
-  .lede{font-size:clamp(17px,1.2vw,20px);line-height:1.85;margin:0 0 26px;max-width:56ch}
-  .lede strong{font-weight:700;box-shadow:inset 0 -.45em 0 var(--accent-soft)}
-  .hero__side{border-left:2px solid var(--ink);padding-left:clamp(16px,2vw,26px)}
-  @media(max-width:880px){.hero__side{border-left:0;border-top:2px solid var(--ink);padding-left:0;padding-top:24px}}
-  .fact{margin:0 0 22px}
-  .fact:last-child{margin-bottom:0}
-  .fact dt{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-60);margin-bottom:5px}
-  .fact dd{margin:0;font-size:15px;line-height:1.6;font-weight:500}
-  .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+  .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(20px,3vw,34px)}
   .btn{
     display:inline-flex;align-items:center;gap:9px;text-decoration:none;
     padding:13px 24px;border-radius:999px;font-weight:700;font-size:14px;
@@ -171,18 +161,6 @@
   .card__link:hover{gap:12px}
   .card__link span{transition:transform .18s ease}
 
-  /* numbered list block */
-  .rail{display:grid;gap:0;border-top:1.5px solid var(--ink)}
-  .rail__row{
-    display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,1.15fr);gap:clamp(12px,2vw,32px);
-    padding:clamp(20px,2.6vw,30px) 0;border-bottom:1.5px solid var(--ink-12);align-items:start;
-  }
-  @media(max-width:760px){.rail__row{grid-template-columns:44px minmax(0,1fr)}.rail__row p{grid-column:2}}
-  .rail__num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);padding-top:6px}
-  .rail__row h3{font-family:var(--serif);font-weight:900;font-size:clamp(19px,1.9vw,25px);line-height:1.3;margin:0 0 8px;letter-spacing:-.01em}
-  .rail__meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-30)}
-  .rail__row p{margin:0;font-size:14.5px;line-height:1.8;color:var(--ink-60)}
-
   /* ---------- footer ---------- */
   .foot{background:var(--ink);color:var(--paper);padding:clamp(48px,7vw,86px) 0 34px}
   .foot h2{font-family:var(--serif);font-weight:900;font-size:clamp(30px,5.4vw,62px);line-height:1.05;margin:0 0 28px;letter-spacing:-.025em}
@@ -221,7 +199,6 @@
     <a class="nav__mark" href="#top">王宇錡<span>.</span></a>
     <div class="nav__links">
       <a href="#code">程式專案</a>
-      <a href="#science" data-opt>探究實作</a>
       <a href="#ask">問我的分身</a>
       <a href="#contact" data-opt>聯絡</a>
     </div>
@@ -232,29 +209,13 @@
 <header id="top" class="hero">
   <div class="wrap">
     <p class="eyebrow">Portfolio · 2026</p>
-    <div class="hero__grid">
-      <div>
-        <h1>持續探索<br><em>與進步</em>
-          <span class="en">Max Wang / 王宇錡</span>
-        </h1>
-        <p class="lede">
-          康橋國際學校學生。用 <strong>AI 與程式</strong>把想法快速做成能用的東西，
-          也在實驗室裡把<strong>看不見的分子</strong>量成數據。
-          從評分系統到晶球膜厚——
-          我相信理解一件事的方法是可以被複製的：問 What、Why、Where、When、How。
-        </p>
-        <div class="btns">
-          <a class="btn btn--fill" href="#code">看程式專案 <span aria-hidden="true">→</span></a>
-          <a class="btn btn--ghost" href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
-        </div>
-      </div>
-      <div class="hero__side">
-        <dl style="margin:0">
-          <div class="fact"><dt>現在</dt><dd>康橋國際學校 · 高三<br>2024 – 2026</dd></div>
-          <div class="fact"><dt>在做的事</dt><dd>用 AI 開發實用工具、<br>自然科學探究實作</dd></div>
-          <div class="fact"><dt>工具箱</dt><dd>Python · C++ · JavaScript<br>Claude Code · 分光光度計</dd></div>
-          <div class="fact"><dt>語言</dt><dd>中文（母語）· 英文 TOEIC 775 · 日文自學中</dd></div>
-        </dl>
+    <div>
+      <h1>程式<br><em>專案</em>
+        <span class="en">Max Wang / 王宇錡</span>
+      </h1>
+      <div class="btns">
+        <a class="btn btn--fill" href="#code">看專案 <span aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
   </div>
@@ -262,10 +223,10 @@
 
 <div class="strip" aria-hidden="true">
   <div class="strip__track">
-    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>晶球交聯反應</span><span>唾液澱粉酶</span><span>阻尼器與制震</span>
-    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>晶球交聯反應</span><span>唾液澱粉酶</span><span>阻尼器與制震</span>
-    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>晶球交聯反應</span><span>唾液澱粉酶</span><span>阻尼器與制震</span>
-    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>晶球交聯反應</span><span>唾液澱粉酶</span><span>阻尼器與制震</span>
+    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>JavaScript</span><span>Python / C++ / Java</span>
+    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>JavaScript</span><span>Python / C++ / Java</span>
+    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>JavaScript</span><span>Python / C++ / Java</span>
+    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>JavaScript</span><span>Python / C++ / Java</span>
   </div>
 </div>
 
@@ -307,51 +268,12 @@
   </div>
 </section>
 
-<!-- ================= SCIENCE ================= -->
-<section id="science" class="sec sec--alt">
-  <div class="wrap">
-    <div class="sec__head rv">
-      <h2>探究<em>實作</em></h2>
-      <p class="sec__note">三個從生活疑問開始、以數據收尾的實驗。有些結果和假設不一樣——那通常才是最有意思的地方。</p>
-    </div>
-
-    <div class="rail">
-      <article class="rail__row rv">
-        <div class="rail__num">01</div>
-        <div>
-          <h3>分子料理中的交聯反應</h3>
-          <p class="rail__meta">pH × 海藻酸鈉晶球 · 約 8 週 / 60 小時</p>
-        </div>
-        <p>從課堂上兩杯神秘溶液做出會彈跳的晶球開始，設計膜厚、粒徑與回彈高度三項測量，並加入剖面觀察驗證。結果耐人尋味：pH 7 的膜最厚、pH 4 的粒徑最大、純水組彈性最好，三者指標彼此矛盾。與其歸咎誤差，我改問「會不會是緩衝液成分本身干擾了反應？」——這個追問後來成了我的習慣。</p>
-      </article>
-
-      <article class="rail__row rv">
-        <div class="rail__num">02</div>
-        <div>
-          <h3>氯化鈉濃度對唾液澱粉酶活性之影響</h3>
-          <p class="rail__meta">分光光度計 · 標準曲線 R² &gt; 0.99</p>
-        </div>
-        <p>起點是宿舍早餐太鹹。設計 0%、0.5%、1%、2% 四組 NaCl 環境，建立吸光度—澱粉濃度標準曲線後回推反應效率。原本假設 0.5% 最佳，實測卻是無鹽環境活性最高、高濃度受抑制，並從別構調節、酶親和力（Km / Kd）與滲透壓三個角度提出解釋與後續驗證設計。</p>
-      </article>
-
-      <article class="rail__row rv">
-        <div class="rail__num">03</div>
-        <div>
-          <h3>建築安全：阻尼器與海砂屋</h3>
-          <p class="rail__meta">共振與制震 · 竹塹抗震盃延伸</p>
-        </div>
-        <p>以台北 101 的阻尼系統為案例，實測最大地動加速度與地震週期的關係，並比較阻尼器裝在一樓、三樓與不裝的差異。發現阻尼器在共振週期附近制震效果最明顯，但週期較大時整體增重反而使最大地動加速度上升。同時以電阻變化觀察海砂水泥對鋼筋的影響。</p>
-      </article>
-    </div>
-  </div>
-</section>
-
 <!-- ================= AI AGENT ================= -->
-<section id="ask" class="sec">
+<section id="ask" class="sec sec--alt">
   <div class="wrap">
     <div class="sec__head rv">
       <h2>問問<em>我的分身</em></h2>
-      <p class="sec__note">不想從頭讀完？直接問。這個 AI 分身可以回答關於我的專案、實驗與學習歷程的問題。</p>
+      <p class="sec__note">想知道更多細節？直接問。這個 AI 分身可以回答關於我和我的專案的問題。</p>
     </div>
     <div class="agent rv">
       <div class="agent__bar"><span class="agent__dot" aria-hidden="true"></span>AI Avatar · Live</div>
