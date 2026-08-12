@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<script type="module" src="https://cdn.perxona.ai/asia/prod/latest/widget/entry/index.js"></script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314130F'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Georgia,serif' font-weight='700' fill='%23D7492F' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
 <style>
   :root{
@@ -195,6 +196,21 @@
   .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
   .rv.in{opacity:1;transform:none}
   @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+  /* ---------- agent widget ---------- */
+  .agent{
+    border:1.5px solid var(--ink);border-radius:6px;background:var(--paper);
+    overflow:hidden;position:relative;min-height:520px;
+    display:flex;flex-direction:column;
+  }
+  .agent__bar{
+    display:flex;align-items:center;gap:10px;
+    padding:12px 18px;border-bottom:1.5px solid var(--ink);background:var(--ink);color:var(--paper);
+    font-family:var(--mono);font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;
+  }
+  .agent__dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex:none}
+  .agent__stage{flex:1;display:flex;min-height:470px}
+  .agent__stage sv-agent{display:block;width:100%;min-height:470px}
 </style>
 </head>
 <body>
@@ -206,7 +222,8 @@
     <div class="nav__links">
       <a href="#code">程式專案</a>
       <a href="#science" data-opt>探究實作</a>
-      <a href="#contact">聯絡</a>
+      <a href="#ask">問我的分身</a>
+      <a href="#contact" data-opt>聯絡</a>
     </div>
   </div>
 </nav>
@@ -325,6 +342,26 @@
         </div>
         <p>以台北 101 的阻尼系統為案例，實測最大地動加速度與地震週期的關係，並比較阻尼器裝在一樓、三樓與不裝的差異。發現阻尼器在共振週期附近制震效果最明顯，但週期較大時整體增重反而使最大地動加速度上升。同時以電阻變化觀察海砂水泥對鋼筋的影響。</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= AI AGENT ================= -->
+<section id="ask" class="sec">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <h2>問問<em>我的分身</em></h2>
+      <p class="sec__note">不想從頭讀完？直接問。這個 AI 分身可以回答關於我的專案、實驗與學習歷程的問題。</p>
+    </div>
+    <div class="agent rv">
+      <div class="agent__bar"><span class="agent__dot" aria-hidden="true"></span>AI Avatar · Live</div>
+      <div class="agent__stage">
+        <sv-agent
+          agentProfileId="01KZTWK2F4HGENW91G7SKGHJN3"
+          presentationMode="embedded"
+          apiKey="bc7e8b1c-f95e-4261-b2ba-7a1c79490b57">
+        </sv-agent>
+      </div>
     </div>
   </div>
 </section>
