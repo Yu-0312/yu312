@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>王宇錡 Max Wang — 專案作品集</title>
+<meta name="description" content="王宇錡 Max Wang 的個人作品集：AI 與程式專案（APCS 評分系統、Claude Code 簡報技能、CV App）與自然科學探究實作成果。">
+<meta name="author" content="王宇錡 Max Wang">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="王宇錡 Max Wang — 專案作品集">
+<meta property="og:description" content="以「持續探索與進步」為信念。AI × 程式專案與自然科學探究實作。">
+<meta property="og:image" content="https://avatars.githubusercontent.com/u/266498311?v=4">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#14130F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314130F'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Georgia,serif' font-weight='700' fill='%23D7492F' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+  :root{
+    --paper:#F4F1EC;
+    --paper-2:#EAE5DC;
+    --ink:#14130F;
+    --ink-60:rgba(20,19,15,.62);
+    --ink-30:rgba(20,19,15,.28);
+    --ink-12:rgba(20,19,15,.12);
+    --accent:#D7492F;
+    --accent-soft:rgba(215,73,47,.12);
+    --sans:"Noto Sans TC","Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    --serif:"Noto Serif TC",Georgia,"Times New Roman",serif;
+    --mono:"Space Grotesk",ui-monospace,SFMono-Regular,Menlo,monospace;
+    --max:1240px;
+    --pad:clamp(20px,5vw,72px);
+  }
+  *,*::before,*::after{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-weight:400;line-height:1.75;
+    font-size:clamp(15px,.55vw + 13.4px,17px);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;display:block}
+  a{color:inherit}
+  ::selection{background:var(--accent);color:var(--paper)}
+  :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+  .skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--paper);padding:12px 18px;z-index:200}
+  .skip:focus{left:12px;top:12px}
+
+  .wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--pad)}
+
+  /* ---------- nav ---------- */
+  .nav{position:sticky;top:0;z-index:100;background:rgba(244,241,236,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--ink-12)}
+  .nav__in{max-width:var(--max);margin:0 auto;padding:14px var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .nav__mark{font-family:var(--serif);font-weight:900;font-size:19px;letter-spacing:.02em;text-decoration:none;white-space:nowrap}
+  .nav__mark span{color:var(--accent)}
+  .nav__links{display:flex;gap:clamp(14px,2vw,30px);align-items:center;font-size:14px;font-weight:500}
+  .nav__links a{text-decoration:none;color:var(--ink-60);transition:color .18s ease}
+  .nav__links a:hover{color:var(--accent)}
+  @media(max-width:600px){.nav__links a[data-opt]{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{padding:clamp(56px,10vw,120px) 0 clamp(40px,6vw,72px);position:relative;overflow:hidden}
+  .hero::after{
+    content:"";position:absolute;right:-14vw;top:-8vw;width:44vw;height:44vw;
+    background:radial-gradient(circle at 30% 30%,var(--accent-soft),transparent 68%);
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--accent);font-weight:700;margin:0 0 clamp(16px,2.5vw,28px);
+    display:flex;align-items:center;gap:12px;
+  }
+  .eyebrow::after{content:"";flex:1;height:1px;background:var(--ink-12);max-width:180px}
+  .hero h1{
+    font-family:var(--serif);font-weight:900;
+    font-size:clamp(48px,11.5vw,148px);line-height:.92;letter-spacing:-.03em;
+    margin:0 0 clamp(18px,3vw,32px);
+  }
+  .hero h1 em{font-style:normal;color:var(--accent)}
+  .hero h1 .en{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(16px,2.4vw,30px);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60);margin-top:clamp(12px,1.6vw,20px);line-height:1.3}
+  .hero__grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(24px,5vw,64px);align-items:start}
+  @media(max-width:880px){.hero__grid{grid-template-columns:1fr}}
+  .lede{font-size:clamp(17px,1.2vw,20px);line-height:1.85;margin:0 0 26px;max-width:56ch}
+  .lede strong{font-weight:700;box-shadow:inset 0 -.45em 0 var(--accent-soft)}
+  .hero__side{border-left:2px solid var(--ink);padding-left:clamp(16px,2vw,26px)}
+  @media(max-width:880px){.hero__side{border-left:0;border-top:2px solid var(--ink);padding-left:0;padding-top:24px}}
+  .fact{margin:0 0 22px}
+  .fact:last-child{margin-bottom:0}
+  .fact dt{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-60);margin-bottom:5px}
+  .fact dd{margin:0;font-size:15px;line-height:1.6;font-weight:500}
+  .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:8px}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+    padding:13px 24px;border-radius:999px;font-weight:700;font-size:14px;
+    border:1.5px solid var(--ink);transition:transform .18s ease,background .18s ease,color .18s ease;
+  }
+  .btn--fill{background:var(--ink);color:var(--paper)}
+  .btn--fill:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
+  .btn--ghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
+  @media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+
+  /* ---------- marquee strip ---------- */
+  .strip{border-block:1.5px solid var(--ink);background:var(--ink);color:var(--paper);overflow:hidden;padding:11px 0}
+  .strip__track{display:flex;gap:0;width:max-content;animation:slide 34s linear infinite}
+  @media (prefers-reduced-motion:reduce){.strip__track{animation:none}}
+  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+  .strip__track span{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;padding:0 26px;white-space:nowrap;opacity:.9}
+  .strip__track span::after{content:"◆";margin-left:26px;color:var(--accent);opacity:.85}
+
+  /* ---------- sections ---------- */
+  section{scroll-margin-top:78px}
+  .sec{padding:clamp(56px,9vw,110px) 0}
+  .sec--alt{background:var(--paper-2)}
+  .sec__head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,52px)}
+  .sec h2{
+    font-family:var(--serif);font-weight:900;letter-spacing:-.025em;line-height:1;
+    font-size:clamp(34px,6.4vw,80px);margin:0;
+  }
+  .sec h2 em{font-style:normal;color:var(--accent)}
+  .sec__note{margin:0;max-width:44ch;color:var(--ink-60);font-size:15px;line-height:1.75}
+
+  /* filter */
+  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(24px,3vw,36px)}
+  .filter{
+    font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+    padding:9px 18px;border-radius:999px;border:1.5px solid var(--ink-30);background:transparent;color:var(--ink-60);
+    cursor:pointer;transition:all .18s ease;
+  }
+  .filter:hover{border-color:var(--ink);color:var(--ink)}
+  .filter[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+
+  /* cards */
+  .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,1.8vw,26px)}
+  @media(max-width:760px){.cards{grid-template-columns:1fr}}
+  .card{
+    background:var(--paper);border:1.5px solid var(--ink);border-radius:6px;
+    padding:clamp(22px,2.4vw,30px);display:flex;flex-direction:column;gap:14px;
+    position:relative;transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .sec--alt .card{background:var(--paper)}
+  .card:hover{transform:translateY(-3px);box-shadow:7px 7px 0 var(--ink)}
+  @media (prefers-reduced-motion:reduce){.card:hover{transform:none}}
+  .card.is-hidden{display:none}
+  .card--wide{grid-column:span 2}
+  @media(max-width:900px){.card--wide{grid-column:span 1}}
+  .card__top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+  .tag{
+    font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
+    padding:5px 11px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;
+  }
+  .tag--ink{background:var(--ink);color:var(--paper)}
+  .stars{font-family:var(--mono);font-size:12px;color:var(--ink-60);white-space:nowrap;font-weight:500}
+  .card h3{
+    font-family:var(--serif);font-weight:900;font-size:clamp(21px,2vw,27px);
+    line-height:1.22;letter-spacing:-.01em;margin:0;
+  }
+  .card h3 a{text-decoration:none;background-image:linear-gradient(var(--accent),var(--accent));background-size:0 2px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .25s ease}
+  .card h3 a:hover{background-size:100% 2px;color:var(--accent)}
+  .card p{margin:0;font-size:14.5px;line-height:1.78;color:var(--ink-60)}
+  .card ul{margin:0;padding-left:1.05em;font-size:14px;line-height:1.72;color:var(--ink-60)}
+  .card li{margin-bottom:5px}
+  .card li::marker{color:var(--accent)}
+  .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
+  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.05em;padding:4px 10px;border:1px solid var(--ink-12);border-radius:4px;color:var(--ink-60)}
+  .card__link{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--accent);display:inline-flex;align-items:center;gap:7px}
+  .card__link:hover{gap:12px}
+  .card__link span{transition:transform .18s ease}
+
+  /* numbered list block */
+  .rail{display:grid;gap:0;border-top:1.5px solid var(--ink)}
+  .rail__row{
+    display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,1.15fr);gap:clamp(12px,2vw,32px);
+    padding:clamp(20px,2.6vw,30px) 0;border-bottom:1.5px solid var(--ink-12);align-items:start;
+  }
+  @media(max-width:760px){.rail__row{grid-template-columns:44px minmax(0,1fr)}.rail__row p{grid-column:2}}
+  .rail__num{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);padding-top:6px}
+  .rail__row h3{font-family:var(--serif);font-weight:900;font-size:clamp(19px,1.9vw,25px);line-height:1.3;margin:0 0 8px;letter-spacing:-.01em}
+  .rail__meta{font-family:var(--mono);font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-30)}
+  .rail__row p{margin:0;font-size:14.5px;line-height:1.8;color:var(--ink-60)}
+
+  /* ---------- footer ---------- */
+  .foot{background:var(--ink);color:var(--paper);padding:clamp(48px,7vw,86px) 0 34px}
+  .foot h2{font-family:var(--serif);font-weight:900;font-size:clamp(30px,5.4vw,62px);line-height:1.05;margin:0 0 28px;letter-spacing:-.025em}
+  .foot h2 em{font-style:normal;color:var(--accent)}
+  .foot__links{display:flex;flex-wrap:wrap;gap:12px 28px;margin-bottom:44px}
+  .foot__links a{font-family:var(--mono);font-size:14px;letter-spacing:.06em;text-decoration:none;border-bottom:1.5px solid rgba(244,241,236,.28);padding-bottom:3px;transition:border-color .18s ease,color .18s ease}
+  .foot__links a:hover{color:var(--accent);border-color:var(--accent)}
+  .foot__bar{border-top:1px solid rgba(244,241,236,.18);padding-top:20px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,241,236,.55)}
+
+  /* reveal */
+  .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
+  .rv.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">跳到主要內容</a>
+
+<nav class="nav" aria-label="主要導覽">
+  <div class="nav__in">
+    <a class="nav__mark" href="#top">王宇錡<span>.</span></a>
+    <div class="nav__links">
+      <a href="#code">程式專案</a>
+      <a href="#science" data-opt>探究實作</a>
+      <a href="#contact">聯絡</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+<header id="top" class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Portfolio · 2026</p>
+    <div class="hero__grid">
+      <div>
+        <h1>持續探索<br><em>與進步</em>
+          <span class="en">Max Wang / 王宇錡</span>
+        </h1>
+        <p class="lede">
+          康橋國際學校學生。用 <strong>AI 與程式</strong>把想法快速做成能用的東西，
+          也在實驗室裡把<strong>看不見的分子</strong>量成數據。
+          從評分系統到晶球膜厚——
+          我相信理解一件事的方法是可以被複製的：問 What、Why、Where、When、How。
+        </p>
+        <div class="btns">
+          <a class="btn btn--fill" href="#code">看程式專案 <span aria-hidden="true">→</span></a>
+          <a class="btn btn--ghost" href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
+        </div>
+      </div>
+      <div class="hero__side">
+        <dl style="margin:0">
+          <div class="fact"><dt>現在</dt><dd>康橋國際學校 · 高三<br>2024 – 2026</dd></div>
+          <div class="fact"><dt>在做的事</dt><dd>用 AI 開發實用工具、<br>自然科學探究實作</dd></div>
+          <div class="fact"><dt>工具箱</dt><dd>Python · C++ · JavaScript<br>Claude Code · 分光光度計</dd></div>
+          <div class="fact"><dt>語言</dt><dd>中文（母語）· 英文 TOEIC 775 · 日文自學中</dd></div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-hidden="true">
+  <div class="strip__track">
+    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>晶球交聯反應</span><span>唾液澱粉酶</span><span>阻尼器與制震</span>
+    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>晶球交聯反應</span><span>唾液澱粉酶</span><span>阻尼器與制震</span>
+    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>晶球交聯反應</span><span>唾液澱粉酶</span><span>阻尼器與制震</span>
+    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>晶球交聯反應</span><span>唾液澱粉酶</span><span>阻尼器與制震</span>
+  </div>
+</div>
+
+<!-- ================= CODE ================= -->
+<section id="code" class="sec">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <h2>程式<em>專案</em></h2>
+      <p class="sec__note">在 GitHub 上公開、實際跑得動的兩個專案。</p>
+    </div>
+
+    <div class="cards" id="cardGrid">
+
+      <article class="card rv">
+        <div class="card__top">
+          <span class="tag tag--ink">GitHub · JavaScript</span>
+          <span class="stars">★ 54</span>
+        </div>
+        <h3><a href="https://github.com/Yu-0312/apcs-judge" target="_blank" rel="noopener">apcs-judge</a></h3>
+        <p>APCS 多語言評分系統。單一頁面就支援 Python / C++ / C / Java 四種語言，收錄 58 題涵蓋初級、中級與高級，並附上解題思路提示，讓練習的人卡住時有方向而不是直接看答案。</p>
+        <div class="stack">
+          <span class="chip">JavaScript</span><span class="chip">Python</span><span class="chip">C++</span><span class="chip">Java</span><span class="chip">Single-page</span>
+        </div>
+        <a class="card__link" href="https://github.com/Yu-0312/apcs-judge" target="_blank" rel="noopener">前往 Repo <span aria-hidden="true">→</span></a>
+      </article>
+
+      <article class="card rv">
+        <div class="card__top">
+          <span class="tag tag--ink">GitHub · JavaScript</span>
+          <span class="stars">★ 7</span>
+        </div>
+        <h3><a href="https://github.com/Yu-0312/ppt-creater" target="_blank" rel="noopener">ppt-creater</a></h3>
+        <p>寫給 Claude Code 的簡報製作 skill——把「幫我做一份簡報」這件模糊的事，變成可重複、有規格的流程，讓每次產出的品質不再靠運氣。</p>
+        <div class="stack"><span class="chip">JavaScript</span><span class="chip">Claude Code</span><span class="chip">Skill</span></div>
+        <a class="card__link" href="https://github.com/Yu-0312/ppt-creater" target="_blank" rel="noopener">前往 Repo <span aria-hidden="true">→</span></a>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= SCIENCE ================= -->
+<section id="science" class="sec sec--alt">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <h2>探究<em>實作</em></h2>
+      <p class="sec__note">三個從生活疑問開始、以數據收尾的實驗。有些結果和假設不一樣——那通常才是最有意思的地方。</p>
+    </div>
+
+    <div class="rail">
+      <article class="rail__row rv">
+        <div class="rail__num">01</div>
+        <div>
+          <h3>分子料理中的交聯反應</h3>
+          <p class="rail__meta">pH × 海藻酸鈉晶球 · 約 8 週 / 60 小時</p>
+        </div>
+        <p>從課堂上兩杯神秘溶液做出會彈跳的晶球開始，設計膜厚、粒徑與回彈高度三項測量，並加入剖面觀察驗證。結果耐人尋味：pH 7 的膜最厚、pH 4 的粒徑最大、純水組彈性最好，三者指標彼此矛盾。與其歸咎誤差，我改問「會不會是緩衝液成分本身干擾了反應？」——這個追問後來成了我的習慣。</p>
+      </article>
+
+      <article class="rail__row rv">
+        <div class="rail__num">02</div>
+        <div>
+          <h3>氯化鈉濃度對唾液澱粉酶活性之影響</h3>
+          <p class="rail__meta">分光光度計 · 標準曲線 R² &gt; 0.99</p>
+        </div>
+        <p>起點是宿舍早餐太鹹。設計 0%、0.5%、1%、2% 四組 NaCl 環境，建立吸光度—澱粉濃度標準曲線後回推反應效率。原本假設 0.5% 最佳，實測卻是無鹽環境活性最高、高濃度受抑制，並從別構調節、酶親和力（Km / Kd）與滲透壓三個角度提出解釋與後續驗證設計。</p>
+      </article>
+
+      <article class="rail__row rv">
+        <div class="rail__num">03</div>
+        <div>
+          <h3>建築安全：阻尼器與海砂屋</h3>
+          <p class="rail__meta">共振與制震 · 竹塹抗震盃延伸</p>
+        </div>
+        <p>以台北 101 的阻尼系統為案例，實測最大地動加速度與地震週期的關係，並比較阻尼器裝在一樓、三樓與不裝的差異。發現阻尼器在共振週期附近制震效果最明顯，但週期較大時整體增重反而使最大地動加速度上升。同時以電阻變化觀察海砂水泥對鋼筋的影響。</p>
+      </article>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer id="contact" class="foot">
+  <div class="wrap">
+    <h2>有想聊的專案，<br>或想看更多<em>細節？</em></h2>
+    <div class="foot__links">
+      <a href="mailto:wang.yuchi.312@gmail.com">wang.yuchi.312@gmail.com</a>
+      <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">github.com/Yu-0312</a>
+    </div>
+    <div class="foot__bar">
+      <span>王宇錡 Max Wang · Taipei, Taiwan</span>
+      <span>Built with HTML, CSS &amp; a lot of iteration</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  /* scroll reveal */
+  var items = document.querySelectorAll('.rv');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    items.forEach(function(el, i){ el.style.transitionDelay = (Math.min(i,6) * 55) + 'ms'; io.observe(el); });
+  } else {
+    items.forEach(function(el){ el.classList.add('in'); });
+  }
+
+})();
+</script>
+</body>
+</html>
