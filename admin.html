@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>後台 — 王宇錡 Max Wang</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#14130F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314130F'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Georgia,serif' font-weight='700' fill='%23D7492F' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">跳到主要內容</a>
+
+<nav class="nav" aria-label="主要導覽">
+  <div class="nav__in">
+    <a class="nav__mark" href="./index.html">王宇錡<span>.</span></a>
+    <div class="nav__links">
+      <a href="./blog.html">看前台</a>
+      <span id="who" style="font-family:var(--mono);font-size:12px;color:var(--ink-30)"></span>
+      <button id="logout" class="btn btn--sm btn--ghost" type="button" hidden>登出</button>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="sec sec--tight">
+  <div class="wrap">
+
+    <!-- ---------------- 登入 ---------------- -->
+    <div id="loginView" hidden>
+      <div class="panel" style="max-width:520px;margin:clamp(20px,5vw,60px) auto">
+        <h2>站長登入</h2>
+        <p class="panel__note">輸入 email，系統會寄一封含登入連結的信給你。點開就登入，不用記密碼。</p>
+        <div id="loginMsg" class="msg msg--info"></div>
+        <form id="loginForm">
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" type="email" required autocomplete="email" placeholder="you@example.com">
+            <span class="hint">只有 config.js 裡設定的站長 email 能發文，其他人就算收到信也改不了東西。</span>
+          </div>
+          <button class="btn btn--fill" type="submit" id="loginBtn">寄登入連結</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- ---------------- 編輯器 ---------------- -->
+    <div id="editorView" hidden>
+      <div class="sec__head">
+        <h2 style="font-family:var(--serif);font-weight:900;font-size:clamp(30px,5vw,58px);margin:0;letter-spacing:-.025em">後<em style="font-style:normal;color:var(--accent)">台</em></h2>
+        <p class="sec__note">內文支援 Markdown：<code>## 標題</code>、<code>**粗體**</code>、<code>- 清單</code>、<code>[連結](網址)</code>、<code>```程式碼```</code></p>
+      </div>
+
+      <div id="editorMsg" class="msg msg--info"></div>
+
+      <div class="admin-grid">
+        <!-- 左：表單 -->
+        <div class="panel">
+          <h2 id="formTitle">寫一篇新文章</h2>
+          <p class="panel__note" id="formNote">存成草稿只有你看得到，勾選發布後所有人都能讀。</p>
+
+          <form id="postForm">
+            <input type="hidden" id="postId">
+
+            <div class="field">
+              <label for="title">標題</label>
+              <input id="title" type="text" required maxlength="200">
+            </div>
+
+            <div class="field">
+              <label for="slug">網址代稱 slug</label>
+              <input id="slug" type="text" required maxlength="200" pattern="[^\s]+">
+              <span class="hint">會變成 blog.html?post=<span id="slugPreview">…</span>，留空會自動從標題產生。</span>
+            </div>
+
+            <div class="field">
+              <label for="excerpt">摘要</label>
+              <textarea id="excerpt" maxlength="300" style="min-height:80px"></textarea>
+              <span class="hint">顯示在列表上的一兩句話。</span>
+            </div>
+
+            <div class="field">
+              <label for="tags">標籤</label>
+              <input id="tags" type="text" placeholder="技術筆記, Supabase">
+              <span class="hint">用逗號分隔。</span>
+            </div>
+
+            <div class="field">
+              <label for="content">內文（Markdown）</label>
+              <textarea id="content" class="tall" required></textarea>
+            </div>
+
+            <label class="check">
+              <input id="published" type="checkbox">
+              發布這篇文章
+            </label>
+
+            <div class="toolbar">
+              <button class="btn btn--fill" type="submit" id="saveBtn">儲存</button>
+              <button class="btn btn--ghost btn--sm" type="button" id="previewBtn">預覽</button>
+              <span class="spacer"></span>
+              <button class="btn btn--ghost btn--sm" type="button" id="newBtn">清空重寫</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- 右：清單 + 預覽 -->
+        <div>
+          <div class="panel">
+            <h2>所有文章</h2>
+            <p class="panel__note">包含草稿。點編輯載入到左邊表單。</p>
+            <ul id="postList" class="admin-list"><li><span class="admin-list__meta">載入中…</span></li></ul>
+          </div>
+
+          <div class="panel" id="previewPanel" hidden>
+            <h2>預覽</h2>
+            <p class="panel__note">這就是讀者會看到的樣子。</p>
+            <div id="previewBody" class="prose"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="bootMsg" class="state">載入中…</div>
+  </div>
+</main>
+
+<script type="module">
+import { db, CONFIGURED, esc, markdown, fmtDate, slugify } from "./app.js";
+import { OWNER_EMAIL } from "./config.js";
+
+const $ = (id) => document.getElementById(id);
+const loginView = $("loginView"), editorView = $("editorView"), bootMsg = $("bootMsg");
+
+function say(el, text, kind = "info") {
+  el.className = `msg msg--${kind}`;
+  el.textContent = text;
+}
+
+if (!CONFIGURED) {
+  bootMsg.textContent = "尚未連上資料庫 — 請先填好 config.js 裡的 SUPABASE_URL 與 SUPABASE_ANON_KEY";
+} else {
+  boot();
+}
+
+async function boot() {
+  const { data: { session } } = await db.auth.getSession();
+  render(session);
+  db.auth.onAuthStateChange((_e, s) => render(s));
+}
+
+function render(session) {
+  bootMsg.hidden = true;
+  const user = session?.user ?? null;
+  const isOwner = user && user.email === OWNER_EMAIL;
+
+  loginView.hidden = !!isOwner;
+  editorView.hidden = !isOwner;
+  $("logout").hidden = !user;
+  $("who").textContent = user ? user.email : "";
+
+  if (user && !isOwner) {
+    loginView.hidden = false;
+    say($("loginMsg"), `${user.email} 已登入，但不是站長帳號，無法發文。`, "err");
+  }
+  if (isOwner) loadPosts();
+}
+
+// ------------------------------------------------------------- 登入
+$("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = $("loginBtn");
+  btn.disabled = true;
+  say($("loginMsg"), "寄送中…", "info");
+
+  const { error } = await db.auth.signInWithOtp({
+    email: $("email").value.trim(),
+    options: { emailRedirectTo: location.href.split("#")[0] },
+  });
+
+  btn.disabled = false;
+  if (error) say($("loginMsg"), `寄送失敗：${error.message}`, "err");
+  else say($("loginMsg"), "信寄出去了，去收信箱點連結（可能在垃圾郵件）。", "ok");
+});
+
+$("logout").addEventListener("click", async () => {
+  await db.auth.signOut();
+  location.reload();
+});
+
+// ------------------------------------------------------------- 清單
+async function loadPosts() {
+  const list = $("postList");
+  const { data, error } = await db
+    .from("posts")
+    .select("id,slug,title,published,created_at")
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    list.innerHTML = `<li><span class="admin-list__meta">讀取失敗：${esc(error.message)}</span></li>`;
+    return;
+  }
+  if (!data.length) {
+    list.innerHTML = `<li><span class="admin-list__meta">還沒有文章</span></li>`;
+    return;
+  }
+  list.innerHTML = data.map((p) => `
+    <li>
+      <div class="admin-list__main">
+        <p class="admin-list__title">${esc(p.title)} ${p.published ? "" : '<span class="draft-flag">草稿</span>'}</p>
+        <span class="admin-list__meta">${fmtDate(p.created_at)} · /${esc(p.slug)}</span>
+      </div>
+      <div class="admin-list__acts">
+        <button class="btn btn--sm btn--ghost" type="button" data-edit="${esc(p.id)}">編輯</button>
+        <button class="btn btn--sm btn--danger" type="button" data-del="${esc(p.id)}">刪除</button>
+      </div>
+    </li>`).join("");
+
+  list.querySelectorAll("[data-edit]").forEach((b) =>
+    b.addEventListener("click", () => loadIntoForm(b.dataset.edit))
+  );
+  list.querySelectorAll("[data-del]").forEach((b) =>
+    b.addEventListener("click", () => removePost(b.dataset.del))
+  );
+}
+
+async function loadIntoForm(id) {
+  const { data, error } = await db.from("posts").select("*").eq("id", id).single();
+  if (error) { say($("editorMsg"), `讀取失敗：${error.message}`, "err"); return; }
+
+  $("postId").value = data.id;
+  $("title").value = data.title;
+  $("slug").value = data.slug;
+  $("excerpt").value = data.excerpt || "";
+  $("tags").value = (data.tags || []).join(", ");
+  $("content").value = data.content || "";
+  $("published").checked = !!data.published;
+  $("slugPreview").textContent = data.slug;
+  $("formTitle").textContent = "編輯文章";
+  $("formNote").textContent = `正在編輯「${data.title}」。按「清空重寫」可以回到新增模式。`;
+  say($("editorMsg"), "已載入到左邊表單。", "info");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+async function removePost(id) {
+  if (!confirm("確定要刪除這篇文章？這個動作無法復原。")) return;
+  const { error } = await db.from("posts").delete().eq("id", id);
+  if (error) say($("editorMsg"), `刪除失敗：${error.message}`, "err");
+  else {
+    say($("editorMsg"), "已刪除。", "ok");
+    if ($("postId").value === id) resetForm();
+    loadPosts();
+  }
+}
+
+// ------------------------------------------------------------- 表單
+$("title").addEventListener("input", () => {
+  if (!$("postId").value && !$("slug").dataset.touched) {
+    $("slug").value = slugify($("title").value);
+    $("slugPreview").textContent = $("slug").value;
+  }
+});
+$("slug").addEventListener("input", () => {
+  $("slug").dataset.touched = "1";
+  $("slugPreview").textContent = $("slug").value;
+});
+
+function resetForm() {
+  $("postForm").reset();
+  $("postId").value = "";
+  delete $("slug").dataset.touched;
+  $("slugPreview").textContent = "…";
+  $("formTitle").textContent = "寫一篇新文章";
+  $("formNote").textContent = "存成草稿只有你看得到，勾選發布後所有人都能讀。";
+  $("previewPanel").hidden = true;
+}
+$("newBtn").addEventListener("click", resetForm);
+
+$("previewBtn").addEventListener("click", () => {
+  $("previewBody").innerHTML = markdown($("content").value);
+  $("previewPanel").hidden = false;
+});
+
+$("postForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = $("saveBtn");
+  btn.disabled = true;
+
+  const payload = {
+    title: $("title").value.trim(),
+    slug: ($("slug").value.trim() || slugify($("title").value)),
+    excerpt: $("excerpt").value.trim(),
+    content: $("content").value,
+    tags: $("tags").value.split(",").map((t) => t.trim()).filter(Boolean),
+    published: $("published").checked,
+  };
+
+  const id = $("postId").value;
+  const { error } = id
+    ? await db.from("posts").update(payload).eq("id", id)
+    : await db.from("posts").insert(payload);
+
+  btn.disabled = false;
+  if (error) {
+    const dup = error.code === "23505";
+    say($("editorMsg"), dup ? "這個 slug 已經有人用了，換一個。" : `儲存失敗：${error.message}`, "err");
+    return;
+  }
+  say($("editorMsg"), payload.published ? "已儲存並發布。" : "已存成草稿。", "ok");
+  if (!id) resetForm();
+  loadPosts();
+});
+</script>
+</body>
+</html>

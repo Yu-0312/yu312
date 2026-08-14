@@ -3,197 +3,32 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>王宇錡 Max Wang — 專案作品集</title>
-<meta name="description" content="王宇錡 Max Wang 的程式作品集：APCS 多語言評分系統 apcs-judge、Claude Code 簡報製作 skill ppt-creater。">
+<title>王宇錡 Max Wang — 專案與寫作</title>
+<meta name="description" content="王宇錡 Max Wang 的程式作品集與部落格：APCS 多語言評分系統 apcs-judge、Claude Code 簡報製作 skill ppt-creater。">
 <meta name="author" content="王宇錡 Max Wang">
 <meta property="og:type" content="profile">
-<meta property="og:title" content="王宇錡 Max Wang — 專案作品集">
-<meta property="og:description" content="apcs-judge、ppt-creater — 在 GitHub 上公開的程式專案。">
+<meta property="og:title" content="王宇錡 Max Wang — 專案與寫作">
+<meta property="og:description" content="apcs-judge、ppt-creater，以及不定期更新的技術筆記。">
 <meta property="og:image" content="https://avatars.githubusercontent.com/u/266498311?v=4">
 <meta name="twitter:card" content="summary">
 <meta name="theme-color" content="#14130F">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
 <script type="module" src="https://cdn.perxona.ai/asia/prod/latest/widget/entry/index.js"></script>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314130F'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Georgia,serif' font-weight='700' fill='%23D7492F' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
-<style>
-  :root{
-    --paper:#F4F1EC;
-    --paper-2:#EAE5DC;
-    --ink:#14130F;
-    --ink-60:rgba(20,19,15,.62);
-    --ink-30:rgba(20,19,15,.28);
-    --ink-12:rgba(20,19,15,.12);
-    --accent:#D7492F;
-    --accent-soft:rgba(215,73,47,.12);
-    --sans:"Noto Sans TC","Space Grotesk",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    --serif:"Noto Serif TC",Georgia,"Times New Roman",serif;
-    --mono:"Space Grotesk",ui-monospace,SFMono-Regular,Menlo,monospace;
-    --max:1240px;
-    --pad:clamp(20px,5vw,72px);
-  }
-  *,*::before,*::after{box-sizing:border-box}
-  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
-  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
-  body{
-    margin:0;background:var(--paper);color:var(--ink);
-    font-family:var(--sans);font-weight:400;line-height:1.75;
-    font-size:clamp(15px,.55vw + 13.4px,17px);
-    -webkit-font-smoothing:antialiased;
-    overflow-x:hidden;
-  }
-  img{max-width:100%;display:block}
-  a{color:inherit}
-  ::selection{background:var(--accent);color:var(--paper)}
-  :focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:2px}
-
-  .skip{position:absolute;left:-9999px;top:0;background:var(--ink);color:var(--paper);padding:12px 18px;z-index:200}
-  .skip:focus{left:12px;top:12px}
-
-  .wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--pad)}
-
-  /* ---------- nav ---------- */
-  .nav{position:sticky;top:0;z-index:100;background:rgba(244,241,236,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--ink-12)}
-  .nav__in{max-width:var(--max);margin:0 auto;padding:14px var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
-  .nav__mark{font-family:var(--serif);font-weight:900;font-size:19px;letter-spacing:.02em;text-decoration:none;white-space:nowrap}
-  .nav__mark span{color:var(--accent)}
-  .nav__links{display:flex;gap:clamp(14px,2vw,30px);align-items:center;font-size:14px;font-weight:500}
-  .nav__links a{text-decoration:none;color:var(--ink-60);transition:color .18s ease}
-  .nav__links a:hover{color:var(--accent)}
-  @media(max-width:600px){.nav__links a[data-opt]{display:none}}
-
-  /* ---------- hero ---------- */
-  .hero{padding:clamp(56px,10vw,120px) 0 clamp(40px,6vw,72px);position:relative;overflow:hidden}
-  .hero::after{
-    content:"";position:absolute;right:-14vw;top:-8vw;width:44vw;height:44vw;
-    background:radial-gradient(circle at 30% 30%,var(--accent-soft),transparent 68%);
-    pointer-events:none;
-  }
-  .eyebrow{
-    font-family:var(--mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;
-    color:var(--accent);font-weight:700;margin:0 0 clamp(16px,2.5vw,28px);
-    display:flex;align-items:center;gap:12px;
-  }
-  .eyebrow::after{content:"";flex:1;height:1px;background:var(--ink-12);max-width:180px}
-  .hero h1{
-    font-family:var(--serif);font-weight:900;
-    font-size:clamp(48px,11.5vw,148px);line-height:.92;letter-spacing:-.03em;
-    margin:0 0 clamp(18px,3vw,32px);
-  }
-  .hero h1 em{font-style:normal;color:var(--accent)}
-  .hero h1 .en{display:block;font-family:var(--mono);font-weight:500;font-size:clamp(16px,2.4vw,30px);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-60);margin-top:clamp(12px,1.6vw,20px);line-height:1.3}
-  .btns{display:flex;flex-wrap:wrap;gap:12px;margin-top:clamp(20px,3vw,34px)}
-  .btn{
-    display:inline-flex;align-items:center;gap:9px;text-decoration:none;
-    padding:13px 24px;border-radius:999px;font-weight:700;font-size:14px;
-    border:1.5px solid var(--ink);transition:transform .18s ease,background .18s ease,color .18s ease;
-  }
-  .btn--fill{background:var(--ink);color:var(--paper)}
-  .btn--fill:hover{background:var(--accent);border-color:var(--accent);transform:translateY(-2px)}
-  .btn--ghost:hover{background:var(--ink);color:var(--paper);transform:translateY(-2px)}
-  @media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
-
-  /* ---------- marquee strip ---------- */
-  .strip{border-block:1.5px solid var(--ink);background:var(--ink);color:var(--paper);overflow:hidden;padding:11px 0}
-  .strip__track{display:flex;gap:0;width:max-content;animation:slide 34s linear infinite}
-  @media (prefers-reduced-motion:reduce){.strip__track{animation:none}}
-  @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-  .strip__track span{font-family:var(--mono);font-size:12.5px;letter-spacing:.2em;text-transform:uppercase;padding:0 26px;white-space:nowrap;opacity:.9}
-  .strip__track span::after{content:"◆";margin-left:26px;color:var(--accent);opacity:.85}
-
-  /* ---------- sections ---------- */
-  section{scroll-margin-top:78px}
-  .sec{padding:clamp(56px,9vw,110px) 0}
-  .sec--alt{background:var(--paper-2)}
-  .sec__head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:clamp(28px,4vw,52px)}
-  .sec h2{
-    font-family:var(--serif);font-weight:900;letter-spacing:-.025em;line-height:1;
-    font-size:clamp(34px,6.4vw,80px);margin:0;
-  }
-  .sec h2 em{font-style:normal;color:var(--accent)}
-  .sec__note{margin:0;max-width:44ch;color:var(--ink-60);font-size:15px;line-height:1.75}
-
-  /* filter */
-  .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:clamp(24px,3vw,36px)}
-  .filter{
-    font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
-    padding:9px 18px;border-radius:999px;border:1.5px solid var(--ink-30);background:transparent;color:var(--ink-60);
-    cursor:pointer;transition:all .18s ease;
-  }
-  .filter:hover{border-color:var(--ink);color:var(--ink)}
-  .filter[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
-
-  /* cards */
-  .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,1.8vw,26px)}
-  @media(max-width:760px){.cards{grid-template-columns:1fr}}
-  .card{
-    background:var(--paper);border:1.5px solid var(--ink);border-radius:6px;
-    padding:clamp(22px,2.4vw,30px);display:flex;flex-direction:column;gap:14px;
-    position:relative;transition:transform .2s ease,box-shadow .2s ease;
-  }
-  .sec--alt .card{background:var(--paper)}
-  .card:hover{transform:translateY(-3px);box-shadow:7px 7px 0 var(--ink)}
-  @media (prefers-reduced-motion:reduce){.card:hover{transform:none}}
-  .card.is-hidden{display:none}
-  .card--wide{grid-column:span 2}
-  @media(max-width:900px){.card--wide{grid-column:span 1}}
-  .card__top{display:flex;align-items:center;justify-content:space-between;gap:12px}
-  .tag{
-    font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;
-    padding:5px 11px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;
-  }
-  .tag--ink{background:var(--ink);color:var(--paper)}
-  .stars{font-family:var(--mono);font-size:12px;color:var(--ink-60);white-space:nowrap;font-weight:500}
-  .card h3{
-    font-family:var(--serif);font-weight:900;font-size:clamp(21px,2vw,27px);
-    line-height:1.22;letter-spacing:-.01em;margin:0;
-  }
-  .card h3 a{text-decoration:none;background-image:linear-gradient(var(--accent),var(--accent));background-size:0 2px;background-repeat:no-repeat;background-position:0 100%;transition:background-size .25s ease}
-  .card h3 a:hover{background-size:100% 2px;color:var(--accent)}
-  .card p{margin:0;font-size:14.5px;line-height:1.78;color:var(--ink-60)}
-  .card ul{margin:0;padding-left:1.05em;font-size:14px;line-height:1.72;color:var(--ink-60)}
-  .card li{margin-bottom:5px}
-  .card li::marker{color:var(--accent)}
-  .stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:6px}
-  .chip{font-family:var(--mono);font-size:11px;letter-spacing:.05em;padding:4px 10px;border:1px solid var(--ink-12);border-radius:4px;color:var(--ink-60)}
-  .card__link{font-family:var(--mono);font-size:12.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;color:var(--accent);display:inline-flex;align-items:center;gap:7px}
-  .card__link:hover{gap:12px}
-  .card__link span{transition:transform .18s ease}
-
-  /* ---------- footer ---------- */
-  .foot{background:var(--ink);color:var(--paper);padding:clamp(48px,7vw,86px) 0 34px}
-  .foot h2{font-family:var(--serif);font-weight:900;font-size:clamp(30px,5.4vw,62px);line-height:1.05;margin:0 0 28px;letter-spacing:-.025em}
-  .foot h2 em{font-style:normal;color:var(--accent)}
-  .foot__links{display:flex;flex-wrap:wrap;gap:12px 28px;margin-bottom:44px}
-  .foot__links a{font-family:var(--mono);font-size:14px;letter-spacing:.06em;text-decoration:none;border-bottom:1.5px solid rgba(244,241,236,.28);padding-bottom:3px;transition:border-color .18s ease,color .18s ease}
-  .foot__links a:hover{color:var(--accent);border-color:var(--accent)}
-  .foot__bar{border-top:1px solid rgba(244,241,236,.18);padding-top:20px;display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:rgba(244,241,236,.55)}
-
-  /* reveal */
-  .rv{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s ease}
-  .rv.in{opacity:1;transform:none}
-  @media (prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
-
-  /* ---------- agent widget (bubble) ---------- */
-  sv-agent{
-    --bubble-right:1.5rem;
-    --bubble-bottom:1.5rem;
-    --bubble-button-size:4.5rem;
-    --bubble-window-width:375px;
-    --bubble-window-height:700px;
-  }
-</style>
 </head>
 <body>
 <a class="skip" href="#main">跳到主要內容</a>
 
 <nav class="nav" aria-label="主要導覽">
   <div class="nav__in">
-    <a class="nav__mark" href="#top">王宇錡<span>.</span></a>
+    <a class="nav__mark" href="./index.html">王宇錡<span>.</span></a>
     <div class="nav__links">
       <a href="#code">程式專案</a>
-      <a href="#contact">聯絡</a>
+      <a href="./blog.html">文章</a>
+      <a href="#contact" data-opt>聯絡</a>
     </div>
   </div>
 </nav>
@@ -208,6 +43,7 @@
       </h1>
       <div class="btns">
         <a class="btn btn--fill" href="#code">看專案 <span aria-hidden="true">→</span></a>
+        <a class="btn btn--ghost" href="./blog.html">讀文章</a>
         <a class="btn btn--ghost" href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
@@ -231,8 +67,7 @@
       <p class="sec__note">在 GitHub 上公開、實際跑得動的兩個專案。</p>
     </div>
 
-    <div class="cards" id="cardGrid">
-
+    <div class="cards">
       <article class="card rv">
         <div class="card__top">
           <span class="tag tag--ink">GitHub · JavaScript</span>
@@ -256,11 +91,25 @@
         <div class="stack"><span class="chip">JavaScript</span><span class="chip">Claude Code</span><span class="chip">Skill</span></div>
         <a class="card__link" href="https://github.com/Yu-0312/ppt-creater" target="_blank" rel="noopener">前往 Repo <span aria-hidden="true">→</span></a>
       </article>
-
     </div>
   </div>
 </section>
 
+<!-- ================= LATEST POSTS ================= -->
+<section id="writing" class="sec sec--alt">
+  <div class="wrap">
+    <div class="sec__head rv">
+      <h2>最新<em>文章</em></h2>
+      <p class="sec__note">記錄做過的東西、踩過的坑，以及想通了什麼。</p>
+    </div>
+    <div id="latestPosts" class="posts" aria-live="polite">
+      <div class="state">載入中…</div>
+    </div>
+    <div class="btns">
+      <a class="btn btn--ghost" href="./blog.html">看全部文章 <span aria-hidden="true">→</span></a>
+    </div>
+  </div>
+</section>
 </main>
 
 <footer id="contact" class="foot">
@@ -269,6 +118,7 @@
     <div class="foot__links">
       <a href="mailto:wang.yuchi.312@gmail.com">wang.yuchi.312@gmail.com</a>
       <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">github.com/Yu-0312</a>
+      <a href="./admin.html">站長登入</a>
     </div>
     <div class="foot__bar">
       <span>王宇錡 Max Wang · Taipei, Taiwan</span>
@@ -277,30 +127,45 @@
   </div>
 </footer>
 
-<script>
-(function(){
-  "use strict";
-
-  /* scroll reveal */
-  var items = document.querySelectorAll('.rv');
-  if ('IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function(entries){
-      entries.forEach(function(e){
-        if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
-      });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
-    items.forEach(function(el, i){ el.style.transitionDelay = (Math.min(i,6) * 55) + 'ms'; io.observe(el); });
-  } else {
-    items.forEach(function(el){ el.classList.add('in'); });
-  }
-
-})();
-</script>
-
 <sv-agent
   agentProfileId="01KZTWK2F4HGENW91G7SKGHJN3"
   presentationMode="bubble"
   apiKey="67db29d5-b58a-4b02-a1ea-3b1b892fdbfb">
 </sv-agent>
+
+<script type="module">
+import { db, CONFIGURED, esc, fmtDate, revealOn, notConfiguredHTML } from "./app.js";
+
+revealOn();
+
+const box = document.getElementById("latestPosts");
+
+if (!CONFIGURED) {
+  box.innerHTML = notConfiguredHTML();
+} else {
+  const { data, error } = await db
+    .from("posts")
+    .select("slug,title,excerpt,tags,created_at")
+    .eq("published", true)
+    .order("created_at", { ascending: false })
+    .limit(3);
+
+  if (error) {
+    box.innerHTML = `<div class="state">文章載入失敗：${esc(error.message)}</div>`;
+  } else if (!data.length) {
+    box.innerHTML = `<div class="state">還沒有文章</div>`;
+  } else {
+    box.innerHTML = data.map((p) => `
+      <a class="post-row" href="./blog.html?post=${encodeURIComponent(p.slug)}">
+        <div class="post-row__date">${fmtDate(p.created_at)}</div>
+        <div>
+          <h3>${esc(p.title)}</h3>
+          ${p.excerpt ? `<p>${esc(p.excerpt)}</p>` : ""}
+          <div class="tags">${(p.tags || []).map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div>
+        </div>
+      </a>`).join("");
+  }
+}
+</script>
 </body>
 </html>

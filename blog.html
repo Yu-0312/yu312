@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>文章 — 王宇錡 Max Wang</title>
+<meta name="description" content="王宇錡 Max Wang 的技術筆記與寫作。">
+<meta name="theme-color" content="#14130F">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./styles.css">
+<script type="module" src="https://cdn.perxona.ai/asia/prod/latest/widget/entry/index.js"></script>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314130F'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Georgia,serif' font-weight='700' fill='%23D7492F' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<a class="skip" href="#main">跳到主要內容</a>
+
+<nav class="nav" aria-label="主要導覽">
+  <div class="nav__in">
+    <a class="nav__mark" href="./index.html">王宇錡<span>.</span></a>
+    <div class="nav__links">
+      <a href="./index.html#code">程式專案</a>
+      <a href="./blog.html" aria-current="page">文章</a>
+      <a href="./index.html#contact" data-opt>聯絡</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main"></main>
+
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot__links">
+      <a href="./index.html">回首頁</a>
+      <a href="mailto:wang.yuchi.312@gmail.com">wang.yuchi.312@gmail.com</a>
+      <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">github.com/Yu-0312</a>
+    </div>
+    <div class="foot__bar">
+      <span>王宇錡 Max Wang · Taipei, Taiwan</span>
+      <span>Built with HTML, CSS &amp; a lot of iteration</span>
+    </div>
+  </div>
+</footer>
+
+<sv-agent
+  agentProfileId="01KZTWK2F4HGENW91G7SKGHJN3"
+  presentationMode="bubble"
+  apiKey="e89781fc-99d0-4fa1-821d-cf31cae1daa7">
+</sv-agent>
+
+<script type="module">
+import { db, CONFIGURED, esc, markdown, fmtDate, revealOn, notConfiguredHTML } from "./app.js";
+
+const main = document.getElementById("main");
+const slug = new URLSearchParams(location.search).get("post");
+
+function shell(inner) { main.innerHTML = inner; }
+
+if (!CONFIGURED) {
+  shell(`<div class="narrow" style="padding:80px 0">${notConfiguredHTML()}</div>`);
+} else if (slug) {
+  await renderPost(slug);
+} else {
+  await renderList();
+}
+
+// ---------------------------------------------------------------- list
+async function renderList() {
+  shell(`
+    <header class="hero hero--sm">
+      <div class="wrap">
+        <p class="eyebrow">Writing</p>
+        <h1>文<em>章</em></h1>
+      </div>
+    </header>
+    <section class="sec sec--tight">
+      <div class="wrap"><div id="list" class="posts" aria-live="polite">
+        <div class="state">載入中…</div>
+      </div></div>
+    </section>`);
+
+  const box = document.getElementById("list");
+  const { data, error } = await db
+    .from("posts")
+    .select("slug,title,excerpt,tags,created_at")
+    .eq("published", true)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    box.innerHTML = `<div class="state">載入失敗：${esc(error.message)}</div>`;
+    return;
+  }
+  if (!data.length) {
+    box.innerHTML = `<div class="state">還沒有文章</div>`;
+    return;
+  }
+  box.innerHTML = data.map((p) => `
+    <a class="post-row rv" href="./blog.html?post=${encodeURIComponent(p.slug)}">
+      <div class="post-row__date">${fmtDate(p.created_at)}</div>
+      <div>
+        <h3>${esc(p.title)}</h3>
+        ${p.excerpt ? `<p>${esc(p.excerpt)}</p>` : ""}
+        <div class="tags">${(p.tags || []).map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div>
+      </div>
+    </a>`).join("");
+  revealOn();
+}
+
+// ---------------------------------------------------------------- post
+async function renderPost(slug) {
+  shell(`<div class="state">載入中…</div>`);
+
+  const { data, error } = await db
+    .from("posts")
+    .select("slug,title,excerpt,content,tags,created_at,updated_at")
+    .eq("slug", slug)
+    .eq("published", true)
+    .maybeSingle();
+
+  if (error) {
+    shell(`<div class="state">載入失敗：${esc(error.message)}</div>`);
+    return;
+  }
+  if (!data) {
+    shell(`
+      <div class="narrow" style="padding:clamp(60px,10vw,120px) 0;text-align:center">
+        <h1 style="font-family:var(--serif);font-size:clamp(32px,6vw,64px);margin:0 0 16px">找不到這篇文章</h1>
+        <p style="color:var(--ink-60);margin:0 0 28px">它可能還是草稿，或網址打錯了。</p>
+        <a class="btn btn--fill" href="./blog.html">回文章列表</a>
+      </div>`);
+    return;
+  }
+
+  document.title = `${data.title} — 王宇錡 Max Wang`;
+  const edited = data.updated_at && data.updated_at.slice(0, 10) !== data.created_at.slice(0, 10);
+
+  shell(`
+    <article class="article">
+      <div class="narrow">
+        <p class="article__meta">
+          ${fmtDate(data.created_at)}${edited ? ` · 更新於 ${fmtDate(data.updated_at)}` : ""}
+        </p>
+        <h1>${esc(data.title)}</h1>
+        ${data.excerpt ? `<p class="article__lede">${esc(data.excerpt)}</p>` : ""}
+        <div class="prose">${markdown(data.content)}</div>
+        <div class="tags" style="margin-top:36px">
+          ${(data.tags || []).map((t) => `<span class="chip">${esc(t)}</span>`).join("")}
+        </div>
+        <div class="btns" style="margin-top:44px;padding-top:28px;border-top:1.5px solid var(--ink-12)">
+          <a class="btn btn--ghost" href="./blog.html"><span aria-hidden="true">←</span> 所有文章</a>
+        </div>
+      </div>
+    </article>`);
+}
+</script>
+</body>
+</html>
