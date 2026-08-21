@@ -91,6 +91,41 @@ create policy "owner deletes"
 
 
 -- ---------------------------------------------------------------------
+-- 圖片儲存空間
+--
+-- 文章裡的圖片放這裡。bucket 設為 public 代表圖片網址任何人都能開，
+-- 這是必要的——不然讀者的瀏覽器載不出圖。
+-- 但「上傳」仍然只有站長可以做，由下面的 policy 控制。
+-- ---------------------------------------------------------------------
+insert into storage.buckets (id, name, public)
+values ('post-images', 'post-images', true)
+on conflict (id) do nothing;
+
+drop policy if exists "anyone reads post images" on storage.objects;
+create policy "anyone reads post images"
+  on storage.objects for select
+  using (bucket_id = 'post-images');
+
+drop policy if exists "owner uploads post images" on storage.objects;
+create policy "owner uploads post images"
+  on storage.objects for insert
+  to authenticated
+  with check (bucket_id = 'post-images' and public.is_owner());
+
+drop policy if exists "owner updates post images" on storage.objects;
+create policy "owner updates post images"
+  on storage.objects for update
+  to authenticated
+  using (bucket_id = 'post-images' and public.is_owner());
+
+drop policy if exists "owner deletes post images" on storage.objects;
+create policy "owner deletes post images"
+  on storage.objects for delete
+  to authenticated
+  using (bucket_id = 'post-images' and public.is_owner());
+
+
+-- ---------------------------------------------------------------------
 -- 一篇範例文章，確認前台讀得到資料。確認後可以在後台刪掉。
 -- ---------------------------------------------------------------------
 insert into public.posts (slug, title, excerpt, content, tags, published)

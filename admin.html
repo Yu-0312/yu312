@@ -50,7 +50,7 @@
     <div id="editorView" hidden>
       <div class="sec__head">
         <h2 style="font-family:var(--serif);font-weight:900;font-size:clamp(30px,5vw,58px);margin:0;letter-spacing:-.025em">後<em style="font-style:normal;color:var(--accent)">台</em></h2>
-        <p class="sec__note">內文支援 Markdown：<code>## 標題</code>、<code>**粗體**</code>、<code>- 清單</code>、<code>[連結](網址)</code>、<code>```程式碼```</code></p>
+        <p class="sec__note">內文支援 Markdown：<code>## 標題</code>、<code>**粗體**</code>、<code>- 清單</code>、<code>[連結](網址)</code>、<code>![圖片](網址)</code>、<code>```程式碼```</code></p>
       </div>
 
       <div id="editorMsg" class="msg msg--info"></div>
@@ -85,6 +85,18 @@
               <label for="tags">標籤</label>
               <input id="tags" type="text" placeholder="技術筆記, Supabase">
               <span class="hint">用逗號分隔。</span>
+            </div>
+
+            <div class="field">
+              <label for="imgFile">插入圖片</label>
+              <div class="drop" id="drop">
+                <input id="imgFile" type="file" accept="image/*" multiple>
+                <p class="drop__hint">
+                  也可以把圖片拖進這個框，或直接在內文按 <strong>Cmd/Ctrl + V</strong> 貼上截圖。<br>
+                  上傳完會自動把 Markdown 插到游標的位置。單張上限 5MB。
+                </p>
+              </div>
+              <ul id="uploadList" class="upload-list"></ul>
             </div>
 
             <div class="field">
@@ -128,7 +140,7 @@
 </main>
 
 <script type="module">
-import { db, CONFIGURED, esc, markdown, fmtDate, slugify } from "./app.js";
+import { db, CONFIGURED, esc, markdown, fmtDate, slugify, uploadImage } from "./app.js";
 import { OWNER_EMAIL } from "./config.js";
 
 const $ = (id) => document.getElementById(id);
@@ -270,6 +282,7 @@ $("slug").addEventListener("input", () => {
 function resetForm() {
   $("postForm").reset();
   $("postId").value = "";
+  $("uploadList").innerHTML = "";
   delete $("slug").dataset.touched;
   $("slugPreview").textContent = "…";
   $("formTitle").textContent = "寫一篇新文章";
@@ -277,6 +290,72 @@ function resetForm() {
   $("previewPanel").hidden = true;
 }
 $("newBtn").addEventListener("click", resetForm);
+
+// ------------------------------------------------------------- 圖片上傳
+// 把文字插在 textarea 游標所在位置，而不是硬接在最後面
+function insertAtCursor(el, text) {
+  const start = el.selectionStart ?? el.value.length;
+  const end = el.selectionEnd ?? el.value.length;
+  el.value = el.value.slice(0, start) + text + el.value.slice(end);
+  const pos = start + text.length;
+  el.selectionStart = el.selectionEnd = pos;
+  el.focus();
+}
+
+async function handleFiles(fileList) {
+  const files = [...fileList].filter((f) => f.type.startsWith("image/"));
+  if (!files.length) return;
+
+  const list = $("uploadList");
+  const content = $("content");
+
+  for (const file of files) {
+    const row = document.createElement("li");
+    row.innerHTML = `<span>${esc(file.name || "screenshot")}</span><span class="pending">上傳中…</span>`;
+    list.appendChild(row);
+
+    try {
+      const { url } = await uploadImage(file);
+      const alt = (file.name || "image").replace(/\.[^.]+$/, "");
+      insertAtCursor(content, `\n![${alt}](${url})\n`);
+      row.lastElementChild.textContent = "完成";
+      row.lastElementChild.className = "done";
+    } catch (err) {
+      row.lastElementChild.textContent = err.message;
+      row.lastElementChild.className = "fail";
+    }
+  }
+}
+
+$("imgFile").addEventListener("change", (e) => {
+  handleFiles(e.target.files);
+  e.target.value = ""; // 清空才能連續上傳同一個檔案
+});
+
+// 拖曳到虛線框
+const drop = $("drop");
+["dragenter", "dragover"].forEach((ev) =>
+  drop.addEventListener(ev, (e) => {
+    e.preventDefault();
+    drop.classList.add("is-over");
+  })
+);
+["dragleave", "drop"].forEach((ev) =>
+  drop.addEventListener(ev, (e) => {
+    e.preventDefault();
+    drop.classList.remove("is-over");
+  })
+);
+drop.addEventListener("drop", (e) => handleFiles(e.dataTransfer.files));
+
+// 直接在內文貼上截圖
+$("content").addEventListener("paste", (e) => {
+  const files = [...(e.clipboardData?.files || [])];
+  if (files.some((f) => f.type.startsWith("image/"))) {
+    e.preventDefault();
+    handleFiles(files);
+  }
+});
 
 $("previewBtn").addEventListener("click", () => {
   $("previewBody").innerHTML = markdown($("content").value);
