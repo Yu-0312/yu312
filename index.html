@@ -27,7 +27,7 @@
     <a class="nav__mark" href="./index.html">王宇錡<span>.</span></a>
     <div class="nav__links">
       <a href="#code">程式專案</a>
-      <a href="./blog.html">文章</a>
+      <a href="#blog">部落格</a>
       <a href="#contact" data-opt>聯絡</a>
     </div>
   </div>
@@ -43,7 +43,7 @@
       </h1>
       <div class="btns">
         <a class="btn btn--fill" href="#code">看專案 <span aria-hidden="true">→</span></a>
-        <a class="btn btn--ghost" href="./blog.html">讀文章</a>
+        <a class="btn btn--ghost" href="#blog">讀文章</a>
         <a class="btn btn--ghost" href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
       </div>
     </div>
@@ -64,49 +64,31 @@
   <div class="wrap">
     <div class="sec__head rv">
       <h2>程式<em>專案</em></h2>
-      <p class="sec__note">在 GitHub 上公開、實際跑得動的兩個專案。</p>
+      <p class="sec__note">GitHub 上所有公開的專案，依星數由多到少排列。星數每次開啟頁面時即時取得。</p>
     </div>
 
-    <div class="cards">
-      <article class="card rv">
-        <div class="card__top">
-          <span class="tag tag--ink">GitHub · JavaScript</span>
-          <span class="stars">★ 54</span>
-        </div>
-        <h3><a href="https://github.com/Yu-0312/apcs-judge" target="_blank" rel="noopener">apcs-judge</a></h3>
-        <p>APCS 多語言評分系統。單一頁面就支援 Python / C++ / C / Java 四種語言，收錄 58 題涵蓋初級、中級與高級，並附上解題思路提示，讓練習的人卡住時有方向而不是直接看答案。</p>
-        <div class="stack">
-          <span class="chip">JavaScript</span><span class="chip">Python</span><span class="chip">C++</span><span class="chip">Java</span><span class="chip">Single-page</span>
-        </div>
-        <a class="card__link" href="https://github.com/Yu-0312/apcs-judge" target="_blank" rel="noopener">前往 Repo <span aria-hidden="true">→</span></a>
-      </article>
+    <p class="live-note" id="repoStatus">
+      <span class="live-dot" aria-hidden="true"></span>讀取 GitHub 中…
+    </p>
 
-      <article class="card rv">
-        <div class="card__top">
-          <span class="tag tag--ink">GitHub · JavaScript</span>
-          <span class="stars">★ 7</span>
-        </div>
-        <h3><a href="https://github.com/Yu-0312/ppt-creater" target="_blank" rel="noopener">ppt-creater</a></h3>
-        <p>寫給 Claude Code 的簡報製作 skill——把「幫我做一份簡報」這件模糊的事，變成可重複、有規格的流程，讓每次產出的品質不再靠運氣。</p>
-        <div class="stack"><span class="chip">JavaScript</span><span class="chip">Claude Code</span><span class="chip">Skill</span></div>
-        <a class="card__link" href="https://github.com/Yu-0312/ppt-creater" target="_blank" rel="noopener">前往 Repo <span aria-hidden="true">→</span></a>
-      </article>
+    <div id="repoGrid" class="cards" aria-live="polite">
+      <div class="state">載入中…</div>
     </div>
   </div>
 </section>
 
-<!-- ================= LATEST POSTS ================= -->
-<section id="writing" class="sec sec--alt">
+<!-- ================= BLOG ================= -->
+<section id="blog" class="sec sec--alt">
   <div class="wrap">
     <div class="sec__head rv">
-      <h2>最新<em>文章</em></h2>
+      <h2>部落<em>格</em></h2>
       <p class="sec__note">記錄做過的東西、踩過的坑，以及想通了什麼。</p>
     </div>
     <div id="latestPosts" class="posts" aria-live="polite">
       <div class="state">載入中…</div>
     </div>
     <div class="btns">
-      <a class="btn btn--ghost" href="./blog.html">看全部文章 <span aria-hidden="true">→</span></a>
+      <a class="btn btn--fill" href="./blog.html">看全部文章 <span aria-hidden="true">→</span></a>
     </div>
   </div>
 </section>
@@ -130,25 +112,52 @@
 <sv-agent
   agentProfileId="01KZTWK2F4HGENW91G7SKGHJN3"
   presentationMode="bubble"
-  apiKey="67db29d5-b58a-4b02-a1ea-3b1b892fdbfb">
+  apiKey="e89781fc-99d0-4fa1-821d-cf31cae1daa7">
 </sv-agent>
 
 <script type="module">
-import { db, CONFIGURED, esc, fmtDate, revealOn, notConfiguredHTML } from "./app.js";
+import {
+  db, CONFIGURED, esc, fmtDate, revealOn, notConfiguredHTML,
+  fetchRepos, repoCardHTML,
+} from "./app.js";
 
-revealOn();
+// ------------------------------------------------ GitHub 專案（依星數排序）
+(async () => {
+  const grid = document.getElementById("repoGrid");
+  const status = document.getElementById("repoStatus");
+  const { repos, stale } = await fetchRepos("Yu-0312");
 
-const box = document.getElementById("latestPosts");
+  if (!repos.length) {
+    grid.innerHTML = `<div class="state">目前沒有公開專案</div>`;
+    status.hidden = true;
+    return;
+  }
 
-if (!CONFIGURED) {
-  box.innerHTML = notConfiguredHTML();
-} else {
+  grid.innerHTML = repos.map((r, i) => repoCardHTML(r, i + 1)).join("");
+
+  const total = repos.reduce((n, r) => n + r.stars, 0);
+  status.innerHTML = stale
+    ? `<span class="live-dot live-dot--stale" aria-hidden="true"></span>GitHub 暫時讀取不到，顯示的是備援資料`
+    : `<span class="live-dot" aria-hidden="true"></span>${repos.length} 個專案 · 共 ${total} 顆星 · 已依星數排序`;
+
+  revealOn();
+})();
+
+// ------------------------------------------------ 部落格最新文章
+(async () => {
+  const box = document.getElementById("latestPosts");
+
+  if (!CONFIGURED) {
+    box.innerHTML = notConfiguredHTML();
+    return;
+  }
+
   const { data, error } = await db
     .from("posts")
     .select("slug,title,excerpt,tags,created_at")
     .eq("published", true)
     .order("created_at", { ascending: false })
-    .limit(3);
+    .limit(4);
 
   if (error) {
     box.innerHTML = `<div class="state">文章載入失敗：${esc(error.message)}</div>`;
@@ -156,7 +165,7 @@ if (!CONFIGURED) {
     box.innerHTML = `<div class="state">還沒有文章</div>`;
   } else {
     box.innerHTML = data.map((p) => `
-      <a class="post-row" href="./blog.html?post=${encodeURIComponent(p.slug)}">
+      <a class="post-row rv" href="./blog.html?post=${encodeURIComponent(p.slug)}">
         <div class="post-row__date">${fmtDate(p.created_at)}</div>
         <div>
           <h3>${esc(p.title)}</h3>
@@ -164,8 +173,11 @@ if (!CONFIGURED) {
           <div class="tags">${(p.tags || []).map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div>
         </div>
       </a>`).join("");
+    revealOn();
   }
-}
+})();
+
+revealOn();
 </script>
 </body>
 </html>

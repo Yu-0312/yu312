@@ -115,7 +115,13 @@ section{scroll-margin-top:78px}
 .card__top{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:700;padding:5px 11px;border-radius:999px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
 .tag--ink{background:var(--ink);color:var(--paper)}
-.stars{font-family:var(--mono);font-size:12px;color:var(--ink-60);white-space:nowrap;font-weight:500}
+.stars{font-family:var(--mono);font-size:12px;color:var(--ink-60);white-space:nowrap;font-weight:500;display:inline-flex;align-items:center;gap:8px}
+.rank{font-size:10.5px;font-weight:700;letter-spacing:.06em;color:var(--accent);background:var(--accent-soft);padding:3px 7px;border-radius:3px}
+.live-note{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-30);margin-bottom:clamp(18px,2.5vw,26px)}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--ok);flex:none;animation:pulse 2.4s ease-in-out infinite}
+.live-dot--stale{background:var(--ink-30);animation:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){.live-dot{animation:none}}
 .card h3{font-family:var(--serif);font-weight:900;font-size:clamp(21px,2vw,27px);line-height:1.22;letter-spacing:-.01em;margin:0}
 .card h3 a{text-decoration:none}
 .card h3 a:hover{color:var(--accent)}
