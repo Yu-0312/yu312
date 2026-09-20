@@ -1,10 +1,16 @@
-# Yu-0312 · 王宇錡 Max
+# yu-neko
 
-個人網站：https://yu-0312.github.io/yu312/
+個人入口站（視覺參考 [lvyovo-wiki.tech](https://lvyovo-wiki.tech/) 的 lvy-neko）— Yu / 王宇錡
 
-- `index.html` — 首頁（自我介紹 + 精選入口）
-- `tutorials.html` — 互動教學
-- `projects.html` — 專案
-- `about.html` — 關於
+網站：https://yu-0312.github.io/yu312/
 
-內容為自己的教學與 GitHub 公開專案；介面是自己的品牌與版型，不是別人的個人化設定複製品。
+## 頁面
+
+- `index.html` — 首頁：問候、時鐘、月曆、社群、隨機推薦
+- `share.html` — 推薦分享：教學/資源卡片 + 分類篩選
+- `projects.html` — 我的項目
+- `about.html` — 關於網站
+
+## 說明
+
+毛玻璃圓角卡片、柔和背景、側邊導覽，內容以 GitHub 公開 repo 動態帶入。插圖與文案為原創／自有專案，未複製對方站內圖片與文章。

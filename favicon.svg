@@ -1,5 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#eef3f1"/>
-  <rect x="6" y="6" width="52" height="52" rx="14" fill="#2F6F63"/>
-  <text x="32" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="28" font-weight="700" fill="#F7F5F0">M</text>
+  <rect width="64" height="64" rx="16" fill="#eeeeee"/>
+  <circle cx="32" cy="34" r="18" fill="#f7f4fb"/>
+  <path d="M18 28 L24 12 L34 26 Z" fill="#f7f4fb"/>
+  <path d="M46 28 L40 12 L30 26 Z" fill="#f7f4fb"/>
+  <circle cx="26" cy="34" r="2.4" fill="#334f52"/>
+  <circle cx="38" cy="34" r="2.4" fill="#334f52"/>
+  <path d="M29 40 Q32 43 35 40" fill="none" stroke="#334f52" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M20 42 Q32 50 44 42" fill="none" stroke="#35bfab" stroke-width="3" stroke-linecap="round"/>
 </svg>

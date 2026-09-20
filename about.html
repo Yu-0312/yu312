@@ -3,49 +3,48 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>關於 — 王宇錡 Max</title>
-  <meta name="description" content="關於 Max 的個人網站。">
+  <title>關於網站 · yu-neko</title>
+  <meta name="description" content="關於 yu-neko 個人站">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Averia+Gruesa+Libre&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="wrap">
-      <a class="brand" href="./index.html">
-        <img src="./assets/mark.svg" alt="" width="34" height="34">
-        <strong>王宇錡 Max</strong>
-        <span>Yu-0312</span>
+  <div class="page-shell">
+    <nav class="icon-nav" aria-label="站內導覽">
+      <a class="avatar-link" href="./index.html" title="首頁"><img src="./assets/neko.svg" alt="yu-neko"></a>
+      <a href="./index.html" title="首頁">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg>
       </a>
-      <nav class="nav" aria-label="主導覽">
-        <a href="./index.html">首頁</a>
-        <a href="./tutorials.html">互動教學</a>
-        <a href="./projects.html">專案</a>
-        <a class="is-active" href="./about.html">關於</a>
-        <a class="ext" href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
-      </nav>
-    </div>
-  </header>
+      <a href="./projects.html" title="我的項目">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
+      </a>
+      <a class="is-active" href="./about.html" title="關於網站">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M8 13c1.5 2 6.5 2 8 0"/></svg>
+      </a>
+      <a href="./share.html" title="推薦分享">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.8 7.1 18.2l.9-5.5-4-3.9L9.5 8 12 3z"/></svg>
+      </a>
+      <a href="https://github.com/Yu-0312" target="_blank" rel="noopener" title="GitHub">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M3 12h18M12 4c2.5 2.8 2.5 13.2 0 16M12 4c-2.5 2.8-2.5 13.2 0 16"/></svg>
+      </a>
+    </nav>
 
-  <main class="wrap">
     <article class="card about-card">
-      <h1>關於這個站</h1>
-      <p>這是 <strong>王宇錡 Max</strong>（GitHub: Yu-0312）的個人網站，用來整理互動教學、工具與公開專案。</p>
+      <h1 class="averia">關於 yu-neko</h1>
+      <p>這是 <strong>王宇錡 Yu</strong>（GitHub: Yu-0312）的個人入口站，視覺風格參考 lvyovo-wiki.tech：柔和背景、毛玻璃圓角卡片、側邊導覽與分享卡片。</p>
       <ul>
-        <li>首頁：自我介紹與精選入口</li>
-        <li>互動教學：課程站與 roadmap 清單</li>
-        <li>專案：GitHub 公開作品</li>
+        <li>首頁：問候 + 時鐘 + 月曆 + 社群連結</li>
+        <li>推薦分享：教學 / 資源卡片（可篩選）</li>
+        <li>我的項目：公開專案整理</li>
+        <li>內容之後可以再改；目前以 GitHub 公開 repo 為主</li>
       </ul>
-      <p>內容與文案都是自己的；之後要改哪一區都可以直接說。</p>
-      <p>
-        Email：<a href="mailto:wang.yuchi.312@gmail.com">wang.yuchi.312@gmail.com</a><br>
-        GitHub：<a href="https://github.com/Yu-0312" target="_blank" rel="noopener">github.com/Yu-0312</a>
-      </p>
-      <p class="section-link" style="margin-top:1rem">Born 2008-03-12 · Taiwan</p>
+      <p>聯絡：<a href="mailto:wang.yuchi.312@gmail.com">wang.yuchi.312@gmail.com</a> ·
+        <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">github.com/Yu-0312</a></p>
+      <p class="foot-note">Born 2008-03-12 · Taiwan · 視覺參考 lvyovo-wiki.tech，插圖與內容為原創/自有專案。</p>
     </article>
-  </main>
-
-  <footer class="wrap site-footer">
-    © 2026 王宇錡 Max
-  </footer>
+  </div>
 </body>
 </html>
