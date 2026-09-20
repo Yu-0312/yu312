@@ -1,6 +1,6 @@
-# yu-neko
+# Yu
 
-個人入口站（視覺參考 [lvyovo-wiki.tech](https://lvyovo-wiki.tech/) 的 lvy-neko）— Yu / 王宇錡
+個人入口站（視覺參考 [lvyovo-wiki.tech](https://lvyovo-wiki.tech/) 的個人 wiki 風格）— Yu / 王宇錡
 
 網站：https://yu-0312.github.io/yu312/
 

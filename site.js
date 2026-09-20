@@ -239,19 +239,19 @@ function setupHomeExtras(repos) {
   const likeBtn = document.getElementById("likeBtn");
   const likeCount = document.getElementById("likeCount");
   if (likeBtn && likeCount) {
-    const KEY = "yu-neko-likes";
+    const KEY = "yu-site-likes";
     let n = Number(localStorage.getItem(KEY) || "1");
-    let on = sessionStorage.getItem("yu-neko-liked") === "1";
+    let on = sessionStorage.getItem("yu-site-liked") === "1";
     likeCount.textContent = String(n);
     if (on) {
       likeBtn.classList.add("is-on");
       likeBtn.setAttribute("aria-pressed", "true");
     }
     likeBtn.addEventListener("click", () => {
-      if (sessionStorage.getItem("yu-neko-liked") === "1") return;
+      if (sessionStorage.getItem("yu-site-liked") === "1") return;
       n += 1;
       localStorage.setItem(KEY, String(n));
-      sessionStorage.setItem("yu-neko-liked", "1");
+      sessionStorage.setItem("yu-site-liked", "1");
       likeCount.textContent = String(n);
       likeBtn.classList.add("is-on");
       likeBtn.setAttribute("aria-pressed", "true");

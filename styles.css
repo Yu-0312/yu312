@@ -1,4 +1,4 @@
-/* yu-neko — visual system after lvyovo-wiki.tech (original assets, same vibe) */
+/* Yu — visual system after lvyovo-wiki.tech (original assets, same vibe) */
 
 :root {
   --color-brand: #35bfab;
@@ -305,7 +305,7 @@ button {
   justify-content: center;
 }
 
-.greet-card .neko {
+.greet-card .avatar-mark {
   width: 96px;
   height: 96px;
   margin-bottom: 0.85rem;
