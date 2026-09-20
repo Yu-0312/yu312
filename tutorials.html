@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>專案 — 王宇錡 Max</title>
-  <meta name="description" content="Yu-0312 公開專案整理。">
+  <title>互動教學 — 王宇錡 Max</title>
+  <meta name="description" content="Max 的互動式教學與學習路線。">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="./styles.css">
 </head>
@@ -18,8 +18,8 @@
       </a>
       <nav class="nav" aria-label="主導覽">
         <a href="./index.html">首頁</a>
-        <a href="./tutorials.html">互動教學</a>
-        <a class="is-active" href="./projects.html">專案</a>
+        <a class="is-active" href="./tutorials.html">互動教學</a>
+        <a href="./projects.html">專案</a>
         <a href="./about.html">關於</a>
         <a class="ext" href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
       </nav>
@@ -28,10 +28,15 @@
 
   <main class="wrap">
     <header class="page-head">
-      <h1>專案</h1>
-      <p>依 GitHub 公開資訊整理，星數即時讀取；fork 與教學站已排除。</p>
+      <h1>互動教學</h1>
+      <p>自己做的課程站與 roadmap。描述之後可以再改；資料從 GitHub 公開 repo 帶入。</p>
     </header>
-    <div class="grid-2" id="projGrid" aria-live="polite"></div>
+
+    <div class="toolbar">
+      <input class="search" id="search" type="search" placeholder="搜尋教學…" aria-label="搜尋教學">
+    </div>
+    <div class="filters" id="filters" role="toolbar" aria-label="分類"></div>
+    <div class="grid-3" id="grid" aria-live="polite"></div>
   </main>
 
   <footer class="wrap site-footer">
