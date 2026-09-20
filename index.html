@@ -1,183 +1,129 @@
 <!DOCTYPE html>
 <html lang="zh-Hant-TW">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>王宇錡 Max Wang — 專案與寫作</title>
-<meta name="description" content="王宇錡 Max Wang 的程式作品集與部落格：APCS 多語言評分系統 apcs-judge、Claude Code 簡報製作 skill ppt-creater。">
-<meta name="author" content="王宇錡 Max Wang">
-<meta property="og:type" content="profile">
-<meta property="og:title" content="王宇錡 Max Wang — 專案與寫作">
-<meta property="og:description" content="apcs-judge、ppt-creater，以及不定期更新的技術筆記。">
-<meta property="og:image" content="https://avatars.githubusercontent.com/u/266498311?v=4">
-<meta name="twitter:card" content="summary">
-<meta name="theme-color" content="#14130F">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@600;900&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles.css">
-<script type="module" src="https://cdn.perxona.ai/asia/prod/latest/widget/entry/index.js"></script>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2314130F'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Georgia,serif' font-weight='700' fill='%23D7492F' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>王宇錡 Max — 筆記入口</title>
+  <meta name="description" content="Yu-0312 個人筆記入口：互動式教學、專案、資源與工具索引。">
+  <meta name="author" content="Max Wang / 王宇錡">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="王宇錡 Max — 筆記入口">
+  <meta property="og:description" content="教學、專案、資源——像 notebook 一樣的個人索引。">
+  <meta property="og:image" content="https://avatars.githubusercontent.com/u/266498311?v=4">
+  <meta name="theme-color" content="#f7f5f0">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f7f5f0'/%3E%3Ctext x='16' y='22' font-size='16' font-family='Georgia,serif' font-weight='700' fill='%232f5d50' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-<a class="skip" href="#main">跳到主要內容</a>
-
-<nav class="nav" aria-label="主要導覽">
-  <div class="nav__in">
-    <a class="nav__mark" href="./index.html">王宇錡<span>.</span></a>
-    <div class="nav__links">
-      <a href="#code">程式專案</a>
-      <a href="#blog">部落格</a>
-      <a href="#contact" data-opt>聯絡</a>
+  <header class="mark">
+    <div class="wrap mark__in">
+      <a class="mark__name" href="./index.html">王宇錡<span>.</span> notebook</a>
+      <nav class="mark__links" aria-label="頁內導覽">
+        <a href="#teach">教學</a>
+        <a href="#projects">專案</a>
+        <a href="#docs">文件</a>
+        <a href="#resources">資源</a>
+        <a href="#about">關於</a>
+        <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
+      </nav>
     </div>
-  </div>
-</nav>
+  </header>
 
-<main id="main">
-<header id="top" class="hero">
-  <div class="wrap">
-    <p class="eyebrow">Portfolio · 2026</p>
-    <div>
-      <h1>程式<br><em>專案</em>
-        <span class="en">Max Wang / 王宇錡</span>
-      </h1>
-      <div class="btns">
-        <a class="btn btn--fill" href="#code">看專案 <span aria-hidden="true">→</span></a>
-        <a class="btn btn--ghost" href="#blog">讀文章</a>
-        <a class="btn btn--ghost" href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
+  <main>
+    <section class="hero wrap">
+      <p class="eyebrow">Notebook hub · Yu-0312</p>
+      <h1>個人<em>筆記</em>入口</h1>
+      <p class="lead">
+        把教學、專案、資源收成一頁索引，方便自己整理，也方便別人找到東西。
+        結構參考 lvynote：先目錄，再連結，少裝飾。
+      </p>
+      <ul class="meta-row">
+        <li><code>Born 2008-03-12</code></li>
+        <li><code>Taiwan</code></li>
+        <li><code>Max Wang / 王宇錡</code></li>
+      </ul>
+      <div class="quick">
+        <a class="btn btn--fill" href="#teach">看教學</a>
+        <a class="btn" href="#projects">看專案</a>
+        <a class="btn" href="https://github.com/Yu-0312/Yu-0312" target="_blank" rel="noopener">Profile README</a>
+      </div>
+    </section>
+
+    <section id="teach" class="sec wrap">
+      <div class="sec__head">
+        <h2>教學</h2>
+        <span class="sec__tag">interactive</span>
+      </div>
+      <p class="sec__note">互動式課程與學習路線，之後可在這裡持續補筆記連結。</p>
+      <ul class="list" id="teachList">
+        <li class="state">讀取 GitHub 中…</li>
+      </ul>
+    </section>
+
+    <section id="projects" class="sec wrap">
+      <div class="sec__head">
+        <h2>專案</h2>
+        <span class="sec__tag">projects</span>
+      </div>
+      <p class="sec__note">公開作品，依星數排序；星標即時自 GitHub 取得。</p>
+      <ul class="list" id="projectList">
+        <li class="state">讀取 GitHub 中…</li>
+      </ul>
+    </section>
+
+    <section id="docs" class="sec wrap">
+      <div class="sec__head">
+        <h2>文件</h2>
+        <span class="sec__tag">docs</span>
+      </div>
+      <p class="sec__note">長文、整理稿、學習筆記入口。</p>
+      <p class="placeholder">之後再決定要放哪些文件。目前先留位——可改成 essay、note 資料夾，或外部部落格連結。</p>
+    </section>
+
+    <section id="resources" class="sec wrap">
+      <div class="sec__head">
+        <h2>資源</h2>
+        <span class="sec__tag">resources</span>
+      </div>
+      <p class="sec__note">覺得好的方向資料可以收在這裡（之後可對應 repo 內 resources 資料夾）。</p>
+      <p class="placeholder">之後再決定資源清單。結構預留：APCS / 互動教學 / DevOps / AI…</p>
+    </section>
+
+    <section id="about" class="sec wrap">
+      <div class="sec__head">
+        <h2>興趣 · 工具</h2>
+        <span class="sec__tag">about</span>
+      </div>
+      <ul class="bullets">
+        <li>互動式教學與可跑的範例</li>
+        <li>把踩過的坑寫成可重複看的筆記</li>
+        <li>APCS 評分系統、Claude Code 簡報 skill 等工具向專案</li>
+        <li>工具索引：
+          <a href="https://github.com/Yu-0312/apcs-judge" target="_blank" rel="noopener">apcs-judge</a> ·
+          <a href="https://github.com/Yu-0312/ppt-creator-skills" target="_blank" rel="noopener">ppt-creator-skills</a> ·
+          <a href="https://github.com/Yu-0312/Yu-0312" target="_blank" rel="noopener">profile README</a>
+        </li>
+        <li>聯絡：
+          <a href="mailto:wang.yuchi.312@gmail.com">wang.yuchi.312@gmail.com</a>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot__links">
+        <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">github.com/Yu-0312</a>
+        <a href="https://github.com/Yu-0312/yu312" target="_blank" rel="noopener">本 repo</a>
+        <a href="mailto:wang.yuchi.312@gmail.com">Email</a>
+      </div>
+      <div class="foot__bar">
+        <span>王宇錡 Max · Taipei, Taiwan</span>
+        <span>Index style after lvynote · static GitHub Pages</span>
       </div>
     </div>
-  </div>
-</header>
+  </footer>
 
-<div class="strip" aria-hidden="true">
-  <div class="strip__track">
-    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>JavaScript</span><span>Python / C++ / Java</span>
-    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>JavaScript</span><span>Python / C++ / Java</span>
-    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>JavaScript</span><span>Python / C++ / Java</span>
-    <span>APCS 多語言評分系統</span><span>Claude Code 簡報技能</span><span>JavaScript</span><span>Python / C++ / Java</span>
-  </div>
-</div>
-
-<!-- ================= CODE ================= -->
-<section id="code" class="sec">
-  <div class="wrap">
-    <div class="sec__head rv">
-      <h2>程式<em>專案</em></h2>
-      <p class="sec__note">GitHub 上所有公開的專案，依星數由多到少排列。星數每次開啟頁面時即時取得。</p>
-    </div>
-
-    <p class="live-note" id="repoStatus">
-      <span class="live-dot" aria-hidden="true"></span>讀取 GitHub 中…
-    </p>
-
-    <div id="repoGrid" class="cards" aria-live="polite">
-      <div class="state">載入中…</div>
-    </div>
-  </div>
-</section>
-
-<!-- ================= BLOG ================= -->
-<section id="blog" class="sec sec--alt">
-  <div class="wrap">
-    <div class="sec__head rv">
-      <h2>部落<em>格</em></h2>
-      <p class="sec__note">記錄做過的東西、踩過的坑，以及想通了什麼。</p>
-    </div>
-    <div id="latestPosts" class="posts" aria-live="polite">
-      <div class="state">載入中…</div>
-    </div>
-    <div class="btns">
-      <a class="btn btn--fill" href="./blog.html">看全部文章 <span aria-hidden="true">→</span></a>
-    </div>
-  </div>
-</section>
-</main>
-
-<footer id="contact" class="foot">
-  <div class="wrap">
-    <h2>有想聊的專案，<br>或想看更多<em>細節？</em></h2>
-    <div class="foot__links">
-      <a href="mailto:wang.yuchi.312@gmail.com">wang.yuchi.312@gmail.com</a>
-      <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">github.com/Yu-0312</a>
-      <a href="./admin.html">站長登入</a>
-    </div>
-    <div class="foot__bar">
-      <span>王宇錡 Max Wang · Taipei, Taiwan</span>
-      <span>Built with HTML, CSS &amp; a lot of iteration</span>
-    </div>
-  </div>
-</footer>
-
-<sv-agent
-  agentProfileId="01KZTWK2F4HGENW91G7SKGHJN3"
-  presentationMode="bubble"
-  apiKey="e89781fc-99d0-4fa1-821d-cf31cae1daa7">
-</sv-agent>
-
-<script type="module">
-import {
-  db, CONFIGURED, esc, fmtDate, revealOn, notConfiguredHTML,
-  fetchRepos, repoCardHTML,
-} from "./app.js";
-
-// ------------------------------------------------ GitHub 專案（依星數排序）
-(async () => {
-  const grid = document.getElementById("repoGrid");
-  const status = document.getElementById("repoStatus");
-  const { repos, stale } = await fetchRepos("Yu-0312");
-
-  if (!repos.length) {
-    grid.innerHTML = `<div class="state">目前沒有公開專案</div>`;
-    status.hidden = true;
-    return;
-  }
-
-  grid.innerHTML = repos.map((r, i) => repoCardHTML(r, i + 1)).join("");
-
-  const total = repos.reduce((n, r) => n + r.stars, 0);
-  status.innerHTML = stale
-    ? `<span class="live-dot live-dot--stale" aria-hidden="true"></span>GitHub 暫時讀取不到，顯示的是備援資料`
-    : `<span class="live-dot" aria-hidden="true"></span>${repos.length} 個專案 · 共 ${total} 顆星 · 已依星數排序`;
-
-  revealOn();
-})();
-
-// ------------------------------------------------ 部落格最新文章
-(async () => {
-  const box = document.getElementById("latestPosts");
-
-  if (!CONFIGURED) {
-    box.innerHTML = notConfiguredHTML();
-    return;
-  }
-
-  const { data, error } = await db
-    .from("posts")
-    .select("slug,title,excerpt,tags,created_at")
-    .eq("published", true)
-    .order("created_at", { ascending: false })
-    .limit(4);
-
-  if (error) {
-    box.innerHTML = `<div class="state">文章載入失敗：${esc(error.message)}</div>`;
-  } else if (!data.length) {
-    box.innerHTML = `<div class="state">還沒有文章</div>`;
-  } else {
-    box.innerHTML = data.map((p) => `
-      <a class="post-row rv" href="./blog.html?post=${encodeURIComponent(p.slug)}">
-        <div class="post-row__date">${fmtDate(p.created_at)}</div>
-        <div>
-          <h3>${esc(p.title)}</h3>
-          ${p.excerpt ? `<p>${esc(p.excerpt)}</p>` : ""}
-          <div class="tags">${(p.tags || []).map((t) => `<span class="chip">${esc(t)}</span>`).join("")}</div>
-        </div>
-      </a>`).join("");
-    revealOn();
-  }
-})();
-
-revealOn();
-</script>
+  <script src="./site.js" defer></script>
 </body>
 </html>
