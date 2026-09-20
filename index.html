@@ -3,127 +3,161 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>王宇錡 Max — 筆記入口</title>
-  <meta name="description" content="Yu-0312 個人筆記入口：互動式教學、專案、資源與工具索引。">
-  <meta name="author" content="Max Wang / 王宇錡">
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="王宇錡 Max — 筆記入口">
-  <meta property="og:description" content="教學、專案、資源——像 notebook 一樣的個人索引。">
-  <meta property="og:image" content="https://avatars.githubusercontent.com/u/266498311?v=4">
-  <meta name="theme-color" content="#f7f5f0">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f7f5f0'/%3E%3Ctext x='16' y='22' font-size='16' font-family='Georgia,serif' font-weight='700' fill='%232f5d50' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+  <title>max-neko</title>
+  <meta name="description" content="Max / 王宇錡 的個人 wiki — 教學、專案、資源">
+  <meta property="og:title" content="max-neko">
+  <meta property="og:description" content="Max / 王宇錡 的個人 wiki">
+  <meta name="theme-color" content="#eeeeee">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Averia+Gruesa+Libre&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <header class="mark">
-    <div class="wrap mark__in">
-      <a class="mark__name" href="./index.html">王宇錡<span>.</span> notebook</a>
-      <nav class="mark__links" aria-label="頁內導覽">
-        <a href="#teach">教學</a>
-        <a href="#projects">專案</a>
-        <a href="#docs">文件</a>
-        <a href="#resources">資源</a>
-        <a href="#about">關於</a>
-        <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
-      </nav>
+  <main class="stage">
+    <div class="board">
+      <!-- LEFT NAV -->
+      <aside class="card profile-card p-nav">
+        <div class="profile-top">
+          <img src="./assets/neko.svg" alt="max-neko avatar" width="42" height="42">
+          <div>
+            <div class="profile-name">max-neko <span class="profile-tag">開發中</span></div>
+          </div>
+        </div>
+        <p class="side-label">General</p>
+        <nav class="side-nav" aria-label="主導覽">
+          <a class="is-active" href="./index.html">
+            <span class="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg>
+            </span>
+            首頁
+          </a>
+          <a href="./share.html">
+            <span class="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.8 7.1 18.2l.9-5.5-4-3.9L9.5 8 12 3z"/></svg>
+            </span>
+            推薦分享
+          </a>
+          <a href="./projects.html">
+            <span class="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
+            </span>
+            我的項目
+          </a>
+          <a href="./about.html">
+            <span class="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M8 13c1.5 2 6.5 2 8 0"/></svg>
+            </span>
+            關於網站
+          </a>
+          <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">
+            <span class="nav-ico" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M3 12h18M12 4c2.5 2.8 2.5 13.2 0 16M12 4c-2.5 2.8-2.5 13.2 0 16"/></svg>
+            </span>
+            GitHub
+          </a>
+        </nav>
+      </aside>
+
+      <!-- ART -->
+      <section class="card art-card p-art" aria-label="wall art">
+        <div class="art-inner">
+          <div class="art-stickers">
+            <span class="sticker">APCS judge</span>
+            <span class="sticker">shell-lab</span>
+            <span class="sticker">stat-lab</span>
+            <span class="sticker">devops-roadmap</span>
+            <span class="sticker">ppt-creator-skills</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- GREET -->
+      <section class="card greet-card p-greet">
+        <img class="neko" src="./assets/neko.svg" alt="" width="96" height="96">
+        <h1 class="averia">
+          <span id="greetPart">Good Afternoon</span><br>
+          I'm <span class="name">Max</span>, Nice to<br>meet you!
+        </h1>
+      </section>
+
+      <!-- TOOLS / CLOCK / CAL -->
+      <div class="tools-stack p-tools">
+        <div class="write-row">
+          <a class="brand-btn" href="https://github.com/Yu-0312" target="_blank" rel="noopener">
+            <span aria-hidden="true">✍️</span> 去 GitHub
+          </a>
+          <div class="dots" aria-hidden="true"></div>
+        </div>
+        <div class="card clock-card" aria-live="polite">
+          <div class="clock-face" id="clock">--:--</div>
+        </div>
+        <div class="card cal-card">
+          <h2 id="calTitle">—</h2>
+          <div class="cal-grid" id="calendar" aria-label="月曆"></div>
+        </div>
+      </div>
+
+      <!-- LATEST -->
+      <section class="card p-latest">
+        <h2 class="mini-title">最新文章</h2>
+        <a class="post-row" href="./projects.html">
+          <div class="thumb">apcs<br>judge</div>
+          <div>
+            <h3>APCS 多語言評分系統</h3>
+            <p>Python / C++ / C / Java · 58 題</p>
+            <p class="text-secondary" id="latestDate">—</p>
+          </div>
+        </a>
+      </section>
+
+      <!-- SOCIAL -->
+      <div class="card p-social">
+        <div class="social-row">
+          <a class="soc soc--gh" href="https://github.com/Yu-0312" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.8c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.38-.01 2.48-.01 2.82 0 .26.18.58.69.48A10.27 10.27 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
+            Github
+          </a>
+          <a class="soc soc--mail" href="mailto:wang.yuchi.312@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 7 9-7"/></svg>
+            Email
+          </a>
+        </div>
+      </div>
+
+      <!-- RECOMMEND -->
+      <section class="card p-recommend">
+        <h2 class="mini-title">隨機推薦</h2>
+        <a class="rec-row" id="recCard" href="./share.html">
+          <div class="thumb" id="recThumb">share</div>
+          <div>
+            <h3 id="recTitle">教學資源</h3>
+            <p id="recDesc">互動式課程與工具整理</p>
+          </div>
+        </a>
+      </section>
+
+      <!-- MUSIC + LIKE -->
+      <div class="card p-extra">
+        <div class="music-row">
+          <span aria-hidden="true" class="text-brand" style="font-size:1.25rem">🎵</span>
+          <div class="music-meta">
+            <strong class="averia">Focus Mode</strong>
+            <div class="music-bar" aria-hidden="true"><span></span></div>
+          </div>
+          <button class="play-btn" type="button" aria-label="播放按鈕（示意）">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+        </div>
+        <div class="like-row">
+          <button class="like-btn" id="likeBtn" type="button" aria-pressed="false" aria-label="喜歡這個站">♥</button>
+          <span class="like-count" id="likeCount">0</span>
+        </div>
+      </div>
     </div>
-  </header>
-
-  <main>
-    <section class="hero wrap">
-      <p class="eyebrow">Notebook hub · Yu-0312</p>
-      <h1>個人<em>筆記</em>入口</h1>
-      <p class="lead">
-        把教學、專案、資源收成一頁索引，方便自己整理，也方便別人找到東西。
-        結構參考 lvynote：先目錄，再連結，少裝飾。
-      </p>
-      <ul class="meta-row">
-        <li><code>Born 2008-03-12</code></li>
-        <li><code>Taiwan</code></li>
-        <li><code>Max Wang / 王宇錡</code></li>
-      </ul>
-      <div class="quick">
-        <a class="btn btn--fill" href="#teach">看教學</a>
-        <a class="btn" href="#projects">看專案</a>
-        <a class="btn" href="https://github.com/Yu-0312/Yu-0312" target="_blank" rel="noopener">Profile README</a>
-      </div>
-    </section>
-
-    <section id="teach" class="sec wrap">
-      <div class="sec__head">
-        <h2>教學</h2>
-        <span class="sec__tag">interactive</span>
-      </div>
-      <p class="sec__note">互動式課程與學習路線，之後可在這裡持續補筆記連結。</p>
-      <ul class="list" id="teachList">
-        <li class="state">讀取 GitHub 中…</li>
-      </ul>
-    </section>
-
-    <section id="projects" class="sec wrap">
-      <div class="sec__head">
-        <h2>專案</h2>
-        <span class="sec__tag">projects</span>
-      </div>
-      <p class="sec__note">公開作品，依星數排序；星標即時自 GitHub 取得。</p>
-      <ul class="list" id="projectList">
-        <li class="state">讀取 GitHub 中…</li>
-      </ul>
-    </section>
-
-    <section id="docs" class="sec wrap">
-      <div class="sec__head">
-        <h2>文件</h2>
-        <span class="sec__tag">docs</span>
-      </div>
-      <p class="sec__note">長文、整理稿、學習筆記入口。</p>
-      <p class="placeholder">之後再決定要放哪些文件。目前先留位——可改成 essay、note 資料夾，或外部部落格連結。</p>
-    </section>
-
-    <section id="resources" class="sec wrap">
-      <div class="sec__head">
-        <h2>資源</h2>
-        <span class="sec__tag">resources</span>
-      </div>
-      <p class="sec__note">覺得好的方向資料可以收在這裡（之後可對應 repo 內 resources 資料夾）。</p>
-      <p class="placeholder">之後再決定資源清單。結構預留：APCS / 互動教學 / DevOps / AI…</p>
-    </section>
-
-    <section id="about" class="sec wrap">
-      <div class="sec__head">
-        <h2>興趣 · 工具</h2>
-        <span class="sec__tag">about</span>
-      </div>
-      <ul class="bullets">
-        <li>互動式教學與可跑的範例</li>
-        <li>把踩過的坑寫成可重複看的筆記</li>
-        <li>APCS 評分系統、Claude Code 簡報 skill 等工具向專案</li>
-        <li>工具索引：
-          <a href="https://github.com/Yu-0312/apcs-judge" target="_blank" rel="noopener">apcs-judge</a> ·
-          <a href="https://github.com/Yu-0312/ppt-creator-skills" target="_blank" rel="noopener">ppt-creator-skills</a> ·
-          <a href="https://github.com/Yu-0312/Yu-0312" target="_blank" rel="noopener">profile README</a>
-        </li>
-        <li>聯絡：
-          <a href="mailto:wang.yuchi.312@gmail.com">wang.yuchi.312@gmail.com</a>
-        </li>
-      </ul>
-    </section>
+    <p class="foot-note">max-neko · 王宇錡 Max · 視覺參考 lvyovo-wiki.tech · 內容為自己的專案</p>
   </main>
-
-  <footer class="foot">
-    <div class="wrap">
-      <div class="foot__links">
-        <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">github.com/Yu-0312</a>
-        <a href="https://github.com/Yu-0312/yu312" target="_blank" rel="noopener">本 repo</a>
-        <a href="mailto:wang.yuchi.312@gmail.com">Email</a>
-      </div>
-      <div class="foot__bar">
-        <span>王宇錡 Max · Taipei, Taiwan</span>
-        <span>Index style after lvynote · static GitHub Pages</span>
-      </div>
-    </div>
-  </footer>
-
   <script src="./site.js" defer></script>
 </body>
 </html>
