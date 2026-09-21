@@ -1,20 +1,29 @@
-/* Yu — visual system after lvyovo-wiki.tech (original assets, same vibe) */
+/* ==========================================================
+   Max 個人入口站 — 毛玻璃卡片視覺系統
+   結構：設計代幣 → 基礎 → 通用元件 → 首頁看板 → 內頁 → RWD
+   ========================================================== */
 
 :root {
+  /* 色彩代幣 */
   --color-brand: #35bfab;
   --color-brand-secondary: #1fc9e7;
   --color-primary: #334f52;
   --color-secondary: #7b888e;
   --color-bg: #eeeeee;
-  --color-border: #ffffff;
   --color-card: rgba(255, 255, 255, 0.4);
   --color-article: rgba(255, 255, 255, 0.8);
   --color-white: #ffffff;
   --color-yellow: #fac800;
-  --font-averia: "Averia Gruesa Libre", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
+
+  /* 字型 */
+  --font-display: "Averia Gruesa Libre", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", system-ui, sans-serif;
   --font-sans: "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", -apple-system, system-ui, sans-serif;
+
+  /* 卡片 */
   --radius-card: 40px;
   --shadow-card: 0 40px 50px -32px rgba(0, 0, 0, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.25);
+
+  /* 滿版柔和漸層背景 */
   --blur-bg:
     radial-gradient(ellipse 50% 40% at 20% 30%, rgba(255, 236, 170, 0.75), transparent 70%),
     radial-gradient(ellipse 45% 40% at 75% 20%, rgba(180, 230, 210, 0.7), transparent 70%),
@@ -56,7 +65,7 @@ body {
   background: var(--color-bg);
   background-image: var(--blur-bg);
   background-attachment: fixed;
-  cursor: url("./assets/cursor.svg") 2 1, auto;
+  cursor: url("./assets/cursor.svg") 4 2, auto;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -75,7 +84,7 @@ input {
 }
 
 button {
-  cursor: url("./assets/cursor.svg") 2 1, pointer;
+  cursor: url("./assets/cursor.svg") 4 2, pointer;
 }
 
 :focus-visible {
@@ -83,7 +92,9 @@ button {
   outline-offset: 3px;
 }
 
-/* frosted card */
+/* ===== 通用元件 ===== */
+
+/* 毛玻璃卡片 */
 .card {
   background: var(--color-card);
   backdrop-filter: blur(12px);
@@ -172,11 +183,12 @@ button {
 }
 
 .averia {
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   letter-spacing: 0.01em;
 }
 
-/* ========== HOME STAGE ========== */
+/* ===== 首頁看板 ===== */
+
 .stage {
   width: min(1100px, calc(100% - 2rem));
   margin: 0 auto;
@@ -204,7 +216,7 @@ button {
 .p-recommend { grid-area: recommend; }
 .p-extra { grid-area: extra; }
 
-/* sidebar */
+/* 側邊導覽 */
 .profile-card {
   padding: 1.35rem 1.25rem 1.2rem;
 }
@@ -225,7 +237,7 @@ button {
 }
 
 .profile-name {
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--color-primary);
@@ -241,7 +253,7 @@ button {
 
 .side-label {
   margin: 0 0 0.55rem;
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 0.78rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -294,7 +306,7 @@ button {
   height: 16px;
 }
 
-/* greeting */
+/* 問候卡 */
 .greet-card {
   text-align: center;
   padding: 1.6rem 1.25rem 1.75rem;
@@ -313,7 +325,7 @@ button {
 
 .greet-card h1 {
   margin: 0;
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: clamp(1.35rem, 2.6vw, 1.75rem);
   font-weight: 700;
   line-height: 1.35;
@@ -324,7 +336,7 @@ button {
   color: var(--color-brand-secondary);
 }
 
-/* wall art */
+/* 貼紙牆 */
 .art-card {
   padding: 0.65rem;
   overflow: hidden;
@@ -365,7 +377,7 @@ button {
   background: rgba(255, 255, 255, 0.82);
   border-radius: 14px;
   padding: 0.45rem 0.7rem;
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 0.85rem;
   color: var(--color-primary);
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
@@ -375,7 +387,7 @@ button {
 .sticker:nth-child(2n) { transform: rotate(2deg); }
 .sticker:nth-child(3n) { transform: rotate(-1deg); background: #e8faf6; }
 
-/* tools column */
+/* 右側工具欄 */
 .tools-stack {
   display: flex;
   flex-direction: column;
@@ -420,7 +432,7 @@ button {
 
 .cal-card h2 {
   margin: 0 0 0.7rem;
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 0.98rem;
   color: var(--color-primary);
 }
@@ -460,7 +472,7 @@ button {
   visibility: hidden;
 }
 
-/* social + recommend + music */
+/* 社群 / 最新 / 推薦 */
 .social-row {
   display: flex;
   flex-wrap: wrap;
@@ -510,7 +522,7 @@ button {
 
 .mini-title {
   margin: 0 0 0.65rem;
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 0.92rem;
   color: var(--color-primary);
 }
@@ -529,7 +541,7 @@ button {
   flex: 0 0 auto;
   display: grid;
   place-items: center;
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 0.72rem;
   color: var(--color-primary);
   background: linear-gradient(145deg, #ffffff, #e7f4ef);
@@ -542,7 +554,7 @@ button {
 .rec-row h3,
 .post-row h3 {
   margin: 0 0 0.25rem;
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 1.05rem;
   line-height: 1.25;
 }
@@ -554,6 +566,7 @@ button {
   font-size: 0.86rem;
 }
 
+/* 音樂 + 點讚 */
 .music-row {
   display: flex;
   align-items: center;
@@ -585,7 +598,7 @@ button {
 }
 
 .music-meta strong {
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-weight: 700;
 }
 
@@ -603,6 +616,16 @@ button {
   width: 28%;
   background: var(--color-brand);
   border-radius: inherit;
+}
+
+@keyframes bar-breathe {
+  0% { width: 22%; }
+  50% { width: 64%; }
+  100% { width: 22%; }
+}
+
+.music-bar > span {
+  animation: bar-breathe 2.6s ease-in-out infinite;
 }
 
 .like-row {
@@ -623,6 +646,11 @@ button {
   place-items: center;
   color: #f2a0b5;
   font-size: 1.25rem;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.like-btn:hover {
+  transform: translateY(-1px);
 }
 
 .like-btn.is-on {
@@ -630,12 +658,13 @@ button {
 }
 
 .like-count {
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 0.95rem;
   color: var(--color-secondary);
 }
 
-/* ========== INNER PAGES ========== */
+/* ===== 內頁 ===== */
+
 .page-shell {
   width: min(1100px, calc(100% - 2rem));
   margin: 0 auto;
@@ -743,7 +772,7 @@ button {
 
 .item-head h3 {
   margin: 0;
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 1.08rem;
   line-height: 1.25;
 }
@@ -789,7 +818,7 @@ button {
   font-size: 0.86rem;
 }
 
-/* projects page */
+/* 專案頁 */
 .proj-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -820,7 +849,7 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.9);
   display: grid;
   place-items: center;
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 0.72rem;
   text-align: center;
   line-height: 1.15;
@@ -837,13 +866,13 @@ button {
 
 .proj-title-row h3 {
   margin: 0;
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 1.25rem;
 }
 
 .proj-year {
   color: var(--color-secondary);
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 0.95rem;
 }
 
@@ -860,14 +889,22 @@ button {
   font-size: 0.92rem;
 }
 
+/* 關於頁 */
 .about-card {
   max-width: 720px;
 }
 
 .about-card h1 {
   margin: 0 0 0.75rem;
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 1.8rem;
+}
+
+.about-card h2 {
+  margin: 1.35rem 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  color: var(--color-primary);
 }
 
 .about-card p {
@@ -879,10 +916,21 @@ button {
   padding-left: 1.15rem;
 }
 
+.about-card li {
+  margin-bottom: 0.3rem;
+}
+
+.about-card code {
+  background: rgba(123, 136, 142, 0.14);
+  border-radius: 6px;
+  padding: 0.08rem 0.35rem;
+  font-size: 0.88em;
+}
+
 .foot-note {
   margin-top: 1.5rem;
   color: var(--color-secondary);
-  font-family: var(--font-averia);
+  font-family: var(--font-display);
   font-size: 0.85rem;
 }
 
@@ -893,7 +941,8 @@ button {
   padding: 2rem 1rem;
 }
 
-/* ========== RESPONSIVE ========== */
+/* ===== RWD ===== */
+
 @media (max-width: 980px) {
   .board {
     grid-template-columns: 1fr 1fr;

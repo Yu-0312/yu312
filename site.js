@@ -1,161 +1,154 @@
-const USER = "Yu-0312";
+/* ==========================================================
+   Max 個人入口站 — 互動腳本
+   資料全部是本地示範佔位：換內容只要改 SHARE_ITEMS / PROJECT_ITEMS
+   （沒有任何對外請求，離線也能跑）
+   ========================================================== */
 
-/** @type {{name:string, title:string, desc:string, url:string, cats:string[], stars?:number, views?:string, marks?:string, badge:string}[]} */
-const FALLBACK_SHARE = [
+/* ---------- 示範資料：推薦分享 ---------- */
+const SHARE_ITEMS = [
   {
-    name: "apcs-judge",
-    title: "APCS 多語言評分系統",
-    desc: "單一頁面支援 Python/C++/C/Java，58 題涵蓋初級/中級/高級，含解題思路提示。",
-    url: "https://github.com/Yu-0312/apcs-judge",
-    cats: ["教學", "Tools"],
-    stars: 116,
-    views: "GitHub ★ 116",
-    marks: "JS",
-    badge: "APCS",
+    name: "notes-garden",
+    title: "筆記花園",
+    desc: "把零散筆記種成一片園地：卡片式整理、標籤與全文檢索。",
+    url: "https://github.com/",
+    cats: ["教學", "Learning"],
+    stars: 96,
+    views: "示範條目",
+    marks: "HTML",
+    badge: "notes",
   },
   {
-    name: "shell-lab",
-    title: "shell-lab",
-    desc: "Shell 互動實驗。",
-    url: "https://github.com/Yu-0312/shell-lab",
+    name: "algo-drills",
+    title: "演算法練習場",
+    desc: "分級題庫加上解題提示，適合考前衝刺的互動練習。",
+    url: "https://github.com/",
+    cats: ["教學", "Tools"],
+    stars: 120,
+    views: "示範條目",
+    marks: "JS",
+    badge: "algo",
+  },
+  {
+    name: "shell-classroom",
+    title: "Shell 互動教室",
+    desc: "在瀏覽器裡練常用指令：管線、權限、程序管理。",
+    url: "https://github.com/",
     cats: ["教學", "OS"],
-    stars: 0,
-    views: "GitHub",
+    stars: 40,
+    views: "示範條目",
     marks: "HTML",
     badge: "shell",
   },
   {
-    name: "stat-lab",
-    title: "stat-lab",
-    desc: "互動式統計學課程 — Excel · JASP · SPSS 三軟體並行。",
-    url: "https://github.com/Yu-0312/stat-lab",
+    name: "stat-playground",
+    title: "統計遊樂場",
+    desc: "把抽象統計概念做成可拖拉的互動圖表。",
+    url: "https://github.com/",
     cats: ["教學", "Learning"],
-    stars: 0,
-    views: "GitHub",
-    marks: "HTML",
+    stars: 64,
+    views: "示範條目",
+    marks: "JS",
     badge: "stat",
   },
   {
-    name: "devops-roadmap",
-    title: "devops-roadmap",
-    desc: "從 Linux 到 Production 的 12 階段 DevOps 互動式學習路線圖。",
-    url: "https://github.com/Yu-0312/devops-roadmap",
-    cats: ["教學", "Backend"],
-    stars: 0,
-    views: "GitHub",
+    name: "web-basics",
+    title: "網頁開發入門",
+    desc: "HTML / CSS / JS 三週連貫教材，附隨堂小練習。",
+    url: "https://github.com/",
+    cats: ["教學", "Frontend"],
+    stars: 88,
+    views: "示範條目",
     marks: "HTML",
-    badge: "DevOps",
+    badge: "web",
   },
   {
-    name: "web-mysql-tutorial",
-    title: "web-mysql-tutorial",
-    desc: "Web 三劍客（HTML/CSS/JS）＋ MySQL 連貫教學網站：11 章互動課程。",
-    url: "https://github.com/Yu-0312/web-mysql-tutorial",
-    cats: ["教學", "Frontend", "DB"],
-    stars: 0,
-    views: "GitHub",
-    marks: "HTML",
-    badge: "Web+SQL",
+    name: "db-cookbook",
+    title: "資料庫食譜",
+    desc: "用食譜步驟比喻 SQL：從 SELECT 到 JOIN 的實作練習。",
+    url: "https://github.com/",
+    cats: ["教學", "DB"],
+    stars: 30,
+    views: "示範條目",
+    marks: "SQL",
+    badge: "db",
   },
   {
-    name: "ppt-creator-skills",
-    title: "ppt-creator-skills",
-    desc: "PPT creator skill for Claude Code。",
-    url: "https://github.com/Yu-0312/ppt-creator-skills",
+    name: "focus-timer",
+    title: "專注番茄鐘",
+    desc: "極簡番茄鐘，附每日專注時數統計。",
+    url: "https://github.com/",
     cats: ["工具", "Tools"],
-    stars: 25,
-    views: "GitHub ★ 25",
+    stars: 75,
+    views: "示範條目",
     marks: "JS",
-    badge: "PPT",
+    badge: "timer",
+  },
+  {
+    name: "slide-kit",
+    title: "簡報素材包",
+    desc: "可重用的簡報模板與圖示庫，一鍵套色。",
+    url: "https://github.com/",
+    cats: ["工具", "Tools"],
+    stars: 52,
+    views: "示範條目",
+    marks: "JS",
+    badge: "slide",
   },
 ];
 
-const FALLBACK_PROJECTS = [
+/* ---------- 示範資料：我的專案 ---------- */
+const PROJECT_ITEMS = [
   {
-    name: "editorial-vision-studio",
+    name: "portfolio-v2",
     year: "2026",
-    tags: ["Design", "Studio"],
-    desc: "Editorial vision studio · GitHub ★215",
-    url: "https://github.com/Yu-0312/editorial-vision-studio",
-    badge: "editorial",
+    tags: ["HTML", "CSS"],
+    desc: "個人網站改版：毛玻璃卡片加上 Bento 版面。",
+    url: "https://github.com/",
+    badge: "site",
   },
   {
-    name: "apcs-judge",
+    name: "quiz-engine",
     year: "2026",
-    tags: ["JavaScript", "APCS"],
-    desc: "APCS 多語言評分系統 · 58 題 · 含解題提示",
-    url: "https://github.com/Yu-0312/apcs-judge",
-    badge: "apcs",
+    tags: ["JavaScript", "Tools"],
+    desc: "出題與自動評分的小引擎。",
+    url: "https://github.com/",
+    badge: "quiz",
   },
   {
-    name: "ppt-creator-skills",
-    year: "2026",
-    tags: ["Claude", "Skill"],
-    desc: "Claude Code 的 PPT 製作 skill",
-    url: "https://github.com/Yu-0312/ppt-creator-skills",
-    badge: "ppt",
-  },
-  {
-    name: "aesthetic-object-recomposer",
-    year: "2026",
-    tags: ["Image", "Codex"],
-    desc: "物件照片重組成 editorial / kawaii 風格",
-    url: "https://github.com/Yu-0312/aesthetic-object-recomposer",
-    badge: "photo",
-  },
-  {
-    name: "english-learning-system",
-    year: "2026",
-    tags: ["Learning", "HTML"],
-    desc: "英語學習系統",
-    url: "https://github.com/Yu-0312/english-learning-system",
-    badge: "eng",
-  },
-  {
-    name: "paper-echo-photo-cards",
-    year: "2026",
-    tags: ["Cards", "Codex"],
-    desc: "把日常照片做成可重用的學習卡片",
-    url: "https://github.com/Yu-0312/paper-echo-photo-cards",
+    name: "photo-cards",
+    year: "2025",
+    tags: ["Learning", "Cards"],
+    desc: "把日常照片變成可重用的記憶卡片。",
+    url: "https://github.com/",
     badge: "cards",
   },
+  {
+    name: "habit-tracker",
+    year: "2025",
+    tags: ["App", "PWA"],
+    desc: "習慣追蹤小工具，離線也能記錄。",
+    url: "https://github.com/",
+    badge: "habit",
+  },
+  {
+    name: "data-viz-lab",
+    year: "2025",
+    tags: ["D3", "Data"],
+    desc: "資料視覺化實驗場：圖表與動態資料。",
+    url: "https://github.com/",
+    badge: "viz",
+  },
+  {
+    name: "mini-blog",
+    year: "2024",
+    tags: ["Static", "Writing"],
+    desc: "極簡靜態部落格，專注在文字本身。",
+    url: "https://github.com/",
+    badge: "blog",
+  },
 ];
 
-const TEACH_NAMES = new Set([
-  "shell-lab",
-  "cg-interactive-tutorial",
-  "rl-interactive-tutorial",
-  "stat-lab",
-  "web-mysql-tutorial",
-  "devops-roadmap",
-  "english-learning-system",
-  "fullstack-roadmap",
-  "ai-engineer-roadmap",
-  "senior-science",
-]);
-
-const CAT_MAP = [
-  ["apcs-judge", ["教學", "Tools"]],
-  ["shell-lab", ["教學", "OS"]],
-  ["stat-lab", ["教學", "Learning"]],
-  ["devops-roadmap", ["教學", "Backend"]],
-  ["web-mysql-tutorial", ["教學", "Frontend", "DB"]],
-  ["english-learning-system", ["教學", "Learning"]],
-  ["cg-interactive-tutorial", ["教學", "Domain"]],
-  ["rl-interactive-tutorial", ["教學", "Domain"]],
-  ["fullstack-roadmap", ["教學", "Frontend"]],
-  ["ai-engineer-roadmap", ["教學", "Domain"]],
-  ["ppt-creator-skills", ["工具", "Tools"]],
-  ["editorial-vision-studio", ["專案", "Domain"]],
-  ["hypecut", ["專案", "Domain"]],
-  ["skillhub", ["專案", "Tools"]],
-];
-
-function catsFor(name) {
-  const hit = CAT_MAP.find(([n]) => n === name);
-  return hit ? hit[1] : ["專案"];
-}
-
+/* ---------- 小工具 ---------- */
 function esc(s) {
   return String(s ?? "")
     .replaceAll("&", "&amp;")
@@ -165,12 +158,12 @@ function esc(s) {
 }
 
 function starsHTML(n) {
-  const full = Math.max(0, Math.min(5, Math.round(Number(n) / 25)));
+  const full = Math.max(0, Math.min(5, Math.round(Number(n) / 20)));
   const safe = n > 0 ? Math.max(1, full) : 0;
   return "★".repeat(safe) + "☆".repeat(5 - safe);
 }
 
-/* ---------- home widgets ---------- */
+/* ---------- 首頁小工具 ---------- */
 function greetWord(d = new Date()) {
   const h = d.getHours();
   if (h < 11) return "Good Morning";
@@ -198,10 +191,11 @@ function renderCalendar() {
   const y = now.getFullYear();
   const m = now.getMonth();
   const dowNames = ["一", "二", "三", "四", "五", "六", "日"];
-  title.textContent = `${y}/${m + 1} ${["周日", "周一", "周二", "周三", "周四", "周五", "周六"][now.getDay()]}`;
+  const weekNames = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+  title.textContent = `${y}/${m + 1} ${weekNames[now.getDay()]}`;
 
   const first = new Date(y, m, 1);
-  // JS: 0=Sun ... convert to Mon-first
+  // JS 的 0=週日，換算成週一起始
   const start = (first.getDay() + 6) % 7;
   const days = new Date(y, m + 1, 0).getDate();
 
@@ -221,7 +215,7 @@ function renderCalendar() {
   }
 }
 
-function setupHomeExtras(repos) {
+function setupHomeExtras(items) {
   const g = document.getElementById("greetPart");
   if (g) g.textContent = greetWord();
 
@@ -229,8 +223,8 @@ function setupHomeExtras(repos) {
   const recDesc = document.getElementById("recDesc");
   const recThumb = document.getElementById("recThumb");
   const recCard = document.getElementById("recCard");
-  const pool = (repos && repos.length ? repos : FALLBACK_SHARE).filter((r) => (r.stars ?? 0) > 0 || r.badge);
-  const pick = pool[Math.floor(Math.random() * pool.length)] || FALLBACK_SHARE[0];
+  const pool = items && items.length ? items : SHARE_ITEMS;
+  const pick = pool[Math.floor(Math.random() * pool.length)] || pool[0];
   if (recTitle) recTitle.textContent = pick.title || pick.name;
   if (recDesc) recDesc.textContent = pick.desc || "";
   if (recThumb) recThumb.textContent = (pick.badge || pick.name || "★").slice(0, 8);
@@ -239,19 +233,20 @@ function setupHomeExtras(repos) {
   const likeBtn = document.getElementById("likeBtn");
   const likeCount = document.getElementById("likeCount");
   if (likeBtn && likeCount) {
-    const KEY = "yu-site-likes";
-    let n = Number(localStorage.getItem(KEY) || "1");
-    let on = sessionStorage.getItem("yu-site-liked") === "1";
+    const KEY = "***";
+    const ONCE = "portal-liked";
+    let n = Number(localStorage.getItem(KEY) || "12");
+    let on = sessionStorage.getItem(ONCE) === "1";
     likeCount.textContent = String(n);
     if (on) {
       likeBtn.classList.add("is-on");
       likeBtn.setAttribute("aria-pressed", "true");
     }
     likeBtn.addEventListener("click", () => {
-      if (sessionStorage.getItem("yu-site-liked") === "1") return;
+      if (sessionStorage.getItem(ONCE) === "1") return;
       n += 1;
       localStorage.setItem(KEY, String(n));
-      sessionStorage.setItem("yu-site-liked", "1");
+      sessionStorage.setItem(ONCE, "1");
       likeCount.textContent = String(n);
       likeBtn.classList.add("is-on");
       likeBtn.setAttribute("aria-pressed", "true");
@@ -259,30 +254,7 @@ function setupHomeExtras(repos) {
   }
 }
 
-/* ---------- data ---------- */
-async function fetchRepos() {
-  const res = await fetch(`https://api.github.com/users/${USER}/repos?per_page=100&sort=updated`, {
-    headers: { Accept: "application/vnd.github+json" },
-  });
-  if (!res.ok) throw new Error(String(res.status));
-  const data = await res.json();
-  return data
-    .filter((r) => !r.fork && !r.private && r.name !== USER && r.name !== "yu312")
-    .map((r) => ({
-      name: r.name,
-      title: r.name,
-      desc: (r.description || "").trim() || "（之後可補描述）",
-      url: r.html_url,
-      cats: catsFor(r.name),
-      stars: r.stargazers_count ?? 0,
-      views: r.stargazers_count ? `GitHub ★ ${r.stargazers_count}` : "GitHub",
-      marks: (r.language || "—").slice(0, 12),
-      badge: r.name.slice(0, 8),
-      year: String((r.updated_at || "").slice(0, 4) || "—"),
-      tags: catsFor(r.name).slice(0, 3),
-    }));
-}
-
+/* ---------- 卡片樣板 ---------- */
 function shareCardHTML(item) {
   return `
     <article class="item-card" data-cats="${esc((item.cats || []).join("|"))}" data-name="${esc(item.name)}">
@@ -318,6 +290,7 @@ function projectCardHTML(p) {
     </article>`;
 }
 
+/* ---------- 推薦分享頁：篩選 + 搜尋 ---------- */
 function setupShare(items) {
   const grid = document.getElementById("grid");
   const filters = document.getElementById("filters");
@@ -362,6 +335,7 @@ function setupShare(items) {
   paint();
 }
 
+/* ---------- 專案頁：依星數排序 ---------- */
 function setupProjects(items) {
   const grid = document.getElementById("projGrid");
   if (!grid) return;
@@ -371,35 +345,15 @@ function setupProjects(items) {
     : `<div class="empty">目前沒有可顯示的專案</div>`;
 }
 
-async function main() {
+/* ---------- 啟動 ---------- */
+function main() {
   tickClock();
   setInterval(tickClock, 30_000);
   renderCalendar();
 
-  let repos = [];
-  try {
-    repos = await fetchRepos();
-  } catch {
-    repos = [];
-  }
-
-  const shareItems = repos.length
-    ? repos.filter((r) => TEACH_NAMES.has(r.name) || (r.stars || 0) > 0 || catsFor(r.name)[0] !== "專案").map((r) => ({ ...r, title: r.name }))
-    : FALLBACK_SHARE;
-
-  // ensure teach items always present even if 0 stars
-  if (repos.length) {
-    const have = new Set(shareItems.map((x) => x.name));
-    for (const r of repos) {
-      if (TEACH_NAMES.has(r.name) && !have.has(r.name)) shareItems.push(r);
-    }
-  }
-
-  const projectItems = repos.length ? repos : FALLBACK_PROJECTS;
-
-  setupHomeExtras(shareItems.length ? shareItems : FALLBACK_SHARE);
-  setupShare(shareItems.length ? shareItems : FALLBACK_SHARE);
-  setupProjects(projectItems);
+  setupHomeExtras(SHARE_ITEMS);
+  setupShare(SHARE_ITEMS);
+  setupProjects(PROJECT_ITEMS);
 }
 
 main();

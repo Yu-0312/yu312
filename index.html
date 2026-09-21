@@ -3,26 +3,24 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yu</title>
-  <meta name="description" content="Yu / 王宇錡 的個人 wiki — 教學、專案、資源">
-  <meta property="og:title" content="Yu">
-  <meta property="og:description" content="Yu / 王宇錡 的個人 wiki">
+  <title>Max</title>
+  <meta name="description" content="Max 的個人入口站 — 推薦分享、專案與關於">
+  <meta property="og:title" content="Max">
+  <meta property="og:description" content="Max 的個人入口站">
   <meta name="theme-color" content="#eeeeee">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Averia+Gruesa+Libre&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./assets/fonts/averia.css">
   <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
   <main class="stage">
     <div class="board">
-      <!-- LEFT NAV -->
+      <!-- 左側導覽 -->
       <aside class="card profile-card p-nav">
         <div class="profile-top">
-          <img src="./assets/avatar.svg" alt="Yu avatar" width="42" height="42">
+          <img src="./assets/avatar.svg" alt="Max 的頭像" width="42" height="42">
           <div>
-            <div class="profile-name">Yu <span class="profile-tag">開發中</span></div>
+            <div class="profile-name">Max <span class="profile-tag">開發中</span></div>
           </div>
         </div>
         <p class="side-label">General</p>
@@ -43,7 +41,7 @@
             <span class="nav-ico" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
             </span>
-            我的項目
+            我的專案
           </a>
           <a href="./about.html">
             <span class="nav-ico" aria-hidden="true">
@@ -51,7 +49,7 @@
             </span>
             關於網站
           </a>
-          <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">
+          <a href="https://github.com/" target="_blank" rel="noopener">
             <span class="nav-ico" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M3 12h18M12 4c2.5 2.8 2.5 13.2 0 16M12 4c-2.5 2.8-2.5 13.2 0 16"/></svg>
             </span>
@@ -60,32 +58,32 @@
         </nav>
       </aside>
 
-      <!-- ART -->
-      <section class="card art-card p-art" aria-label="wall art">
+      <!-- 貼紙牆 -->
+      <section class="card art-card p-art" aria-label="貼紙牆">
         <div class="art-inner">
           <div class="art-stickers">
-            <span class="sticker">APCS judge</span>
-            <span class="sticker">shell-lab</span>
-            <span class="sticker">stat-lab</span>
-            <span class="sticker">devops-roadmap</span>
-            <span class="sticker">ppt-creator-skills</span>
+            <span class="sticker">notes</span>
+            <span class="sticker">tools</span>
+            <span class="sticker">demo-lab</span>
+            <span class="sticker">wip</span>
+            <span class="sticker">playground</span>
           </div>
         </div>
       </section>
 
-      <!-- GREET -->
+      <!-- 問候 -->
       <section class="card greet-card p-greet">
         <img class="avatar-mark" src="./assets/avatar.svg" alt="" width="96" height="96">
         <h1 class="averia">
           <span id="greetPart">Good Afternoon</span><br>
-          I'm <span class="name">Yu</span>, Nice to<br>meet you!
+          I'm <span class="name">Max</span>, Nice to<br>meet you!
         </h1>
       </section>
 
-      <!-- TOOLS / CLOCK / CAL -->
+      <!-- 工具欄：時鐘 + 月曆 -->
       <div class="tools-stack p-tools">
         <div class="write-row">
-          <a class="brand-btn" href="https://github.com/Yu-0312" target="_blank" rel="noopener">
+          <a class="brand-btn" href="https://github.com/" target="_blank" rel="noopener">
             <span aria-hidden="true">✍️</span> 去 GitHub
           </a>
           <div class="dots" aria-hidden="true"></div>
@@ -99,34 +97,34 @@
         </div>
       </div>
 
-      <!-- LATEST -->
+      <!-- 最新文章 -->
       <section class="card p-latest">
         <h2 class="mini-title">最新文章</h2>
         <a class="post-row" href="./projects.html">
-          <div class="thumb">apcs<br>judge</div>
+          <div class="thumb">demo<br>post</div>
           <div>
-            <h3>APCS 多語言評分系統</h3>
-            <p>Python / C++ / C / Java · 58 題</p>
+            <h3>示範文章：把網站改成 Bento 版面</h3>
+            <p>HTML / CSS / JS · 示範條目</p>
             <p class="text-secondary" id="latestDate">—</p>
           </div>
         </a>
       </section>
 
-      <!-- SOCIAL -->
+      <!-- 社群 -->
       <div class="card p-social">
         <div class="social-row">
-          <a class="soc soc--gh" href="https://github.com/Yu-0312" target="_blank" rel="noopener">
+          <a class="soc soc--gh" href="https://github.com/" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.8c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.38-.01 2.48-.01 2.82 0 .26.18.58.69.48A10.27 10.27 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
             Github
           </a>
-          <a class="soc soc--mail" href="mailto:wang.yuchi.312@gmail.com">
+          <a class="soc soc--mail" href="mailto:hello@example.com">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 7 9-7"/></svg>
             Email
           </a>
         </div>
       </div>
 
-      <!-- RECOMMEND -->
+      <!-- 隨機推薦 -->
       <section class="card p-recommend">
         <h2 class="mini-title">隨機推薦</h2>
         <a class="rec-row" id="recCard" href="./share.html">
@@ -138,10 +136,10 @@
         </a>
       </section>
 
-      <!-- MUSIC + LIKE -->
+      <!-- 音樂 + 點讚 -->
       <div class="card p-extra">
         <div class="music-row">
-          <span aria-hidden="true" class="text-brand" style="font-size:1.25rem">🎵</span>
+          <span aria-hidden="true" class="text-brand" style="font-size:1.25rem">🎧</span>
           <div class="music-meta">
             <strong class="averia">Focus Mode</strong>
             <div class="music-bar" aria-hidden="true"><span></span></div>
@@ -156,7 +154,7 @@
         </div>
       </div>
     </div>
-    <p class="foot-note">Yu · 王宇錡 · 視覺參考 lvyovo-wiki.tech · 內容為自己的專案</p>
+    <p class="foot-note">Max · 個人入口站 · 內容為示範佔位</p>
   </main>
   <script src="./site.js" defer></script>
 </body>
