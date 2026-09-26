@@ -1,16 +1,16 @@
 # Yu
 
-個人入口站（視覺參考 [lvyovo-wiki.tech](https://lvyovo-wiki.tech/) 的個人 wiki 風格）— Yu / 王宇錡
-
-網站：https://yu-0312.github.io/yu312/
+Yu（王宇錡 · [@yuqi._.0313](https://www.threads.com/@yuqi._.0313)）的個人站 — https://yu-0312.github.io/yu312/
 
 ## 頁面
 
-- `index.html` — 首頁：問候、時鐘、月曆、社群、隨機推薦
-- `share.html` — 推薦分享：教學/資源卡片 + 分類篩選
-- `projects.html` — 我的項目
-- `about.html` — 關於網站
+- `index.html` — 首頁：問候、最新動態、近期圖片、時鐘與發文月曆、專注白噪音＋番茄鐘、隨機推薦
+- `posts.html` — 動態：同步自 Threads 的全部貼文，可依主題 / 月份篩選與搜尋，圖片可放大
+- `projects.html` — 我的專案（GitHub，依星數排序）
+- `share.html` — 教學資源：自己做的互動式教學網站
+- `about.html` — 關於我
 
-## 說明
+## 資料
 
-毛玻璃圓角卡片、柔和背景、側邊導覽，內容以 GitHub 公開 repo 動態帶入。插圖與文案為原創／自有專案，未複製對方站內圖片與文章。
+所有內容集中在 `data.js`：`PROFILE`、`THREADS_POSTS`（Threads 貼文，圖片在 `assets/threads/`）、`PROJECT_ITEMS`、`SHARE_ITEMS`。
+純靜態網頁，無框架、無追蹤碼，支援深色模式與 `prefers-reduced-motion`。

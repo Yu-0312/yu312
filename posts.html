@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>動態 · Yu</title>
+  <meta name="description" content="Yu 在 Threads 上的所有貼文：AI 新知、提示詞、活動筆記與日常">
+  <meta property="og:title" content="動態 · Yu">
+  <meta property="og:description" content="Yu 在 Threads 上的所有貼文：AI 新知、提示詞、活動筆記與日常">
+  <meta property="og:image" content="./assets/profile.jpg">
+  <meta name="theme-color" content="#eef0ec">
+  <link rel="icon" href="./assets/profile.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="./assets/fonts/averia.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-page="posts">
+  <div class="page-shell">
+    <nav class="top-nav" id="topNav" aria-label="站內導覽"></nav>
+    <header class="page-head">
+      <div>
+        <h1>動態</h1>
+        <p>同步自我的 Threads：AI 新知、提示詞分享、活動筆記與日常雜談。<span id="feedCount"></span></p>
+      </div>
+      <input class="search" id="search" type="search" placeholder="搜尋貼文內容…" aria-label="搜尋貼文">
+    </header>
+    <div class="filters" id="filters" role="toolbar" aria-label="主題篩選"></div>
+    <div class="feed-layout">
+      <div class="feed-col">
+        <div class="feed" id="feed" aria-live="polite"></div>
+        <div style="text-align:center;margin-top:1.2rem"><button class="btn btn--ghost load-more" id="loadMore" type="button" hidden>載入更多</button></div>
+      </div>
+      <aside class="feed-aside">
+        <div class="card aside-profile">
+          <img src="./assets/profile.jpg" alt="Yu 的頭像">
+          <h2>Yu</h2>
+          <div class="handle">@yuqi._.0313</div>
+          <p>好吧其實我是一名普通的學生<br>會更新日常 / 實用工具 / AI 新知。雜更～</p>
+          <a class="btn" href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">在 Threads 追蹤</a>
+        </div>
+        <div class="card">
+          <h2 class="mini-title">依月份</h2>
+          <div class="month-list" id="months"></div>
+        </div>
+      </aside>
+    </div>
+    <p class="foot-note">© 2026 Yu · 貼文版權屬原作者，點「在 Threads 查看」可看原文與留言</p>
+  </div>
+  <script src="./data.js" defer></script>
+  <script src="./site.js" defer></script>
+</body>
+</html>

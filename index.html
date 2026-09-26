@@ -3,159 +3,131 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yuqi</title>
-  <meta name="description" content="Yuqi 的個人入口站 — 教學、專案與近況">
-  <meta property="og:title" content="Yuqi">
-  <meta property="og:description" content="Yuqi 的個人入口站">
-  <meta name="theme-color" content="#eeeeee">
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>Yu · 王宇錡</title>
+  <meta name="description" content="Yu（@yuqi._.0313）的個人站：Threads 動態、AI 新知、教學網站與開源專案">
+  <meta property="og:title" content="Yu · 王宇錡">
+  <meta property="og:description" content="Yu（@yuqi._.0313）的個人站：Threads 動態、AI 新知、教學網站與開源專案">
+  <meta property="og:image" content="./assets/profile.jpg">
+  <meta name="theme-color" content="#eef0ec">
+  <link rel="icon" href="./assets/profile.jpg" type="image/jpeg">
   <link rel="stylesheet" href="./assets/fonts/averia.css">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body>
+<body data-page="home">
   <main class="stage">
     <div class="board">
-      <!-- 左側導覽 -->
-      <aside class="card profile-card p-nav">
+      <aside class="card profile-card p-nav rise">
         <div class="profile-top">
-          <img src="./assets/avatar.svg" alt="Yuqi 的頭像" width="42" height="42">
+          <img class="avatar" src="./assets/profile.jpg" alt="Yu 的頭像" width="46" height="46">
           <div>
-            <div class="profile-name">Yuqi <span class="profile-tag">開發中</span></div>
+            <div class="profile-name">Yu</div>
+            <div class="profile-handle">@yuqi._.0313</div>
           </div>
         </div>
+        <p class="profile-bio">好吧其實我是一名普通的學生<br>會更新日常 / 實用工具 / AI 新知。雜更～</p>
         <p class="side-label">General</p>
-        <nav class="side-nav" aria-label="主導覽">
-          <a class="is-active" href="./index.html">
-            <span class="nav-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg>
-            </span>
-            首頁
-          </a>
-          <a href="./share.html">
-            <span class="nav-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.8 7.1 18.2l.9-5.5-4-3.9L9.5 8 12 3z"/></svg>
-            </span>
-            推薦分享
-          </a>
-          <a href="./projects.html">
-            <span class="nav-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
-            </span>
-            我的專案
-          </a>
-          <a href="./about.html">
-            <span class="nav-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M8 13c1.5 2 6.5 2 8 0"/></svg>
-            </span>
-            關於網站
-          </a>
-          <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">
-            <span class="nav-ico" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M3 12h18M12 4c2.5 2.8 2.5 13.2 0 16M12 4c-2.5 2.8-2.5 13.2 0 16"/></svg>
-            </span>
-            GitHub
-          </a>
-        </nav>
+        <nav class="side-nav" id="sideNav" aria-label="主導覽"></nav>
+        <div class="profile-foot">
+          <div class="stat-row" id="stats"></div>
+          <span id="themeSlot"></span>
+        </div>
       </aside>
 
-      <!-- 貼紙牆 -->
-      <section class="card art-card p-art" aria-label="貼紙牆">
-        <div class="art-inner">
-          <div class="art-stickers">
-            <span class="sticker">apcs</span>
-            <span class="sticker">devops</span>
-            <span class="sticker">stat-lab</span>
-            <span class="sticker">studio</span>
-            <span class="sticker">hypecut</span>
+      <section class="card greet-card p-greet rise">
+        <div class="greet-avatar"><img src="./assets/profile.jpg" alt="" width="104" height="104"></div>
+        <div>
+          <h1><span id="greetPart">Hello</span>,<br>I'm <span class="name">Yu</span>. Nice to meet you!</h1>
+          <p>和貓共用一個帳號的學生，喜歡把 AI 新知、實用工具和程式教學整理成大家看得懂的樣子。</p>
+        </div>
+      </section>
+
+      <section class="card art-card p-art rise" aria-label="最近的圖片">
+        <h2 class="mini-title">最近的圖片 <a href="./posts.html">看更多 →</a></h2>
+        <div class="polaroids" id="polaroids"></div>
+      </section>
+
+      <div class="tools-stack p-tools">
+        <div class="card clock-card rise" aria-live="polite">
+          <div class="clock-face">
+            <div class="clock-time" id="clock">--:--</div>
+            <div class="clock-sub" id="clockSub">&nbsp;</div>
           </div>
         </div>
-      </section>
-
-      <!-- 問候 -->
-      <section class="card greet-card p-greet">
-        <img class="avatar-mark" src="./assets/avatar.svg" alt="" width="96" height="96">
-        <h1 class="averia">
-          <span id="greetPart">Good Afternoon</span><br>
-          I'm <span class="name">Yuqi</span>, Nice to<br>meet you!
-        </h1>
-      </section>
-
-      <!-- 工具欄：時鐘 + 月曆 -->
-      <div class="tools-stack p-tools">
-        <div class="write-row">
-          <a class="brand-btn" href="https://github.com/Yu-0312" target="_blank" rel="noopener">
-            <span aria-hidden="true">✍️</span> 去 GitHub
-          </a>
-          <div class="dots" aria-hidden="true"></div>
-        </div>
-        <div class="card clock-card" aria-live="polite">
-          <div class="clock-face" id="clock">--:--</div>
-        </div>
-        <div class="card cal-card">
-          <h2 id="calTitle">—</h2>
-          <div class="cal-grid" id="calendar" aria-label="月曆"></div>
+        <div class="card cal-card rise">
+          <div class="cal-head"><h2 id="calTitle">—</h2><span id="calNote"></span></div>
+          <div class="cal-grid" id="calendar" aria-label="本月月曆，圓點代表當天有發文"></div>
         </div>
       </div>
 
-      <!-- 最新文章 -->
-      <section class="card p-latest">
-        <h2 class="mini-title">最新文章</h2>
-        <a class="post-row" href="https://www.threads.net/@yuqi._.0313" target="_blank" rel="noopener">
-          <div class="thumb">threads</div>
-          <div>
-            <h3>近期文章</h3>
-            <p>最新文章與近況都在我的 Threads，點擊前往</p>
-            <p class="text-secondary" id="latestDate">—</p>
-          </div>
-        </a>
+      <section class="card latest-card p-latest rise">
+        <h2 class="mini-title">最新動態 <a href="./posts.html">全部動態 →</a></h2>
+        <div id="latest"></div>
       </section>
 
-      <!-- 社群 -->
-      <div class="card p-social">
+      <div class="card p-social rise">
+        <h2 class="mini-title">找到我</h2>
         <div class="social-row">
-          <a class="soc soc--gh" href="https://github.com/Yu-0312" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.8c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.38-.01 2.48-.01 2.82 0 .26.18.58.69.48A10.27 10.27 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
-            Github
+          <a class="soc soc--dark" href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16.5 11.2c-.1-2.6-1.6-4.1-4.2-4.1-1.6 0-2.9.7-3.6 1.9l1.4.9c.5-.8 1.2-1.1 2.2-1.1 1.2 0 2 .6 2.3 1.7-.7-.1-1.4-.2-2.2-.1-2.2.1-3.6 1.4-3.5 3.2.1 1.8 1.7 2.9 3.6 2.8 2.4-.1 3.6-1.9 3.8-4.1.8.5 1.3 1.2 1.4 2.1.3 1.9-1.4 3.9-5.6 3.9-4 0-6-2.3-6-6.3S8 5.6 12 5.6c3.3 0 5.4 1.5 6 4.3"/></svg>
+            Threads
           </a>
-          <a class="soc soc--mail" href="mailto:wang.yuchi.312@gmail.com">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 7 9-7"/></svg>
+          <a class="soc" href="https://github.com/Yu-0312" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.8c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .26.18.58.69.48A10.27 10.27 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
+            GitHub
+          </a>
+          <a class="soc soc--brand" href="mailto:wang.yuchi.312@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg>
             Email
           </a>
         </div>
       </div>
 
-      <!-- 隨機推薦 -->
-      <section class="card p-recommend">
+      <section class="card p-recommend rise">
         <h2 class="mini-title">隨機推薦</h2>
-        <a class="rec-row" id="recCard" href="./share.html">
-          <div class="thumb" id="recThumb">share</div>
-          <div>
-            <h3 id="recTitle">教學資源</h3>
-            <p id="recDesc">互動式課程與工具整理</p>
-          </div>
-        </a>
-      </section>
-
-      <!-- 音樂 + 點讚 -->
-      <div class="card p-extra">
-        <div class="music-row">
-          <span aria-hidden="true" class="text-brand" style="font-size:1.25rem">🎧</span>
-          <div class="music-meta">
-            <strong class="averia">Focus Mode</strong>
-            <div class="music-bar" aria-hidden="true"><span></span></div>
-          </div>
-          <button class="play-btn" type="button" aria-label="播放按鈕（示意）">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <div class="rec-row">
+          <a class="rec-row" id="recCard" href="./share.html" target="_blank" rel="noopener" style="flex:1;min-width:0">
+            <div class="thumb" id="recThumb">★</div>
+            <div style="min-width:0">
+              <h3 id="recTitle">教學資源</h3>
+              <p id="recDesc"></p>
+            </div>
+          </a>
+          <button class="shuffle" id="recShuffle" type="button" aria-label="換一個">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h4v4M20 4l-6 6M4 20l6-6M16 20h4v-4M20 20l-5.5-5.5M4 4l5 5"/></svg>
           </button>
         </div>
+      </section>
+
+      <div class="card p-extra rise">
+        <div id="noise">
+          <h2 class="mini-title">專注模式</h2>
+          <div class="music-row">
+            <button class="play-btn" id="noiseBtn" type="button" aria-label="播放"></button>
+            <div class="music-meta">
+              <strong>Focus Noise</strong>
+              <small id="noiseLabel"></small>
+              <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+            </div>
+          </div>
+          <div class="noise-tabs" style="margin-top:.7rem">
+            <button type="button" data-noise="rain" class="is-active">雨聲</button>
+            <button type="button" data-noise="brown">棕噪音</button>
+            <button type="button" data-noise="white">白噪音</button>
+          </div>
+        </div>
+        <div class="pomodoro">
+          <div><div class="pomo-time" id="pomoTime" title="雙擊重設">25:00</div><div class="pomo-label">番茄鐘 · 雙擊時間重設</div></div>
+          <button class="btn btn--ghost" id="pomoBtn" type="button">開始</button>
+        </div>
         <div class="like-row">
-          <button class="like-btn" id="likeBtn" type="button" aria-pressed="false" aria-label="喜歡這個站">♥</button>
-          <span class="like-count" id="likeCount">0</span>
+          <button class="like-btn" id="likeBtn" type="button" aria-pressed="false" aria-label="喜歡這個網站">♥</button>
+          <span id="likeText"></span>
         </div>
       </div>
     </div>
-    <p class="foot-note">Yuqi · 個人入口站 · 內容為個人專案</p>
+    <p class="foot-note">© 2026 Yu · 動態內容來自 <a href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">Threads @yuqi._.0313</a></p>
   </main>
+  <script src="./data.js" defer></script>
   <script src="./site.js" defer></script>
 </body>
 </html>

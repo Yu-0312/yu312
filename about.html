@@ -3,67 +3,58 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>關於網站 · Yuqi</title>
-  <meta name="description" content="關於 Yuqi 的個人入口站">
-  <meta property="og:title" content="關於網站 · Yuqi">
-  <meta property="og:description" content="關於 Yuqi 的個人入口站">
-  <meta name="theme-color" content="#eeeeee">
-  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <title>關於我 · Yu</title>
+  <meta name="description" content="關於 Yu（王宇錡）">
+  <meta property="og:title" content="關於我 · Yu">
+  <meta property="og:description" content="關於 Yu（王宇錡）">
+  <meta property="og:image" content="./assets/profile.jpg">
+  <meta name="theme-color" content="#eef0ec">
+  <link rel="icon" href="./assets/profile.jpg" type="image/jpeg">
   <link rel="stylesheet" href="./assets/fonts/averia.css">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body>
+<body data-page="about">
   <div class="page-shell">
-    <nav class="icon-nav" aria-label="站內導覽">
-      <a class="avatar-link" href="./index.html" title="首頁"><img src="./assets/avatar.svg" alt="Yuqi"></a>
-      <a href="./index.html" title="首頁">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h16M4 19h10"/></svg>
-      </a>
-      <a href="./projects.html" title="我的專案">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg>
-      </a>
-      <a class="is-active" href="./about.html" title="關於網站">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M8 13c1.5 2 6.5 2 8 0"/></svg>
-      </a>
-      <a href="./share.html" title="推薦分享">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 15.8 7.1 18.2l.9-5.5-4-3.9L9.5 8 12 3z"/></svg>
-      </a>
-      <a href="https://github.com/Yu-0312" target="_blank" rel="noopener" title="GitHub">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8"/><path d="M3 12h18M12 4c2.5 2.8 2.5 13.2 0 16M12 4c-2.5 2.8-2.5 13.2 0 16"/></svg>
-      </a>
-    </nav>
-
-    <article class="card about-card">
-      <h1 class="averia">關於這個站</h1>
-      <p>這是 <strong>Yuqi</strong> 的個人入口站：柔和背景、毛玻璃圓角卡片、側邊導覽與分享卡片，整個站都是純靜態網頁。</p>
-
-      <h2>站內功能</h2>
-      <ul>
-        <li><strong>首頁</strong>：依時段問候、即時時鐘、當月月曆、最新文章、隨機推薦、社群連結、專注模式與點讚小玩具</li>
-        <li><strong>推薦分享</strong>：資源卡片，可依分類篩選、也可用關鍵字即時搜尋</li>
-        <li><strong>我的專案</strong>：專案卡片整理，依星數排序</li>
-      </ul>
-
-      <h2>怎麼換成自己的內容</h2>
-      <ul>
-        <li>文字資料都在 <code>site.js</code>：<code>SHARE_ITEMS</code>（推薦卡）與 <code>PROJECT_ITEMS</code>（專案卡），改陣列內容就會跟著更新</li>
-        <li>首頁的最新文章與問候文字寫在 <code>index.html</code></li>
-        <li>頭像、游標、favicon 都是 <code>assets/</code> 裡的 SVG，直接換檔即可</li>
-        <li>改完存檔、重新整理就生效，不需要任何建置工具</li>
-      </ul>
-
-      <h2>技術小記</h2>
-      <ul>
-        <li>HTML / CSS / JavaScript 手工撰寫，沒有框架、沒有追蹤碼</li>
-        <li>沒有任何對外請求：字型檔與插圖都隨站打包，離線也能開</li>
-        <li>支援鍵盤導覽與 <code>prefers-reduced-motion</code> 偏好</li>
-      </ul>
-
-      <p>聯絡：<a href="mailto:wang.yuchi.312@gmail.com">wang.yuchi.312@gmail.com</a> ·
-        <a href="https://github.com/Yu-0312" target="_blank" rel="noopener">github.com/Yu-0312</a></p>
-      <p class="foot-note">站內資料為個人專案，更新請改 site.js 的資料陣列。</p>
-    </article>
+    <nav class="top-nav" id="topNav" aria-label="站內導覽"></nav>
+    <div class="about-grid">
+      <aside class="card about-id rise">
+        <img src="./assets/profile.jpg" alt="Yu 的頭像">
+        <h1>Yu</h1>
+        <div class="handle">王宇錡 · @yuqi._.0313</div>
+        <div class="social-row">
+          <a class="soc soc--dark" href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">Threads</a>
+          <a class="soc" href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
+          <a class="soc soc--brand" href="mailto:wang.yuchi.312@gmail.com">Email</a>
+        </div>
+      </aside>
+      <div class="about-main">
+        <section class="card rise">
+          <h2>先說好</h2>
+          <p class="quote">我提前說一下，我是文盲，和貓共用一個帳號，如果這個帳號發了不好的言論，那都是貓發的，對不起，我家貓剛學上網請大家見諒，罵人的都是貓，貓四個爪子，比我打字快。</p>
+          <p style="margin-top:1rem">好吧其實我是一名普通的學生，會更新日常 / 實用工具 / AI 新知。雜更～</p>
+        </section>
+        <section class="card rise">
+          <h2>一些小事</h2>
+          <div class="topic-cloud">
+            <span class="chip chip--plain">🏸 羽球</span>
+            <span class="chip chip--plain">📮 獲得了人生第一個工作信箱！！！</span>
+            <span class="chip chip--plain">🎹 學了 12 年鋼琴</span>
+            <span class="chip chip--plain">🇹🇼 Taiwan</span>
+          </div>
+        </section>
+        <section class="card rise">
+          <h2>數字</h2>
+          <div class="facts" id="facts"></div>
+        </section>
+        <section class="card rise">
+          <h2>常寫的主題</h2>
+          <div class="topic-cloud" id="topics"></div>
+        </section>
+      </div>
+    </div>
+    <p class="foot-note">© 2026 Yu · 這個站是純靜態網頁，沒有追蹤碼</p>
   </div>
+  <script src="./data.js" defer></script>
   <script src="./site.js" defer></script>
 </body>
 </html>
