@@ -61,16 +61,14 @@
     { href: "./about.html", key: "about", label: "關於我", icon: "smile" },
   ];
 
-  /* ---------- 主題 ---------- */
+  /* ---------- 主題（預設明亮，對齊 lvyovo） ---------- */
   function applyTheme(t) {
-    if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
-    else delete document.documentElement.dataset.theme;
+    if (t === "dark") document.documentElement.dataset.theme = "dark";
+    else document.documentElement.dataset.theme = "light";
   }
   applyTheme(store.get("yu-theme"));
   function isDark() {
-    const t = document.documentElement.dataset.theme;
-    if (t) return t === "dark";
-    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+    return document.documentElement.dataset.theme === "dark";
   }
   function themeButton() {
     const b = document.createElement("button");
