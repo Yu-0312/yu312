@@ -3,132 +3,1097 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yu · 王宇錡</title>
-  <meta name="description" content="Yu（@yuqi._.0313）的個人站：Threads 動態、AI 新知、教學網站與開源專案">
-  <meta property="og:title" content="Yu · 王宇錡">
-  <meta property="og:description" content="Yu（@yuqi._.0313）的個人站：Threads 動態、AI 新知、教學網站與開源專案">
-  <meta property="og:image" content="./assets/profile.jpg">
-  <meta name="theme-color" content="#eeeeee">
+  <title>Yu · 王宇錡 — 一屏 Dashboard</title>
+  <meta name="description" content="Yu 的個人站：一屏看完動態、專案、教學資源與專注工具">
   <link rel="icon" href="./assets/profile.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="./assets/fonts/averia.css">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #3d4f48;
+      --ink-2: #6f8179;
+      --ink-3: #93a69c;
+      --brand: #3cbfa8;
+      --brand-2: #2fa893;
+      --brand-deep: #2fa893;
+      --brand-soft: rgba(60, 191, 168, 0.18);
+      --bg: #e6e7e6;
+      --wash-1: rgba(232, 232, 236, 0.95);
+      --wash-2: rgba(242, 242, 238, 0.9);
+      --wash-3: rgba(214, 216, 140, 0.95);
+      --wash-4: rgba(186, 212, 186, 0.95);
+      --yellow: #f3e39a;
+      --pink: #f2a5bb;
+      --card: rgba(255, 255, 255, 0.42);
+      --card-strong: rgba(255, 255, 255, 0.72);
+      --line: rgba(255, 255, 255, 0.82);
+      --hair: rgba(61, 79, 72, 0.08);
+      --r-xl: 40px;
+      --r-lg: 28px;
+      --r-md: 18px;
+      --shadow: 0 24px 48px -28px rgba(70, 95, 75, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+      --font: "Quicksand", "Nunito", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", -apple-system, sans-serif;
+      --mono: "Share Tech Mono", ui-monospace, Menlo, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body {
+      color: var(--ink);
+      font-family: var(--font);
+      font-weight: 600;
+      overflow: hidden;
+      background:
+        radial-gradient(1000px 700px at 30% -10%, var(--wash-1), transparent 55%),
+        radial-gradient(900px 650px at 100% 0%, var(--wash-2), transparent 50%),
+        radial-gradient(1100px 800px at -5% 100%, var(--wash-4), transparent 55%),
+        radial-gradient(1100px 850px at 100% 100%, var(--wash-3), transparent 58%),
+        var(--bg);
+      background-attachment: fixed;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; border: none; background: none; cursor: pointer; }
+    img { display: block; max-width: 100%; }
+    :focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; }
+
+    .stage {
+      position: relative;
+      height: 100dvh;
+      width: min(1480px, 100%);
+      margin: 0 auto;
+      padding: clamp(12px, 1.8vw, 28px) clamp(14px, 2.2vw, 36px);
+    }
+
+    /* floating action, like 写文章 */
+    .write-row {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 16px;
+      padding-right: 4px;
+      margin-bottom: 4px;
+      min-height: 52px;
+    }
+    .write-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px 0 18px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, #4fd0b8, var(--brand-deep));
+      color: #fff;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      box-shadow: 0 16px 32px -16px rgba(47, 168, 147, 0.55);
+    }
+    .write-btn:hover { filter: brightness(1.05); color: #fff; transform: translateY(-1px); }
+    .write-btn svg { width: 20px; height: 20px; }
+    .dots {
+      display: grid;
+      grid-template-columns: repeat(3, 4px);
+      gap: 5px;
+      opacity: 0.35;
+    }
+    .dots i {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .board {
+      height: 100%;
+      display: grid;
+      grid-template-columns: minmax(240px, 0.92fr) minmax(320px, 1.35fr) minmax(280px, 1.05fr);
+      gap: clamp(16px, 2vw, 36px);
+      align-items: stretch;
+    }
+
+    .col {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(16px, 2vw, 32px);
+    }
+
+    .card {
+      min-height: 0;
+      background: var(--card);
+      backdrop-filter: blur(16px) saturate(1.08);
+      -webkit-backdrop-filter: blur(16px) saturate(1.08);
+      border: 1px solid var(--line);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow);
+      padding: clamp(18px, 1.7vw, 28px);
+      overflow: hidden;
+    }
+
+    .mini-title {
+      margin: 0 0 12px;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+    }
+    .mini-title .more {
+      float: right;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-2);
+    }
+    .mini-title .more:hover { color: var(--brand-deep); }
+
+    /* ===== profile ===== */
+    .profile-card {
+      flex: 1.55 1 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 8px;
+    }
+    .profile-top img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: var(--yellow);
+      border: 3px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 12px 24px -14px rgba(60, 80, 60, 0.35);
+    }
+    .profile-name {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: 0.01em;
+    }
+    .profile-name em {
+      font-style: normal;
+      margin-left: 8px;
+      font-size: 14px;
+      color: var(--brand-deep);
+      font-weight: 700;
+    }
+    .profile-handle {
+      margin: 4px 0 0;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--ink-2);
+      font-weight: 600;
+    }
+    .side-label {
+      margin: 0 0 18px;
+      font-size: 15px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+      font-weight: 700;
+    }
+    .side-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .side-nav a {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 18px;
+      border-radius: 22px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+    .side-nav a:hover { background: rgba(255, 255, 255, 0.35); }
+    .side-nav a.is-active {
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: 0 14px 28px -18px rgba(50, 80, 60, 0.28);
+      margin-right: -12px;
+    }
+    .nav-ico {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      color: var(--ink);
+      flex: 0 0 auto;
+    }
+    .nav-ico svg { width: 22px; height: 22px; }
+    .side-nav a.is-active .nav-ico { color: var(--brand-deep); }
+
+    /* ===== latest ===== */
+    .latest-card { flex: 0 0 auto; }
+    .latest-item {
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr);
+      gap: 14px;
+      align-items: center;
+    }
+    .latest-item img {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      object-fit: cover;
+    }
+    .latest-item h3 {
+      margin: 0 0 4px;
+      font-size: 16px;
+      line-height: 1.3;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .latest-item p {
+      margin: 0 0 6px;
+      font-size: 13px;
+      color: var(--ink-2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .latest-item time {
+      font-size: 13px;
+      color: var(--ink-3);
+    }
+
+    /* ===== polaroids ===== */
+    .art-card {
+      flex: 1 1 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(12px, 1.2vw, 22px);
+      background: rgba(255, 255, 255, 0.35);
+    }
+    .polaroids {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      max-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .polaroid {
+      width: min(32%, 170px);
+      aspect-ratio: 4 / 5;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 10px 10px 28px;
+      border-radius: 14px;
+      box-shadow: 0 18px 36px -18px rgba(50, 70, 55, 0.3);
+      margin: 0 -10px;
+      transition: transform 0.3s cubic-bezier(.2, .8, .2, 1);
+    }
+    .polaroid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .polaroid:nth-child(1) { transform: rotate(-8deg) translateY(10px); }
+    .polaroid:nth-child(2) { transform: rotate(2deg) translateY(-8px); z-index: 2; }
+    .polaroid:nth-child(3) { transform: rotate(8deg) translateY(12px); }
+    .polaroid:hover { transform: rotate(0deg) translateY(-12px) scale(1.06); z-index: 3; }
+
+    /* ===== greeting ===== */
+    .greet-card {
+      flex: 1.35 1 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 18px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.05)),
+        var(--card);
+    }
+    .greet-avatar-wrap {
+      width: clamp(88px, 12vh, 128px);
+      height: clamp(88px, 12vh, 128px);
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #fff6c8, var(--yellow));
+      display: grid;
+      place-items: center;
+      box-shadow: 0 18px 36px -18px rgba(180, 160, 80, 0.45);
+    }
+    .greet-avatar-wrap img {
+      width: 78%;
+      height: 78%;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .greet-card h1 {
+      margin: 0;
+      font-size: clamp(26px, 3.1vw, 42px);
+      line-height: 1.22;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+    .greet-card h1 .name { color: var(--brand-deep); }
+
+    /* ===== social ===== */
+    .social-row {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .soc {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 18px;
+      font-size: 17px;
+      font-weight: 700;
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      box-shadow: 0 12px 24px -16px rgba(50, 70, 55, 0.25);
+    }
+    .soc:hover { transform: translateY(-2px); }
+    .soc svg { width: 22px; height: 22px; }
+    .soc--dark {
+      background: #222628;
+      border-color: #222628;
+      color: #fff;
+    }
+    .soc--dark:hover { color: #fff; }
+    .soc--brand {
+      background: var(--brand);
+      border-color: transparent;
+      color: #fff;
+    }
+    .soc--brand:hover { color: #fff; }
+
+    /* ===== recommend ===== */
+    .rec-card {
+      flex: 0.95 1 0;
+    }
+    .rec-body {
+      display: grid;
+      grid-template-columns: 68px minmax(0, 1fr);
+      gap: 16px;
+      align-items: start;
+    }
+    .rec-thumb {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.2;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), var(--brand-soft));
+      border: 1px solid var(--line);
+    }
+    .rec-body h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .rec-body p {
+      margin: 0 0 10px;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--ink-2);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .rec-meta {
+      font-size: 13px;
+      color: var(--ink-3);
+    }
+    .shuffle {
+      float: right;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--card-strong);
+      display: grid;
+      place-items: center;
+      color: var(--ink-2);
+      margin-top: -4px;
+    }
+    .shuffle:hover { color: var(--brand-deep); transform: rotate(180deg); }
+    .shuffle svg { width: 15px; height: 15px; }
+
+    /* ===== clock ===== */
+    .clock-card {
+      flex: 0 0 auto;
+      padding: clamp(12px, 1vw, 18px);
+    }
+    .lcd {
+      border-radius: 28px;
+      padding: clamp(16px, 2.4vh, 28px) 16px;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.08)),
+        #d7dbd2;
+      border: 1px solid rgba(255, 255, 255, 0.65);
+      box-shadow: inset 0 3px 10px rgba(90, 110, 95, 0.08);
+    }
+    .lcd-time {
+      font-family: var(--mono);
+      font-size: clamp(48px, 6.5vw, 78px);
+      letter-spacing: 0.12em;
+      line-height: 1;
+      color: #5a6b62;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+      font-weight: 700;
+    }
+    .lcd-time .colon {
+      animation: blink 1s steps(1) infinite;
+      margin: 0 0.02em;
+    }
+    @keyframes blink { 50% { opacity: 0.2; } }
+
+    /* ===== calendar ===== */
+    .cal-card {
+      flex: 1.35 1 0;
+    }
+    .cal-head {
+      margin-bottom: 10px;
+    }
+    .cal-head h2 {
+      margin: 0;
+      font-size: 20px;
+      font-weight: 700;
+    }
+    .cal-head span {
+      display: block;
+      margin-top: 2px;
+      font-size: 13px;
+      color: var(--ink-3);
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 6px 4px;
+      text-align: center;
+      font-size: 15px;
+    }
+    .cal-grid .dow {
+      color: var(--ink-2);
+      font-size: 15px;
+      font-weight: 700;
+      padding-bottom: 4px;
+    }
+    .cal-grid .day {
+      position: relative;
+      min-height: 0;
+      height: clamp(26px, 3.4vh, 36px);
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .cal-grid .day.is-empty { visibility: hidden; }
+    .cal-grid a.day:hover { background: rgba(255, 255, 255, 0.55); }
+    .cal-grid .day.has-post::after {
+      content: "";
+      position: absolute;
+      bottom: 1px;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      margin-left: -2px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+    .cal-grid .day.is-today {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 10px 18px -10px rgba(47, 168, 147, 0.55);
+    }
+    .cal-grid .day.is-today::after { background: #fff; }
+
+    /* ===== music bar like Close To You ===== */
+    .music-card {
+      flex: 0 0 auto;
+      border-radius: 28px;
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .music-note {
+      width: 36px;
+      height: 36px;
+      color: var(--brand-deep);
+      flex: 0 0 auto;
+    }
+    .music-note svg { width: 100%; height: 100%; }
+    .music-body { flex: 1; min-width: 0; }
+    .music-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .music-bar {
+      height: 8px;
+      border-radius: 999px;
+      background: rgba(61, 79, 72, 0.1);
+      overflow: hidden;
+    }
+    .music-bar i {
+      display: block;
+      height: 100%;
+      width: 32%;
+      border-radius: 999px;
+      background: rgba(61, 79, 72, 0.28);
+    }
+    .is-playing .music-bar i {
+      width: 48%;
+      background: var(--brand);
+      transition: width 0.6s ease;
+    }
+    .play-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      color: var(--brand-deep);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      box-shadow: 0 10px 20px -12px rgba(50, 70, 55, 0.3);
+    }
+    .play-btn:hover { transform: scale(1.05); }
+    .play-btn svg { width: 18px; height: 18px; }
+
+    .noise-tabs {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .noise-tabs button {
+      border: 1px solid var(--line);
+      background: transparent;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      color: var(--ink-2);
+      font-weight: 700;
+    }
+    .noise-tabs button.is-active {
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      border-color: transparent;
+    }
+
+    .pomo-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .pomo-time {
+      font-family: var(--mono);
+      font-size: 28px;
+      letter-spacing: 0.06em;
+      line-height: 1;
+    }
+    .pomo-label {
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--ink-3);
+      font-weight: 600;
+    }
+    .btn-pill {
+      min-height: 40px;
+      padding: 0 18px;
+      border-radius: 999px;
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      font-size: 14px;
+      font-weight: 700;
+    }
+    .btn-pill:hover { color: var(--brand-deep); }
+
+    /* floating heart */
+    .like-float {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+      position: relative;
+    }
+    .like-btn {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      color: var(--pink);
+      font-size: 26px;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 16px 32px -18px rgba(50, 70, 55, 0.3);
+    }
+    .like-btn.is-on {
+      color: #f27a9d;
+      animation: pop 0.4s ease;
+    }
+    @keyframes pop { 50% { transform: scale(1.2); } }
+    .like-count {
+      position: absolute;
+      top: -2px;
+      right: calc(50% - 42px);
+      background: rgba(255, 255, 255, 0.8);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink-2);
+    }
+
+    /* right extras stack under calendar */
+    .right-tools {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* short desktop */
+    @media (max-height: 860px) and (min-width: 980px) {
+      .profile-bio { display: none; }
+      .profile-name { font-size: 22px; }
+      .side-nav { gap: 8px; }
+      .side-nav a { padding: 10px 14px; font-size: 16px; }
+      .greet-card { gap: 10px; }
+      .greet-card h1 { font-size: clamp(22px, 2.5vw, 32px); }
+      .lcd-time { font-size: clamp(36px, 5vw, 56px); }
+      .cal-grid .day { min-height: 24px; }
+      .cal-grid .dow, .cal-grid { font-size: 13px; }
+      .soc { min-height: 44px; font-size: 15px; padding: 0 16px; }
+      .rec-body p { -webkit-line-clamp: 2; }
+      .latest-item img { width: 52px; height: 52px; }
+    }
+    @media (max-height: 720px) and (min-width: 980px) {
+      .profile-bio, .side-label, .pomo-label, .latest-item p { display: none; }
+      .greet-card h1 { font-size: 22px; }
+      .lcd { padding: 14px 10px; }
+      .lcd-time { font-size: 34px; }
+      .cal-card { flex: 1 1 0; }
+      .rec-body h3 { font-size: 17px; }
+      .write-btn { min-height: 42px; font-size: 14px; }
+    }
+
+    /* tablet / phone */
+    @media (max-width: 980px) {
+      body { overflow: auto; }
+      .stage { height: auto; min-height: 100dvh; }
+      .board { grid-template-columns: 1fr 1fr; }
+      .col-right { grid-column: 1 / -1; }
+      .write-row { justify-content: flex-start; margin-bottom: 4px; }
+    }
+    @media (max-width: 680px) {
+      .board { grid-template-columns: 1fr; }
+      .profile-name { font-size: 22px; }
+      .greet-card h1 { font-size: 26px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
-<body data-page="home">
-  <main class="stage">
-    <div class="board">
-      <aside class="card profile-card p-nav rise">
-        <div class="profile-top">
-          <img class="avatar" src="./assets/profile.jpg" alt="Yu 的頭像" width="46" height="46">
-          <div>
-            <div class="profile-name">Yu</div>
-            <div class="profile-handle">@yuqi._.0313</div>
+<body>
+  <div class="stage">
+    <main class="board">
+      <!-- LEFT -->
+      <section class="col col-left">
+        <div class="card profile-card">
+          <div class="profile-top">
+            <img src="./assets/profile.jpg" alt="Yu">
+            <div>
+              <div class="profile-name"><span id="greetUser">Yu</span> <em>雜更中</em></div>
+              <div class="profile-handle" id="siteTagline">好吧其實我是一名普通的學生，會更新日常 / 實用工具 / AI 新知。</div>
+            </div>
+          </div>
+          <p class="side-label">General</p>
+          <nav class="side-nav" aria-label="主導覽">
+            <a class="is-active" href="#home">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8 7h8M8 11h8M8 15h5"/></svg></span>
+              近期動態
+            </a>
+            <a href="https://yu-0312.github.io/yu312/projects.html">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/></svg></span>
+              我的專案
+            </a>
+            <a href="https://yu-0312.github.io/yu312/about.html">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 13.2c1.7 1.9 5.3 1.9 7 0M9.3 9.5h.01M14.7 9.5h.01"/></svg></span>
+              關於網站
+            </a>
+            <a href="https://yu-0312.github.io/yu312/share.html">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3.5l2.4 5 5.5.8-4 3.8.9 5.4L12 16.1 7.2 18.5l.9-5.4-4-3.8 5.5-.8z"/></svg></span>
+              推薦分享
+            </a>
+            <a href="https://yu-0312.github.io/yu312/share.html">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.6 3.8 5.4 3.8 8.5S14.5 18 12 20.5C9.5 18 8.2 15.1 8.2 12S9.5 6.1 12 3.5z"/></svg></span>
+              優秀博客
+            </a>
+            <a href="./friends.html">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/></svg></span>
+              友鏈
+            </a>
+            <a href="./write.html">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg></span>
+              寫作台
+            </a>
+          </nav>
+        </div>
+
+        <div class="card latest-card">
+          <h2 class="mini-title">最新文章</h2>
+          <a class="latest-item" href="https://yu-0312.github.io/yu312/posts.html#DdnOjx0E5kx">
+            <img src="./assets/threads/DdnOjx0E5kx-0.jpg" alt="">
+            <div>
+              <h3>Claude Opus 5.5 超過 GPT-6</h3>
+              <p>紀念在知識工作榜的一次轉折</p>
+              <time>2026/9/23</time>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- CENTER -->
+      <section class="col col-center">
+        <div class="card art-card">
+          <div class="polaroids">
+            <a class="polaroid" href="https://yu-0312.github.io/yu312/posts.html#DdQSLsXk4fe">
+              <img src="./assets/threads/DdQSLsXk4fe-0.jpg" alt="旅行刺繡">
+            </a>
+            <a class="polaroid" href="https://yu-0312.github.io/yu312/posts.html#DdGZlDTG2wo">
+              <img src="./assets/threads/DdGZlDTG2wo-0.jpg" alt="海報提示詞">
+            </a>
+            <a class="polaroid" href="https://yu-0312.github.io/yu312/posts.html#Ddkdz_XGjmD">
+              <img src="./assets/threads/Ddkdz_XGjmD-0.jpg" alt="模型評測">
+            </a>
           </div>
         </div>
-        <p class="profile-bio">好吧其實我是一名普通的學生<br>會更新日常 / 實用工具 / AI 新知。雜更～</p>
-        <p class="side-label">General</p>
-        <nav class="side-nav" id="sideNav" aria-label="主導覽"></nav>
-        <div class="profile-foot">
-          <div class="stat-row" id="stats"></div>
-          <span id="themeSlot"></span>
-        </div>
-      </aside>
 
-      <section class="card greet-card p-greet rise">
-        <div class="greet-avatar"><img src="./assets/profile.jpg" alt="" width="104" height="104"></div>
-        <div>
-          <h1><span id="greetPart">Hello</span>,<br>I'm <span class="name" id="greetUser">Yu</span>. Nice to meet you!</h1>
-          <p id="siteTagline">和貓共用一個帳號的學生，喜歡把 AI 新知、實用工具和程式教學整理成大家看得懂的樣子。</p>
-        </div>
-      </section>
-
-      <section class="card art-card p-art rise" aria-label="最近的圖片">
-        <h2 class="mini-title">最近的圖片 <a href="./posts.html">看更多 →</a></h2>
-        <div class="polaroids" id="polaroids"></div>
-      </section>
-
-      <div class="tools-stack p-tools">
-        <div class="card clock-card rise" aria-live="polite">
-          <div class="clock-face">
-            <div class="clock-time" id="clock">--:--</div>
-            <div class="clock-sub" id="clockSub">&nbsp;</div>
+        <div class="card greet-card">
+          <div class="greet-avatar-wrap">
+            <img src="./assets/profile.jpg" alt="">
           </div>
+          <h1>
+            <span id="greetPart">Good Afternoon</span><br>
+            I'm <span class="name">Yu</span>, Nice to<br>
+            meet you!
+          </h1>
         </div>
-        <div class="card cal-card rise">
-          <div class="cal-head"><h2 id="calTitle">—</h2><span id="calNote"></span></div>
-          <div class="cal-grid" id="calendar" aria-label="本月月曆，圓點代表當天有發文"></div>
-        </div>
-      </div>
 
-      <section class="card latest-card p-latest rise">
-        <h2 class="mini-title">最新動態 <a href="./posts.html">全部動態 →</a></h2>
-        <div id="latest"></div>
-      </section>
-
-      <div class="card p-social rise">
-        <h2 class="mini-title">找到我</h2>
-        <div class="social-row">
-          <a class="soc soc--dark" href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">
+        <div class="social-row" id="socialRow" aria-label="社群連結">
+          <a class="soc soc--dark" href="https://github.com/Yu-0312" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.8c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .26.18.58.69.48A10.27 10.27 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
+            Github
+          </a>
+          <a class="soc" href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16.5 11.2c-.1-2.6-1.6-4.1-4.2-4.1-1.6 0-2.9.7-3.6 1.9l1.4.9c.5-.8 1.2-1.1 2.2-1.1 1.2 0 2 .6 2.3 1.7-.7-.1-1.4-.2-2.2-.1-2.2.1-3.6 1.4-3.5 3.2.1 1.8 1.7 2.9 3.6 2.8 2.4-.1 3.6-1.9 3.8-4.1.8.5 1.3 1.2 1.4 2.1.3 1.9-1.4 3.9-5.6 3.9-4 0-6-2.3-6-6.3S8 5.6 12 5.6c3.3 0 5.4 1.5 6 4.3"/></svg>
             Threads
-          </a>
-          <a class="soc" href="https://github.com/Yu-0312" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.8c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .26.18.58.69.48A10.27 10.27 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
-            GitHub
           </a>
           <a class="soc soc--brand" href="mailto:wang.yuchi.312@gmail.com">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg>
             Email
           </a>
         </div>
-      </div>
 
-      <section class="card p-recommend rise">
-        <h2 class="mini-title">隨機推薦</h2>
-        <div class="rec-row">
-          <a class="rec-row" id="recCard" href="./share.html" target="_blank" rel="noopener" style="flex:1;min-width:0">
-            <div class="thumb" id="recThumb">★</div>
-            <div style="min-width:0">
-              <h3 id="recTitle">教學資源</h3>
-              <p id="recDesc"></p>
+        <div class="card rec-card">
+          <h2 class="mini-title">隨機推薦 <button class="shuffle" id="recShuffle" type="button" aria-label="換一個"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h4v4M20 4l-6 6M4 20l6-6M16 20h4v-4M20 20l-5.5-5.5M4 4l5 5"/></svg></button></h2>
+          <div class="rec-body">
+            <div class="rec-thumb" id="recThumb">教學</div>
+            <div>
+              <h3 id="recTitle">互動程式教室 × APCS 練習</h3>
+              <p id="recDesc">四語言 101 章互動教學，300 題範例練習，加上 AI 解題與錯題本。</p>
+              <div class="rec-meta" id="recMeta">Views: 24,199 · Marks: 365</div>
             </div>
-          </a>
-          <button class="shuffle" id="recShuffle" type="button" aria-label="換一個">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h4v4M20 4l-6 6M4 20l6-6M16 20h4v-4M20 20l-5.5-5.5M4 4l5 5"/></svg>
-          </button>
+          </div>
         </div>
       </section>
 
-      <div class="card p-extra rise">
-        <div id="noise">
-          <h2 class="mini-title">專注模式</h2>
-          <div class="music-row">
-            <button class="play-btn" id="noiseBtn" type="button" aria-label="播放"></button>
-            <div class="music-meta">
-              <strong>Focus Noise</strong>
-              <small id="noiseLabel"></small>
-              <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+      <!-- RIGHT -->
+      <section class="col col-right">
+        <div class="write-row">
+          <a class="write-btn" href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+            寫動態
+          </a>
+          <div class="dots" aria-hidden="true">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+        <div class="card clock-card">
+          <div class="lcd" aria-live="polite">
+            <div class="lcd-time" id="clock">--:--</div>
+          </div>
+        </div>
+
+        <div class="card cal-card">
+          <div class="cal-head">
+            <h2 id="calTitle">—</h2>
+            <span id="calNote"></span>
+          </div>
+          <div class="cal-grid" id="calendar" aria-label="本月月曆"></div>
+        </div>
+
+        <div class="right-tools" id="noise">
+          <div class="card music-card">
+            <div class="music-note" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 18V6l11-2v12"/><circle cx="7" cy="18" r="2.5"/><circle cx="18" cy="16" r="2.5"/></svg>
+            </div>
+            <div class="music-body">
+              <div class="music-title">Focus Noise · <span id="noiseLabel">雨聲</span></div>
+              <div class="music-bar"><i></i></div>
+            </div>
+            <button class="play-btn" id="noiseBtn" type="button" aria-label="播放">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="noise-tabs" style="margin-bottom: 12px;">
+              <button type="button" data-noise="rain" class="is-active">雨聲</button>
+              <button type="button" data-noise="brown">棕噪音</button>
+              <button type="button" data-noise="white">白噪音</button>
+            </div>
+            <div class="pomo-row">
+              <div>
+                <div class="pomo-time" id="pomoTime" title="雙擊重設">25:00</div>
+                <div class="pomo-label">番茄鐘 · 雙擊重設</div>
+              </div>
+              <button class="btn-pill" id="pomoBtn" type="button">開始</button>
             </div>
           </div>
-          <div class="noise-tabs" style="margin-top:.7rem">
-            <button type="button" data-noise="rain" class="is-active">雨聲</button>
-            <button type="button" data-noise="brown">棕噪音</button>
-            <button type="button" data-noise="white">白噪音</button>
+
+          <div class="like-float">
+            <button class="like-btn" id="likeBtn" type="button" aria-pressed="false" aria-label="喜歡這個網站">♥</button>
+            <span class="like-count" id="likeText">22865</span>
           </div>
         </div>
-        <div class="pomodoro">
-          <div><div class="pomo-time" id="pomoTime" title="雙擊重設">25:00</div><div class="pomo-label">番茄鐘 · 雙擊時間重設</div></div>
-          <button class="btn btn--ghost" id="pomoBtn" type="button">開始</button>
-        </div>
-        <div class="like-row">
-          <button class="like-btn" id="likeBtn" type="button" aria-pressed="false" aria-label="喜歡這個網站">♥</button>
-          <span id="likeText"></span>
-        </div>
-      </div>
-    </div>
-    <p class="foot-note">© 2026 Yu · 動態內容來自 <a href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">Threads @yuqi._.0313</a></p>
-  </main>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    (() => {
+      const $ = (s, r = document) => r.querySelector(s);
+      const pad = (n) => String(n).padStart(2, "0");
+      const WEEK = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+
+      const POSTS = [
+        { id: "DdnOjx0E5kx", date: "2026-09-23" },
+        { id: "Ddk1dZkkwsn", date: "2026-09-22" },
+        { id: "Ddkdz_XGjmD", date: "2026-09-22" },
+        { id: "Ddcz31oE9zP", date: "2026-09-19" },
+        { id: "DdbvPAAE3Zi", date: "2026-09-18" },
+        { id: "Ddafoylk2B4", date: "2026-09-18" },
+        { id: "DdQ4jy2kz6O", date: "2026-09-14" },
+        { id: "DdQSLsXk4fe", date: "2026-09-14" },
+        { id: "DdGwI87mwtM", date: "2026-09-10" },
+        { id: "DdD1E-ik_uv", date: "2026-09-09" }
+      ];
+
+      const SHARE = [
+        { badge: "程式", title: "互動程式教室 × APCS 練習", desc: "四語言 101 章互動教學，300 題範例練習，加上 AI 解題與錯題本。", meta: "Views: 24,199 · Marks: 365", url: "https://yu-0312.github.io/apcs-judge/" },
+        { badge: "程式", title: "Web 三劍客 × MySQL", desc: "HTML / CSS / JS ＋ MySQL 連貫教學，瀏覽器內建 SQL 模擬器。", meta: "Views: 12,480 · Marks: 210", url: "https://yu-0312.github.io/web-mysql-tutorial/" },
+        { badge: "AI", title: "強化學習互動教學", desc: "對話式講解＋可動手玩的 Canvas 演示，一路讀到 DQN / PPO。", meta: "Views: 18,220 · Marks: 290", url: "https://yu-0312.github.io/rl-interactive-tutorial/" },
+        { badge: "路線", title: "AI Engineer Roadmap", desc: "12 站 AI 工程師路線，用 DocMind 智慧文件助理貫穿全程。", meta: "Views: 21,104 · Marks: 402", url: "https://yu-0312.github.io/ai-engineer-roadmap/" },
+        { badge: "統計", title: "睡眠研究統計教室", desc: "16 關互動統計課，同一份資料同時教 Excel、JASP、SPSS。", meta: "Views: 15,670 · Marks: 243", url: "https://yu-0312.github.io/stat-lab/" },
+        { badge: "自然", title: "物理實驗室", desc: "12 個學習模組、248 個即時 Canvas 互動模擬。", meta: "Views: 29,273 · Marks: 483", url: "https://senior-science.vercel.app/" }
+      ];
+
+      function greetWord(h = new Date().getHours()) {
+        if (h < 5) return "Good Night";
+        if (h < 11) return "Good Morning";
+        if (h < 18) return "Good Afternoon";
+        if (h < 22) return "Good Evening";
+        return "Good Night";
+      }
+      $("#greetPart").textContent = greetWord();
+
+      function tickClock() {
+        const d = new Date();
+        $("#clock").innerHTML = `${pad(d.getHours())}<span class="colon">:</span>${pad(d.getMinutes())}`;
+      }
+      tickClock();
+      setInterval(tickClock, 10000);
+
+      function dayKey(d) {
+        return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+      }
+      function renderCalendar() {
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = now.getMonth();
+        const dateLine = `${y}/${m + 1}/${now.getDate()} ${WEEK[now.getDay()]}`;
+        $("#calTitle").textContent = dateLine;
+        const byDay = {};
+        POSTS.forEach((p) => {
+          const k = dayKey(new Date(p.date + "T12:00:00"));
+          (byDay[k] = byDay[k] || []).push(p);
+        });
+        const monthCount = POSTS.filter((p) => {
+          const d = new Date(p.date + "T12:00:00");
+          return d.getFullYear() === y && d.getMonth() === m;
+        }).length;
+        $("#calNote").textContent = monthCount ? `本月發文 ${monthCount} 則` : "本月還沒發文";
+        const start = (new Date(y, m, 1).getDay() + 6) % 7;
+        const days = new Date(y, m + 1, 0).getDate();
+        let html = ["一", "二", "三", "四", "五", "六", "日"].map((d) => `<div class="dow">${d}</div>`).join("");
+        for (let i = 0; i < start; i++) html += `<div class="day is-empty"></div>`;
+        for (let d = 1; d <= days; d++) {
+          const k = `${y}-${pad(m + 1)}-${pad(d)}`;
+          const cls = `day${d === now.getDate() ? " is-today" : ""}${byDay[k] ? " has-post" : ""}`;
+          html += byDay[k]
+            ? `<a class="${cls}" href="https://yu-0312.github.io/yu312/posts.html#${byDay[k][0].id}">${d}</a>`
+            : `<div class="${cls}">${d}</div>`;
+        }
+        $("#calendar").innerHTML = html;
+      }
+      renderCalendar();
+
+      let last = -1;
+      function pickRec() {
+        let i;
+        do { i = Math.floor(Math.random() * SHARE.length); } while (SHARE.length > 1 && i === last);
+        last = i;
+        const it = SHARE[i];
+        $("#recThumb").textContent = it.badge;
+        $("#recTitle").innerHTML = `<a href="${it.url}" target="_blank" rel="noopener">${it.title}</a>`;
+        $("#recDesc").textContent = it.desc;
+        $("#recMeta").textContent = it.meta;
+      }
+      pickRec();
+      $("#recShuffle").addEventListener("click", pickRec);
+
+      const noiseBox = $("#noise");
+      const noiseBtn = $("#noiseBtn");
+      const noiseLabel = $("#noiseLabel");
+      const TYPES = { rain: "雨聲", brown: "棕噪音", white: "白噪音" };
+      let type = "rain";
+      let ctx, src, gain, playing = false;
+
+      function buffer(kind) {
+        const len = ctx.sampleRate * 4;
+        const b = ctx.createBuffer(1, len, ctx.sampleRate);
+        const d = b.getChannelData(0);
+        let lastVal = 0;
+        for (let i = 0; i < len; i++) {
+          const w = Math.random() * 2 - 1;
+          if (kind === "white") d[i] = w * 0.35;
+          else {
+            lastVal = (lastVal + 0.02 * w) / 1.02;
+            d[i] = lastVal * (kind === "brown" ? 3.2 : 2.2);
+          }
+          if (kind === "rain" && Math.random() < 0.0009) d[i] += (Math.random() - 0.5) * 0.9;
+        }
+        return b;
+      }
+      function startNoise() {
+        ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+        src = ctx.createBufferSource();
+        src.buffer = buffer(type);
+        src.loop = true;
+        const filter = ctx.createBiquadFilter();
+        filter.type = type === "rain" ? "highpass" : "lowpass";
+        filter.frequency.value = type === "rain" ? 400 : type === "brown" ? 900 : 9000;
+        gain = ctx.createGain();
+        gain.gain.value = 0;
+        gain.gain.linearRampToValueAtTime(0.55, ctx.currentTime + 0.7);
+        src.connect(filter).connect(gain).connect(ctx.destination);
+        src.start();
+      }
+      function stopNoise() {
+        if (!src) return;
+        const s = src;
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.25);
+        setTimeout(() => s.stop(), 300);
+        src = null;
+      }
+      function paintNoise() {
+        noiseBox.classList.toggle("is-playing", playing);
+        noiseBtn.innerHTML = playing
+          ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>'
+          : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+        noiseLabel.textContent = TYPES[type];
+        noiseBtn.setAttribute("aria-label", playing ? "暫停" : "播放");
+      }
+      noiseBtn.addEventListener("click", () => {
+        playing = !playing;
+        if (playing) startNoise(); else stopNoise();
+        paintNoise();
+      });
+      noiseBox.querySelectorAll("[data-noise]").forEach((b) => {
+        b.addEventListener("click", () => {
+          type = b.dataset.noise;
+          noiseBox.querySelectorAll("[data-noise]").forEach((x) => x.classList.toggle("is-active", x === b));
+          if (playing) { stopNoise(); startNoise(); }
+          paintNoise();
+        });
+      });
+      paintNoise();
+
+      const pomoTime = $("#pomoTime");
+      const pomoBtn = $("#pomoBtn");
+      const FULL = 25 * 60;
+      let left = FULL, timer = null;
+      function paintPomo() {
+        pomoTime.textContent = `${pad(Math.floor(left / 60))}:${pad(left % 60)}`;
+        pomoBtn.textContent = timer ? "暫停" : left === FULL ? "開始" : "繼續";
+      }
+      pomoBtn.addEventListener("click", () => {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        } else {
+          timer = setInterval(() => {
+            left -= 1;
+            if (left <= 0) {
+              clearInterval(timer);
+              timer = null;
+              left = FULL;
+              document.title = "⏰ 休息一下！";
+              setTimeout(() => { document.title = "Yu · 王宇錡 — 一屏 Dashboard"; }, 3000);
+            }
+            paintPomo();
+          }, 1000);
+        }
+        paintPomo();
+      });
+      pomoTime.addEventListener("dblclick", () => {
+        clearInterval(timer);
+        timer = null;
+        left = FULL;
+        paintPomo();
+      });
+      paintPomo();
+      // like / daily limit handled by studio.js
+    })();
+  </script>
   <script src="./data.js" defer></script>
   <script src="./studio.js" defer></script>
-  <script src="./site.js" defer></script>
 </body>
 </html>
