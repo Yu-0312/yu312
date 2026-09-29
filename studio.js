@@ -25,7 +25,7 @@
     tagline: "好吧其實我是一名普通的學生，會更新日常 / 實用工具 / AI 新知。",
     clockSeconds: false,
     showCategories: true,
-    accent: "#c45c26",
+    accent: "#3cbfa8",
     palette: "mint",
     socials: [
       { id: "threads", label: "Threads", url: "https://www.threads.com/@yuqi._.0313" },
