@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>寫作台 · Yu</title>
+  <meta name="description" content="在瀏覽器裡寫 Markdown 草稿，可預覽、匯入與匯出">
+  <meta property="og:title" content="寫作台 · Yu">
+  <meta property="og:description" content="在瀏覽器裡寫 Markdown 草稿，可預覽、匯入與匯出">
+  <meta property="og:image" content="./assets/profile.jpg">
+  <meta name="theme-color" content="#f6efe3">
+  <link rel="icon" href="./assets/profile.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="./assets/fonts/averia.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-page="write">
+  <div class="page-shell">
+    <nav class="top-nav" id="topNav" aria-label="站內導覽"></nav>
+    <header class="page-head">
+      <div>
+        <h1>寫作台</h1>
+        <p>純前端 Markdown 草稿本：自動存本機、可匯入 .md、一鍵匯出。</p>
+      </div>
+      <div class="write-actions">
+        <button type="button" class="btn btn--ghost" id="wImport">匯入 MD</button>
+        <button type="button" class="btn btn--ghost" id="wExport">匯出 MD</button>
+        <button type="button" class="btn btn--ghost" id="wClear">清除草稿</button>
+      </div>
+    </header>
+
+    <form class="write-layout" id="writeForm">
+      <div class="write-main card">
+        <div class="write-title-row">
+          <input class="write-title" id="wTitle" type="text" placeholder="標題" maxlength="80" required>
+          <input class="write-slug" id="wSlug" type="text" placeholder="slug（可選）" maxlength="40">
+        </div>
+        <textarea class="write-body" id="wBody" placeholder="用 Markdown 寫…&#10;&#10;# 小標題&#10;- 清單&#10;**粗體** 與 *斜體*&#10;```code```" spellcheck="false"></textarea>
+        <div class="write-foot">
+          <span id="wStatus" class="muted">草稿會自動存在這台裝置</span>
+          <button type="submit" class="btn">儲存草稿</button>
+        </div>
+        <input type="file" id="wFile" accept=".md,.markdown,.txt" hidden>
+      </div>
+
+      <aside class="write-side">
+        <div class="card">
+          <h2 class="mini-title">封面圖</h2>
+          <input class="write-input" id="wCover" type="url" placeholder="圖片 URL（可選）">
+        </div>
+        <div class="card">
+          <h2 class="mini-title">中繼資訊</h2>
+          <input class="write-input" id="wTags" type="text" placeholder="標籤（逗號分隔）">
+          <select class="write-input" id="wCat">
+            <option>未分類</option>
+            <option>AI</option>
+            <option>程式</option>
+            <option>工具</option>
+            <option>日常</option>
+            <option>筆記</option>
+          </select>
+        </div>
+        <div class="card">
+          <h2 class="mini-title">預覽</h2>
+          <div id="wPreview" class="write-preview"></div>
+        </div>
+      </aside>
+    </form>
+
+    <p class="foot-note">© 2026 Yu · 草稿只存在你的瀏覽器，不會上傳</p>
+  </div>
+  <script src="./data.js" defer></script>
+  <script src="./site.js" defer></script>
+  <script src="./studio.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "yu312",
+  "private": true,
+  "type": "module",
+  "description": "Yu 個人站 — Threads 自動同步",
+  "scripts": {
+    "sync-threads": "node scripts/sync_threads.mjs",
+    "sync-threads:dry": "node scripts/sync_threads.mjs --dry-run"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.1"
+  }
+}

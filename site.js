@@ -58,6 +58,8 @@
     { href: "./posts.html", key: "posts", label: "動態", icon: "threads", count: POSTS.length },
     { href: "./projects.html", key: "projects", label: "我的專案", icon: "grid", count: PROJECTS.length },
     { href: "./share.html", key: "share", label: "教學資源", icon: "star", count: SHARE.length },
+    { href: "./friends.html", key: "friends", label: "友鏈", icon: "link", count: (window.FRIEND_LINKS || []).length },
+    { href: "./write.html", key: "write", label: "寫作台", icon: "play" },
     { href: "./about.html", key: "about", label: "關於我", icon: "smile" },
   ];
 
@@ -333,19 +335,7 @@
     paint();
   }
 
-  function setupLike() {
-    const btn = $("#likeBtn");
-    const txt = $("#likeText");
-    if (!btn) return;
-    let on = store.get("yu-liked") === "1";
-    const paint = () => {
-      btn.classList.toggle("is-on", on);
-      btn.setAttribute("aria-pressed", String(on));
-      txt.textContent = on ? "謝謝你的喜歡 ♡" : "喜歡這個網站嗎？";
-    };
-    btn.addEventListener("click", () => { on = !on; store.set("yu-liked", on ? "1" : "0"); paint(); });
-    paint();
-  }
+  /* 讚／收藏改由 studio.js 的 setupLikeDaily 處理（含每日上限） */
 
   function initHome() {
     const g = $("#greetPart");
@@ -363,7 +353,6 @@
     setupRecommend();
     setupNoise();
     setupPomodoro();
-    setupLike();
   }
 
   /* ==========================================================
@@ -435,7 +424,39 @@
     const months = $("#months");
     const more = $("#loadMore");
     const count = $("#feedCount");
+    const rangeBox = $("#rangeTabs");
     const PAGE = 10;
+
+    let range = "";
+    if (rangeBox) {
+      rangeBox.innerHTML = ["全部", "今日", "本週", "本月", "今年"]
+        .map((r, i) => `<button type="button" class="chip-btn${i === 0 ? " is-active" : ""}" data-range="${i === 0 ? "" : r}">${r}</button>`)
+        .join("");
+      rangeBox.addEventListener("click", (e) => {
+        const b = e.target.closest("[data-range]");
+        if (!b) return;
+        range = b.dataset.range;
+        rangeBox.querySelectorAll("[data-range]").forEach((x) => x.classList.toggle("is-active", x === b));
+        shown = PAGE;
+        apply();
+      });
+    }
+
+    function inRange(p) {
+      if (!range) return true;
+      const d = new Date(p.time);
+      const now = new Date();
+      if (range === "今日") return d.toDateString() === now.toDateString();
+      if (range === "本週") {
+        const start = new Date(now);
+        start.setDate(now.getDate() - now.getDay());
+        start.setHours(0, 0, 0, 0);
+        return d >= start;
+      }
+      if (range === "本月") return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
+      if (range === "今年") return d.getFullYear() === now.getFullYear();
+      return true;
+    }
 
     const tagCount = {};
     POSTS.forEach((p) => { const t = p.tag || "日常雜談"; tagCount[t] = (tagCount[t] || 0) + 1; });
@@ -456,6 +477,7 @@
 
     function apply() {
       list = POSTS.filter((p) => {
+        if (!inRange(p)) return false;
         if (tag === "有圖片" && !postImgs(p).length) return false;
         if (tag !== "全部" && tag !== "有圖片" && (p.tag || "日常雜談") !== tag) return false;
         if (month && !fmtDate(p.time).replace("/", "-").startsWith(month)) return false;
@@ -538,11 +560,26 @@
     const star = it.stars ? `<span><span class="star">★</span> ${it.stars}</span>` : "";
     return `<div class="item-foot"><span class="meta">${lang}${star}</span><span class="item-links">${it.site ? `<a class="primary" href="${esc(it.site)}" target="_blank" rel="noopener">開啟</a>` : ""}<a href="${esc(it.url)}" target="_blank" rel="noopener">GitHub</a></span></div>`;
   }
+
+  function viewsHTML(id) {
+    const v = window.YU?.views;
+    if (!v) return "";
+    const views = v.get(id);
+    const marks = v.markCount(id);
+    const on = v.marked(id);
+    return `<div class="views-row" data-id="${esc(id)}">
+      <span>Views: ${views.toLocaleString()}</span>
+      <span class="marks">Marks: ${marks.toLocaleString()}</span>
+      <button type="button" class="mark-btn${on ? " is-on" : ""}" data-mark="${esc(id)}">${on ? "★ 已收藏" : "☆ 收藏"}</button>
+    </div>`;
+  }
+
   function shareCard(it, i) {
     return `<article class="card item-card" style="animation-delay:${Math.min(i, 10) * 0.04}s">
       <div class="item-head"><div class="thumb">${esc(it.cats[0])}</div><div><h3>${esc(it.title)}</h3><span class="repo">${esc(it.name)}</span></div></div>
       <div class="item-tags">${it.cats.map((c) => `<span class="chip chip--plain">${esc(c)}</span>`).join("")}</div>
       <p class="item-desc">${esc(it.desc)}</p>
+      ${viewsHTML(it.name || it.title)}
       ${footHTML(it)}
     </article>`;
   }
@@ -576,6 +613,22 @@
       paint();
     });
     search.addEventListener("input", () => { q = search.value.trim().toLowerCase(); paint(); });
+    grid.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-mark]");
+      if (!b) return;
+      e.preventDefault();
+      const id = b.dataset.mark;
+      const v = window.YU?.views;
+      if (!v) return;
+      const on = v.mark(id);
+      b.classList.toggle("is-on", on);
+      b.textContent = on ? "★ 已收藏" : "☆ 收藏";
+      const row = b.closest(".views-row");
+      if (row) {
+        const m = $(".marks", row);
+        if (m) m.textContent = `Marks: ${v.markCount(id).toLocaleString()}`;
+      }
+    });
     paint();
   }
 

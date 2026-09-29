@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>友鏈 · Yu</title>
+  <meta name="description" content="Yu 的朋友們與喜歡的部落格">
+  <meta property="og:title" content="友鏈 · Yu">
+  <meta property="og:description" content="Yu 的朋友們與喜歡的部落格">
+  <meta property="og:image" content="./assets/profile.jpg">
+  <meta name="theme-color" content="#f6efe3">
+  <link rel="icon" href="./assets/profile.jpg" type="image/jpeg">
+  <link rel="stylesheet" href="./assets/fonts/averia.css">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body data-page="friends">
+  <div class="page-shell">
+    <nav class="top-nav" id="topNav" aria-label="站內導覽"></nav>
+    <header class="page-head">
+      <div>
+        <h1>友鏈</h1>
+        <p>認識的人、喜歡的站。想交換友鏈的話，歡迎寄信或到 GitHub 開 issue。</p>
+      </div>
+      <input class="search" id="friendSearch" type="search" placeholder="搜尋友鏈…" aria-label="搜尋友鏈">
+    </header>
+    <div class="filters" id="friendFilters" role="toolbar" aria-label="類型篩選"></div>
+    <div class="grid-cards friends-grid" id="friendsGrid" aria-live="polite"></div>
+    <p class="foot-note">© 2026 Yu · 友鏈僅代表個人喜好</p>
+  </div>
+  <script src="./data.js" defer></script>
+  <script src="./site.js" defer></script>
+  <script src="./studio.js" defer></script>
+</body>
+</html>
