@@ -26,7 +26,7 @@
     clockSeconds: false,
     showCategories: true,
     accent: "#c45c26",
-    palette: "ember",
+    palette: "mint",
     socials: [
       { id: "threads", label: "Threads", url: "https://www.threads.com/@yuqi._.0313" },
       { id: "github", label: "GitHub", url: "https://github.com/Yu-0312" },
@@ -37,6 +37,7 @@
   };
 
   const PALETTES = {
+    mint: { name: "薄荷", accent: "#3cbfa8", accent2: "#2fa893", bg: "#e6e7e6", wash1: "rgba(232,232,236,0.95)", wash2: "rgba(242,242,238,0.9)", wash3: "rgba(214,216,140,0.95)", wash4: "rgba(186,212,186,0.95)", ink: "#3d4f48", ink2: "#6f8179", ink3: "#93a69c" },
     ember: { name: "暖爐", accent: "#c45c26", accent2: "#e07a5f", bg: "#f6efe3", wash1: "rgba(224,122,95,0.22)", wash2: "rgba(255,248,235,0.9)", wash3: "rgba(129,178,154,0.28)", wash4: "rgba(244,198,120,0.32)", ink: "#2c2418", ink2: "#6b5c4c", ink3: "#9a8b7a" },
     sage: { name: "苔綠", accent: "#3d7a5c", accent2: "#81b29a", bg: "#eef2ea", wash1: "rgba(129,178,154,0.3)", wash2: "rgba(255,255,250,0.85)", wash3: "rgba(196,92,38,0.18)", wash4: "rgba(168,196,140,0.32)", ink: "#243028", ink2: "#5c6b60", ink3: "#8a988c" },
     plum: { name: "李子", accent: "#7b3d5b", accent2: "#c47b9a", bg: "#f4eef1", wash1: "rgba(196,123,154,0.24)", wash2: "rgba(255,250,252,0.88)", wash3: "rgba(122,140,180,0.22)", wash4: "rgba(220,180,160,0.28)", ink: "#2e2230", ink2: "#6b5568", ink3: "#9a8498" },
@@ -51,7 +52,7 @@
   function saveSettings(s) { store.setJson("yu-settings", s); }
 
   function applyPalette(key, accentOverride) {
-    const p = PALETTES[key] || PALETTES.ember;
+    const p = PALETTES[key] || PALETTES.mint;
     const root = document.documentElement;
     const accent = accentOverride || p.accent;
     root.style.setProperty("--brand", accent);
