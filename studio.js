@@ -56,6 +56,7 @@
     const accent = accentOverride || p.accent;
     root.style.setProperty("--brand", accent);
     root.style.setProperty("--brand-2", p.accent2);
+    root.style.setProperty("--brand-deep", accent);
     root.style.setProperty("--brand-soft", hexA(accent, 0.16));
     root.style.setProperty("--bg", p.bg);
     root.style.setProperty("--ink", p.ink);
@@ -146,7 +147,19 @@
   }
 
   /* ---------- 首頁卡片拖拽排序 ---------- */
-  const CARD_IDS = ["p-nav", "p-greet", "p-art", "p-tools", "p-latest", "p-social", "p-recommend", "p-extra"];
+  // 多頁首頁用 p-nav…p-extra；一屏 dashboard 用 p-left / p-center / p-right
+  const CARD_IDS = ["p-left", "p-center", "p-right", "p-nav", "p-greet", "p-art", "p-tools", "p-latest", "p-social", "p-recommend", "p-extra"];
+
+  function dragLabel(el) {
+    const map = {
+      "p-left": "左欄", "p-center": "中欄", "p-right": "右欄",
+      "p-nav": "導覽", "p-greet": "問候", "p-art": "圖片牆",
+      "p-tools": "時鐘月曆", "p-latest": "最新動態", "p-social": "社群",
+      "p-recommend": "隨機推薦", "p-extra": "專注工具",
+    };
+    for (const id of CARD_IDS) if (el.classList.contains(id)) return map[id];
+    return "卡片";
+  }
 
   function setupDragLayout() {
     const board = $(".board");
@@ -164,14 +177,7 @@
     board.classList.add("can-drag");
     $$(".board > *").forEach((el) => {
       el.draggable = true;
-      el.dataset.dragLabel = el.classList.contains("p-nav") ? "導覽"
-        : el.classList.contains("p-greet") ? "問候"
-        : el.classList.contains("p-art") ? "圖片牆"
-        : el.classList.contains("p-tools") ? "時鐘月曆"
-        : el.classList.contains("p-latest") ? "最新動態"
-        : el.classList.contains("p-social") ? "社群"
-        : el.classList.contains("p-recommend") ? "隨機推薦"
-        : "專注工具";
+      el.dataset.dragLabel = dragLabel(el);
       el.addEventListener("dragstart", (e) => {
         dragEl = el;
         el.classList.add("is-dragging");
@@ -209,7 +215,6 @@
       saveSettings(s);
     }
 
-    // 佈局編輯模式
     window.YU = window.YU || {};
     window.YU.setLayoutMode = (on) => {
       board.classList.toggle("layout-mode", on);
