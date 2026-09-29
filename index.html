@@ -3,131 +3,1206 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Yu · 王宇錡</title>
-  <meta name="description" content="Yu（@yuqi._.0313）的個人站：Threads 動態、AI 新知、教學網站與開源專案">
-  <meta property="og:title" content="Yu · 王宇錡">
-  <meta property="og:description" content="Yu（@yuqi._.0313）的個人站：Threads 動態、AI 新知、教學網站與開源專案">
-  <meta property="og:image" content="./assets/profile.jpg">
-  <meta name="theme-color" content="#eeeeee">
+  <title>Yu · 王宇錡 — 一屏 Dashboard</title>
+  <meta name="description" content="Yu 的個人站：一屏看完動態、專案、教學資源與專注工具">
   <link rel="icon" href="./assets/profile.jpg" type="image/jpeg">
-  <link rel="stylesheet" href="./assets/fonts/averia.css">
-  <link rel="stylesheet" href="./styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@500;600;700;800&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #2f4038;
+      --ink-2: #6d7f74;
+      --ink-3: #93a49a;
+      --brand: #3cb8a4;
+      --brand-deep: #2f9e8c;
+      --brand-soft: rgba(60, 184, 164, 0.16);
+      --cream: #f7f4e8;
+      --card: rgba(255, 255, 255, 0.52);
+      --card-strong: rgba(255, 255, 255, 0.78);
+      --line: rgba(255, 255, 255, 0.88);
+      --hair: rgba(47, 64, 56, 0.08);
+      --pink: #f2a0b8;
+      --yellow: #e8d48a;
+      --r-xl: 28px;
+      --r-lg: 22px;
+      --r-md: 16px;
+      --shadow: 0 18px 40px -22px rgba(55, 80, 60, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+      --font: "Nunito", "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", -apple-system, system-ui, sans-serif;
+      --mono: "Share Tech Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      color: var(--ink);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.5;
+      overflow: hidden;
+      background:
+        radial-gradient(900px 620px at 8% 0%, rgba(232, 236, 228, 0.95), transparent 55%),
+        radial-gradient(820px 560px at 100% 12%, rgba(246, 242, 228, 0.9), transparent 52%),
+        radial-gradient(900px 640px at 0% 100%, rgba(186, 214, 186, 0.95), transparent 55%),
+        radial-gradient(900px 700px at 100% 100%, rgba(214, 214, 140, 0.95), transparent 58%),
+        linear-gradient(165deg, #e7ebe4 0%, #d5e2c8 42%, #c8d6a8 72%, #d6d89a 100%);
+      background-attachment: fixed;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; border: none; background: none; cursor: pointer; }
+    img { display: block; max-width: 100%; }
+    :focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+
+    .app {
+      height: 100dvh;
+      min-height: 100dvh;
+      padding: clamp(10px, 1.35vw, 20px);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 1vw, 14px);
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex: 0 0 auto;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+    .brand img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 8px 18px -10px rgba(40, 60, 50, 0.35);
+    }
+    .brand-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+    .brand-text span {
+      font-size: 11px;
+      color: var(--ink-2);
+      letter-spacing: 0.02em;
+    }
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      min-height: 36px;
+      padding: 0 14px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: transform 0.18s ease, filter 0.18s ease, background 0.18s ease;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary {
+      background: linear-gradient(180deg, #4ecfba, var(--brand-deep));
+      color: #fff;
+      box-shadow: 0 10px 22px -12px rgba(47, 158, 140, 0.7);
+    }
+    .btn-primary:hover { filter: brightness(1.04); color: #fff; }
+    .btn-ghost {
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      color: var(--ink);
+    }
+    .btn-ghost:hover { color: var(--brand-deep); }
+
+    .board {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(210px, 0.95fr) minmax(280px, 1.45fr) minmax(240px, 1.05fr);
+      gap: clamp(10px, 1.1vw, 16px);
+    }
+
+    .col {
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(10px, 1.1vw, 16px);
+    }
+
+    .card {
+      min-height: 0;
+      background: var(--card);
+      backdrop-filter: blur(14px) saturate(1.12);
+      -webkit-backdrop-filter: blur(14px) saturate(1.12);
+      border: 1px solid var(--line);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow);
+      padding: clamp(12px, 1.1vw, 18px);
+      overflow: hidden;
+    }
+    .card strong, .card h1, .card h2, .card h3 { font-weight: 800; }
+
+    .grow { flex: 1 1 auto; min-height: 0; }
+    .mini-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin: 0 0 10px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-2);
+    }
+    .mini-title a {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--brand-deep);
+    }
+    .muted { color: var(--ink-2); }
+
+    /* ===== Left: profile + nav + latest ===== */
+    .profile-card {
+      flex: 1.35 1 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .profile-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .profile-top img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+    }
+    .profile-name {
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+    .profile-name em {
+      font-style: normal;
+      color: var(--brand);
+      font-size: 12px;
+      margin-left: 4px;
+    }
+    .profile-handle {
+      font-size: 12px;
+      color: var(--ink-2);
+    }
+    .profile-bio {
+      margin: 10px 0 12px;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--ink-2);
+    }
+    .side-label {
+      margin: 0 0 8px;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      font-weight: 800;
+    }
+    .side-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .side-nav a {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 12px;
+      border-radius: 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--ink);
+      transition: background 0.18s ease, transform 0.18s ease;
+    }
+    .side-nav a:hover { background: rgba(255, 255, 255, 0.55); transform: translateX(2px); }
+    .side-nav a.is-active {
+      background: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 8px 18px -12px rgba(40, 60, 50, 0.25);
+    }
+    .nav-ico {
+      width: 28px;
+      height: 28px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: rgba(47, 64, 56, 0.07);
+      color: var(--ink-2);
+      flex: 0 0 auto;
+    }
+    .side-nav a.is-active .nav-ico {
+      background: var(--brand);
+      color: #fff;
+    }
+    .nav-ico svg { width: 15px; height: 15px; }
+    .stat-row {
+      display: flex;
+      gap: 14px;
+      margin-top: auto;
+      padding-top: 12px;
+    }
+    .stat b {
+      display: block;
+      font-size: 16px;
+      line-height: 1.1;
+    }
+    .stat span {
+      font-size: 11px;
+      color: var(--ink-3);
+    }
+
+    .latest-card {
+      flex: 0 1 auto;
+    }
+    .latest-item {
+      display: grid;
+      grid-template-columns: 52px minmax(0, 1fr);
+      gap: 10px;
+      align-items: start;
+    }
+    .latest-item img {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      object-fit: cover;
+      border: 1px solid var(--line);
+    }
+    .latest-item h3 {
+      margin: 0 0 4px;
+      font-size: 13px;
+      line-height: 1.3;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .latest-item p {
+      margin: 0;
+      font-size: 11px;
+      color: var(--ink-2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .latest-item time {
+      display: inline-block;
+      margin-top: 4px;
+      font-size: 11px;
+      color: var(--ink-3);
+    }
+
+    /* ===== Center: polaroids, greet, social, recommend ===== */
+    .art-card {
+      flex: 0.95 1 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .polaroids {
+      flex: 1 1 auto;
+      min-height: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      overflow: hidden;
+    }
+    .polaroid {
+      height: min(100%, 20vh);
+      width: auto;
+      max-width: 30%;
+      aspect-ratio: 4 / 5;
+      background: rgba(255, 255, 255, 0.94);
+      padding: 7px 7px 18px;
+      border-radius: 12px;
+      box-shadow: 0 14px 28px -16px rgba(40, 60, 50, 0.28);
+      transition: transform 0.28s cubic-bezier(.2, .8, .2, 1);
+    }
+    .polaroid img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .polaroid:nth-child(1) { transform: rotate(-6deg) translateY(6px); }
+    .polaroid:nth-child(2) { transform: rotate(1.5deg) translateY(-4px); z-index: 1; }
+    .polaroid:nth-child(3) { transform: rotate(6deg) translateY(8px); }
+    .polaroid:hover { transform: rotate(0) translateY(-8px) scale(1.05); z-index: 2; }
+
+    .greet-card {
+      flex: 1.15 1 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      gap: 10px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.08)),
+        var(--card);
+    }
+    .greet-avatar {
+      width: clamp(64px, 8vh, 92px);
+      height: clamp(64px, 8vh, 92px);
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 16px 30px -18px rgba(40, 60, 50, 0.35);
+    }
+    .greet-card h1 {
+      margin: 0;
+      font-size: clamp(18px, 2.2vw, 28px);
+      line-height: 1.2;
+      letter-spacing: 0.01em;
+    }
+    .greet-card h1 .name {
+      color: var(--brand-deep);
+    }
+    .greet-card p {
+      margin: 0;
+      max-width: 28ch;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--ink-2);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .social-row {
+      flex: 0 0 auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .soc {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      min-height: 38px;
+      padding: 0 13px;
+      border-radius: 16px;
+      font-size: 12px;
+      font-weight: 800;
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      transition: transform 0.18s ease;
+    }
+    .soc:hover { transform: translateY(-2px); }
+    .soc svg { width: 16px; height: 16px; }
+    .soc--dark {
+      background: #22282a;
+      border-color: #22282a;
+      color: #fff;
+    }
+    .soc--dark:hover { color: #fff; }
+    .soc--brand {
+      background: var(--brand);
+      border-color: transparent;
+      color: #fff;
+    }
+    .soc--brand:hover { color: #fff; }
+
+    .rec-card {
+      flex: 0.9 1 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .rec-body {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr) 32px;
+      gap: 12px;
+      align-items: center;
+      min-height: 0;
+    }
+    .rec-thumb {
+      width: 58px;
+      height: 58px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.15;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.85), var(--brand-soft));
+      border: 1px solid var(--line);
+    }
+    .rec-body h3 {
+      margin: 0 0 4px;
+      font-size: 14px;
+      line-height: 1.25;
+    }
+    .rec-body p {
+      margin: 0;
+      font-size: 11px;
+      line-height: 1.45;
+      color: var(--ink-2);
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .shuffle {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--card-strong);
+      display: grid;
+      place-items: center;
+      color: var(--ink-2);
+    }
+    .shuffle:hover { color: var(--brand-deep); transform: rotate(180deg); }
+    .shuffle svg { width: 14px; height: 14px; transition: transform 0.35s ease; }
+
+    /* ===== Right: clock, calendar, focus, like ===== */
+    .clock-card {
+      flex: 0 0 auto;
+      padding: clamp(12px, 1.1vw, 16px);
+    }
+    .lcd {
+      border-radius: 22px;
+      padding: clamp(14px, 1.6vw, 22px) 12px;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.12)),
+        #d9ddd4;
+      border: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: inset 0 2px 8px rgba(80, 95, 80, 0.08);
+    }
+    .lcd-time {
+      font-family: var(--mono);
+      font-size: clamp(34px, 5.2vw, 52px);
+      letter-spacing: 0.08em;
+      line-height: 1;
+      color: #5a6860;
+      text-shadow: 0 1px 0 rgba(255, 255, 255, 0.55);
+    }
+    .lcd-time .colon {
+      animation: blink 1s steps(1) infinite;
+      opacity: 0.85;
+    }
+    @keyframes blink { 50% { opacity: 0.22; } }
+    .lcd-sub {
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--ink-2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .cal-card {
+      flex: 1.2 1 0;
+    }
+    .cal-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .cal-head h2 {
+      margin: 0;
+      font-size: 15px;
+    }
+    .cal-head span {
+      font-size: 11px;
+      color: var(--ink-3);
+    }
+    .cal-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 4px 2px;
+      text-align: center;
+      font-size: 11px;
+    }
+    .cal-grid .dow {
+      color: var(--ink-3);
+      font-size: 10px;
+      font-weight: 800;
+      padding-bottom: 2px;
+    }
+    .cal-grid .day {
+      position: relative;
+      min-height: 0;
+      height: clamp(18px, 2.8vh, 28px);
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+    .cal-grid .day.is-empty { visibility: hidden; }
+    .cal-grid a.day:hover { background: rgba(255, 255, 255, 0.65); color: var(--ink); }
+    .cal-grid .day.has-post::after {
+      content: "";
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      width: 4px;
+      height: 4px;
+      margin-left: -2px;
+      border-radius: 50%;
+      background: var(--brand);
+    }
+    .cal-grid .day.is-today {
+      background: var(--brand);
+      color: #fff;
+      box-shadow: 0 8px 16px -10px rgba(47, 158, 140, 0.7);
+    }
+    .cal-grid .day.is-today::after { background: #fff; }
+
+    .focus-card {
+      flex: 1 1 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      overflow: hidden;
+    }
+    .focus-card .mini-title { margin-bottom: 0; }
+    .music-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .play-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--card-strong);
+      border: 1px solid var(--line);
+      color: var(--brand-deep);
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+    .play-btn:hover { transform: scale(1.05); }
+    .play-btn svg { width: 16px; height: 16px; }
+    .music-meta { flex: 1; min-width: 0; }
+    .music-meta strong {
+      display: block;
+      font-size: 13px;
+    }
+    .music-meta small {
+      display: block;
+      font-size: 11px;
+      color: var(--ink-3);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .eq {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 14px;
+      margin-top: 4px;
+    }
+    .eq i {
+      width: 3px;
+      height: 30%;
+      border-radius: 2px;
+      background: var(--brand);
+      opacity: 0.35;
+    }
+    .is-playing .eq i {
+      opacity: 1;
+      animation: eq 0.85s ease-in-out infinite alternate;
+    }
+    .is-playing .eq i:nth-child(2) { animation-delay: -0.25s; }
+    .is-playing .eq i:nth-child(3) { animation-delay: -0.5s; }
+    .is-playing .eq i:nth-child(4) { animation-delay: -0.12s; }
+    .is-playing .eq i:nth-child(5) { animation-delay: -0.4s; }
+    @keyframes eq { from { height: 22%; } to { height: 100%; } }
+
+    .noise-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .noise-tabs button {
+      border: 1px solid var(--line);
+      background: transparent;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 11px;
+      color: var(--ink-2);
+      font-weight: 700;
+    }
+    .noise-tabs button.is-active {
+      background: var(--brand-soft);
+      color: var(--brand-deep);
+      border-color: transparent;
+    }
+
+    .pomodoro {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding-top: 10px;
+      border-top: 1px solid var(--hair);
+    }
+    .pomo-time {
+      font-family: var(--mono);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.04em;
+    }
+    .pomo-label {
+      font-size: 10px;
+      color: var(--ink-3);
+      margin-top: 3px;
+    }
+    .like-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 8px;
+    }
+    .like-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--line);
+      background: var(--card-strong);
+      color: var(--pink);
+      font-size: 16px;
+      display: grid;
+      place-items: center;
+    }
+    .like-btn.is-on {
+      color: #f26d92;
+      animation: pop 0.35s ease;
+    }
+    @keyframes pop { 50% { transform: scale(1.22); } }
+    .like-row span {
+      font-size: 11px;
+      color: var(--ink-2);
+    }
+
+    .footer-note {
+      flex: 0 0 auto;
+      text-align: center;
+      font-size: 11px;
+      color: rgba(47, 64, 56, 0.55);
+    }
+    .footer-note a {
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    /* short desktop height: tighten so nothing clips */
+    @media (max-height: 820px) and (min-width: 960px) {
+      .app { gap: 8px; padding: 10px; }
+      .board, .col { gap: 10px; }
+      .card { padding: 10px 12px; border-radius: 22px; }
+      .profile-bio { display: none; }
+      .greet-card p { -webkit-line-clamp: 2; font-size: 11px; }
+      .greet-card { gap: 6px; padding: 10px; }
+      .greet-avatar { width: 52px; height: 52px; }
+      .greet-card h1 { font-size: clamp(15px, 1.7vw, 20px); }
+      .lcd { padding: 8px 8px; border-radius: 16px; }
+      .lcd-time { font-size: clamp(24px, 3.2vw, 34px); }
+      .lcd-sub { margin-top: 4px; font-size: 10px; }
+      .cal-head { margin-bottom: 4px; }
+      .cal-head h2 { font-size: 13px; }
+      .cal-grid { gap: 1px 2px; }
+      .latest-item img { width: 42px; height: 42px; }
+      .polaroid { padding: 4px 4px 10px; border-radius: 10px; }
+      .focus-card { gap: 6px; }
+      .music-row { gap: 8px; }
+      .play-btn { width: 32px; height: 32px; }
+      .music-meta strong { font-size: 12px; }
+      .eq { height: 10px; margin-top: 2px; }
+      .noise-tabs button { padding: 2px 8px; font-size: 10px; }
+      .pomodoro { padding-top: 5px; }
+      .pomo-time { font-size: 17px; }
+      .like-row { padding-top: 2px; }
+      .like-btn { width: 30px; height: 30px; font-size: 14px; }
+      .side-nav a { padding: 6px 10px; font-size: 12px; }
+      .nav-ico { width: 24px; height: 24px; border-radius: 10px; }
+      .stat-row { padding-top: 6px; gap: 12px; }
+      .stat b { font-size: 14px; }
+      .mini-title { margin-bottom: 4px; }
+      .brand img { width: 32px; height: 32px; }
+      .btn { min-height: 32px; }
+    }
+    @media (max-height: 700px) and (min-width: 960px) {
+      .greet-card p, .profile-handle, .pomo-label, .profile-name em { display: none; }
+      .art-card .mini-title { display: none; }
+      .lcd-sub { display: none; }
+      .rec-body p { -webkit-line-clamp: 1; }
+      .rec-thumb { width: 48px; height: 48px; }
+      .side-label { margin-bottom: 4px; }
+      .profile-card { flex: 1 1 0; }
+      .latest-card .latest-item p { display: none; }
+    }
+
+    /* tablet / phone: allow scroll, stack */
+    @media (max-width: 960px) {
+      body { overflow: auto; }
+      .app {
+        height: auto;
+        min-height: 100dvh;
+      }
+      .board {
+        grid-template-columns: 1fr 1fr;
+      }
+      .col-right { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+      .col-right .focus-card { grid-column: 1 / -1; }
+    }
+    @media (max-width: 680px) {
+      .board { grid-template-columns: 1fr; }
+      .col-right { grid-template-columns: 1fr; }
+      .polaroid { width: 30%; }
+      .brand-text span { display: none; }
+      .btn { min-height: 34px; padding: 0 12px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
 </head>
-<body data-page="home">
-  <main class="stage">
-    <div class="board">
-      <aside class="card profile-card p-nav rise">
-        <div class="profile-top">
-          <img class="avatar" src="./assets/profile.jpg" alt="Yu 的頭像" width="46" height="46">
-          <div>
-            <div class="profile-name">Yu</div>
-            <div class="profile-handle">@yuqi._.0313</div>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <div class="brand">
+        <img src="./assets/profile.jpg" alt="Yu 的頭像">
+        <div class="brand-text">
+          <strong>Yu · 王宇錡</strong>
+          <span>@yuqi._.0313 · 一屏看完的個人站</span>
+        </div>
+      </div>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="https://github.com/Yu-0312" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn btn-primary" href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">寫動態</a>
+      </div>
+    </header>
+
+    <main class="board">
+      <!-- LEFT -->
+      <section class="col col-left">
+        <div class="card profile-card">
+          <div class="profile-top">
+            <img src="./assets/profile.jpg" alt="">
+            <div>
+              <div class="profile-name">Yu <em>學生 · 雜更</em></div>
+              <div class="profile-handle">@yuqi._.0313</div>
+            </div>
+          </div>
+          <p class="profile-bio">好吧其實我是一名普通的學生<br>會更新日常 / 實用工具 / AI 新知</p>
+          <p class="side-label">General</p>
+          <nav class="side-nav" aria-label="主導覽">
+            <a class="is-active" href="#home">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/></svg></span>
+              首頁
+            </a>
+            <a href="https://yu-0312.github.io/yu312/posts.html">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16.5 11.2c-.1-2.6-1.6-4.1-4.2-4.1-1.6 0-2.9.7-3.6 1.9l1.4.9c.5-.8 1.2-1.1 2.2-1.1 1.2 0 2 .6 2.3 1.7-.7-.1-1.4-.2-2.2-.1-2.2.1-3.6 1.4-3.5 3.2.1 1.8 1.7 2.9 3.6 2.8 2.4-.1 3.6-1.9 3.8-4.1.8.5 1.3 1.2 1.4 2.1.3 1.9-1.4 3.9-5.6 3.9-4 0-6-2.3-6-6.3S8 5.6 12 5.6c3.3 0 5.4 1.5 6 4.3"/></svg></span>
+              近期動態
+            </a>
+            <a href="https://yu-0312.github.io/yu312/projects.html">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="7" height="7" rx="1.8"/><rect x="13" y="4" width="7" height="7" rx="1.8"/><rect x="4" y="13" width="7" height="7" rx="1.8"/><rect x="13" y="13" width="7" height="7" rx="1.8"/></svg></span>
+              我的專案
+            </a>
+            <a href="https://yu-0312.github.io/yu312/share.html">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.8z"/></svg></span>
+              教學資源
+            </a>
+            <a href="https://yu-0312.github.io/yu312/about.html">
+              <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 13.5c1.8 2 5.2 2 7 0M9.5 9.5h.01M14.5 9.5h.01"/></svg></span>
+              關於我
+            </a>
+          </nav>
+          <div class="stat-row">
+            <div class="stat"><b id="statPosts">—</b><span>篇動態</span></div>
+            <div class="stat"><b id="statProjects">—</b><span>個專案</span></div>
+            <div class="stat"><b id="statStars">—</b><span>GitHub ★</span></div>
           </div>
         </div>
-        <p class="profile-bio">好吧其實我是一名普通的學生<br>會更新日常 / 實用工具 / AI 新知。雜更～</p>
-        <p class="side-label">General</p>
-        <nav class="side-nav" id="sideNav" aria-label="主導覽"></nav>
-        <div class="profile-foot">
-          <div class="stat-row" id="stats"></div>
-          <span id="themeSlot"></span>
-        </div>
-      </aside>
 
-      <section class="card greet-card p-greet rise">
-        <div class="greet-avatar"><img src="./assets/profile.jpg" alt="" width="104" height="104"></div>
-        <div>
+        <div class="card latest-card">
+          <h2 class="mini-title">最新文章 <a href="https://yu-0312.github.io/yu312/posts.html">看更多 →</a></h2>
+          <a class="latest-item" href="https://yu-0312.github.io/yu312/posts.html#DdnOjx0E5kx">
+            <img src="./assets/threads/DdnOjx0E5kx-0.jpg" alt="">
+            <div>
+              <h3>Claude Opus 5.5 在知識工作榜超過 GPT-6 Astra Max</h3>
+              <p>不是營銷口號，直接看 GDPval-AA 數據</p>
+              <time>2026/9/23</time>
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <!-- CENTER -->
+      <section class="col col-center">
+        <div class="card art-card">
+          <h2 class="mini-title">最近的圖片 <a href="https://yu-0312.github.io/yu312/posts.html">看更多 →</a></h2>
+          <div class="polaroids">
+            <a class="polaroid" href="https://yu-0312.github.io/yu312/posts.html#DdQSLsXk4fe">
+              <img src="./assets/threads/DdQSLsXk4fe-0.jpg" alt="旅行刺繡提示詞圖片">
+            </a>
+            <a class="polaroid" href="https://yu-0312.github.io/yu312/posts.html#DdGZlDTG2wo">
+              <img src="./assets/threads/DdGZlDTG2wo-0.jpg" alt="雙畫面海報提示詞圖片">
+            </a>
+            <a class="polaroid" href="https://yu-0312.github.io/yu312/posts.html#Ddkdz_XGjmD">
+              <img src="./assets/threads/Ddkdz_XGjmD-0.jpg" alt="模型評測圖片">
+            </a>
+          </div>
+        </div>
+
+        <div class="card greet-card">
+          <img class="greet-avatar" src="./assets/profile.jpg" alt="">
           <h1><span id="greetPart">Hello</span>,<br>I'm <span class="name">Yu</span>. Nice to meet you!</h1>
           <p>和貓共用一個帳號的學生，喜歡把 AI 新知、實用工具和程式教學整理成大家看得懂的樣子。</p>
         </div>
-      </section>
 
-      <section class="card art-card p-art rise" aria-label="最近的圖片">
-        <h2 class="mini-title">最近的圖片 <a href="./posts.html">看更多 →</a></h2>
-        <div class="polaroids" id="polaroids"></div>
-      </section>
-
-      <div class="tools-stack p-tools">
-        <div class="card clock-card rise" aria-live="polite">
-          <div class="clock-face">
-            <div class="clock-time" id="clock">--:--</div>
-            <div class="clock-sub" id="clockSub">&nbsp;</div>
-          </div>
-        </div>
-        <div class="card cal-card rise">
-          <div class="cal-head"><h2 id="calTitle">—</h2><span id="calNote"></span></div>
-          <div class="cal-grid" id="calendar" aria-label="本月月曆，圓點代表當天有發文"></div>
-        </div>
-      </div>
-
-      <section class="card latest-card p-latest rise">
-        <h2 class="mini-title">最新動態 <a href="./posts.html">全部動態 →</a></h2>
-        <div id="latest"></div>
-      </section>
-
-      <div class="card p-social rise">
-        <h2 class="mini-title">找到我</h2>
-        <div class="social-row">
-          <a class="soc soc--dark" href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16.5 11.2c-.1-2.6-1.6-4.1-4.2-4.1-1.6 0-2.9.7-3.6 1.9l1.4.9c.5-.8 1.2-1.1 2.2-1.1 1.2 0 2 .6 2.3 1.7-.7-.1-1.4-.2-2.2-.1-2.2.1-3.6 1.4-3.5 3.2.1 1.8 1.7 2.9 3.6 2.8 2.4-.1 3.6-1.9 3.8-4.1.8.5 1.3 1.2 1.4 2.1.3 1.9-1.4 3.9-5.6 3.9-4 0-6-2.3-6-6.3S8 5.6 12 5.6c3.3 0 5.4 1.5 6 4.3"/></svg>
-            Threads
-          </a>
-          <a class="soc" href="https://github.com/Yu-0312" target="_blank" rel="noopener">
+        <div class="social-row" aria-label="社群連結">
+          <a class="soc soc--dark" href="https://github.com/Yu-0312" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.8c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .26.18.58.69.48A10.27 10.27 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/></svg>
             GitHub
+          </a>
+          <a class="soc" href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M16.5 11.2c-.1-2.6-1.6-4.1-4.2-4.1-1.6 0-2.9.7-3.6 1.9l1.4.9c.5-.8 1.2-1.1 2.2-1.1 1.2 0 2 .6 2.3 1.7-.7-.1-1.4-.2-2.2-.1-2.2.1-3.6 1.4-3.5 3.2.1 1.8 1.7 2.9 3.6 2.8 2.4-.1 3.6-1.9 3.8-4.1.8.5 1.3 1.2 1.4 2.1.3 1.9-1.4 3.9-5.6 3.9-4 0-6-2.3-6-6.3S8 5.6 12 5.6c3.3 0 5.4 1.5 6 4.3"/></svg>
+            Threads
           </a>
           <a class="soc soc--brand" href="mailto:wang.yuchi.312@gmail.com">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.5 6.5L20.5 7"/></svg>
             Email
           </a>
         </div>
-      </div>
 
-      <section class="card p-recommend rise">
-        <h2 class="mini-title">隨機推薦</h2>
-        <div class="rec-row">
-          <a class="rec-row" id="recCard" href="./share.html" target="_blank" rel="noopener" style="flex:1;min-width:0">
-            <div class="thumb" id="recThumb">★</div>
-            <div style="min-width:0">
-              <h3 id="recTitle">教學資源</h3>
-              <p id="recDesc"></p>
+        <div class="card rec-card">
+          <h2 class="mini-title">隨機推薦 <a href="https://yu-0312.github.io/yu312/share.html">全部資源 →</a></h2>
+          <div class="rec-body">
+            <div class="rec-thumb" id="recThumb">教學</div>
+            <div>
+              <h3 id="recTitle">互動程式教室 × APCS 練習</h3>
+              <p id="recDesc">四語言 101 章互動教學，300 題範例練習，加上 AI 解題與錯題本。</p>
             </div>
-          </a>
-          <button class="shuffle" id="recShuffle" type="button" aria-label="換一個">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h4v4M20 4l-6 6M4 20l6-6M16 20h4v-4M20 20l-5.5-5.5M4 4l5 5"/></svg>
-          </button>
+            <button class="shuffle" id="recShuffle" type="button" aria-label="換一個">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h4v4M20 4l-6 6M4 20l6-6M16 20h4v-4M20 20l-5.5-5.5M4 4l5 5"/></svg>
+            </button>
+          </div>
         </div>
       </section>
 
-      <div class="card p-extra rise">
-        <div id="noise">
+      <!-- RIGHT -->
+      <section class="col col-right">
+        <div class="card clock-card">
+          <div class="lcd" aria-live="polite">
+            <div class="lcd-time" id="clock">--:--</div>
+            <div class="lcd-sub" id="clockSub">LIVE · LOCAL TIME</div>
+          </div>
+        </div>
+
+        <div class="card cal-card">
+          <div class="cal-head">
+            <h2 id="calTitle">—</h2>
+            <span id="calNote"></span>
+          </div>
+          <div class="cal-grid" id="calendar" aria-label="本月月曆"></div>
+        </div>
+
+        <div class="card focus-card" id="noise">
           <h2 class="mini-title">專注模式</h2>
           <div class="music-row">
             <button class="play-btn" id="noiseBtn" type="button" aria-label="播放"></button>
             <div class="music-meta">
               <strong>Focus Noise</strong>
-              <small id="noiseLabel"></small>
+              <small id="noiseLabel">點擊播放，陪你專注</small>
               <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
             </div>
           </div>
-          <div class="noise-tabs" style="margin-top:.7rem">
+          <div class="noise-tabs">
             <button type="button" data-noise="rain" class="is-active">雨聲</button>
             <button type="button" data-noise="brown">棕噪音</button>
             <button type="button" data-noise="white">白噪音</button>
           </div>
+          <div class="pomodoro">
+            <div>
+              <div class="pomo-time" id="pomoTime" title="雙擊重設">25:00</div>
+              <div class="pomo-label">番茄鐘 · 雙擊重設</div>
+            </div>
+            <button class="btn btn-ghost" id="pomoBtn" type="button">開始</button>
+          </div>
+          <div class="like-row">
+            <button class="like-btn" id="likeBtn" type="button" aria-pressed="false" aria-label="喜歡這個網站">♥</button>
+            <span id="likeText">喜歡這個網站嗎？</span>
+          </div>
         </div>
-        <div class="pomodoro">
-          <div><div class="pomo-time" id="pomoTime" title="雙擊重設">25:00</div><div class="pomo-label">番茄鐘 · 雙擊時間重設</div></div>
-          <button class="btn btn--ghost" id="pomoBtn" type="button">開始</button>
-        </div>
-        <div class="like-row">
-          <button class="like-btn" id="likeBtn" type="button" aria-pressed="false" aria-label="喜歡這個網站">♥</button>
-          <span id="likeText"></span>
-        </div>
-      </div>
-    </div>
-    <p class="foot-note">© 2026 Yu · 動態內容來自 <a href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">Threads @yuqi._.0313</a></p>
-  </main>
-  <script src="./data.js" defer></script>
-  <script src="./site.js" defer></script>
+      </section>
+    </main>
+
+    <p class="footer-note">© 2026 Yu · 動態內容來自 <a href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">Threads @yuqi._.0313</a></p>
+  </div>
+
+  <script>
+    (() => {
+      const $ = (s, r = document) => r.querySelector(s);
+      const pad = (n) => String(n).padStart(2, "0");
+      const WEEK = ["週日", "週一", "週二", "週三", "週四", "週五", "週六"];
+
+      const POSTS = [
+        { id: "DdnOjx0E5kx", date: "2026-09-23", title: "Claude Opus 5.5 Medium 超過 GPT-6 Astra Max" },
+        { id: "Ddk1dZkkwsn", date: "2026-09-22", title: "小米 MiMo-V2.6 為什麼能漲這麼猛" },
+        { id: "Ddkdz_XGjmD", date: "2026-09-22", title: "MiMo 封測使用心得" },
+        { id: "Ddcz31oE9zP", date: "2026-09-19", title: "亞洲創辦人該不該衝矽谷" },
+        { id: "DdbvPAAE3Zi", date: "2026-09-18", title: "林之晨：怎麼變強" },
+        { id: "Ddafoylk2B4", date: "2026-09-18", title: "MOPCON 2026 要來了" },
+        { id: "DdQ4jy2kz6O", date: "2026-09-14", title: "打造你自己的主權 AI" },
+        { id: "DdQSLsXk4fe", date: "2026-09-14", title: "旅行刺繡提示詞" },
+        { id: "DdGwI87mwtM", date: "2026-09-10", title: "小米無限量內測資格" },
+        { id: "DdD1E-ik_uv", date: "2026-09-09", title: "全球首個數學黑客松" }
+      ];
+
+      const SHARE = [
+        { badge: "程式", title: "互動程式教室 × APCS 練習", desc: "Python / C++ / C / Java 四語言、101 章互動教學，300 題範例練習與 AI 解題。", url: "https://yu-0312.github.io/apcs-judge/" },
+        { badge: "程式", title: "Web 三劍客 × MySQL", desc: "HTML / CSS / JS ＋ MySQL 連貫教學，瀏覽器內建 SQL 模擬器。", url: "https://yu-0312.github.io/web-mysql-tutorial/" },
+        { badge: "AI", title: "強化學習互動教學", desc: "對話式講解＋可動手玩的 Canvas 演示，一路讀到 DQN / PPO。", url: "https://yu-0312.github.io/rl-interactive-tutorial/" },
+        { badge: "路線", title: "AI Engineer Roadmap", desc: "12 站 AI 工程師路線，用 DocMind 智慧文件助理貫穿全程。", url: "https://yu-0312.github.io/ai-engineer-roadmap/" },
+        { badge: "統計", title: "睡眠研究統計教室", desc: "16 關互動統計課，同一份資料同時教 Excel、JASP、SPSS。", url: "https://yu-0312.github.io/stat-lab/" },
+        { badge: "自然", title: "物理實驗室", desc: "12 個學習模組、248 個即時 Canvas 互動模擬。", url: "https://senior-science.vercel.app/" },
+        { badge: "語言", title: "English Learning System", desc: "以通過條件推進的英語學習系統：五關框架＋經歷語料庫。", url: "https://yu-0312.github.io/english-learning-system/" }
+      ];
+
+      // stats
+      $("#statPosts").textContent = "20+";
+      $("#statProjects").textContent = "23";
+      $("#statStars").textContent = "368";
+
+      // greeting
+      function greetWord(h = new Date().getHours()) {
+        if (h < 5) return "Good Night";
+        if (h < 11) return "Good Morning";
+        if (h < 18) return "Good Afternoon";
+        if (h < 22) return "Good Evening";
+        return "Good Night";
+      }
+      $("#greetPart").textContent = greetWord();
+
+      // clock
+      function tickClock() {
+        const d = new Date();
+        $("#clock").innerHTML = `${pad(d.getHours())}<span class="colon">:</span>${pad(d.getMinutes())}`;
+        $("#clockSub").textContent = `${d.getFullYear()} / ${d.getMonth() + 1} / ${d.getDate()} · ${WEEK[d.getDay()]}`;
+      }
+      tickClock();
+      setInterval(tickClock, 10000);
+
+      // calendar
+      function dayKey(d) {
+        return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+      }
+      function renderCalendar() {
+        const now = new Date();
+        const y = now.getFullYear();
+        const m = now.getMonth();
+        $("#calTitle").textContent = `${y} / ${m + 1}`;
+        const byDay = {};
+        POSTS.forEach((p) => {
+          const d = new Date(p.date + "T12:00:00");
+          const k = dayKey(d);
+          (byDay[k] = byDay[k] || []).push(p);
+        });
+        const monthCount = POSTS.filter((p) => {
+          const d = new Date(p.date + "T12:00:00");
+          return d.getFullYear() === y && d.getMonth() === m;
+        }).length;
+        $("#calNote").textContent = monthCount ? `本月 ${monthCount} 則` : "本月還沒發文";
+        const start = (new Date(y, m, 1).getDay() + 6) % 7;
+        const days = new Date(y, m + 1, 0).getDate();
+        let html = ["一", "二", "三", "四", "五", "六", "日"].map((d) => `<div class="dow">${d}</div>`).join("");
+        for (let i = 0; i < start; i++) html += `<div class="day is-empty"></div>`;
+        for (let d = 1; d <= days; d++) {
+          const k = `${y}-${pad(m + 1)}-${pad(d)}`;
+          const cls = `day${d === now.getDate() ? " is-today" : ""}${byDay[k] ? " has-post" : ""}`;
+          html += byDay[k]
+            ? `<a class="${cls}" href="https://yu-0312.github.io/yu312/posts.html#${byDay[k][0].id}" title="${byDay[k].length} 則貼文">${d}</a>`
+            : `<div class="${cls}">${d}</div>`;
+        }
+        $("#calendar").innerHTML = html;
+      }
+      renderCalendar();
+
+      // random recommend
+      let last = -1;
+      function pickRec() {
+        let i;
+        do { i = Math.floor(Math.random() * SHARE.length); } while (SHARE.length > 1 && i === last);
+        last = i;
+        const it = SHARE[i];
+        $("#recThumb").textContent = it.badge;
+        $("#recTitle").textContent = it.title;
+        $("#recDesc").textContent = it.desc;
+        const body = $(".rec-body a") || $("#recTitle").parentElement.parentElement.querySelector("a");
+        // wrap title as link
+        $("#recTitle").innerHTML = `<a href="${it.url}" target="_blank" rel="noopener">${it.title}</a>`;
+      }
+      pickRec();
+      $("#recShuffle").addEventListener("click", pickRec);
+
+      // focus noise
+      const noiseBox = $("#noise");
+      const noiseBtn = $("#noiseBtn");
+      const noiseLabel = $("#noiseLabel");
+      const TYPES = { rain: "雨聲", brown: "棕噪音", white: "白噪音" };
+      let type = "rain";
+      let ctx, src, gain, playing = false;
+
+      function buffer(kind) {
+        const len = ctx.sampleRate * 4;
+        const b = ctx.createBuffer(1, len, ctx.sampleRate);
+        const d = b.getChannelData(0);
+        let last = 0;
+        for (let i = 0; i < len; i++) {
+          const w = Math.random() * 2 - 1;
+          if (kind === "white") d[i] = w * 0.35;
+          else {
+            last = (last + 0.02 * w) / 1.02;
+            d[i] = last * (kind === "brown" ? 3.2 : 2.2);
+          }
+          if (kind === "rain" && Math.random() < 0.0009) d[i] += (Math.random() - 0.5) * 0.9;
+        }
+        return b;
+      }
+      function startNoise() {
+        ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
+        src = ctx.createBufferSource();
+        src.buffer = buffer(type);
+        src.loop = true;
+        const filter = ctx.createBiquadFilter();
+        filter.type = type === "rain" ? "highpass" : "lowpass";
+        filter.frequency.value = type === "rain" ? 400 : type === "brown" ? 900 : 9000;
+        gain = ctx.createGain();
+        gain.gain.value = 0;
+        gain.gain.linearRampToValueAtTime(0.55, ctx.currentTime + 0.7);
+        src.connect(filter).connect(gain).connect(ctx.destination);
+        src.start();
+      }
+      function stopNoise() {
+        if (!src) return;
+        const s = src;
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.25);
+        setTimeout(() => s.stop(), 300);
+        src = null;
+      }
+      function paintNoise() {
+        noiseBox.classList.toggle("is-playing", playing);
+        noiseBtn.innerHTML = playing
+          ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>'
+          : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+        noiseBtn.setAttribute("aria-label", playing ? "暫停" : "播放");
+        noiseLabel.textContent = playing ? `正在播放 · ${TYPES[type]}` : "點擊播放，陪你專注";
+      }
+      noiseBtn.addEventListener("click", () => {
+        playing = !playing;
+        if (playing) startNoise(); else stopNoise();
+        paintNoise();
+      });
+      noiseBox.querySelectorAll("[data-noise]").forEach((b) => {
+        b.addEventListener("click", () => {
+          type = b.dataset.noise;
+          noiseBox.querySelectorAll("[data-noise]").forEach((x) => x.classList.toggle("is-active", x === b));
+          if (playing) { stopNoise(); startNoise(); }
+          paintNoise();
+        });
+      });
+      paintNoise();
+
+      // pomodoro
+      const pomoTime = $("#pomoTime");
+      const pomoBtn = $("#pomoBtn");
+      const FULL = 25 * 60;
+      let left = FULL, timer = null;
+      function paintPomo() {
+        pomoTime.textContent = `${pad(Math.floor(left / 60))}:${pad(left % 60)}`;
+        pomoBtn.textContent = timer ? "暫停" : left === FULL ? "開始" : "繼續";
+      }
+      pomoBtn.addEventListener("click", () => {
+        if (timer) {
+          clearInterval(timer);
+          timer = null;
+        } else {
+          timer = setInterval(() => {
+            left -= 1;
+            if (left <= 0) {
+              clearInterval(timer);
+              timer = null;
+              left = FULL;
+              document.title = "⏰ 休息一下！";
+              setTimeout(() => { document.title = "Yu · 王宇錡 — 一屏 Dashboard"; }, 3000);
+            }
+            paintPomo();
+          }, 1000);
+        }
+        paintPomo();
+      });
+      pomoTime.addEventListener("dblclick", () => {
+        clearInterval(timer);
+        timer = null;
+        left = FULL;
+        paintPomo();
+      });
+      paintPomo();
+
+      // like
+      const likeBtn = $("#likeBtn");
+      const likeText = $("#likeText");
+      let on = false;
+      try { on = localStorage.getItem("yu-liked") === "1"; } catch (_) {}
+      function paintLike() {
+        likeBtn.classList.toggle("is-on", on);
+        likeBtn.setAttribute("aria-pressed", String(on));
+        likeText.textContent = on ? "謝謝你的喜歡 ♡" : "喜歡這個網站嗎？";
+      }
+      likeBtn.addEventListener("click", () => {
+        on = !on;
+        try { localStorage.setItem("yu-liked", on ? "1" : "0"); } catch (_) {}
+        paintLike();
+      });
+      paintLike();
+    })();
+  </script>
 </body>
 </html>
