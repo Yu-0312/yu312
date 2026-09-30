@@ -1,10 +1,11 @@
 /**
  * 同步 Threads (@yuqi._.0313) 貼文到 data.js
  *
- * 資料來源（依序）：
- *   1. 官方 Threads API（設定 THREADS_ACCESS_TOKEN）— 可拿全部貼文
- *   2. Playwright 瀏覽器擷取公開頁 — 與先前人工匯出相同路徑，
- *      但未登入時 Threads 只顯示最前面幾則（其餘有登入牆）
+ * 資料來源：
+ *   - 預設：Playwright 抓公開頁（不需 API key）。
+ *     未登入時 Threads 只顯示最前面幾則；新貼文會併入 data.js，
+ *     較舊貼文保留既有內容。
+ *   - 可選：設定 THREADS_ACCESS_TOKEN 走官方 API，可一次補齊完整歷史。
  *
  * 然後：
  *   - 清理成 data.js 的 THREADS_POSTS 結構
@@ -59,8 +60,8 @@ const IMG_DIR = path.join(ROOT, "assets", "threads");
 const HANDLE = "yuqi._.0313";
 const PROFILE_URL = `https://www.threads.com/@${HANDLE}`;
 const DRY_RUN = process.argv.includes("--dry-run");
-const MAX_POSTS = 200;
-const MAX_SCROLL = 25;
+const MAX_POSTS = 80;
+const MAX_SCROLL = 8;
 
 /* ---------- data.js 讀寫 ---------- */
 function loadExisting() {

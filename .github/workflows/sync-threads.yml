@@ -1,10 +1,12 @@
-# 每三天自動把 Threads 貼文同步到網站（data.js + assets/threads/）
+# 每天自動把 Threads 貼文同步到網站（data.js + assets/threads/）
+# 預設不需 API key：用 Playwright 抓公開頁（合併既有貼文）。
+# 若有 secrets.THREADS_ACCESS_TOKEN 則改走官方 API，可補齊完整歷史。
 name: Sync Threads
 
 on:
   schedule:
-    # 每 3 天 16:10 UTC（台北 00:10）執行
-    - cron: "10 16 */3 * *"
+    # 每天 16:10 UTC（台北 00:10）
+    - cron: "10 16 * * *"
   workflow_dispatch: {}
 
 permissions:
@@ -17,7 +19,7 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,14 +28,23 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "22"
+          cache: npm
 
-      - name: Install Playwright
-        run: |
-          npm install
-          npx playwright install --with-deps chromium
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package.json') }}
+
+      - name: Install dependencies
+        run: npm ci || npm install
+
+      - name: Install Chromium
+        run: npx playwright install chromium
 
       - name: Sync Threads posts
         env:
+          # 可選：有設定才走官方 API；沒有就用瀏覽器抓公開頁
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
         run: node scripts/sync_threads.mjs
 

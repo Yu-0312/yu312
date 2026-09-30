@@ -30,16 +30,16 @@ Yu（王宇錡 · [@yuqi._.0313](https://www.threads.com/@yuqi._.0313)）的個�
 
 ## Threads 自動同步
 
-網站上的動態來自 Threads（[@yuqi._.0313](https://www.threads.com/@yuqi._.0313)），由 `scripts/sync_threads.mjs` 自動更新，GitHub Actions **每三天**跑一次（也可在 Actions 手動觸發）。
+網站上的動態來自 Threads（[@yuqi._.0313](https://www.threads.com/@yuqi._.0313)），由 `scripts/sync_threads.mjs` 自動更新，GitHub Actions **每天**跑一次（也可在 Actions 手動觸發）。**預設不需要 API key。**
 
 流程：
 
-1. 有設定 `THREADS_ACCESS_TOKEN` 時，走官方 Threads API，可同步全部貼文
-2. 沒有 token 時，用 Playwright 抓公開頁（與先前人工匯出相同路徑）
-   — 但 Threads 未登入只會顯示最前面幾則，其餘有登入牆
-3. 貼文寫入 `data.js` 的 `THREADS_POSTS`，圖片存到 `assets/threads/`
-4. 人工標的 `tag` 會保留，不會被覆蓋
-5. 有變更才 commit / push，GitHub Pages 會自動部署
+1. 用 Playwright 抓公開 Threads 頁（與先前人工匯出相同路徑）
+2. 新貼文併入 `data.js` 的 `THREADS_POSTS`，圖片存到 `assets/threads/`
+3. 較舊貼文與人工標的 `tag` 會保留，不會被覆蓋
+4. 有變更才 commit / push，GitHub Pages 自動部署
+
+> 補充：公開頁未登入時 Threads 只顯示最前面幾則（登入牆），所以每天抓主要是「增量收新貼文」。若之後設定 `THREADS_ACCESS_TOKEN`，會自動改走官方 API 並補齊完整歷史。
 
 ### 本機執行
 
@@ -50,12 +50,8 @@ npm run sync-threads:dry   # 先看會改什麼
 npm run sync-threads       # 真的寫入 data.js 與圖片
 ```
 
-### 設定官方 API（建議，才能拿完整歷史）
+### 可選：官方 API（完整歷史）
 
-1. 到 [Meta for Developers](https://developers.facebook.com/) 建立應用程式，加入 **Threads API**
-2. 依官方文件取得具備 `threads_basic` 的 access token（建議換成 60 天的 long-lived token）
-3. 在 GitHub repo → **Settings → Secrets and variables → Actions** 新增：
-   - Name：`THREADS_ACCESS_TOKEN`
-   - Value：你的 token
-
-沒設定 secret 時仍可跑，但只能抓到公開頁最前面幾則新貼文。
+1. Meta 後台建立 App → 加入 **Threads API** → 產生 token（需 `threads_basic`）
+2. GitHub repo → **Settings → Secrets and variables → Actions** 新增 `THREADS_ACCESS_TOKEN`
+3. 有 secret 時同步會自動改走 API，不需要改程式
