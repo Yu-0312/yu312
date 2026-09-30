@@ -47,6 +47,11 @@
 
   function loadSettings() {
     const saved = store.json("yu-settings", {});
+    // migrate old ember default (pre-mint) so the kawaii mint look stays the house default
+    if (saved.palette === "ember" && (!saved.accent || saved.accent === "#c45c26")) {
+      delete saved.palette;
+      delete saved.accent;
+    }
     return { ...DEFAULTS, ...saved, socials: saved.socials || DEFAULTS.socials };
   }
   function saveSettings(s) { store.setJson("yu-settings", s); }
@@ -420,7 +425,7 @@
     root.addEventListener("input", (e) => {
       if (e.target.id === "fAccent") {
         $("#fAccentHex", root).textContent = e.target.value;
-        applyPalette(root.dataset.palette || "ember", e.target.value);
+        applyPalette(root.dataset.palette || "mint", e.target.value);
       }
     });
 
