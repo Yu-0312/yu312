@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-09-29T03:46:52.715Z（scripts/sync_threads.mjs，GitHub Actions 每三天自動更新） */
+   Threads 同步於 2026-10-01T00:44:43.637Z（scripts/sync_threads.mjs，GitHub Actions 每三天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -299,6 +299,18 @@ window.PROJECT_ITEMS = [
 ];
 window.THREADS_POSTS = [
  {
+  "id": "Dd21zc8E6qu",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Dd21zc8E6qu",
+  "time": "2026-09-29T03:54:16.000Z",
+  "tag": "",
+  "parts": [
+   "讓 AI 當一晚上主值觀測員會發生什麼？\nGOSIM 巡天智能體黑客松：每 15 分鐘決定望遠鏡看哪片天\n純線上、免費、個人能打、不需要天文學位，入門包跑一下就是基線分，改改策略就能上榜\n獎金 5500 美金，10/5～10/7 線上開賽，現在還能報！\n連結： create.gosim.org/surve…"
+  ],
+  "imgs": [],
+  "links": [],
+  "video": false
+ },
+ {
   "id": "Dd2prrKE0Pf",
   "url": "https://www.threads.com/@yuqi._.0313/post/Dd2prrKE0Pf",
   "time": "2026-09-29T02:08:20.000Z",
@@ -306,14 +318,7 @@ window.THREADS_POSTS = [
   "parts": [
    "黃爸爸推特： x.com/Jense…\n官方新聞： nvidianews.nvidia.com/news…\nnvidianews.nvidia.com\nNVIDIA Launches Open Agent Safety Platform to Secure Agents From Testing to Deployment"
   ],
-  "imgs": [
-   {
-    "src": "assets/threads/Dd2prrKE0Pf-0.png",
-    "w": 1920,
-    "h": 1080,
-    "alt": "NVIDIA Launches Open Agent Safety Platform to Secure Agents From Testing to Deployment"
-   }
-  ],
+  "imgs": [],
   "links": [],
   "video": false
  },
@@ -356,20 +361,7 @@ window.THREADS_POSTS = [
   "parts": [
    "這次是真的有點離譜！\nClaude Opus 5.5 Medium，已經在 GDPval-AA 知識工作榜超過 GPT-6 Astra Max！\n不是營銷口號，直接看數據👇\n• Opus 5.5 Max：1846 Elo\n• Opus 5.5 Medium：1576 Elo\n• GPT-6 Astra Max：1542 Elo\n簡單來說這個分數代表相對實力，所以不用拉滿，Opus 5.5 Medium 在知識工作這個 benchmark 上就已經超過 Astra Max\n更狠的是其他測試：\n💻 Terminal-Bench 4.0（AI 完成任務的能力）\n66.4% vs 57.9%\n🧠 Humanity's Last Exam（懂多少高難度知識）\n67.7% vs 57.2%\n當然一樣別把一個 benchmark 當成「全面碾壓」\n相關連結： artificialanalysis.ai/es/mo…"
   ],
-  "imgs": [
-   {
-    "src": "assets/threads/DdnOjx0E5kx-0.jpg",
-    "w": 900,
-    "h": 614,
-    "alt": ""
-   },
-   {
-    "src": "assets/threads/DdnOjx0E5kx-1.jpg",
-    "w": 640,
-    "h": 635,
-    "alt": ""
-   }
-  ],
+  "imgs": [],
   "links": [
    "https://artificialanalysis.ai/es/models/comparisons/claude-opus-5-5-medium-vs-gpt-6-astra?utm_source=chatgpt.com"
   ],
@@ -1579,17 +1571,4 @@ window.THREADS_POSTS = [
   ],
   "video": false
  }
-];
-
-window.FRIEND_LINKS = [
-  { "name": "lvy-neko", "url": "https://lvyovo-wiki.tech", "desc": "莫西莫西，歡迎一起交流", "kind": "朋友", "color": "rgba(53,191,171,0.22)" },
-  { "name": "Anthony Fu", "url": "https://antfu.me/", "desc": "Vue core team，神做事就像喝水一樣輕鬆", "kind": "大神", "color": "rgba(224,122,95,0.22)" },
-  { "name": "Innei 靜かな森", "url": "https://innei.in/", "desc": "支持高產博主喵", "kind": "大神", "color": "rgba(122,140,180,0.22)" },
-  { "name": "Cassie Evans's Blog", "url": "https://www.cassie.codes/", "desc": "GSAP 和 SVG 動畫的厲害姐姐", "kind": "朋友", "color": "rgba(196,123,154,0.22)" },
-  { "name": "貓魚週刊", "url": "https://ameow.xyz/", "desc": "快樂劃水", "kind": "朋友", "color": "rgba(244,198,120,0.28)" },
-  { "name": "十玖八柒", "url": "https://blog.ahzoo.cn/", "desc": "後端 | Z次元ovo", "kind": "朋友", "color": "rgba(129,178,154,0.24)" },
-  { "name": "Jerry Yang", "url": "https://efjerryyang.github.io/", "desc": "Rust | All in", "kind": "朋友", "color": "rgba(196,92,38,0.18)" },
-  { "name": "Satoru", "url": "https://www.vanishcode.com/", "desc": "全端的前輩", "kind": "大神", "color": "rgba(61,155,184,0.2)" },
-  { "name": "Tonsky", "url": "https://tonsky.me", "desc": "頁面很亮的極客", "kind": "大神", "color": "rgba(232,168,124,0.22)" },
-  { "name": "空と海", "url": "https://blog.chiyo.uk", "desc": "就算活著沒有意義，偶而還是會碰到好事的", "kind": "朋友", "color": "rgba(168,196,140,0.26)" }
 ];
