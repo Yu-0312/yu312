@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-01T00:44:43.637Z（scripts/sync_threads.mjs，GitHub Actions 每三天自動更新） */
+   Threads 同步於 2026-10-01T21:00:17.707Z（scripts/sync_threads.mjs，GitHub Actions 每三天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -298,6 +298,55 @@ window.PROJECT_ITEMS = [
  }
 ];
 window.THREADS_POSTS = [
+ {
+  "id": "Dd87Nitk74W",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Dd87Nitk74W",
+  "time": "2026-10-01T12:36:57.000Z",
+  "tag": "",
+  "parts": [
+   "6️⃣ CS224N NLP × DL｜Manning 神課\nyoutube.com/playl…\n7️⃣ CS224U 自然語言理解｜語義方向\nyoutube.com/playl…\n8️⃣ CME295 大模型｜Transformers & LLM\nyoutube.com/playl…\n9️⃣ CS236 深度生成模型｜VAE·GAN·Diffusion\nyoutube.com/playl…"
+  ],
+  "imgs": [],
+  "links": [],
+  "video": false
+ },
+ {
+  "id": "Dd87NDGk-x9",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Dd87NDGk-x9",
+  "time": "2026-10-01T12:36:53.000Z",
+  "tag": "",
+  "parts": [
+   "🔥 斯坦福免費 AI 課，鏈接都幫你們扒好了！\n1️⃣ CS221 人工智能｜搜索·邏輯·MDP\nyoutube.com/playl…\n2️⃣ CS229 機器學習｜經典 ML 必修\nyoutube.com/playl…\n3️⃣ CS230 深度學習｜Andrew Ng 親授\nyoutube.com/playl…\n4️⃣ CS229M 機器學習理論｜想搞懂為什麼有用就看這個\nyoutube.com/playl…\n5️⃣ CS234 強化學習｜RL 入門天花板\nyoutube.com/playl…",
+   "👉 （留言續）看完不按讚分享＝白嫖失敗"
+  ],
+  "imgs": [],
+  "links": [],
+  "video": false
+ },
+ {
+  "id": "Dd85JZcEz44",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Dd85JZcEz44",
+  "time": "2026-10-01T12:18:55.000Z",
+  "tag": "",
+  "parts": [
+   "我不當兵的幾個原因：\n1.沒有小地圖我會迷路\n2.萬一排到逆天隊友怎麼辦\n3.隊友死了不爆點\n4.沒有復活機制\n5.機動性太低\n6.沒有第三人稱"
+  ],
+  "imgs": [],
+  "links": [],
+  "video": false
+ },
+ {
+  "id": "Dd8XNHJE7H4",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Dd8XNHJE7H4",
+  "time": "2026-10-01T07:22:19.000Z",
+  "tag": "",
+  "parts": [
+   "今天被台大李宏毅教授的訪談狠狠上了一課\n他問學生「假設資源無限你想做什麼？」\n平常抱怨資源不夠的學生居然答不上來😅\n到了 AI Agent 時代，「學AI」其實是個模糊說法，會不會寫程式、懂不懂技術的界線越來越模糊\n想讓 AI 幫你把事情做好要練這3種能力👇\n1️⃣ 出題力：把腦中模糊的想法變成明確的目標\n2️⃣ 驗收力：知道什麼成果才叫「合格」，標準由你定不是AI說了算\n3️⃣ 監督力：盯著 AI 一路修改別讓它為了刷指標越跑越偏\n連結： bnext.com.tw/artic…"
+  ],
+  "imgs": [],
+  "links": [],
+  "video": false
+ },
  {
   "id": "Dd21zc8E6qu",
   "url": "https://www.threads.com/@yuqi._.0313/post/Dd21zc8E6qu",
