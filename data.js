@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-02T06:37:36.524Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-02T06:45:53.581Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -322,7 +322,8 @@ window.THREADS_POSTS = [
   "thread": [
    "Dd-l9MDFLcq",
    "Dd-l9m-FPAV"
-  ]
+  ],
+  "likes": 17
  },
  {
   "id": "Dd87NDGk-x9",
@@ -362,7 +363,8 @@ window.THREADS_POSTS = [
   "thread": [
    "Dd87NDGk-x9",
    "Dd87Nitk74W"
-  ]
+  ],
+  "likes": 51
  },
  {
   "id": "Dd85JZcEz44",
@@ -374,7 +376,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 7
  },
  {
   "id": "Dd8XNHJE7H4",
@@ -395,7 +398,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://www.bnext.com.tw/article/92416/ai-education-problem-finding-future-skills?openExternalBrowser=1&utm_source=line&utm_medium=message&ldtag_cl=5EiClVIcSw-bKVDDupZ6eQAA_oa&lt_r=099&srclt=oa&_ly_c=e4488295-521c-4b0f-9b29-50c3ba967a79&_ly_r=099&_ly_src=oa"
   ],
-  "video": false
+  "video": false,
+  "likes": 4
  },
  {
   "id": "Dd21zc8E6qu",
@@ -407,7 +411,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 4
  },
  {
   "id": "Dd2prQcE1p5",
@@ -434,7 +439,8 @@ window.THREADS_POSTS = [
   "thread": [
    "Dd2prQcE1p5",
    "Dd2prrKE0Pf"
-  ]
+  ],
+  "likes": 7
  },
  {
   "id": "Dd0smhtm4p4",
@@ -453,7 +459,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 20
  },
  {
   "id": "DdnOjx0E5kx",
@@ -480,7 +487,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://artificialanalysis.ai/es/models/comparisons/claude-opus-5-5-medium-vs-gpt-6-astra?utm_source=chatgpt.com"
   ],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "Ddk1dZkkwsn",
@@ -492,7 +500,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "Ddkdz_XGjmD",
@@ -511,7 +520,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 1
  },
  {
   "id": "Ddih8R4k6yr",
@@ -525,7 +535,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://autoclaw.z.ai/"
   ],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "DdiKhwYk_rG",
@@ -539,7 +550,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/zai-org/ZCode"
   ],
-  "video": false
+  "video": false,
+  "likes": 5
  },
  {
   "id": "Ddh_PX5k-G2",
@@ -553,7 +565,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://console.typesafe.ai/login"
   ],
-  "video": false
+  "video": false,
+  "likes": 4
  },
  {
   "id": "Ddh1c8Ik6bq",
@@ -575,7 +588,8 @@ window.THREADS_POSTS = [
    "https://github.com/QwenLM/Qwen-Image-2.1",
    "https://www.modelscope.cn/models/Qwen/Qwen-Image-2.1"
   ],
-  "video": false
+  "video": false,
+  "likes": 188
  },
  {
   "id": "DdgV7U3E2iT",
@@ -589,7 +603,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://modelscope.cn/models/Qwen/Qwen-Image-2.1"
   ],
-  "video": false
+  "video": false,
+  "likes": 92
  },
  {
   "id": "Ddcz31oE9zP",
@@ -601,7 +616,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 25
  },
  {
   "id": "DdbvPAAE3Zi",
@@ -613,7 +629,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 24
  },
  {
   "id": "Ddbk7m1k9bq",
@@ -625,7 +642,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 6
  },
  {
   "id": "Ddafoylk2B4",
@@ -640,7 +658,8 @@ window.THREADS_POSTS = [
    "https://kaochenlong.com/",
    "https://zonble.net/"
   ],
-  "video": false
+  "video": false,
+  "likes": 23
  },
  {
   "id": "DdQ4jy2kz6O",
@@ -652,7 +671,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 7
  },
  {
   "id": "DdQXuwpE8Kp",
@@ -664,7 +684,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 12
  },
  {
   "id": "DdQSLsXk4fe",
@@ -714,7 +735,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 163
  },
  {
   "id": "DdGwI87mwtM",
@@ -736,7 +758,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://mimo.mi.com/"
   ],
-  "video": false
+  "video": false,
+  "likes": 18
  },
  {
   "id": "DdGoP9am7YU",
@@ -748,7 +771,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 29
  },
  {
   "id": "DdGjq8VGzKX",
@@ -760,7 +784,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 32
  },
  {
   "id": "DdGcbrVm1gU",
@@ -772,7 +797,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 6
  },
  {
   "id": "DdGZlDTG2wo",
@@ -804,7 +830,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 16
  },
  {
   "id": "DdFpa-9E0rm",
@@ -816,7 +843,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 31
  },
  {
   "id": "DdD1E-ik_uv",
@@ -838,7 +866,8 @@ window.THREADS_POSTS = [
    "http://mathathonchallenge.com/apply.html",
    "http://mathathonchallenge.com/"
   ],
-  "video": true
+  "video": true,
+  "likes": 83
  },
  {
   "id": "Dc-5LEcE-O-",
@@ -878,7 +907,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/nevertoday/xxd-panel-116"
   ],
-  "video": false
+  "video": false,
+  "likes": 1679
  },
  {
   "id": "Dc5wjZ0k4NO",
@@ -899,7 +929,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://typewords.cc/"
   ],
-  "video": false
+  "video": false,
+  "likes": 16
  },
  {
   "id": "Dc5lSrck3UP",
@@ -920,7 +951,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://x.com/victornunez/status/2095975651094261777"
   ],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "Dc4oHAyE_ks",
@@ -945,7 +977,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "Dc3UHAwE4SA",
@@ -972,7 +1005,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://youtu.be/9vnr69Lg4_I?si=7m9q7rM4BIBUbpxx"
   ],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "Dc2IxxrEwhu",
@@ -999,7 +1033,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://www.cnet.com/tech/services-and-software/openai-gpt-6-astra-release-ai-agi-chatgpt/"
   ],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "Dczp6Amk7w7",
@@ -1018,7 +1053,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 335
  },
  {
   "id": "DczlIRuk-Gi",
@@ -1038,7 +1074,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 11
  },
  {
   "id": "DcmefHPE0Bb",
@@ -1064,7 +1101,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 57
  },
  {
   "id": "DcctWYMFO60",
@@ -1098,7 +1136,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://forms.gle/h424y1w544cTQ2rW6"
   ],
-  "video": false
+  "video": false,
+  "likes": 6
  },
  {
   "id": "DcawHs7G_Ui",
@@ -1184,7 +1223,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 32
  },
  {
   "id": "DcP4Sz4E3rL",
@@ -1209,7 +1249,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "DcP4REnE6Jz",
@@ -1254,7 +1295,8 @@ window.THREADS_POSTS = [
   "links": [
    "http://Z.ai/"
   ],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "DcOXTaJE4__",
@@ -1281,7 +1323,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://lvyovo-wiki.tech/"
   ],
-  "video": false
+  "video": false,
+  "likes": 9
  },
  {
   "id": "DcNIuSik9AA",
@@ -1300,7 +1343,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "DcNHaOHk2aP",
@@ -1319,7 +1363,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 13
  },
  {
   "id": "DcCjMnemanu",
@@ -1345,7 +1390,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "DcAa70NE0mS",
@@ -1372,7 +1418,8 @@ window.THREADS_POSTS = [
   "links": [
    "http://github.com/guillaumemeyer/watermarks-remover"
   ],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "Db_8Kt8E1uU",
@@ -1422,7 +1469,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 14
  },
  {
   "id": "Db_7rADk_LX",
@@ -1472,7 +1520,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 31
  },
  {
   "id": "DbnzGmdE91J",
@@ -1506,7 +1555,8 @@ window.THREADS_POSTS = [
   "links": [
    "http://unity.com/blog/meet-the-unity-cli"
   ],
-  "video": false
+  "video": false,
+  "likes": 5
  },
  {
   "id": "DbIyJ6nE7tf",
@@ -1533,7 +1583,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://tolaria.md/"
   ],
-  "video": false
+  "video": false,
+  "likes": 132
  },
  {
   "id": "DbFgDgoE3V3",
@@ -1566,7 +1617,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/Evolink-AI/awesome-kimi-k3-usecases"
   ],
-  "video": true
+  "video": true,
+  "likes": 3
  },
  {
   "id": "DbBEknTk7gM",
@@ -1594,7 +1646,8 @@ window.THREADS_POSTS = [
    "http://github.com/Yu-0312/ppt-creater-skills",
    "https://github.com/Yu-0312/ppt-creater-skills"
   ],
-  "video": false
+  "video": false,
+  "likes": 64
  },
  {
   "id": "DbAQJTJE8up",
@@ -1621,7 +1674,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://www.accupass.com/event/2607070627081511571718"
   ],
-  "video": false
+  "video": false,
+  "likes": 6
  },
  {
   "id": "DZ-MAbuE4Qr",
@@ -1635,7 +1689,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/Yu-0312/apcs-judge"
   ],
-  "video": false
+  "video": false,
+  "likes": 102
  },
  {
   "id": "DZztwi6Gxfn",
@@ -1657,7 +1712,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/Yu-0312/ppt-creater"
   ],
-  "video": false
+  "video": false,
+  "likes": 11
  },
  {
   "id": "DZpu6RvE1NU",
@@ -1713,7 +1769,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 7
  },
  {
   "id": "DZoFMp-k6qp",
@@ -1726,7 +1783,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 50
  },
  {
   "id": "DZjpDB_G9he",
@@ -1739,7 +1797,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 8
  },
  {
   "id": "DZSqkvkk8gb",
@@ -1762,6 +1821,7 @@ window.THREADS_POSTS = [
    "http://yu-0312.github.io/apcs-judge",
    "https://github.com/Yu-0312/apcs-judge"
   ],
-  "video": false
+  "video": false,
+  "likes": 394
  }
 ];

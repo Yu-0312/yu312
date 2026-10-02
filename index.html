@@ -580,24 +580,86 @@
     .play-btn:hover { transform: scale(1.05); }
     .play-btn svg { width: 18px; height: 18px; }
 
-    .noise-tabs {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
+    .sound-anchor { position: relative; }
+    .sound-card {
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .noise-tabs button {
-      border: 1px solid var(--line);
-      background: transparent;
-      border-radius: 999px;
-      padding: 6px 12px;
+    .sound-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 28px 52px -26px rgba(70, 95, 75, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    }
+    .sound-card:focus-visible {
+      outline: 2px solid var(--brand);
+      outline-offset: 3px;
+    }
+    .sound-caret {
+      width: 14px;
+      height: 14px;
+      vertical-align: -2px;
+      margin-left: 4px;
+      color: var(--ink-3);
+      transition: transform 0.25s ease;
+    }
+    .sound-card.is-open .sound-caret { transform: rotate(180deg); }
+    .sound-picker {
+      position: absolute;
+      bottom: calc(100% + 10px);
+      left: 0;
+      right: 0;
+      z-index: 40;
+      padding: 14px 14px 10px;
+      border-radius: 24px;
+      background: var(--card-strong);
+      cursor: default;
+      animation: sp-in 0.22s ease;
+    }
+    @keyframes sp-in {
+      from { opacity: 0; transform: translateY(-6px); }
+    }
+    .sp-title {
+      margin: 2px 2px 8px;
       font-size: 12px;
-      color: var(--ink-2);
-      font-weight: 700;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      color: var(--ink-3);
     }
-    .noise-tabs button.is-active {
+    .sp-title + .sp-title, .sp-grid + .sp-title { margin-top: 12px; }
+    .sp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .sp-chip {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.5);
+      border-radius: 14px;
+      padding: 9px 4px 7px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+    }
+    .sp-chip:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.85);
+    }
+    .sp-chip.is-active {
       background: var(--brand-soft);
-      color: var(--brand-deep);
       border-color: transparent;
+      color: var(--brand-deep);
+    }
+    .sp-ico { font-size: 17px; line-height: 1; }
+    .sp-note {
+      margin: 10px 2px 0;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--ink-3);
     }
 
     .pomo-row {
@@ -856,25 +918,24 @@
         </div>
 
         <div class="right-tools" id="noise">
-          <div class="card music-card">
-            <div class="music-note" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 18V6l11-2v12"/><circle cx="7" cy="18" r="2.5"/><circle cx="18" cy="16" r="2.5"/></svg>
+          <div class="sound-anchor">
+            <div class="card music-card sound-card" id="soundCard" role="button" tabindex="0" aria-haspopup="true" aria-expanded="false" aria-controls="soundPicker" title="點一下切換白噪音 / 音樂">
+              <div class="music-note" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M9 18V6l11-2v12"/><circle cx="7" cy="18" r="2.5"/><circle cx="18" cy="16" r="2.5"/></svg>
+              </div>
+              <div class="music-body">
+                <div class="music-title">Focus Noise · <span id="noiseLabel">雨聲</span><svg class="sound-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></div>
+                <div class="music-bar"><i></i></div>
+              </div>
+              <button class="play-btn" id="noiseBtn" type="button" aria-label="播放">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+              </button>
             </div>
-            <div class="music-body">
-              <div class="music-title">Focus Noise · <span id="noiseLabel">雨聲</span></div>
-              <div class="music-bar"><i></i></div>
-            </div>
-            <button class="play-btn" id="noiseBtn" type="button" aria-label="播放">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            </button>
+
+            <div class="card sound-picker" id="soundPicker" hidden></div>
           </div>
 
           <div class="card">
-            <div class="noise-tabs" style="margin-bottom: 12px;">
-              <button type="button" data-noise="rain" class="is-active">雨聲</button>
-              <button type="button" data-noise="brown">棕噪音</button>
-              <button type="button" data-noise="white">白噪音</button>
-            </div>
             <div class="pomo-row">
               <div>
                 <div class="pomo-time" id="pomoTime" title="雙擊重設">25:00</div>
@@ -998,72 +1059,392 @@
         }
       }
 
+      /* ===== Focus Noise / 音樂：全部由 Web Audio 即時合成，不含任何音檔或串流（無版權疑慮） ===== */
       const noiseBox = $("#noise");
+      const soundCard = $("#soundCard");
+      const soundPicker = $("#soundPicker");
       const noiseBtn = $("#noiseBtn");
       const noiseLabel = $("#noiseLabel");
-      const TYPES = { rain: "雨聲", brown: "棕噪音", white: "白噪音" };
-      let type = "rain";
-      let ctx, src, gain, playing = false;
 
-      function buffer(kind) {
+      const SOUNDS = [
+        { id: "rain",  name: "雨聲",       icon: "🌧️", group: "noise" },
+        { id: "ocean", name: "海浪",       icon: "🌊", group: "noise" },
+        { id: "fire",  name: "營火",       icon: "🔥", group: "noise" },
+        { id: "wind",  name: "微風",       icon: "🍃", group: "noise" },
+        { id: "brown", name: "棕噪音",     icon: "🤎", group: "noise" },
+        { id: "white", name: "白噪音",     icon: "🤍", group: "noise" },
+        { id: "lofi",  name: "晨光 Lo-Fi", icon: "🎹", group: "music" },
+        { id: "star",  name: "星空漫遊",   icon: "✨", group: "music" },
+        { id: "zen",   name: "禪意鐘聲",   icon: "🎐", group: "music" },
+      ];
+      const SOUND_MAP = Object.fromEntries(SOUNDS.map((s) => [s.id, s]));
+      const GROUP_TITLES = { noise: "白噪音", music: "音樂 · 即時合成" };
+      const STORE_KEY = "focusSound";
+
+      let ctx = null, master = null, handle = null, swapTimer = null;
+      let type = "rain", playing = false;
+      const bufCache = {};
+
+      function ensureCtx() {
+        if (!ctx) {
+          ctx = new (window.AudioContext || window.webkitAudioContext)();
+          master = ctx.createGain();
+          master.gain.value = 0;
+          master.connect(ctx.destination);
+        }
+        if (ctx.state === "suspended") ctx.resume();
+      }
+
+      function noiseBuffer(kind) {
+        if (bufCache[kind]) return bufCache[kind];
         const len = ctx.sampleRate * 4;
         const b = ctx.createBuffer(1, len, ctx.sampleRate);
         const d = b.getChannelData(0);
-        let lastVal = 0;
-        for (let i = 0; i < len; i++) {
-          const w = Math.random() * 2 - 1;
-          if (kind === "white") d[i] = w * 0.35;
-          else {
-            lastVal = (lastVal + 0.02 * w) / 1.02;
-            d[i] = lastVal * (kind === "brown" ? 3.2 : 2.2);
+        if (kind === "crackle") {
+          let i = 0;
+          while (i < len - 900) {
+            if (Math.random() < 0.0011) {
+              const amp = 0.25 + Math.random() * 0.5;
+              const dur = 150 + ((Math.random() * 450) | 0);
+              for (let j = 0; j < dur && i + j < len; j++)
+                d[i + j] += (Math.random() * 2 - 1) * amp * (1 - j / dur);
+              i += dur;
+            } else i++;
           }
-          if (kind === "rain" && Math.random() < 0.0009) d[i] += (Math.random() - 0.5) * 0.9;
+        } else {
+          let lastVal = 0;
+          for (let i = 0; i < len; i++) {
+            const w = Math.random() * 2 - 1;
+            if (kind === "white") d[i] = w * 0.35;
+            else {
+              lastVal = (lastVal + 0.02 * w) / 1.02;
+              d[i] = lastVal * (kind === "brown" ? 3.2 : 2.2);
+            }
+            if (kind === "rain" && Math.random() < 0.0009) d[i] += (Math.random() - 0.5) * 0.9;
+          }
         }
-        return b;
+        return (bufCache[kind] = b);
       }
-      function startNoise() {
-        ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
-        src = ctx.createBufferSource();
-        src.buffer = buffer(type);
+
+      /* 白噪音共用：回圈 buffer → 濾波器 → 音量；extra 可再掛 LFO 做起伏 */
+      function noiseChain(bufKind, filterType, freq, vol, extra) {
+        const src = ctx.createBufferSource();
+        src.buffer = noiseBuffer(bufKind);
         src.loop = true;
         const filter = ctx.createBiquadFilter();
-        filter.type = type === "rain" ? "highpass" : "lowpass";
-        filter.frequency.value = type === "rain" ? 400 : type === "brown" ? 900 : 9000;
-        gain = ctx.createGain();
-        gain.gain.value = 0;
-        gain.gain.linearRampToValueAtTime(0.55, ctx.currentTime + 0.7);
-        src.connect(filter).connect(gain).connect(ctx.destination);
+        filter.type = filterType;
+        filter.frequency.value = freq;
+        const g = ctx.createGain();
+        g.gain.value = vol;
+        src.connect(filter).connect(g).connect(master);
+        const stops = [() => src.stop()];
+        if (extra) extra(filter, g, stops);
         src.start();
+        return { stop: () => stops.forEach((f) => f()) };
       }
-      function stopNoise() {
-        if (!src) return;
-        const s = src;
-        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.25);
-        setTimeout(() => s.stop(), 300);
-        src = null;
+
+      function lfoOn(param, hz, depth, stops) {
+        const lfo = ctx.createOscillator();
+        lfo.frequency.value = hz;
+        const lg = ctx.createGain();
+        lg.gain.value = depth;
+        lfo.connect(lg).connect(param);
+        lfo.start();
+        stops.push(() => lfo.stop());
       }
-      function paintNoise() {
+
+      const BUILD = {
+        rain()  { return noiseChain("rain", "highpass", 400, 1); },
+        brown() { return noiseChain("brown", "lowpass", 900, 1); },
+        white() { return noiseChain("white", "lowpass", 9000, 1); },
+        ocean() {
+          return noiseChain("brown", "lowpass", 480, 0.72, (f, g, stops) =>
+            lfoOn(g.gain, 0.07, 0.3, stops));
+        },
+        wind() {
+          return noiseChain("white", "bandpass", 520, 0.9, (f, g, stops) => {
+            f.Q.value = 0.7;
+            lfoOn(f.frequency, 0.05, 320, stops);
+          });
+        },
+        fire() {
+          const a = noiseChain("crackle", "lowpass", 4200, 0.85);
+          const b = noiseChain("brown", "lowpass", 260, 0.4);
+          return { stop: () => { a.stop(); b.stop(); } };
+        },
+        lofi() {
+          const g = ctx.createGain();
+          g.gain.value = 0.9;
+          const lp = ctx.createBiquadFilter();
+          lp.type = "lowpass";
+          lp.frequency.value = 1600;
+          lp.Q.value = 0.4;
+          g.connect(lp).connect(master);
+          const stops = [];
+          const hiss = noiseChain("white", "lowpass", 6500, 0.012);
+          stops.push(() => hiss.stop());
+          const CHORDS = [
+            [261.63, 329.63, 392.0, 493.88],
+            [220.0, 261.63, 329.63, 392.0],
+            [174.61, 220.0, 261.63, 329.63],
+            [196.0, 246.94, 293.66, 349.23],
+          ];
+          const PENTA = [523.25, 587.33, 659.25, 783.99, 880.0];
+          const BAR = 4.8;
+          let bar = 0;
+          function chord() {
+            const t = ctx.currentTime + 0.05;
+            CHORDS[bar % CHORDS.length].forEach((f) => {
+              [["triangle", 1], ["sine", 1.004]].forEach(([wave, det]) => {
+                const o = ctx.createOscillator();
+                o.type = wave;
+                o.frequency.value = f * det;
+                const og = ctx.createGain();
+                og.gain.setValueAtTime(0, t);
+                og.gain.linearRampToValueAtTime(0.07, t + 1.4);
+                og.gain.setValueAtTime(0.07, t + BAR - 1.2);
+                og.gain.linearRampToValueAtTime(0.0001, t + BAR + 0.2);
+                o.connect(og).connect(g);
+                o.start(t);
+                o.stop(t + BAR + 0.3);
+              });
+            });
+            if (Math.random() < 0.8) {
+              const n = Math.random() < 0.35 ? 2 : 1;
+              for (let k = 0; k < n; k++) {
+                const pt = t + 0.8 + Math.random() * (BAR - 1.6);
+                const o = ctx.createOscillator();
+                o.type = "sine";
+                o.frequency.value = PENTA[(Math.random() * PENTA.length) | 0];
+                const og = ctx.createGain();
+                og.gain.setValueAtTime(0, pt);
+                og.gain.linearRampToValueAtTime(0.09, pt + 0.015);
+                og.gain.exponentialRampToValueAtTime(0.0001, pt + 1.8);
+                o.connect(og).connect(g);
+                o.start(pt);
+                o.stop(pt + 2);
+              }
+            }
+            bar++;
+          }
+          chord();
+          const timer = setInterval(chord, BAR * 1000);
+          return { stop: () => { clearInterval(timer); stops.forEach((f) => f()); } };
+        },
+        star() {
+          const g = ctx.createGain();
+          g.gain.value = 1;
+          const lp = ctx.createBiquadFilter();
+          lp.type = "lowpass";
+          lp.frequency.value = 700;
+          lp.Q.value = 0.6;
+          g.connect(lp).connect(master);
+          const stops = [];
+          lfoOn(lp.frequency, 0.03, 380, stops);
+          [[110, 0.1], [164.81, 0.07], [220, 0.05]].forEach(([f, v]) => {
+            [-2.5, 2.5].forEach((cents) => {
+              const o = ctx.createOscillator();
+              o.type = "sine";
+              o.frequency.value = f;
+              o.detune.value = cents;
+              const og = ctx.createGain();
+              og.gain.setValueAtTime(0, ctx.currentTime);
+              og.gain.linearRampToValueAtTime(v, ctx.currentTime + 3);
+              o.connect(og).connect(g);
+              o.start();
+              stops.push(() => o.stop());
+            });
+          });
+          const NOTES = [1046.5, 1318.5, 1568, 1975.5];
+          const timer = setInterval(() => {
+            if (Math.random() > 0.55) return;
+            const t = ctx.currentTime + 0.02;
+            const o = ctx.createOscillator();
+            o.type = "sine";
+            o.frequency.value = NOTES[(Math.random() * NOTES.length) | 0];
+            const og = ctx.createGain();
+            og.gain.setValueAtTime(0, t);
+            og.gain.linearRampToValueAtTime(0.045, t + 0.02);
+            og.gain.exponentialRampToValueAtTime(0.0001, t + 2.8);
+            o.connect(og).connect(g);
+            o.start(t);
+            o.stop(t + 3);
+          }, 2600);
+          return { stop: () => { clearInterval(timer); stops.forEach((f) => f()); } };
+        },
+        zen() {
+          const g = ctx.createGain();
+          g.gain.value = 1;
+          g.connect(master);
+          const stops = [];
+          [[98, 0.06], [146.83, 0.045]].forEach(([f, v]) => {
+            const o = ctx.createOscillator();
+            o.type = "sine";
+            o.frequency.value = f;
+            const og = ctx.createGain();
+            og.gain.setValueAtTime(0, ctx.currentTime);
+            og.gain.linearRampToValueAtTime(v, ctx.currentTime + 4);
+            o.connect(og).connect(g);
+            o.start();
+            stops.push(() => o.stop());
+          });
+          const BELLS = [392, 523.25, 587.33, 659.25];
+          let timer = null;
+          function strike() {
+            const t = ctx.currentTime + 0.02;
+            const f = BELLS[(Math.random() * BELLS.length) | 0];
+            [[1, 0.14], [2.756, 0.05], [5.404, 0.02]].forEach(([m, v]) => {
+              const o = ctx.createOscillator();
+              o.type = "sine";
+              o.frequency.value = f * m;
+              const og = ctx.createGain();
+              og.gain.setValueAtTime(0, t);
+              og.gain.linearRampToValueAtTime(v, t + 0.01);
+              og.gain.exponentialRampToValueAtTime(0.0001, t + 4.5);
+              o.connect(og).connect(g);
+              o.start(t);
+              o.stop(t + 4.8);
+            });
+            timer = setTimeout(strike, 4500 + Math.random() * 5000);
+          }
+          timer = setTimeout(strike, 800);
+          return { stop: () => { clearTimeout(timer); stops.forEach((f) => f()); } };
+        },
+      };
+
+      function targetLevel() {
+        return SOUND_MAP[type].group === "music" ? 0.5 : 0.55;
+      }
+      function rampMaster(to, seconds) {
+        const now = ctx.currentTime;
+        master.gain.cancelScheduledValues(now);
+        master.gain.setValueAtTime(master.gain.value, now);
+        master.gain.linearRampToValueAtTime(to, now + seconds);
+      }
+      function play() {
+        ensureCtx();
+        if (swapTimer) { clearTimeout(swapTimer); swapTimer = null; }
+        if (handle) return;
+        handle = BUILD[type]();
+        rampMaster(targetLevel(), 0.7);
+        playing = true;
+        paint();
+      }
+      function stop() {
+        if (swapTimer) { clearTimeout(swapTimer); swapTimer = null; }
+        if (handle) {
+          const h = handle;
+          handle = null;
+          rampMaster(0, 0.3);
+          setTimeout(() => h.stop(), 350);
+        }
+        playing = false;
+        paint();
+      }
+      function switchTo(id) {
+        if (id === type) return;
+        type = id;
+        try { localStorage.setItem(STORE_KEY, id); } catch {}
+        if (playing) {
+          if (swapTimer) clearTimeout(swapTimer);
+          if (handle) {
+            const h = handle;
+            handle = null;
+            rampMaster(0, 0.22);
+            setTimeout(() => h.stop(), 260);
+          }
+          ensureCtx();
+          swapTimer = setTimeout(() => {
+            swapTimer = null;
+            handle = BUILD[type]();
+            rampMaster(targetLevel(), 0.5);
+          }, 260);
+        }
+        paint();
+        markActive();
+      }
+      function paint() {
         noiseBox.classList.toggle("is-playing", playing);
         noiseBtn.innerHTML = playing
           ? '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>'
           : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
-        noiseLabel.textContent = TYPES[type];
+        noiseLabel.textContent = SOUND_MAP[type].name;
         noiseBtn.setAttribute("aria-label", playing ? "暫停" : "播放");
       }
-      noiseBtn.addEventListener("click", () => {
-        playing = !playing;
-        if (playing) startNoise(); else stopNoise();
-        paintNoise();
-      });
-      noiseBox.querySelectorAll("[data-noise]").forEach((b) => {
-        b.addEventListener("click", () => {
-          type = b.dataset.noise;
-          noiseBox.querySelectorAll("[data-noise]").forEach((x) => x.classList.toggle("is-active", x === b));
-          if (playing) { stopNoise(); startNoise(); }
-          paintNoise();
+
+      /* ===== 選擇面板：點音樂卡開啟，選白噪音或音樂 ===== */
+      function markActive() {
+        soundPicker.querySelectorAll("[data-sound]").forEach((b) =>
+          b.classList.toggle("is-active", b.dataset.sound === type)
+        );
+      }
+      function buildPicker() {
+        ["noise", "music"].forEach((grp) => {
+          const title = document.createElement("div");
+          title.className = "sp-title";
+          title.textContent = GROUP_TITLES[grp];
+          const grid = document.createElement("div");
+          grid.className = "sp-grid";
+          SOUNDS.filter((s) => s.group === grp).forEach((s) => {
+            const b = document.createElement("button");
+            b.type = "button";
+            b.className = "sp-chip";
+            b.dataset.sound = s.id;
+            b.innerHTML = `<span class="sp-ico">${s.icon}</span>${s.name}`;
+            b.addEventListener("click", () => {
+              if (playing) switchTo(s.id);
+              else {
+                type = s.id;
+                try { localStorage.setItem(STORE_KEY, s.id); } catch {}
+                play();
+                markActive();
+              }
+              setOpen(false);
+            });
+            grid.appendChild(b);
+          });
+          soundPicker.append(title, grid);
         });
+        const note = document.createElement("p");
+        note.className = "sp-note";
+        note.textContent = "🎧 所有聲音皆由瀏覽器即時合成，未使用任何音檔或串流，無版權疑慮。";
+        soundPicker.appendChild(note);
+        markActive();
+      }
+      function setOpen(open) {
+        soundPicker.hidden = !open;
+        soundCard.classList.toggle("is-open", open);
+        soundCard.setAttribute("aria-expanded", String(open));
+      }
+      const isOpen = () => !soundPicker.hidden;
+
+      noiseBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (playing) stop(); else play();
       });
-      paintNoise();
+      soundCard.addEventListener("click", (e) => {
+        if (e.target.closest("#noiseBtn")) return;
+        setOpen(!isOpen());
+      });
+      soundCard.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setOpen(!isOpen());
+        }
+      });
+      document.addEventListener("click", (e) => {
+        if (isOpen() && !e.target.closest("#soundCard, #soundPicker")) setOpen(false);
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && isOpen()) setOpen(false);
+      });
+
+      try {
+        const saved = localStorage.getItem(STORE_KEY);
+        if (saved && SOUND_MAP[saved]) type = saved;
+      } catch {}
+      buildPicker();
+      paint();
 
       const pomoTime = $("#pomoTime");
       const pomoBtn = $("#pomoBtn");
