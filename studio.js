@@ -33,7 +33,7 @@
       { id: "email", label: "Email", url: "mailto:wang.yuchi.312@gmail.com" },
     ],
     layoutOrder: [],
-    likeBase: 1286,
+    likeBase: 3890,
   };
 
   const PALETTES = {
@@ -120,27 +120,36 @@
   const _early = loadSettings();
   applyPalette(_early.palette, _early.accent);
 
-  /* ---------- 收藏（♥）：Threads 貼文按讚數總和 ---------- */
-  function threadsLikesTotal() {
-    return (window.THREADS_POSTS || []).reduce((s, p) => s + (Number(p && p.likes) || 0), 0);
-  }
+  /* ---------- 網站按讚（♥）：獨立於 Threads，儲存在瀏覽器 ---------- */
   function setupLikeDaily() {
     const btn = $("#likeBtn");
     if (!btn) return;
-    // 數字 = data.js 每則貼文的 Threads 讚數加總（sync_threads.mjs 同步時更新），抓不到才退回 likeBase
-    const total = threadsLikesTotal() || Number(loadSettings().likeBase) || 0;
-    const state = store.json("yu-like", { on: false });
+    const base = Number(loadSettings().likeBase) || 3890;
+    const state = store.json("yu-site-like", { on: false, total: base });
+    if (!Number.isFinite(Number(state.total))) state.total = base;
     const paint = () => {
       btn.classList.toggle("is-on", state.on);
       btn.setAttribute("aria-pressed", String(state.on));
       const t = $("#likeText");
-      if (t) t.textContent = state.on ? `已收藏 · ${total.toLocaleString()}` : `收藏 · ${total.toLocaleString()}`;
+      if (t) t.textContent = state.on ? `已按讚 · ${Number(state.total).toLocaleString()}` : `讚 · ${Number(state.total).toLocaleString()}`;
     };
     btn.addEventListener("click", () => {
       state.on = !state.on;
-      store.setJson("yu-like", state);
+      state.total = Math.max(0, Number(state.total) + (state.on ? 1 : -1));
+      store.setJson("yu-site-like", state);
       btn.animate([{ transform: "scale(1)" }, { transform: "scale(1.15)" }, { transform: "scale(1)" }], { duration: 280 });
       paint();
+    });
+    window.addEventListener("storage", (event) => {
+      if (event.key !== "yu-site-like" || !event.newValue) return;
+      try {
+        const next = JSON.parse(event.newValue);
+        if (typeof next.on === "boolean" && Number.isFinite(Number(next.total))) {
+          state.on = next.on;
+          state.total = Number(next.total);
+          paint();
+        }
+      } catch {}
     });
     paint();
   }

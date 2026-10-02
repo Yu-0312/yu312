@@ -680,6 +680,58 @@
       color: var(--ink-3);
       font-weight: 600;
     }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+    .pomo-settings {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+    .pomo-adjust {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: var(--card-strong);
+      color: var(--ink-2);
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 700;
+    }
+    .pomo-adjust:hover { color: var(--brand-deep); }
+    .pomo-adjust:disabled, .pomo-minutes:disabled { cursor: not-allowed; opacity: 0.55; }
+    .pomo-minutes {
+      width: 45px;
+      min-height: 28px;
+      padding: 2px 4px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--card-strong);
+      color: var(--ink);
+      font: 700 13px var(--mono);
+      text-align: center;
+    }
+    .pomo-unit { font-size: 12px; color: var(--ink-3); font-weight: 600; }
+    .pomo-reset {
+      margin-left: 2px;
+      padding: 3px 7px;
+      border: 0;
+      background: transparent;
+      color: var(--ink-3);
+      font-size: 12px;
+      font-weight: 600;
+    }
+    .pomo-reset:hover { color: var(--brand-deep); }
     .btn-pill {
       min-height: 40px;
       padding: 0 18px;
@@ -939,8 +991,16 @@
           <div class="card">
             <div class="pomo-row">
               <div>
-                <div class="pomo-time" id="pomoTime" title="雙擊重設">25:00</div>
-                <div class="pomo-label">番茄鐘 · 雙擊重設</div>
+                <div class="pomo-time" id="pomoTime" aria-live="polite">25:00</div>
+                <div class="pomo-label">番茄鐘</div>
+                <div class="pomo-settings" aria-label="設定番茄鐘時間">
+                  <button class="pomo-adjust" id="pomoMinus" type="button" aria-label="減少 5 分鐘">−</button>
+                  <label class="sr-only" for="pomoMinutes">番茄鐘分鐘數</label>
+                  <input class="pomo-minutes" id="pomoMinutes" type="number" min="1" max="120" value="25" inputmode="numeric">
+                  <span class="pomo-unit">分鐘</span>
+                  <button class="pomo-adjust" id="pomoPlus" type="button" aria-label="增加 5 分鐘">+</button>
+                  <button class="pomo-reset" id="pomoReset" type="button">重設</button>
+                </div>
               </div>
               <button class="btn-pill" id="pomoBtn" type="button">開始</button>
             </div>
@@ -1449,11 +1509,28 @@
 
       const pomoTime = $("#pomoTime");
       const pomoBtn = $("#pomoBtn");
-      const FULL = 25 * 60;
-      let left = FULL, timer = null;
+      const pomoMinutes = $("#pomoMinutes");
+      const pomoMinus = $("#pomoMinus");
+      const pomoPlus = $("#pomoPlus");
+      const pomoReset = $("#pomoReset");
+      const POMO_MIN = 1;
+      const POMO_MAX = 120;
+      let full = 25 * 60;
+      let left = full, timer = null;
+      function setDuration(minutes) {
+        const safeMinutes = Math.max(POMO_MIN, Math.min(POMO_MAX, Number(minutes) || 25));
+        full = safeMinutes * 60;
+        left = full;
+        pomoMinutes.value = safeMinutes;
+        paintPomo();
+      }
       function paintPomo() {
         pomoTime.textContent = `${pad(Math.floor(left / 60))}:${pad(left % 60)}`;
-        pomoBtn.textContent = timer ? "暫停" : left === FULL ? "開始" : "繼續";
+        pomoBtn.textContent = timer ? "暫停" : left === full ? "開始" : "繼續";
+        const running = Boolean(timer);
+        pomoMinutes.disabled = running;
+        pomoMinus.disabled = running;
+        pomoPlus.disabled = running;
       }
       pomoBtn.addEventListener("click", () => {
         if (timer) {
@@ -1465,7 +1542,7 @@
             if (left <= 0) {
               clearInterval(timer);
               timer = null;
-              left = FULL;
+              left = full;
               document.title = "⏰ 休息一下！";
               setTimeout(() => { document.title = "Yu · 王宇錡"; }, 3000);
             }
@@ -1474,11 +1551,15 @@
         }
         paintPomo();
       });
-      pomoTime.addEventListener("dblclick", () => {
+      pomoMinutes.addEventListener("change", () => {
+        if (!timer) setDuration(pomoMinutes.value);
+      });
+      pomoMinus.addEventListener("click", () => setDuration(Number(pomoMinutes.value) - 5));
+      pomoPlus.addEventListener("click", () => setDuration(Number(pomoMinutes.value) + 5));
+      pomoReset.addEventListener("click", () => {
         clearInterval(timer);
         timer = null;
-        left = FULL;
-        paintPomo();
+        setDuration(pomoMinutes.value);
       });
       paintPomo();
       // like / daily limit handled by studio.js
