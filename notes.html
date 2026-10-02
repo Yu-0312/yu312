@@ -3,29 +3,28 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>我的專案 · Yu</title>
-  <meta name="description" content="Yu 的 GitHub 開源專案">
-  <meta property="og:title" content="我的專案 · Yu">
-  <meta property="og:description" content="Yu 的 GitHub 開源專案">
+  <title>筆記 · Yu</title>
+  <meta name="description" content="Yu 寫作台發布的 Markdown 筆記">
+  <meta property="og:title" content="筆記 · Yu">
+  <meta property="og:description" content="Yu 寫作台發布的 Markdown 筆記">
   <meta property="og:image" content="./assets/profile.jpg">
   <meta name="theme-color" content="#eeeeee">
   <link rel="icon" href="./assets/profile.jpg" type="image/jpeg">
   <link rel="stylesheet" href="./assets/fonts/averia.css">
   <link rel="stylesheet" href="./styles.css">
 </head>
-<body data-page="projects">
+<body data-page="notes">
   <div class="page-shell">
     <nav class="top-nav" id="topNav" aria-label="站內導覽"></nav>
     <header class="page-head">
       <div>
-        <h1>我的專案</h1>
-        <p>在 GitHub 上做的東西：AI 圖像 skill、學習工具、App 和小遊戲，依星數排序。</p>
+        <h1>筆記</h1>
+        <p>從寫作台發布的 Markdown 文章。<span id="notesCount"></span></p>
       </div>
-      <a class="btn btn--ghost" href="https://github.com/Yu-0312?tab=repositories" target="_blank" rel="noopener">所有 repo →</a>
+      <input class="search" id="notesSearch" type="search" placeholder="搜尋筆記…" aria-label="搜尋筆記">
     </header>
-    <div class="proj-feature" id="projFeature"></div>
-    <div class="grid-cards" id="projGrid" aria-live="polite"></div>
-    <p class="foot-note">© 2026 Yu · 星數為 2026/9 的 GitHub 數據</p>
+    <div id="notesView"></div>
+    <p class="foot-note">© 2026 Yu · 想寫新的請到寫作台</p>
   </div>
   <script src="./data.js" defer></script>
   <script src="./notes.js" defer></script>

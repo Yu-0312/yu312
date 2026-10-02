@@ -1,6 +1,6 @@
 /* ==========================================================
    Yu 個人站 — 互動腳本
-   資料都在 data.js：PROFILE / THREADS_POSTS / SHARE_ITEMS / PROJECT_ITEMS
+   資料在 data.js 與 notes.js：PROFILE / THREADS_POSTS / SHARE_ITEMS / PROJECT_ITEMS / NOTES
    ========================================================== */
 (() => {
   "use strict";
@@ -9,6 +9,7 @@
   const POSTS = (window.THREADS_POSTS || []).slice().sort((a, b) => b.time.localeCompare(a.time));
   const SHARE = window.SHARE_ITEMS || [];
   const PROJECTS = window.PROJECT_ITEMS || [];
+  const NOTES = (window.NOTES || []).slice().sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
   const page = document.body.dataset.page || "home";
 
   /* ---------- 小工具 ---------- */
@@ -60,6 +61,7 @@
     { href: "./projects.html", key: "projects", label: "我的專案", icon: "grid", count: PROJECTS.length },
     { href: "./share.html", key: "share", label: "教學資源", icon: "star", count: SHARE.length },
     { href: "./friends.html", key: "friends", label: "友鏈", icon: "link", count: (window.FRIEND_LINKS || []).length },
+    { href: "./notes.html", key: "notes", label: "筆記", icon: "star", count: NOTES.length },
     { href: "./write.html", key: "write", label: "寫作台", icon: "play" },
     { href: "./about.html", key: "about", label: "關於我", icon: "smile" },
   ];

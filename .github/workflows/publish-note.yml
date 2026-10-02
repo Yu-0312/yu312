@@ -1,0 +1,52 @@
+# Decrypts writing-desk payloads with secrets.WRITE_PASSWORD and publishes to notes.js.
+# The password is a repository secret — it is never committed.
+name: Publish note
+
+on:
+  push:
+    paths:
+      - "notes/inbox/**"
+  workflow_dispatch:
+    inputs:
+      blob:
+        description: "AES-GCM blob from the writing desk (not the password)"
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-note
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Decrypt and write notes.js
+        env:
+          WRITE_PASSWORD: ${{ secrets.WRITE_PASSWORD }}
+          NOTE_BLOB: ${{ github.event.inputs.blob }}
+        run: node scripts/publish_note.mjs
+
+      - name: Commit and push if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add notes.js notes/inbox
+          if git diff --staged --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git commit -m "Publish writing-desk note"
+          git push

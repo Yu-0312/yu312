@@ -485,7 +485,136 @@
     el._t = setTimeout(() => el.classList.remove("is-show"), 2200);
   }
 
+  /* ---------- Markdown 預覽（寫作台 / 筆記頁共用） ---------- */
+  function mdToHtml(md) {
+    const lines = esc(md).split(/\n/);
+    let html = "", inCode = false, inList = false;
+    for (const line of lines) {
+      if (line.startsWith("```")) {
+        if (inCode) { html += "</code></pre>"; inCode = false; }
+        else { html += "<pre><code>"; inCode = true; }
+        continue;
+      }
+      if (inCode) { html += line + "\n"; continue; }
+      if (/^#{1,3}\s/.test(line)) {
+        const level = line.match(/^#+/)[0].length;
+        html += `<h${level}>${line.replace(/^#+\s/, "")}</h${level}>`;
+        continue;
+      }
+      if (/^[-*]\s/.test(line)) {
+        if (!inList) { html += "<ul>"; inList = true; }
+        html += `<li>${line.replace(/^[-*]\s/, "")}</li>`;
+        continue;
+      }
+      if (inList) { html += "</ul>"; inList = false; }
+      if (/^&gt;\s?/.test(line)) { html += `<blockquote>${line.replace(/^&gt;\s?/, "")}</blockquote>`; continue; }
+      if (!line.trim()) { html += ""; continue; }
+      html += `<p>${line.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\*(.+?)\*/g, "<em>$1</em>").replace(/`(.+?)`/g, "<code>$1</code>")}</p>`;
+    }
+    if (inList) html += "</ul>";
+    if (inCode) html += "</code></pre>";
+    return html;
+  }
+  window.YU = window.YU || {};
+  window.YU.mdToHtml = mdToHtml;
+
   /* ---------- 寫作台 ---------- */
+  const WRITE_SALT = new TextEncoder().encode("yu312-write-v1-salt");
+  const WRITE_ITERS = 210000;
+  const WRITE_REPO = { owner: "Yu-0312", name: "yu312", branch: "main" };
+
+  function turndowner() {
+    if (!window.TurndownService) return null;
+    const td = new window.TurndownService({
+      headingStyle: "atx",
+      codeBlockStyle: "fenced",
+      bulletListMarker: "-",
+    });
+    if (window.turndownPluginGfm?.gfm) {
+      td.use(window.turndownPluginGfm.gfm);
+    } else {
+      td.addRule("strikethrough", {
+        filter: ["del", "s", "strike"],
+        replacement: (c) => `~~${c}~~`,
+      });
+    }
+    return td;
+  }
+
+  function htmlToMarkdown(html) {
+    const td = turndowner();
+    if (!td) return html;
+    const cleaned = String(html)
+      .replace(/<style[\s\S]*?<\/style>/gi, "")
+      .replace(/<script[\s\S]*?<\/script>/gi, "")
+      .replace(/<(meta|link)[^>]*>/gi, "");
+    return td.turndown(cleaned).trim();
+  }
+
+  function looksLikeHtml(s) {
+    const t = String(s || "").trim();
+    if (!t) return false;
+    if (/^<!DOCTYPE html/i.test(t) || /^<html[\s>]/i.test(t)) return true;
+    return /^<([a-z][\w:-]*)[\s>]/i.test(t) && /<\/[a-z][\w:-]*>/i.test(t) && (t.match(/</g) || []).length >= 3;
+  }
+
+  function clipboardLooksRich(html, text) {
+    if (!html || !html.trim()) return false;
+    const rich = /<(h[1-6]|ul|ol|li|table|blockquote|strong|b|em|i|p|br|span)\b/i.test(html);
+    if (!rich) return false;
+    const mdish = /^\s{0,3}(#{1,6}\s|[-*]\s|\d+\.\s)/m.test(text || "");
+    if (mdish && /<(pre|code)\b/i.test(html) && !/<(table|h[1-6])\b/i.test(html)) return false;
+    return true;
+  }
+
+  function toMarkdown(raw, mime = "") {
+    const text = String(raw || "");
+    if (/html/i.test(mime) || looksLikeHtml(text)) return htmlToMarkdown(text);
+    return text.replace(/\r\n/g, "\n");
+  }
+
+  function insertBody(textarea, chunk, { replace = false } = {}) {
+    const add = String(chunk || "").replace(/\s+$/, "");
+    if (!add) return;
+    if (replace || !textarea.value.trim()) {
+      textarea.value = add;
+      return;
+    }
+    const start = textarea.selectionStart ?? textarea.value.length;
+    const end = textarea.selectionEnd ?? textarea.value.length;
+    const before = textarea.value.slice(0, start);
+    const after = textarea.value.slice(end);
+    const pad = before && !before.endsWith("\n") ? "\n\n" : before ? "\n" : "";
+    textarea.value = before + pad + add + (after.startsWith("\n") ? after : "\n" + after);
+  }
+
+  function bytesToB64(bytes) {
+    let s = "";
+    const chunk = 0x8000;
+    for (let i = 0; i < bytes.length; i += chunk) {
+      s += String.fromCharCode(...bytes.subarray(i, i + chunk));
+    }
+    return btoa(s);
+  }
+
+  async function encryptNoteBlob(password, obj) {
+    const enc = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey("raw", enc.encode(password), "PBKDF2", false, ["deriveKey"]);
+    const key = await crypto.subtle.deriveKey(
+      { name: "PBKDF2", salt: WRITE_SALT, iterations: WRITE_ITERS, hash: "SHA-256" },
+      keyMaterial,
+      { name: "AES-GCM", length: 256 },
+      false,
+      ["encrypt"],
+    );
+    const iv = crypto.getRandomValues(new Uint8Array(12));
+    const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, enc.encode(JSON.stringify(obj))));
+    const out = new Uint8Array(iv.length + ct.length);
+    out.set(iv, 0);
+    out.set(ct, iv.length);
+    return bytesToB64(out);
+  }
+
   function setupWrite() {
     const form = $("#writeForm");
     if (!form) return;
@@ -497,6 +626,7 @@
     const cover = $("#wCover");
     const preview = $("#wPreview");
     const status = $("#wStatus");
+    const dlg = $("#wPublishDlg");
 
     const draft = store.json("yu-draft", null);
     if (draft) {
@@ -517,36 +647,6 @@
       status.textContent = `草稿已存 · ${new Date().toLocaleTimeString("zh-TW")}`;
     };
 
-    function mdToHtml(md) {
-      const lines = esc(md).split(/\n/);
-      let html = "", inCode = false, inList = false;
-      for (const line of lines) {
-        if (line.startsWith("```")) {
-          if (inCode) { html += "</code></pre>"; inCode = false; }
-          else { html += "<pre><code>"; inCode = true; }
-          continue;
-        }
-        if (inCode) { html += line + "\n"; continue; }
-        if (/^#{1,3}\s/.test(line)) {
-          const level = line.match(/^#+/)[0].length;
-          html += `<h${level}>${line.replace(/^#+\s/, "")}</h${level}>`;
-          continue;
-        }
-        if (/^[-*]\s/.test(line)) {
-          if (!inList) { html += "<ul>"; inList = true; }
-          html += `<li>${line.replace(/^[-*]\s/, "")}</li>`;
-          continue;
-        }
-        if (inList) { html += "</ul>"; inList = false; }
-        if (/^&gt;\s?/.test(line)) { html += `<blockquote>${line.replace(/^&gt;\s?/, "")}</blockquote>`; continue; }
-        if (!line.trim()) { html += ""; continue; }
-        html += `<p>${line.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\*(.+?)\*/g, "<em>$1</em>").replace(/`(.+?)`/g, "<code>$1</code>")}</p>`;
-      }
-      if (inList) html += "</ul>";
-      if (inCode) html += "</code></pre>";
-      return html;
-    }
-
     function paintPreview() {
       const t = title.value.trim() || "（未命名）";
       const tagList = tags.value.split(/[,，\s]+/).filter(Boolean);
@@ -559,29 +659,79 @@
         </article>`;
     }
 
+    function paintPublished() {
+      const box = $("#wPublished");
+      if (!box) return;
+      const list = window.NOTES || [];
+      box.innerHTML = list.length
+        ? list.slice(0, 8).map((n) => `<a class="notes-mini-item" href="./notes.html?slug=${encodeURIComponent(n.slug)}"><strong>${esc(n.title)}</strong><span>${esc(n.cat || "")} · ${esc((n.time || "").slice(0, 10))}</span></a>`).join("")
+        : `<p class="muted">還沒有發布過的文章。寫完後按「發布到網站」。</p>`;
+    }
+
+    function maybeConvertHtmlField() {
+      if (!looksLikeHtml(body.value)) return false;
+      const md = htmlToMarkdown(body.value);
+      if (md && md !== body.value) {
+        body.value = md;
+        return true;
+      }
+      return false;
+    }
+
     form.addEventListener("input", () => { paintPreview(); saveDraft(); });
     form.addEventListener("submit", (e) => { e.preventDefault(); saveDraft(); toast("草稿已儲存"); });
+    body.addEventListener("blur", () => {
+      if (maybeConvertHtmlField()) {
+        paintPreview();
+        saveDraft();
+        toast("已把 HTML 轉成 Markdown");
+      }
+    });
+
+    body.addEventListener("paste", (e) => {
+      const html = e.clipboardData?.getData("text/html") || "";
+      const text = e.clipboardData?.getData("text/plain") || "";
+      if (!clipboardLooksRich(html, text) && !looksLikeHtml(text)) return;
+      e.preventDefault();
+      const md = htmlToMarkdown(html || text);
+      insertBody(body, md);
+      paintPreview();
+      saveDraft();
+      toast("已轉成 Markdown");
+    });
 
     $("#wImport")?.addEventListener("click", () => {
       const input = $("#wFile");
       input?.click();
     });
-    $("#wFile")?.addEventListener("change", (e) => {
+    $("#wFile")?.addEventListener("change", async (e) => {
       const f = e.target.files?.[0];
+      e.target.value = "";
       if (!f) return;
-      const reader = new FileReader();
-      reader.onload = () => {
-        const text = String(reader.result || "");
-        if (!title.value) title.value = f.name.replace(/\.md$/i, "");
-        body.value = body.value ? body.value + "\n\n" + text : text;
+      const name = f.name;
+      if (!title.value) title.value = name.replace(/\.(md|markdown|txt|html|htm|docx)$/i, "");
+      try {
+        let md = "";
+        if (/\.docx$/i.test(name)) {
+          if (!window.mammoth) throw new Error("無法載入 Word 轉換器");
+          const buf = await f.arrayBuffer();
+          const res = await window.mammoth.convertToHtml({ arrayBuffer: buf });
+          md = htmlToMarkdown(res.value || "");
+        } else {
+          const text = await f.text();
+          md = toMarkdown(text, f.type || name);
+        }
+        insertBody(body, md);
         paintPreview();
         saveDraft();
-        toast(`已匯入 ${f.name}`);
-      };
-      reader.readAsText(f);
+        toast(`已匯入並轉成 Markdown：${name}`);
+      } catch (err) {
+        toast(err.message || "匯入失敗");
+      }
     });
 
     $("#wExport")?.addEventListener("click", () => {
+      maybeConvertHtmlField();
       const t = title.value.trim() || "draft";
       const front = `---\ntitle: ${t}\ntags: [${tags.value}]\ncategory: ${cat.value}\n---\n\n`;
       const blob = new Blob([front + body.value], { type: "text/markdown;charset=utf-8" });
@@ -602,7 +752,83 @@
       status.textContent = "草稿已清除";
     });
 
+    const tokenInput = $("#wGhToken");
+    if (tokenInput) tokenInput.value = store.get("yu-write-gh-token", "");
+
+    function openPublish() {
+      if (dlg) dlg.hidden = false;
+      $("#wPassword")?.focus();
+    }
+    function closePublish() {
+      if (dlg) dlg.hidden = true;
+      const pw = $("#wPassword");
+      if (pw) pw.value = "";
+    }
+
+    $("#wPublish")?.addEventListener("click", () => {
+      if (!title.value.trim() || !body.value.trim()) {
+        toast("請先寫標題和內容");
+        return;
+      }
+      maybeConvertHtmlField();
+      paintPreview();
+      saveDraft();
+      openPublish();
+    });
+    $("#wPublishCancel")?.addEventListener("click", closePublish);
+    dlg?.addEventListener("click", (e) => { if (e.target === dlg) closePublish(); });
+
+    $("#wPublishGo")?.addEventListener("click", async () => {
+      const password = $("#wPassword")?.value || "";
+      const token = ($("#wGhToken")?.value || "").trim();
+      if (!password) { toast("請輸入發布密碼"); return; }
+      if (!token) { toast("請貼上 GitHub Token"); return; }
+      maybeConvertHtmlField();
+      const note = {
+        title: title.value.trim(),
+        slug: slug.value.trim(),
+        tags: tags.value.split(/[,，\s]+/).filter(Boolean),
+        cat: cat.value || "未分類",
+        cover: cover.value.trim(),
+        body: body.value,
+        time: new Date().toISOString(),
+      };
+      const go = $("#wPublishGo");
+      if (go) go.disabled = true;
+      try {
+        const blob = await encryptNoteBlob(password, note);
+        const fname = `${(note.slug || note.title).replace(/[^\w一-龥-]+/g, "-").slice(0, 40) || "note"}-${Date.now()}.enc`;
+        const api = `https://api.github.com/repos/${WRITE_REPO.owner}/${WRITE_REPO.name}/contents/notes/inbox/${fname}`;
+        const res = await fetch(api, {
+          method: "PUT",
+          headers: {
+            Accept: "application/vnd.github+json",
+            Authorization: `Bearer ${token}`,
+            "X-GitHub-Api-Version": "2022-11-28",
+          },
+          body: JSON.stringify({
+            message: "writing desk: encrypted note inbox",
+            content: btoa(blob),
+            branch: WRITE_REPO.branch,
+          }),
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          throw new Error(err.message || `GitHub ${res.status}`);
+        }
+        store.set("yu-write-gh-token", token);
+        closePublish();
+        toast("已送出。密碼對的話，約一分鐘後會出現在筆記頁");
+        status.textContent = "已送出加密稿，等待 GitHub Actions 發布";
+      } catch (err) {
+        toast(err.message || "發布失敗");
+      } finally {
+        if (go) go.disabled = false;
+      }
+    });
+
     paintPreview();
+    paintPublished();
   }
 
   /* ---------- 友鏈頁 ---------- */
@@ -648,6 +874,57 @@
     paint();
   }
 
+  /* ---------- 筆記頁：寫作台發布的文章 ---------- */
+  function setupNotes() {
+    const view = $("#notesView");
+    if (!view) return;
+    const notes = (window.NOTES || []).slice().sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
+    const search = $("#notesSearch");
+    const count = $("#notesCount");
+    const slug = new URLSearchParams(location.search).get("slug");
+
+    const mdExcerpt = (md) =>
+      String(md || "").replace(/```[\s\S]*?```/g, " ").replace(/[#>*`~\-[\]!]/g, " ").replace(/\s+/g, " ").trim();
+
+    function openNote(n) {
+      const tags = (n.tags || []).map((t) => `<span>#${esc(t)}</span>`).join("");
+      document.title = `${n.title} · 筆記`;
+      if (search) search.hidden = true;
+      if (count) count.textContent = "";
+      view.innerHTML = `
+        <article class="card draft-card note-full">
+          ${n.cover ? `<img class="draft-cover" src="${esc(n.cover)}" alt="">` : ""}
+          <h1>${esc(n.title)}</h1>
+          <div class="draft-meta"><span>${esc(n.cat || "未分類")}</span><span>${esc(String(n.time || "").slice(0, 10))}</span>${tags}</div>
+          <div class="draft-body">${window.YU.mdToHtml(n.body || "")}</div>
+          <p class="note-back"><a class="btn btn--ghost btn-sm" href="./notes.html">← 回筆記列表</a></p>
+        </article>`;
+    }
+
+    function paintList() {
+      const text = (search?.value || "").trim().toLowerCase();
+      const items = notes.filter((n) =>
+        !text || `${n.title} ${n.cat} ${(n.tags || []).join(" ")} ${n.body}`.toLowerCase().includes(text));
+      if (count) count.textContent = notes.length ? `（共 ${notes.length} 篇）` : "";
+      view.innerHTML = items.length
+        ? `<div class="notes-mini">${items.map((n) => {
+            const exc = mdExcerpt(n.body);
+            return `
+            <a class="notes-mini-item" href="./notes.html?slug=${encodeURIComponent(n.slug)}">
+              <strong>${esc(n.title)}</strong>
+              <span>${esc(n.cat || "未分類")} · ${esc(String(n.time || "").slice(0, 10))}</span>
+              <p>${esc(exc.slice(0, 90))}${exc.length > 90 ? "…" : ""}</p>
+            </a>`;
+          }).join("")}</div>`
+        : `<div class="empty">${notes.length ? "沒有符合的筆記" : "還沒有筆記。到寫作台寫一篇吧！"}</div>`;
+    }
+
+    const found = slug ? notes.find((n) => n.slug === slug) : null;
+    if (slug && found) openNote(found);
+    else paintList();
+    search?.addEventListener("input", paintList);
+  }
+
   /* ---------- 套用設定到頁面文字 / 社群 ---------- */
   function applySiteCopy() {
     const s = loadSettings();
@@ -655,7 +932,7 @@
     const page = document.body.dataset.page || "home";
     const pageNames = {
       home: "", posts: "動態", projects: "我的專案", share: "教學資源",
-      friends: "友鏈", write: "寫作台", about: "關於我",
+      friends: "友鏈", notes: "筆記", write: "寫作台", about: "關於我",
     };
     const pageName = pageNames[page] ?? "";
     document.title = pageName ? `${pageName} · ${s.siteTitle || "Yu"}` : (s.siteTitle || "Yu · 王宇錡");
@@ -686,6 +963,7 @@
     setupDragLayout();
     setupLikeDaily();
     setupWrite();
+    setupNotes();
     setupFriends();
   });
 })();
