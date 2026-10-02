@@ -674,10 +674,12 @@ img { max-width: 100%; }
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
 .post-links a:hover { background: var(--brand-soft); color: var(--brand); }
-.post-foot { display: flex; justify-content: flex-end; margin-top: 0.85rem; }
+.post-foot { display: flex; justify-content: flex-end; align-items: center; gap: 0.9rem; margin-top: 0.85rem; }
 .post-foot a { font-size: 0.8rem; color: var(--ink-3); display: inline-flex; align-items: center; gap: 0.32rem; }
 .post-foot a:hover { color: var(--brand); }
 .post-foot svg { width: 14px; height: 14px; }
+.post-likes { display: inline-flex; align-items: center; gap: 0.3rem; margin-right: auto; font-size: 0.8rem; font-weight: 600; color: var(--ink-2); }
+.post-likes svg { width: 13px; height: 13px; color: var(--brand); }
 .post.is-target { box-shadow: 0 0 0 3px var(--brand), var(--shadow-hover); }
 
 .aside-profile { text-align: center; }

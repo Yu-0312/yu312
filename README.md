@@ -5,7 +5,7 @@ Yu（王宇錡 · [@yuqi._.0313](https://www.threads.com/@yuqi._.0313)）的個�
 ## 頁面
 
 - `index.html` — 首頁：問候、最新動態、近期圖片、時鐘與發文月曆、專注白噪音＋番茄鐘、隨機推薦、可拖曳卡片佈局
-- `posts.html` — 動態：同步自 Threads 的全部貼文，可依主題 / 月份 / 時間範圍（日週月年）篩選與搜尋，圖片可放大
+- `posts.html` — 動態：同步自 Threads 的全部貼文，可依主題 / 月份 / 時間範圍（日週月年）篩選與搜尋，圖片可放大，每則顯示 Threads 實際按讚數
 - `projects.html` — 我的專案（GitHub，依星數排序）
 - `share.html` — 教學資源：分類篩選、Views / Marks 收藏
 - `friends.html` — 友鏈：朋友與喜歡的部落格
@@ -20,7 +20,7 @@ Yu（王宇錡 · [@yuqi._.0313](https://www.threads.com/@yuqi._.0313)）的個�
   - 首頁佈局：卡片順序說明與重設
 - **拖曳首頁卡片**：右下角佈局鈕進入編輯模式，拖完自動記住
 - **Views / Marks**：教學資源卡有瀏覽與收藏（存 localStorage）
-- **收藏（♥）**：每日上限 20 次
+- **收藏（♥）**：首頁心心顯示所有 Threads 貼文的按讚數總和（真實數據，隨每日同步更新）
 - 設定全部存在瀏覽器 `localStorage`，純靜態、不打後端
 
 ## 資料
@@ -36,8 +36,9 @@ Yu（王宇錡 · [@yuqi._.0313](https://www.threads.com/@yuqi._.0313)）的個�
 
 1. 用 Playwright 抓公開 Threads 頁（與先前人工匯出相同路徑）
 2. 新貼文併入 `data.js` 的 `THREADS_POSTS`，圖片存到 `assets/threads/`
-3. 較舊貼文與人工標的 `tag` 會保留，不會被覆蓋
-4. 有變更才 commit / push，GitHub Pages 自動部署
+3. 逐則開公開 embed 頁，把每則貼文的實際按讚數存進 `likes`（首頁 ♥ 總和與動態頁卡片都用它）
+4. 較舊貼文與人工標的 `tag` 會保留，不會被覆蓋
+5. 有變更才 commit / push，GitHub Pages 自動部署
 
 > 補充：公開頁未登入時 Threads 只顯示最前面幾則（登入牆），所以每天抓主要是「增量收新貼文」。若之後設定 `THREADS_ACCESS_TOKEN`，會自動改走官方 API 並補齊完整歷史。
 

@@ -38,6 +38,7 @@
     home: '<path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z"/>',
     threads: '<path d="M16.5 11.2c-.1-2.6-1.6-4.1-4.2-4.1-1.6 0-2.9.7-3.6 1.9l1.4.9c.5-.8 1.2-1.1 2.2-1.1 1.2 0 2 .6 2.3 1.7-.7-.1-1.4-.2-2.2-.1-2.2.1-3.6 1.4-3.5 3.2.1 1.8 1.7 2.9 3.6 2.8 2.4-.1 3.6-1.9 3.8-4.1.8.5 1.3 1.2 1.4 2.1.3 1.9-1.4 3.9-5.6 3.9-4 0-6-2.3-6-6.3S8 5.6 12 5.6c3.3 0 5.4 1.5 6 4.3"/>',
     star: '<path d="M12 3l2.6 5.4 5.9.8-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.8z"/>',
+    heart: '<path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>',
     grid: '<rect x="4" y="4" width="7" height="7" rx="1.8"/><rect x="13" y="4" width="7" height="7" rx="1.8"/><rect x="4" y="13" width="7" height="7" rx="1.8"/><rect x="13" y="13" width="7" height="7" rx="1.8"/>',
     smile: '<circle cx="12" cy="12" r="8.5"/><path d="M8.5 13.5c1.8 2 5.2 2 7 0M9.5 9.5h.01M14.5 9.5h.01"/>',
     gh: '<path fill="currentColor" stroke="none" d="M12 2C6.48 2 2 6.58 2 12.26c0 4.52 2.87 8.35 6.84 9.7.5.1.68-.22.68-.48v-1.7c-2.78.62-3.37-1.37-3.37-1.37-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.36 1.12 2.94.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.32.1-2.75 0 0 .84-.27 2.75 1.05A9.3 9.3 0 0 1 12 6.8c.85 0 1.71.12 2.51.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.43.2 2.49.1 2.75.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9v2.82c0 .26.18.58.69.48A10.27 10.27 0 0 0 22 12.26C22 6.58 17.52 2 12 2z"/>',
@@ -335,7 +336,7 @@
     paint();
   }
 
-  /* 讚／收藏改由 studio.js 的 setupLikeDaily 處理（含每日上限） */
+  /* 讚／收藏：首頁 ♥ 由 studio.js 的 setupLikeDaily 顯示 Threads 讚數總和 */
 
   function initHome() {
     const g = $("#greetPart");
@@ -400,6 +401,10 @@
       .map((t, i) => `<div class="post-part">${total > 1 ? `<span class="post-part-label">${i + 1} / ${total}</span>` : ""}<div class="post-text">${linkify(t, p.links)}</div></div>`)
       .join("");
     const shownLinks = p.links.filter((l) => !/threads\.com|l\.threads/.test(l)).slice(0, 4);
+    const likes = Number(p.likes);
+    const likesHTML = p.likes != null && Number.isFinite(likes)
+      ? `<span class="post-likes" title="Threads 按讚數">${svg("heart")}${likes.toLocaleString()}</span>`
+      : "";
     return `
       <article class="card post rise" id="${p.id}" data-id="${p.id}">
         <header class="post-head">
@@ -412,7 +417,7 @@
         <button class="post-more" type="button" hidden>展開全文</button>
         ${n ? `<div class="post-media ${cls}">${imgs.map((im, i) => `<button type="button" data-i="${i}" aria-label="放大圖片 ${i + 1}"><img src="${im.src}" alt="${esc(im.alt)}" loading="lazy" width="${im.w}" height="${im.h}"></button>`).join("")}</div>` : ""}
         ${shownLinks.length ? `<div class="post-links">${shownLinks.map((l) => `<a href="${esc(l)}" target="_blank" rel="noopener">${svg("link", 'width="13" height="13"')}${esc(strip(l).split("?")[0].slice(0, 48))}</a>`).join("")}</div>` : ""}
-        <footer class="post-foot"><a href="${p.url}" target="_blank" rel="noopener">在 Threads 查看 ${svg("ext")}</a></footer>
+        <footer class="post-foot">${likesHTML}<a href="${p.url}" target="_blank" rel="noopener">在 Threads 查看 ${svg("ext")}</a></footer>
       </article>`;
   }
 

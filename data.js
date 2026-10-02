@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-01T21:00:17.707Z（scripts/sync_threads.mjs，GitHub Actions 每三天自動更新） */
+   Threads 同步於 2026-10-02T06:33:06.852Z（scripts/sync_threads.mjs，GitHub Actions 每三天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -299,6 +299,39 @@ window.PROJECT_ITEMS = [
 ];
 window.THREADS_POSTS = [
  {
+  "id": "Dd-l9m-FPAV",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Dd-l9m-FPAV",
+  "time": "2026-10-02T04:09:46.000Z",
+  "tag": "",
+  "parts": [
+   "連結： ytustartuphouse.com.tr/en/bl…"
+  ],
+  "imgs": [],
+  "links": [],
+  "video": false,
+  "likes": 2
+ },
+ {
+  "id": "Dd-l9MDFLcq",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Dd-l9MDFLcq",
+  "time": "2026-10-02T04:09:42.000Z",
+  "tag": "",
+  "parts": [
+   "Meta × YTU Startup House AI Builders Türkiye Student Hackathon 開放申請！\n想從零開始學習 AI 並實際打造自己的 AI 專案嗎？\n這是一個從 AI 學習 → 專案開發 → 國際 Hackathon 的完整機會！\n🟢 Phase 1：AI 101 Training（線上）\n官方提供免費 AI 培訓：\n✅ 線上進行，並提供課程錄影\n✅ Meta 認證講師授課\n✅ 不需具備 LLM 或 AI 開發經驗\n✅ 完成3/4 課程可獲得參與證書\n🔴 Phase 2：Student Hackathon（土耳其線下）\n完成培訓可申請進入正式 Hackathon\n📍 地點：YTU Startup House，Istanbul（土耳其伊斯坦堡）\n💰 總獎金：6,000 USD\nytustartuphouse.com.tr\nFree AI Training for Undergraduates: YTU Startup House and Meta Open Applications for the Student Hackathon Training Series"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/Dd-l9MDFLcq-0.jpg",
+    "w": 800,
+    "h": 1000,
+    "alt": "Free AI Training for Undergraduates: YTU Startup House and Meta Open Applications for the Student Hackathon Training Series"
+   }
+  ],
+  "links": [],
+  "video": false,
+  "likes": 17
+ },
+ {
   "id": "Dd87Nitk74W",
   "url": "https://www.threads.com/@yuqi._.0313/post/Dd87Nitk74W",
   "time": "2026-10-01T12:36:57.000Z",
@@ -306,9 +339,17 @@ window.THREADS_POSTS = [
   "parts": [
    "6️⃣ CS224N NLP × DL｜Manning 神課\nyoutube.com/playl…\n7️⃣ CS224U 自然語言理解｜語義方向\nyoutube.com/playl…\n8️⃣ CME295 大模型｜Transformers & LLM\nyoutube.com/playl…\n9️⃣ CS236 深度生成模型｜VAE·GAN·Diffusion\nyoutube.com/playl…"
   ],
-  "imgs": [],
+  "imgs": [
+   {
+    "src": "assets/threads/Dd87Nitk74W-0.jpg",
+    "w": 480,
+    "h": 270,
+    "alt": "Large Language Models (LLMs)"
+   }
+  ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "Dd87NDGk-x9",
@@ -319,9 +360,17 @@ window.THREADS_POSTS = [
    "🔥 斯坦福免費 AI 課，鏈接都幫你們扒好了！\n1️⃣ CS221 人工智能｜搜索·邏輯·MDP\nyoutube.com/playl…\n2️⃣ CS229 機器學習｜經典 ML 必修\nyoutube.com/playl…\n3️⃣ CS230 深度學習｜Andrew Ng 親授\nyoutube.com/playl…\n4️⃣ CS229M 機器學習理論｜想搞懂為什麼有用就看這個\nyoutube.com/playl…\n5️⃣ CS234 強化學習｜RL 入門天花板\nyoutube.com/playl…",
    "👉 （留言續）看完不按讚分享＝白嫖失敗"
   ],
-  "imgs": [],
+  "imgs": [
+   {
+    "src": "assets/threads/Dd87NDGk-x9-0.jpg",
+    "w": 480,
+    "h": 270,
+    "alt": "Stanford CS234 I Reinforcement Learning I Spring 2024 I Emma Brunskill"
+   }
+  ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 51
  },
  {
   "id": "Dd85JZcEz44",
@@ -333,7 +382,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 7
  },
  {
   "id": "Dd8XNHJE7H4",
@@ -343,9 +393,17 @@ window.THREADS_POSTS = [
   "parts": [
    "今天被台大李宏毅教授的訪談狠狠上了一課\n他問學生「假設資源無限你想做什麼？」\n平常抱怨資源不夠的學生居然答不上來😅\n到了 AI Agent 時代，「學AI」其實是個模糊說法，會不會寫程式、懂不懂技術的界線越來越模糊\n想讓 AI 幫你把事情做好要練這3種能力👇\n1️⃣ 出題力：把腦中模糊的想法變成明確的目標\n2️⃣ 驗收力：知道什麼成果才叫「合格」，標準由你定不是AI說了算\n3️⃣ 監督力：盯著 AI 一路修改別讓它為了刷指標越跑越偏\n連結： bnext.com.tw/artic…"
   ],
-  "imgs": [],
+  "imgs": [
+   {
+    "src": "assets/threads/Dd8XNHJE7H4-0.webp",
+    "w": 900,
+    "h": 600,
+    "alt": "台大教授李宏毅：AI Agent時代，學生最該練的是這3種能力"
+   }
+  ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 4
  },
  {
   "id": "Dd21zc8E6qu",
@@ -357,7 +415,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 4
  },
  {
   "id": "Dd2prrKE0Pf",
@@ -369,7 +428,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "Dd2prQcE1p5",
@@ -381,7 +441,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 7
  },
  {
   "id": "Dd0smhtm4p4",
@@ -400,7 +461,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 20
  },
  {
   "id": "DdnOjx0E5kx",
@@ -414,7 +476,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://artificialanalysis.ai/es/models/comparisons/claude-opus-5-5-medium-vs-gpt-6-astra?utm_source=chatgpt.com"
   ],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "Ddk1dZkkwsn",
@@ -426,7 +489,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "Ddkdz_XGjmD",
@@ -445,7 +509,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 1
  },
  {
   "id": "Ddcz31oE9zP",
@@ -457,7 +522,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 25
  },
  {
   "id": "DdbvPAAE3Zi",
@@ -469,7 +535,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 24
  },
  {
   "id": "Ddbk7m1k9bq",
@@ -481,7 +548,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 6
  },
  {
   "id": "Ddafoylk2B4",
@@ -496,7 +564,8 @@ window.THREADS_POSTS = [
    "https://kaochenlong.com/",
    "https://zonble.net/"
   ],
-  "video": false
+  "video": false,
+  "likes": 23
  },
  {
   "id": "DdQ4jy2kz6O",
@@ -508,7 +577,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 7
  },
  {
   "id": "DdQXuwpE8Kp",
@@ -520,7 +590,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 12
  },
  {
   "id": "DdQSLsXk4fe",
@@ -570,7 +641,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 163
  },
  {
   "id": "DdGwI87mwtM",
@@ -592,7 +664,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://mimo.mi.com/"
   ],
-  "video": false
+  "video": false,
+  "likes": 18
  },
  {
   "id": "DdGoP9am7YU",
@@ -604,7 +677,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 29
  },
  {
   "id": "DdGjq8VGzKX",
@@ -616,7 +690,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 32
  },
  {
   "id": "DdGcbrVm1gU",
@@ -628,7 +703,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 6
  },
  {
   "id": "DdGZlDTG2wo",
@@ -660,7 +736,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 16
  },
  {
   "id": "DdFpa-9E0rm",
@@ -672,7 +749,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 31
  },
  {
   "id": "DdD1E-ik_uv",
@@ -694,7 +772,8 @@ window.THREADS_POSTS = [
    "http://mathathonchallenge.com/apply.html",
    "http://mathathonchallenge.com/"
   ],
-  "video": true
+  "video": true,
+  "likes": 83
  },
  {
   "id": "Dc-5LEcE-O-",
@@ -734,7 +813,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/nevertoday/xxd-panel-116"
   ],
-  "video": false
+  "video": false,
+  "likes": 1679
  },
  {
   "id": "Dc5wjZ0k4NO",
@@ -755,7 +835,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://typewords.cc/"
   ],
-  "video": false
+  "video": false,
+  "likes": 16
  },
  {
   "id": "Dc5lSrck3UP",
@@ -776,7 +857,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://x.com/victornunez/status/2095975651094261777"
   ],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "Dc4oHAyE_ks",
@@ -801,7 +883,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "Dc3UHAwE4SA",
@@ -828,7 +911,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://youtu.be/9vnr69Lg4_I?si=7m9q7rM4BIBUbpxx"
   ],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "Dc2IxxrEwhu",
@@ -855,7 +939,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://www.cnet.com/tech/services-and-software/openai-gpt-6-astra-release-ai-agi-chatgpt/"
   ],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "Dczp6Amk7w7",
@@ -874,7 +959,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 335
  },
  {
   "id": "DczlIRuk-Gi",
@@ -894,7 +980,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 11
  },
  {
   "id": "DcmefHPE0Bb",
@@ -920,7 +1007,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 57
  },
  {
   "id": "DcctWYMFO60",
@@ -954,7 +1042,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://forms.gle/h424y1w544cTQ2rW6"
   ],
-  "video": false
+  "video": false,
+  "likes": 6
  },
  {
   "id": "DcawHs7G_Ui",
@@ -1040,7 +1129,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 32
  },
  {
   "id": "DcP4Sz4E3rL",
@@ -1065,7 +1155,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "DcP4REnE6Jz",
@@ -1110,7 +1201,8 @@ window.THREADS_POSTS = [
   "links": [
    "http://Z.ai/"
   ],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "DcOXTaJE4__",
@@ -1137,7 +1229,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://lvyovo-wiki.tech/"
   ],
-  "video": false
+  "video": false,
+  "likes": 9
  },
  {
   "id": "DcNIuSik9AA",
@@ -1156,7 +1249,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "DcNHaOHk2aP",
@@ -1175,7 +1269,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 13
  },
  {
   "id": "DcCjMnemanu",
@@ -1201,7 +1296,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 3
  },
  {
   "id": "DcAa70NE0mS",
@@ -1228,7 +1324,8 @@ window.THREADS_POSTS = [
   "links": [
    "http://github.com/guillaumemeyer/watermarks-remover"
   ],
-  "video": false
+  "video": false,
+  "likes": 2
  },
  {
   "id": "Db_8Kt8E1uU",
@@ -1278,7 +1375,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 14
  },
  {
   "id": "Db_7rADk_LX",
@@ -1328,7 +1426,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 31
  },
  {
   "id": "DbnzGmdE91J",
@@ -1362,7 +1461,8 @@ window.THREADS_POSTS = [
   "links": [
    "http://unity.com/blog/meet-the-unity-cli"
   ],
-  "video": false
+  "video": false,
+  "likes": 5
  },
  {
   "id": "DbIyJ6nE7tf",
@@ -1389,7 +1489,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://tolaria.md/"
   ],
-  "video": false
+  "video": false,
+  "likes": 132
  },
  {
   "id": "DbFgDgoE3V3",
@@ -1422,7 +1523,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/Evolink-AI/awesome-kimi-k3-usecases"
   ],
-  "video": true
+  "video": true,
+  "likes": 3
  },
  {
   "id": "DbBEknTk7gM",
@@ -1450,7 +1552,8 @@ window.THREADS_POSTS = [
    "http://github.com/Yu-0312/ppt-creater-skills",
    "https://github.com/Yu-0312/ppt-creater-skills"
   ],
-  "video": false
+  "video": false,
+  "likes": 64
  },
  {
   "id": "DbAQJTJE8up",
@@ -1477,7 +1580,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://www.accupass.com/event/2607070627081511571718"
   ],
-  "video": false
+  "video": false,
+  "likes": 6
  },
  {
   "id": "DZ-MAbuE4Qr",
@@ -1491,7 +1595,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/Yu-0312/apcs-judge"
   ],
-  "video": false
+  "video": false,
+  "likes": 102
  },
  {
   "id": "DZztwi6Gxfn",
@@ -1513,7 +1618,8 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/Yu-0312/ppt-creater"
   ],
-  "video": false
+  "video": false,
+  "likes": 11
  },
  {
   "id": "DZpu6RvE1NU",
@@ -1569,7 +1675,8 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 7
  },
  {
   "id": "DZoFMp-k6qp",
@@ -1582,7 +1689,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 50
  },
  {
   "id": "DZjpDB_G9he",
@@ -1595,7 +1703,8 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false
+  "video": false,
+  "likes": 8
  },
  {
   "id": "DZSqkvkk8gb",
@@ -1618,6 +1727,7 @@ window.THREADS_POSTS = [
    "http://yu-0312.github.io/apcs-judge",
    "https://github.com/Yu-0312/apcs-judge"
   ],
-  "video": false
+  "video": false,
+  "likes": 394
  }
 ];

@@ -120,33 +120,26 @@
   const _early = loadSettings();
   applyPalette(_early.palette, _early.accent);
 
-  /* ---------- 讚（每日上限） ---------- */
+  /* ---------- 收藏（♥）：Threads 貼文按讚數總和 ---------- */
+  function threadsLikesTotal() {
+    return (window.THREADS_POSTS || []).reduce((s, p) => s + (Number(p && p.likes) || 0), 0);
+  }
   function setupLikeDaily() {
     const btn = $("#likeBtn");
     if (!btn) return;
-    const base = loadSettings().likeBase;
-    const today = new Date().toISOString().slice(0, 10);
-    const state = store.json("yu-like", { date: today, count: 0, on: false });
-    if (state.date !== today) {
-      state.date = today; state.count = 0; state.on = false;
-      store.setJson("yu-like", state);
-    }
+    // 數字 = data.js 每則貼文的 Threads 讚數加總（sync_threads.mjs 同步時更新），抓不到才退回 likeBase
+    const total = threadsLikesTotal() || Number(loadSettings().likeBase) || 0;
+    const state = store.json("yu-like", { on: false });
     const paint = () => {
       btn.classList.toggle("is-on", state.on);
       btn.setAttribute("aria-pressed", String(state.on));
       const t = $("#likeText");
-      const total = base + state.count + (store.get("yu-like-bonus") ? Number(store.get("yu-like-bonus")) : 0);
-      if (t) t.textContent = state.on ? `已收藏 · ${total}` : `收藏 · ${total}`;
+      if (t) t.textContent = state.on ? `已收藏 · ${total.toLocaleString()}` : `收藏 · ${total.toLocaleString()}`;
     };
     btn.addEventListener("click", () => {
-      if (state.count >= 20) {
-        btn.title = "今天已經按滿 20 次啦，明天再來～";
-        btn.animate([{ transform: "scale(1)" }, { transform: "scale(1.15)" }, { transform: "scale(1)" }], { duration: 280 });
-        return;
-      }
       state.on = !state.on;
-      state.count += 1;
       store.setJson("yu-like", state);
+      btn.animate([{ transform: "scale(1)" }, { transform: "scale(1.15)" }, { transform: "scale(1)" }], { duration: 280 });
       paint();
     });
     paint();

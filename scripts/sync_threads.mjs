@@ -10,6 +10,7 @@
  * 然後：
  *   - 清理成 data.js 的 THREADS_POSTS 結構
  *   - 下載圖片到 assets/threads/
+ *   - 逐則開公開 embed 頁抓按讚數，存進每則貼文的 likes
  *   - 合併時保留既有 tag（人工標籤）
  *
  * 用法：
@@ -408,6 +409,88 @@ async function syncImages(post, existingImgs) {
   return out;
 }
 
+/* ---------- 按讚數（公開 embed 頁，每則貼文動作列第一個圖示是愛心） ---------- */
+const HEART_PATH_PREFIX = "M12.375";
+const normText = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g, "");
+const parseCount = (t) => {
+  const m = String(t || "").replace(/,/g, "").trim().match(/^([\d.]+)\s*([km])?$/i);
+  if (!m) return 0;
+  const unit = m[2] ? { k: 1e3, m: 1e6 }[m[2].toLowerCase()] : 1;
+  return Math.round(parseFloat(m[1]) * unit);
+};
+
+async function refreshLikes(posts) {
+  const pending = posts.filter((p) => p.id && !p.id.startsWith("local-"));
+  // embed 頁會截斷長文，比對用完整正規化正文，越長越準
+  const fullById = new Map(pending.map((p) => [p.id, normText((p.parts || []).join(""))]));
+  const likes = new Map();
+  if (!pending.length) return likes;
+
+  const executablePath = findChromium();
+  const browser = await chromium.launch({ headless: true, ...(executablePath ? { executablePath } : {}) });
+  const context = await browser.newContext({
+    userAgent:
+      "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+    viewport: { width: 480, height: 1600 },
+    locale: "zh-TW",
+  });
+  const page = await context.newPage();
+  try {
+    for (const p of pending) {
+      if (likes.has(p.id)) continue; // 逛別則的 thread 頁時已經順手抓到
+      try {
+        await page.goto(`https://www.threads.com/@${HANDLE}/post/${p.id}/embed`, {
+          waitUntil: "domcontentloaded",
+          timeout: 45000,
+        });
+        await page.waitForSelector(".ActionBarIcon", { timeout: 20000 });
+        await page.waitForTimeout(700);
+        const blocks = await page.evaluate((heartPrefix) => {
+          const norm = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9\u4e00-\u9fff]+/g, "");
+          const parseCountInPage = (t) => {
+            const m = String(t || "").replace(/,/g, "").trim().match(/^([\d.]+)\s*([km])?$/i);
+            if (!m) return 0;
+            const unit = m[2] ? { k: 1e3, m: 1e6 }[m[2].toLowerCase()] : 1;
+            return Math.round(parseFloat(m[1]) * unit);
+          };
+          return [...document.querySelectorAll(".OuterContainer")].map((el) => {
+            const first = el.querySelector(".ActionBarIcon");
+            let like = null;
+            if (first) {
+              const d = first.querySelector("svg path")?.getAttribute("d") || "";
+              if (d.startsWith(heartPrefix)) {
+                like = parseCountInPage(first.querySelector(".ActionBarCount")?.textContent);
+              }
+            }
+            return { like, text: norm(el.innerText || "") };
+          });
+        }, HEART_PATH_PREFIX);
+
+        for (const b of blocks) {
+          if (!b.text || b.like == null) continue;
+          // 前綴由長到短嘗試，取比對到最長前綴的貼文（embed 可能截斷長文）
+          let best = null, bestLen = 0;
+          for (const q of pending) {
+            if (likes.has(q.id)) continue;
+            const full = fullById.get(q.id) || "";
+            if (full.length < 8 || !b.text.includes(full.slice(0, 8))) continue;
+            let k = Math.min(40, full.length);
+            while (k > 8 && !b.text.includes(full.slice(0, k))) k = Math.floor(k / 2);
+            if (k > bestLen) { best = q; bestLen = k; }
+          }
+          if (best) likes.set(best.id, b.like);
+        }
+        console.log(`  讚數 ${p.id}：本頁解析 ${blocks.length} 則，累積 ${likes.size}/${pending.length}`);
+      } catch (err) {
+        console.warn(`  ! 讚數抓取失敗 ${p.id}: ${err.message}`);
+      }
+    }
+  } finally {
+    await browser.close();
+  }
+  return likes;
+}
+
 /* ---------- 主流程 ---------- */
 function normalizePost(raw, existingById) {
   const old = existingById.get(raw.id) || {};
@@ -490,6 +573,24 @@ async function main() {
     if (!merged.has(p.id)) merged.set(p.id, p);
   }
   const posts = Array.from(merged.values()).sort((a, b) => b.time.localeCompare(a.time));
+
+  if (DRY_RUN) {
+    console.log("（dry-run：略過讚數更新）");
+  } else {
+    console.log(`更新 Threads 按讚數（${posts.length} 則）…`);
+    try {
+      const likes = await refreshLikes(posts);
+      let got = 0;
+      for (const p of posts) {
+        if (likes.has(p.id)) { p.likes = likes.get(p.id); got++; }
+        else if (p.likes == null) delete p.likes; // 抓不到就不留假資料
+      }
+      const total = posts.reduce((s, p) => s + (Number(p.likes) || 0), 0);
+      console.log(`  讚數：取得 ${got}/${posts.length}，全部加總 ${total}`);
+    } catch (err) {
+      console.warn(`  ! 讚數更新失敗（不影響貼文同步）：${err.message}`);
+    }
+  }
 
   const syncedAt = new Date().toISOString();
   writeDataJs({
