@@ -7,6 +7,13 @@
  *     較舊貼文保留既有內容。
  *   - 可選：設定 THREADS_ACCESS_TOKEN 走官方 API，可一次補齊完整歷史。
  *
+ * 多段貼文（thread / 續文）：
+ *   Threads 上同一則貼文的續文各自有獨立的 post id，但在頁面內嵌 JSON
+ *   （data-sjs script 與 GraphQL 回應）中會放在同一個 thread_items 陣列。
+ *   同步時以此為依據，把整個 thread 合併成一張卡片：
+ *   root 貼文為主體，每段續文變成 parts 的一個元素，並在資料中記錄
+ *   thread 成員 id（之後同步不會把續文再加回來變成獨立卡片）。
+ *
  * 然後：
  *   - 清理成 data.js 的 THREADS_POSTS 結構
  *   - 下載圖片到 assets/threads/
@@ -81,7 +88,7 @@ function loadExisting() {
 
 function writeDataJs({ profile, share, projects, posts, syncedAt }) {
   const header = `/* 網站資料 — 由 Threads (@${HANDLE}) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 ${syncedAt}（scripts/sync_threads.mjs，GitHub Actions 每三天自動更新） */`;
+   Threads 同步於 ${syncedAt}（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */`;
   const dump = (name, value) => `window.${name} = ${JSON.stringify(value, null, 1)};`;
   const body = [
     header,
@@ -176,7 +183,7 @@ function cleanPostText(raw) {
 
 function splitParts(text) {
   if (!text) return [""];
-  // 多段貼文（thread）常見：「…（留言續）」或 「(continued)」後接下一則
+  // 單則貼文內的續文標記：「…（留言續）」或 「(continued)」
   const byMarker = text.split(/\n(?=[^\n]*(?:留言續|continued|以下接續|↓\s*$))/i);
   if (byMarker.length > 1) {
     return byMarker.map((s) => s.replace(/\n?(?:留言續|continued|以下接續)\s*$/i, "").trim()).filter(Boolean);
@@ -188,6 +195,66 @@ function extractLinks(text) {
   const re = /https?:\/\/[^\s，。、）)」』]+/g;
   const found = text.match(re) || [];
   return [...new Set(found.map((u) => u.replace(/[.,;:]+$/, "")))];
+}
+
+/* ---------- 內嵌 JSON：解析 thread（續文）分組 ---------- */
+
+// 從頁面內嵌 JSON 找出所有 thread_items 陣列（同一 thread 的各段在同一陣列）
+function collectThreadPayload(jsonText, acc) {
+  let data;
+  try {
+    data = JSON.parse(jsonText);
+  } catch {
+    return;
+  }
+  const seen = new Set();
+  const walk = (node) => {
+    if (!node || typeof node !== "object" || seen.has(node)) return;
+    seen.add(node);
+    if (Array.isArray(node)) {
+      node.forEach(walk);
+      return;
+    }
+    if (Array.isArray(node.thread_items) && node.thread_items.length) {
+      const codes = [];
+      for (const it of node.thread_items) {
+        const post = it?.post;
+        if (!post?.code) continue;
+        codes.push(post.code);
+        if (!acc.items.has(post.code)) {
+          acc.items.set(post.code, {
+            takenAt: Number(post.taken_at) || 0,
+            text: post.caption?.text || "",
+            imgs: imgsFromApiPost(post),
+            video: post.media_type === 2 || Array.isArray(post.video_versions) && post.video_versions.length > 0,
+          });
+        }
+      }
+      if (codes.length > 1) acc.groups.push(codes);
+    }
+    for (const v of Object.values(node)) walk(v);
+  };
+  walk(data);
+}
+
+// 從 API/內嵌 JSON 的 post 物件取圖片（候選網址中挑最大解析度）
+function imgsFromApiPost(post) {
+  const out = [];
+  const pick = (media) => {
+    if (!media || Array.isArray(media.video_versions) && media.video_versions.length) return;
+    const cands = media.image_versions2?.candidates || [];
+    const best = cands.reduce(
+      (a, b) => ((Number(b.width) || 0) * (Number(b.height) || 0) > (Number(a?.width) || 0) * (Number(a?.height) || 0) ? b : a),
+      null,
+    );
+    if (best?.url) out.push({ src: best.url, alt: "", w: Number(best.width) || 0, h: Number(best.height) || 0 });
+  };
+  if (Array.isArray(post.carousel_media)) {
+    for (const child of post.carousel_media) pick(child);
+  } else {
+    pick(post);
+  }
+  return out;
 }
 
 /* ---------- 官方 API 備援 ---------- */
@@ -239,18 +306,48 @@ async function scrapeViaBrowser() {
     locale: "zh-TW",
   });
   const page = await context.newPage();
+
+  // 蒐集頁面內嵌 JSON：thread 分組 + 每則貼文的乾淨文字與圖片
+  const payload = { groups: [], items: new Map() };
+  const absorbJson = (text) => {
+    if (text && text.includes("thread_items")) collectThreadPayload(text, payload);
+  };
+  const absorbPageScripts = async () => {
+    const texts = await page.evaluate(() =>
+      Array.from(document.querySelectorAll('script[type="application/json"]')).map((s) => s.textContent || ""),
+    );
+    for (const t of texts) absorbJson(t);
+  };
+
+  // 捲動載入的貼文來自 GraphQL（POST）回應，一併攔截解析
+  page.on("response", async (res) => {
+    try {
+      const url = res.url() || "";
+      const ct = res.headers()["content-type"] || "";
+      if (!/threads\.com/.test(url) || !/json/i.test(ct)) return;
+      absorbJson(await res.text());
+    } catch {
+      /* 回應可能已釋放，忽略 */
+    }
+  });
+
   try {
     await page.goto(PROFILE_URL, { waitUntil: "domcontentloaded", timeout: 60000 });
     await page.waitForSelector('a[href*="/post/"]', { timeout: 30000 });
+    await page.waitForTimeout(2000); // 等水合完成，feed 才會長完整
+    await absorbPageScripts();
 
-    // 捲動載入更多貼文
+    // 捲動載入更多貼文（連兩輪沒有新增才停止）
+    let stale = 0;
     for (let i = 0; i < MAX_SCROLL; i++) {
       const before = await page.evaluate(() => document.querySelectorAll('a[href*="/post/"]').length);
       await page.mouse.wheel(0, 2200);
       await page.waitForTimeout(900);
       const after = await page.evaluate(() => document.querySelectorAll('a[href*="/post/"]').length);
-      if (after >= MAX_POSTS || after === before) break;
+      stale = after > before ? 0 : stale + 1;
+      if (after >= MAX_POSTS || stale >= 2) break;
     }
+    await absorbPageScripts();
 
     const rawPosts = await page.evaluate((handle) => {
       const byId = new Map();
@@ -330,11 +427,51 @@ async function scrapeViaBrowser() {
       return Array.from(byId.values());
     }, HANDLE);
 
-    return rawPosts;
+    // 用內嵌 JSON 的資料補強：完整文字（含完整連結）、精確時間、高解析圖片
+    for (const rp of rawPosts) {
+      const item = payload.items.get(rp.id);
+      if (!item) continue;
+      if (item.text) rp.rawText = item.text;
+      if (item.takenAt) rp.time = new Date(item.takenAt * 1000).toISOString();
+      if (item.imgs.length) rp.imgs = item.imgs.map((im) => ({ ...im, src: im.src }));
+      if (item.video) rp.video = true;
+    }
+    // 內嵌 JSON 有、但 DOM 沒收到的貼文（例如被過濾器漏掉）直接補上
+    for (const [code, item] of payload.items) {
+      if (rawPosts.some((p) => p.id === code)) continue;
+      if (!item.text || !item.takenAt) continue;
+      rawPosts.push({
+        id: code,
+        url: `https://www.threads.com/@${HANDLE}/post/${code}`,
+        time: new Date(item.takenAt * 1000).toISOString(),
+        rawText: item.text,
+        imgs: item.imgs,
+        video: item.video,
+      });
+    }
+
+    // thread 分組：只保留成員都抓到的組（去重複）
+    const ids = new Set(rawPosts.map((p) => p.id));
+    const seenGroups = new Set();
+    const groups = [];
+    for (const g of payload.groups) {
+      const key = g.join("+");
+      if (seenGroups.has(key)) continue;
+      seenGroups.add(key);
+      if (g.length < 2) continue;
+      if (!g.every((c) => ids.has(c))) continue;
+      // 同一則貼文只能屬於一組
+      if (g.slice(1).some((c) => groups.some((x) => x.includes(c)))) continue;
+      groups.push(g);
+    }
+
+    return { posts: rawPosts, groups, stats: { jsonItems: payload.items.size, jsonGroups: payload.groups.length } };
   } finally {
     await browser.close();
   }
 }
+
+const DEBUG = process.env.SYNC_DEBUG === "1";
 
 /* ---------- 圖片下載 ---------- */
 function extFromUrl(url, contentType = "") {
@@ -364,15 +501,15 @@ async function syncImages(post, existingImgs) {
   // 若本地已有同名圖片就重用，避免每次重抓
   const out = [];
   const remote = post.imgs || [];
-  // 若既有圖片比較完整（例如瀏覽器只抓到部分），保留舊的
-  if (existingImgs.length > remote.length && remote.length > 0) {
+  // 若既有圖片比較完整（例如瀏覽器只抓到部分、或這次沒抓到），保留舊的
+  if (existingImgs.length > remote.length) {
     const stillValid = existingImgs.filter((im) => {
       const src = im.src || "";
       if (!src) return false;
       if (src.startsWith("http")) return true;
       return fs.existsSync(path.join(ROOT, src));
     });
-    if (stillValid.length >= remote.length) return stillValid;
+    if (stillValid.length >= Math.max(remote.length, 1)) return stillValid;
   }
   for (let i = 0; i < remote.length; i++) {
     const base = `${post.id}-${i}`;
@@ -492,25 +629,6 @@ async function refreshLikes(posts) {
 }
 
 /* ---------- 主流程 ---------- */
-function normalizePost(raw, existingById) {
-  const old = existingById.get(raw.id) || {};
-  const cleaned = cleanPostText(raw.text ?? raw.rawText ?? "");
-  const scrapedParts = splitParts(cleaned);
-  const links = raw.links?.length ? raw.links : extractLinks(cleaned);
-  // 既有貼文若已有人工整理過的正文，保留；只補新欄位
-  const parts = Array.isArray(old.parts) && old.parts.some((p) => p && p.trim()) ? old.parts : scrapedParts;
-  return {
-    id: raw.id,
-    url: raw.url || old.url || `https://www.threads.com/@${HANDLE}/post/${raw.id}`,
-    time: new Date(raw.time).toISOString(),
-    tag: old.tag ?? "",
-    parts,
-    imgs: [], // 後填
-    links: Array.from(new Set([...(old.links || []), ...links])),
-    video: Boolean(raw.video ?? old.video),
-  };
-}
-
 async function main() {
   console.log(`同步 Threads @${HANDLE} …`);
   const existing = loadExisting();
@@ -518,6 +636,7 @@ async function main() {
   console.log(`  現有貼文 ${existing.posts.length} 則`);
 
   let rawPosts = [];
+  let threadGroups = [];
   let method = "none";
   const hasToken = Boolean(process.env.THREADS_ACCESS_TOKEN);
 
@@ -534,9 +653,14 @@ async function main() {
 
   if (!rawPosts.length) {
     try {
-      rawPosts = await scrapeViaBrowser();
+      const scraped = await scrapeViaBrowser();
+      rawPosts = scraped.posts;
+      threadGroups = scraped.groups;
       method = "browser";
-      console.log(`  瀏覽器擷取 ${rawPosts.length} 則`);
+      console.log(
+        `  瀏覽器擷取 ${rawPosts.length} 則（內建 JSON：${scraped.stats.jsonItems} 則資料、` +
+          `${scraped.stats.jsonGroups} 個原始分組，採用 ${threadGroups.length} 組）`,
+      );
       if (rawPosts.length && rawPosts.length < existing.posts.length) {
         console.warn(
           `  提醒：公開頁未登入通常只顯示最前面幾則（登入牆）。` +
@@ -557,20 +681,124 @@ async function main() {
 
   if (!DRY_RUN) fs.mkdirSync(IMG_DIR, { recursive: true });
 
+  const rawById = new Map(rawPosts.filter((p) => p.id && p.time).map((p) => [p.id, p]));
+
+  // --- thread 分類 ---
+  // freshGroups：今天抓到的完整 thread（root = 第一個元素）
+  const freshRoots = new Map(); // rootId -> memberIds（不含 root）
+  const memberRoot = new Map(); // memberId -> rootId
+  for (const g of threadGroups) {
+    const [rootId, ...members] = g;
+    if (freshRoots.has(rootId)) continue;
+    freshRoots.set(rootId, members);
+    for (const m of members) memberRoot.set(m, rootId);
+  }
+  // 沒有出現在 fresh 分組的貼文，若屬於既有合併貼文（thread 欄位），也歸到那個 root
+  const existingThreadRoot = new Map();
+  for (const ep of existing.posts) {
+    if (!Array.isArray(ep.thread)) continue;
+    for (const id of ep.thread) if (id !== ep.id) existingThreadRoot.set(id, ep.id);
+  }
+  const absorbed = new Set(); // 併入 root、不再單獨出現的貼文
+  for (const [id, rootId] of memberRoot) {
+    if (rawById.has(rootId) || existingById.has(rootId)) continue;
+    // root 完全不可得：放棄合併，維持原本行為
+    memberRoot.delete(id);
+  }
+  for (const rp of rawById.values()) {
+    if (memberRoot.has(rp.id)) continue;
+    const er = existingThreadRoot.get(rp.id);
+    if (er) memberRoot.set(rp.id, er);
+  }
+  // root 不在今天抓取範圍、但既有資料已有合併內容 → 子貼文直接捨棄
+  for (const [id, rootId] of memberRoot) {
+    if (id !== rootId && !rawById.has(rootId) && existingById.has(rootId)) {
+      absorbed.add(id);
+    }
+  }
+
+  // --- 清理文字 ---
+  const cleanedById = new Map();
+  for (const rp of rawById.values()) {
+    cleanedById.set(rp.id, cleanPostText(rp.text ?? rp.rawText ?? ""));
+  }
+
+  // --- 圖片（成員若已併入既有 root，就不再重抓） ---
+  const imgsById = new Map();
+  for (const rp of rawById.values()) {
+    if (absorbed.has(rp.id)) continue;
+    const rid = memberRoot.get(rp.id);
+    if (rid && rid !== rp.id) {
+      const rootOld = existingById.get(rid);
+      if (rootOld && Array.isArray(rootOld.thread) && rootOld.thread.includes(rp.id)) continue;
+    }
+    imgsById.set(rp.id, await syncImages(rp, existingById.get(rp.id)?.imgs || []));
+  }
+
+  // --- 組成貼文物件 ---
   const nextPosts = [];
-  for (const raw of rawPosts) {
-    if (!raw.id || !raw.time) continue;
-    const post = normalizePost(raw, existingById);
-    const oldImgs = existingById.get(raw.id)?.imgs || [];
-    post.imgs = await syncImages(raw, oldImgs);
+  for (const rp of rawById.values()) {
+    if (absorbed.has(rp.id)) continue;
+    const rootId = memberRoot.get(rp.id);
+    if (rootId && rootId !== rp.id) continue; // 成員併入 root，底下一起處理
+    const old = existingById.get(rp.id) || {};
+    const cleaned = cleanedById.get(rp.id) || "";
+    const post = {
+      id: rp.id,
+      url: rp.url || old.url || `https://www.threads.com/@${HANDLE}/post/${rp.id}`,
+      time: new Date(rp.time).toISOString(),
+      tag: old.tag ?? "",
+      parts: [],
+      imgs: imgsById.get(rp.id) || [],
+      links: Array.from(new Set([...(old.links || []), ...(rp.links?.length ? rp.links : extractLinks(cleaned))])),
+      video: Boolean(rp.video ?? old.video),
+    };
+    if (old.likes != null) post.likes = old.likes; // 保留已抓過的按讚數
+
+    const members = freshRoots.get(rp.id);
+    if (!members) {
+      // 單則貼文：保留既有整理過的正文
+      post.parts = Array.isArray(old.parts) && old.parts.some((p) => p && p.trim()) ? old.parts : splitParts(cleaned);
+      const oldThread = Array.isArray(old.thread) && old.thread.length > 1 ? old.thread : null;
+      if (oldThread) post.thread = oldThread;
+      nextPosts.push(post);
+      continue;
+    }
+
+    // thread：root 為主體，每段續文一個 part
+    const oldThread = Array.isArray(old.thread) && old.thread.length ? old.thread : [rp.id];
+    const newMembers = members.filter((id) => !oldThread.includes(id));
+    post.thread = [...new Set([rp.id, ...oldThread, ...members])];
+    if (newMembers.length) {
+      if (oldThread.length > 1 && Array.isArray(old.parts) && old.parts.some((p) => p && p.trim())) {
+        // 之前已合併過：既有 parts 已含舊續文，只接上新成員
+        post.parts = [...old.parts, ...newMembers.map((id) => cleanedById.get(id) || "").filter((t) => t.trim())];
+      } else {
+        // 首次合併：以抓到的乾淨文字重組（root 一段、續文各一段）
+        const partTexts = [cleaned, ...members.map((id) => cleanedById.get(id) || "")].filter((t) => t.trim());
+        post.parts = partTexts.length ? partTexts : [cleaned];
+      }
+      for (const id of newMembers) {
+        post.imgs = [...(post.imgs || []), ...(imgsById.get(id) || [])];
+        post.links = Array.from(new Set([...post.links, ...extractLinks(cleanedById.get(id) || "")]));
+        if (rawById.get(id)?.video) post.video = true;
+      }
+    } else {
+      // 成員都已併入既有內容：沿用既有正文，避免重複
+      post.parts = Array.isArray(old.parts) && old.parts.some((p) => p && p.trim())
+        ? old.parts
+        : splitParts(cleaned);
+    }
     nextPosts.push(post);
   }
 
-  // 合併：新抓的優先；若 API 只拿到部分，保留較舊既有貼文
+  // --- 合併：新抓的優先；若 API 只拿到部分，保留較舊既有貼文 ---
   const merged = new Map();
   for (const p of nextPosts) merged.set(p.id, p);
   for (const p of existing.posts) {
-    if (!merged.has(p.id)) merged.set(p.id, p);
+    // 已併入 root 的子貼文（今天抓到或之前已合併）不再單獨出現
+    if (merged.has(p.id) || absorbed.has(p.id) || memberRoot.has(p.id)) continue;
+    merged.set(p.id, p);
   }
   const posts = Array.from(merged.values()).sort((a, b) => b.time.localeCompare(a.time));
 
@@ -602,8 +830,8 @@ async function main() {
   });
 
   const added = nextPosts.filter((p) => !existingById.has(p.id)).length;
-  const updated = nextPosts.filter((p) => existingById.has(p.id)).length;
-  console.log(`完成（${method}）：新增 ${added}、更新 ${updated}、總計 ${posts.length}`);
+  const mergedThreads = nextPosts.filter((p) => p.thread && p.thread.length > 1).length;
+  console.log(`完成（${method}）：新增 ${added}、合併 thread ${mergedThreads} 組、總計 ${posts.length}`);
   if (DRY_RUN) console.log("（dry-run，未寫入檔案）");
 }
 

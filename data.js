@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-02T06:33:06.852Z（scripts/sync_threads.mjs，GitHub Actions 每三天自動更新） */
+   Threads 同步於 2026-10-02T06:37:36.524Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -299,25 +299,13 @@ window.PROJECT_ITEMS = [
 ];
 window.THREADS_POSTS = [
  {
-  "id": "Dd-l9m-FPAV",
-  "url": "https://www.threads.com/@yuqi._.0313/post/Dd-l9m-FPAV",
-  "time": "2026-10-02T04:09:46.000Z",
-  "tag": "",
-  "parts": [
-   "連結： ytustartuphouse.com.tr/en/bl…"
-  ],
-  "imgs": [],
-  "links": [],
-  "video": false,
-  "likes": 2
- },
- {
   "id": "Dd-l9MDFLcq",
   "url": "https://www.threads.com/@yuqi._.0313/post/Dd-l9MDFLcq",
   "time": "2026-10-02T04:09:42.000Z",
   "tag": "",
   "parts": [
-   "Meta × YTU Startup House AI Builders Türkiye Student Hackathon 開放申請！\n想從零開始學習 AI 並實際打造自己的 AI 專案嗎？\n這是一個從 AI 學習 → 專案開發 → 國際 Hackathon 的完整機會！\n🟢 Phase 1：AI 101 Training（線上）\n官方提供免費 AI 培訓：\n✅ 線上進行，並提供課程錄影\n✅ Meta 認證講師授課\n✅ 不需具備 LLM 或 AI 開發經驗\n✅ 完成3/4 課程可獲得參與證書\n🔴 Phase 2：Student Hackathon（土耳其線下）\n完成培訓可申請進入正式 Hackathon\n📍 地點：YTU Startup House，Istanbul（土耳其伊斯坦堡）\n💰 總獎金：6,000 USD\nytustartuphouse.com.tr\nFree AI Training for Undergraduates: YTU Startup House and Meta Open Applications for the Student Hackathon Training Series"
+   "Meta × YTU Startup House AI Builders Türkiye Student Hackathon 開放申請！\n想從零開始學習 AI 並實際打造自己的 AI 專案嗎？\n這是一個從 AI 學習 → 專案開發 → 國際 Hackathon 的完整機會！\n\n🟢 Phase 1：AI 101 Training（線上）\n官方提供免費 AI 培訓：\n✅ 線上進行，並提供課程錄影\n✅ Meta 認證講師授課\n✅ 不需具備 LLM 或 AI 開發經驗\n✅ 完成3/4 課程可獲得參與證書\n\n🔴 Phase 2：Student Hackathon（土耳其線下）\n完成培訓可申請進入正式 Hackathon\n📍 地點：YTU Startup House，Istanbul（土耳其伊斯坦堡）\n💰 總獎金：6,000 USD",
+   "連結： https://ytustartuphouse.com.tr/en/blog/free-ai-training-for-undergraduates-ytu-startup-house-and-meta-open-applications-for-the-student-hackathon-training-series?utm_source=chatgpt.com"
   ],
   "imgs": [
    {
@@ -327,29 +315,14 @@ window.THREADS_POSTS = [
     "alt": "Free AI Training for Undergraduates: YTU Startup House and Meta Open Applications for the Student Hackathon Training Series"
    }
   ],
-  "links": [],
-  "video": false,
-  "likes": 17
- },
- {
-  "id": "Dd87Nitk74W",
-  "url": "https://www.threads.com/@yuqi._.0313/post/Dd87Nitk74W",
-  "time": "2026-10-01T12:36:57.000Z",
-  "tag": "",
-  "parts": [
-   "6️⃣ CS224N NLP × DL｜Manning 神課\nyoutube.com/playl…\n7️⃣ CS224U 自然語言理解｜語義方向\nyoutube.com/playl…\n8️⃣ CME295 大模型｜Transformers & LLM\nyoutube.com/playl…\n9️⃣ CS236 深度生成模型｜VAE·GAN·Diffusion\nyoutube.com/playl…"
+  "links": [
+   "https://ytustartuphouse.com.tr/en/blog/free-ai-training-for-undergraduates-ytu-startup-house-and-meta-open-applications-for-the-student-hackathon-training-series?utm_source=chatgpt.com"
   ],
-  "imgs": [
-   {
-    "src": "assets/threads/Dd87Nitk74W-0.jpg",
-    "w": 480,
-    "h": 270,
-    "alt": "Large Language Models (LLMs)"
-   }
-  ],
-  "links": [],
   "video": false,
-  "likes": 2
+  "thread": [
+   "Dd-l9MDFLcq",
+   "Dd-l9m-FPAV"
+  ]
  },
  {
   "id": "Dd87NDGk-x9",
@@ -357,8 +330,8 @@ window.THREADS_POSTS = [
   "time": "2026-10-01T12:36:53.000Z",
   "tag": "",
   "parts": [
-   "🔥 斯坦福免費 AI 課，鏈接都幫你們扒好了！\n1️⃣ CS221 人工智能｜搜索·邏輯·MDP\nyoutube.com/playl…\n2️⃣ CS229 機器學習｜經典 ML 必修\nyoutube.com/playl…\n3️⃣ CS230 深度學習｜Andrew Ng 親授\nyoutube.com/playl…\n4️⃣ CS229M 機器學習理論｜想搞懂為什麼有用就看這個\nyoutube.com/playl…\n5️⃣ CS234 強化學習｜RL 入門天花板\nyoutube.com/playl…",
-   "👉 （留言續）看完不按讚分享＝白嫖失敗"
+   "🔥 斯坦福免費 AI 課，鏈接都幫你們扒好了！\n\n1️⃣ CS221 人工智能｜搜索·邏輯·MDP\nhttps://youtube.com/playlist?list=PLoROMvodv4rMeDqwS1yFl3j3sR_-MQNEN\n2️⃣ CS229 機器學習｜經典 ML 必修\nhttps://youtube.com/playlist?list=PLaqpC4kq8Gpw\n3️⃣ CS230 深度學習｜Andrew Ng 親授\nhttps://youtube.com/playlist?list=PLoROMvodv4rNRRGdS0rBbXOUGA0wjdh1X\n4️⃣ CS229M 機器學習理論｜想搞懂為什麼有用就看這個\nhttps://youtube.com/playlist?list=PLoROMvodv4rP8nAmISxFINlGKSK4rbLKh\n5️⃣ CS234 強化學習｜RL 入門天花板\nhttps://youtube.com/playlist?list=PLoROMvodv4rN4wG6Nk6sNpTEbuOSosZdX\n👉 （留言續）看完不按讚分享＝白嫖失敗",
+   "6️⃣ CS224N NLP × DL｜Manning 神課\nhttps://youtube.com/playlist?list=PLoROMvodv4rOaMFbaqxPDoLWjDaRAdP9D\n7️⃣ CS224U 自然語言理解｜語義方向\nhttps://youtube.com/playlist?list=PLoROMvodv4rPt5D0zs3YhbWSZA8Q_DyiJ\n8️⃣ CME295 大模型｜Transformers & LLM\nhttps://youtube.com/playlist?list=PLoROMvodv4rObv1FMizXqumgVVdzX4_05\n9️⃣ CS236 深度生成模型｜VAE·GAN·Diffusion\nhttps://youtube.com/playlist?list=PLoROMvodv4rPOWA-omMM6STXaWW4FvJT8"
   ],
   "imgs": [
    {
@@ -366,11 +339,30 @@ window.THREADS_POSTS = [
     "w": 480,
     "h": 270,
     "alt": "Stanford CS234 I Reinforcement Learning I Spring 2024 I Emma Brunskill"
+   },
+   {
+    "src": "assets/threads/Dd87Nitk74W-0.jpg",
+    "w": 480,
+    "h": 270,
+    "alt": "Large Language Models (LLMs)"
    }
   ],
-  "links": [],
+  "links": [
+   "https://youtube.com/playlist?list=PLoROMvodv4rMeDqwS1yFl3j3sR_-MQNEN",
+   "https://youtube.com/playlist?list=PLaqpC4kq8Gpw",
+   "https://youtube.com/playlist?list=PLoROMvodv4rNRRGdS0rBbXOUGA0wjdh1X",
+   "https://youtube.com/playlist?list=PLoROMvodv4rP8nAmISxFINlGKSK4rbLKh",
+   "https://youtube.com/playlist?list=PLoROMvodv4rN4wG6Nk6sNpTEbuOSosZdX",
+   "https://youtube.com/playlist?list=PLoROMvodv4rOaMFbaqxPDoLWjDaRAdP9D",
+   "https://youtube.com/playlist?list=PLoROMvodv4rPt5D0zs3YhbWSZA8Q_DyiJ",
+   "https://youtube.com/playlist?list=PLoROMvodv4rObv1FMizXqumgVVdzX4_05",
+   "https://youtube.com/playlist?list=PLoROMvodv4rPOWA-omMM6STXaWW4FvJT8"
+  ],
   "video": false,
-  "likes": 51
+  "thread": [
+   "Dd87NDGk-x9",
+   "Dd87Nitk74W"
+  ]
  },
  {
   "id": "Dd85JZcEz44",
@@ -382,8 +374,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 7
+  "video": false
  },
  {
   "id": "Dd8XNHJE7H4",
@@ -401,9 +392,10 @@ window.THREADS_POSTS = [
     "alt": "台大教授李宏毅：AI Agent時代，學生最該練的是這3種能力"
    }
   ],
-  "links": [],
-  "video": false,
-  "likes": 4
+  "links": [
+   "https://www.bnext.com.tw/article/92416/ai-education-problem-finding-future-skills?openExternalBrowser=1&utm_source=line&utm_medium=message&ldtag_cl=5EiClVIcSw-bKVDDupZ6eQAA_oa&lt_r=099&srclt=oa&_ly_c=e4488295-521c-4b0f-9b29-50c3ba967a79&_ly_r=099&_ly_src=oa"
+  ],
+  "video": false
  },
  {
   "id": "Dd21zc8E6qu",
@@ -415,21 +407,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 4
- },
- {
-  "id": "Dd2prrKE0Pf",
-  "url": "https://www.threads.com/@yuqi._.0313/post/Dd2prrKE0Pf",
-  "time": "2026-09-29T02:08:20.000Z",
-  "tag": "",
-  "parts": [
-   "黃爸爸推特： x.com/Jense…\n官方新聞： nvidianews.nvidia.com/news…\nnvidianews.nvidia.com\nNVIDIA Launches Open Agent Safety Platform to Secure Agents From Testing to Deployment"
-  ],
-  "imgs": [],
-  "links": [],
-  "video": false,
-  "likes": 3
+  "video": false
  },
  {
   "id": "Dd2prQcE1p5",
@@ -437,12 +415,26 @@ window.THREADS_POSTS = [
   "time": "2026-09-29T02:08:17.000Z",
   "tag": "",
   "parts": [
-   "🚨NVIDIA官方通知：9 月 28 日正式上線「開放代理安全平台」！\n🔹核心變化：沒有新模型，是把 Agent 的護城河下放到「軟件 + 晶片」強制OpenShell 開源管邊界、Sentry 跑在 BlueField-4 越界毫秒級掐斷\n🔹影響範圍：Claude Code / Codex / Cursor 直接套；Anthropic、SpaceXAI、SAP、微軟、CrowdStrike 等 100+ 已接入，延伸到機器人、銀行、能源，但對純聊天型應用沒有太大影響\nQ1：和台灣有什麼關係，什麼股票會漲？\n．NVIDIA — NVDA（美股）\n．台積電：製 BlueField 晶片 — 2330（台股）/ TSM（美 ADR）\n．聯發科：edge AI 合作 — 2454（台股）\n．廣達： Dell / HPE / Supermicro 代工 — 2382（台股）\n．仁寶 Compal：HP / Dell / Lenovo 代工 — 2324（台股）\n．緯創 Wistron：HPE / Lenovo 代工 — 3231（台股）\n．和碩 Pegatron：硬體供應 — 4938（台股）\n．英業達 Inventec：伺服器代工 — 2356（台股）\n．鴻海 Foxconn：個人認為的伺服器未來名單 — 2317（台股）\n．Supermicro 美超微 — SMCI（美股）\n．Synopsys 新思：台灣半導體 EDA 支柱 — SNPS（美股）\n．Cadence：台灣半導體 EDA 支柱 — CDNS（美股）\n\nQ2：NVDA 發的到底是什麼？不是又一個模型嗎？\n\n．Jensen Huang（NVIDIA CEO）：「This is bigger than a single product. It's the beginning of an open ecosystem to build the trust layer for safe agent systems.」→ 不是模型，以互聯網為例：沒有 SSL / 瀏覽器沙箱就沒有電商時代，他想給 Agent 經濟定義同一把鎖\n\nQ3：跟以前的 AI 安全有什麼不一樣？\n\n．NVIDIA 官方的關鍵切分：「Model safeguards 影響 agent 嘗試做什麼；runtime controls 強制它被允許做什麼。」→ 以前是自律，現在是管控\n閱讀全文"
+   "🚨NVIDIA官方通知：9 月 28 日正式上線「開放代理安全平台」！\n\n🔹核心變化：沒有新模型，是把 Agent 的護城河下放到「軟件 + 晶片」強制OpenShell 開源管邊界、Sentry 跑在 BlueField-4 越界毫秒級掐斷\n🔹影響範圍：Claude Code / Codex / Cursor 直接套；Anthropic、SpaceXAI、SAP、微軟、CrowdStrike 等 100+ 已接入，延伸到機器人、銀行、能源，但對純聊天型應用沒有太大影響",
+   "黃爸爸推特： https://x.com/JensenHuang/status/2104499465055023424\n官方新聞： https://nvidianews.nvidia.com/news/open-agent-safety-platform"
   ],
-  "imgs": [],
-  "links": [],
+  "imgs": [
+   {
+    "src": "assets/threads/Dd2prrKE0Pf-0.png",
+    "w": 1920,
+    "h": 1080,
+    "alt": ""
+   }
+  ],
+  "links": [
+   "https://x.com/JensenHuang/status/2104499465055023424",
+   "https://nvidianews.nvidia.com/news/open-agent-safety-platform"
+  ],
   "video": false,
-  "likes": 7
+  "thread": [
+   "Dd2prQcE1p5",
+   "Dd2prrKE0Pf"
+  ]
  },
  {
   "id": "Dd0smhtm4p4",
@@ -461,8 +453,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 20
+  "video": false
  },
  {
   "id": "DdnOjx0E5kx",
@@ -472,12 +463,24 @@ window.THREADS_POSTS = [
   "parts": [
    "這次是真的有點離譜！\nClaude Opus 5.5 Medium，已經在 GDPval-AA 知識工作榜超過 GPT-6 Astra Max！\n不是營銷口號，直接看數據👇\n• Opus 5.5 Max：1846 Elo\n• Opus 5.5 Medium：1576 Elo\n• GPT-6 Astra Max：1542 Elo\n簡單來說這個分數代表相對實力，所以不用拉滿，Opus 5.5 Medium 在知識工作這個 benchmark 上就已經超過 Astra Max\n更狠的是其他測試：\n💻 Terminal-Bench 4.0（AI 完成任務的能力）\n66.4% vs 57.9%\n🧠 Humanity's Last Exam（懂多少高難度知識）\n67.7% vs 57.2%\n當然一樣別把一個 benchmark 當成「全面碾壓」\n相關連結： artificialanalysis.ai/es/mo…"
   ],
-  "imgs": [],
+  "imgs": [
+   {
+    "src": "assets/threads/DdnOjx0E5kx-0.jpg",
+    "w": 1320,
+    "h": 901,
+    "alt": ""
+   },
+   {
+    "src": "assets/threads/DdnOjx0E5kx-1.jpg",
+    "w": 1320,
+    "h": 1309,
+    "alt": ""
+   }
+  ],
   "links": [
    "https://artificialanalysis.ai/es/models/comparisons/claude-opus-5-5-medium-vs-gpt-6-astra?utm_source=chatgpt.com"
   ],
-  "video": false,
-  "likes": 2
+  "video": false
  },
  {
   "id": "Ddk1dZkkwsn",
@@ -489,8 +492,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 2
+  "video": false
  },
  {
   "id": "Ddkdz_XGjmD",
@@ -509,8 +511,85 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 1
+  "video": false
+ },
+ {
+  "id": "Ddih8R4k6yr",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Ddih8R4k6yr",
+  "time": "2026-09-21T06:35:53.000Z",
+  "tag": "",
+  "parts": [
+   "AutoClaw Token Rush 又來了！🔥🔥🔥\n這週直接給 GLM-5.3-Flash 瘋狂加額度，所有用戶都能領！！！\n📅 9/21：2億 Token\n📅 9/22：3億 Token\n兩天直接 5億 Token！要注意每天晚上 23:59 會失效！\n更狠的是 9/24～9/26 付費會員（不到一個便當錢）每天還能繼續領 Token！\n今天先把 2億 Token 領了，後面還有連續三天會員額度，狠狠薅一波😎\n連結： https://autoclaw.z.ai/"
+  ],
+  "imgs": [],
+  "links": [
+   "https://autoclaw.z.ai/"
+  ],
+  "video": false
+ },
+ {
+  "id": "DdiKhwYk_rG",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DdiKhwYk_rG",
+  "time": "2026-09-21T03:11:18.000Z",
+  "tag": "",
+  "parts": [
+   "🚨最新：智譜在今天把 ZCode 改開源了！\n為了回應之前靜默上傳用戶程式碼的爭議，智譜把 ZCode 開源讓開發者能夠自由檢查，並且引入中國信通院與 NSFOCUS 進行第三方檢驗，來挽回用戶信任。\nGithub : https://github.com/zai-org/ZCode"
+  ],
+  "imgs": [],
+  "links": [
+   "https://github.com/zai-org/ZCode"
+  ],
+  "video": false
+ },
+ {
+  "id": "Ddh_PX5k-G2",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Ddh_PX5k-G2",
+  "time": "2026-09-21T01:32:40.000Z",
+  "tag": "",
+  "parts": [
+   "最近爆火的 Jev 終於對所有人都開放了！\n不用等待的感覺真好～\n而且登入就送 1.2 億 tokens！\n官方連結：https://console.typesafe.ai/login"
+  ],
+  "imgs": [],
+  "links": [
+   "https://console.typesafe.ai/login"
+  ],
+  "video": false
+ },
+ {
+  "id": "Ddh1c8Ik6bq",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Ddh1c8Ik6bq",
+  "time": "2026-09-21T00:07:08.000Z",
+  "tag": "",
+  "parts": [
+   "認識一下目前開源最強的生圖模型 ：Qwen-Image-2.1！\n亮點：\n1. 緊湊且極速：輕量級 7B 架構，超越大多數閉源模型，並大幅加速多圖像輸入的推理速度。\n2. 原生透明度：原生生成與編輯 RGBA 圖層，實現透明圖像中的無縫合成與文字編輯。\n3. 多功能、高保真編輯：支援最多 10 張參考圖像與精確局部控制，同時為肖像與產品保留嚴格保真度。\n4. 廣泛涵蓋與驚艷美學：擅長全景、資訊圖表與虛擬試穿，提供逼真紋理與優雅排版。\nGithub: https://github.com/QwenLM/Qwen-Image-2.1\nModel Scope: https://www.modelscope.cn/models/Qwen/Qwen-Image-2.1"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/Ddh1c8Ik6bq-0.jpg",
+    "w": 2542,
+    "h": 944,
+    "alt": ""
+   }
+  ],
+  "links": [
+   "https://github.com/QwenLM/Qwen-Image-2.1",
+   "https://www.modelscope.cn/models/Qwen/Qwen-Image-2.1"
+  ],
+  "video": false
+ },
+ {
+  "id": "DdgV7U3E2iT",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DdgV7U3E2iT",
+  "time": "2026-09-20T10:12:25.000Z",
+  "tag": "",
+  "parts": [
+   "難道圖像生成這一塊要捲起來了嗎？\n阿里把 Qwen-Image 2.1 開源了\n官方定位：高效創作、靈活編輯，支持局部修改和多樣輸入輸出\n準備好今晚就來測試吧！\n👉 入口： https://modelscope.cn/models/Qwen/Qwen-Image-2.1"
+  ],
+  "imgs": [],
+  "links": [
+   "https://modelscope.cn/models/Qwen/Qwen-Image-2.1"
+  ],
+  "video": false
  },
  {
   "id": "Ddcz31oE9zP",
@@ -522,8 +601,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 25
+  "video": false
  },
  {
   "id": "DdbvPAAE3Zi",
@@ -535,8 +613,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 24
+  "video": false
  },
  {
   "id": "Ddbk7m1k9bq",
@@ -548,8 +625,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 6
+  "video": false
  },
  {
   "id": "Ddafoylk2B4",
@@ -564,8 +640,7 @@ window.THREADS_POSTS = [
    "https://kaochenlong.com/",
    "https://zonble.net/"
   ],
-  "video": false,
-  "likes": 23
+  "video": false
  },
  {
   "id": "DdQ4jy2kz6O",
@@ -577,8 +652,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 7
+  "video": false
  },
  {
   "id": "DdQXuwpE8Kp",
@@ -590,8 +664,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 12
+  "video": false
  },
  {
   "id": "DdQSLsXk4fe",
@@ -641,8 +714,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 163
+  "video": false
  },
  {
   "id": "DdGwI87mwtM",
@@ -664,8 +736,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://mimo.mi.com/"
   ],
-  "video": false,
-  "likes": 18
+  "video": false
  },
  {
   "id": "DdGoP9am7YU",
@@ -677,8 +748,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 29
+  "video": false
  },
  {
   "id": "DdGjq8VGzKX",
@@ -690,8 +760,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 32
+  "video": false
  },
  {
   "id": "DdGcbrVm1gU",
@@ -703,8 +772,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 6
+  "video": false
  },
  {
   "id": "DdGZlDTG2wo",
@@ -736,8 +804,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 16
+  "video": false
  },
  {
   "id": "DdFpa-9E0rm",
@@ -749,8 +816,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 31
+  "video": false
  },
  {
   "id": "DdD1E-ik_uv",
@@ -772,8 +838,7 @@ window.THREADS_POSTS = [
    "http://mathathonchallenge.com/apply.html",
    "http://mathathonchallenge.com/"
   ],
-  "video": true,
-  "likes": 83
+  "video": true
  },
  {
   "id": "Dc-5LEcE-O-",
@@ -813,8 +878,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/nevertoday/xxd-panel-116"
   ],
-  "video": false,
-  "likes": 1679
+  "video": false
  },
  {
   "id": "Dc5wjZ0k4NO",
@@ -835,8 +899,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://typewords.cc/"
   ],
-  "video": false,
-  "likes": 16
+  "video": false
  },
  {
   "id": "Dc5lSrck3UP",
@@ -857,8 +920,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://x.com/victornunez/status/2095975651094261777"
   ],
-  "video": false,
-  "likes": 3
+  "video": false
  },
  {
   "id": "Dc4oHAyE_ks",
@@ -883,8 +945,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 3
+  "video": false
  },
  {
   "id": "Dc3UHAwE4SA",
@@ -911,8 +972,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://youtu.be/9vnr69Lg4_I?si=7m9q7rM4BIBUbpxx"
   ],
-  "video": false,
-  "likes": 3
+  "video": false
  },
  {
   "id": "Dc2IxxrEwhu",
@@ -939,8 +999,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://www.cnet.com/tech/services-and-software/openai-gpt-6-astra-release-ai-agi-chatgpt/"
   ],
-  "video": false,
-  "likes": 2
+  "video": false
  },
  {
   "id": "Dczp6Amk7w7",
@@ -959,8 +1018,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 335
+  "video": false
  },
  {
   "id": "DczlIRuk-Gi",
@@ -980,8 +1038,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 11
+  "video": false
  },
  {
   "id": "DcmefHPE0Bb",
@@ -1007,8 +1064,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 57
+  "video": false
  },
  {
   "id": "DcctWYMFO60",
@@ -1042,8 +1098,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://forms.gle/h424y1w544cTQ2rW6"
   ],
-  "video": false,
-  "likes": 6
+  "video": false
  },
  {
   "id": "DcawHs7G_Ui",
@@ -1129,8 +1184,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 32
+  "video": false
  },
  {
   "id": "DcP4Sz4E3rL",
@@ -1155,8 +1209,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 2
+  "video": false
  },
  {
   "id": "DcP4REnE6Jz",
@@ -1201,8 +1254,7 @@ window.THREADS_POSTS = [
   "links": [
    "http://Z.ai/"
   ],
-  "video": false,
-  "likes": 2
+  "video": false
  },
  {
   "id": "DcOXTaJE4__",
@@ -1229,8 +1281,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://lvyovo-wiki.tech/"
   ],
-  "video": false,
-  "likes": 9
+  "video": false
  },
  {
   "id": "DcNIuSik9AA",
@@ -1249,8 +1300,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 3
+  "video": false
  },
  {
   "id": "DcNHaOHk2aP",
@@ -1269,8 +1319,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 13
+  "video": false
  },
  {
   "id": "DcCjMnemanu",
@@ -1296,8 +1345,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 3
+  "video": false
  },
  {
   "id": "DcAa70NE0mS",
@@ -1324,8 +1372,7 @@ window.THREADS_POSTS = [
   "links": [
    "http://github.com/guillaumemeyer/watermarks-remover"
   ],
-  "video": false,
-  "likes": 2
+  "video": false
  },
  {
   "id": "Db_8Kt8E1uU",
@@ -1375,8 +1422,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 14
+  "video": false
  },
  {
   "id": "Db_7rADk_LX",
@@ -1426,8 +1472,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 31
+  "video": false
  },
  {
   "id": "DbnzGmdE91J",
@@ -1461,8 +1506,7 @@ window.THREADS_POSTS = [
   "links": [
    "http://unity.com/blog/meet-the-unity-cli"
   ],
-  "video": false,
-  "likes": 5
+  "video": false
  },
  {
   "id": "DbIyJ6nE7tf",
@@ -1489,8 +1533,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://tolaria.md/"
   ],
-  "video": false,
-  "likes": 132
+  "video": false
  },
  {
   "id": "DbFgDgoE3V3",
@@ -1523,8 +1566,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/Evolink-AI/awesome-kimi-k3-usecases"
   ],
-  "video": true,
-  "likes": 3
+  "video": true
  },
  {
   "id": "DbBEknTk7gM",
@@ -1552,8 +1594,7 @@ window.THREADS_POSTS = [
    "http://github.com/Yu-0312/ppt-creater-skills",
    "https://github.com/Yu-0312/ppt-creater-skills"
   ],
-  "video": false,
-  "likes": 64
+  "video": false
  },
  {
   "id": "DbAQJTJE8up",
@@ -1580,8 +1621,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://www.accupass.com/event/2607070627081511571718"
   ],
-  "video": false,
-  "likes": 6
+  "video": false
  },
  {
   "id": "DZ-MAbuE4Qr",
@@ -1595,8 +1635,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/Yu-0312/apcs-judge"
   ],
-  "video": false,
-  "likes": 102
+  "video": false
  },
  {
   "id": "DZztwi6Gxfn",
@@ -1618,8 +1657,7 @@ window.THREADS_POSTS = [
   "links": [
    "https://github.com/Yu-0312/ppt-creater"
   ],
-  "video": false,
-  "likes": 11
+  "video": false
  },
  {
   "id": "DZpu6RvE1NU",
@@ -1675,8 +1713,7 @@ window.THREADS_POSTS = [
    }
   ],
   "links": [],
-  "video": false,
-  "likes": 7
+  "video": false
  },
  {
   "id": "DZoFMp-k6qp",
@@ -1689,8 +1726,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 50
+  "video": false
  },
  {
   "id": "DZjpDB_G9he",
@@ -1703,8 +1739,7 @@ window.THREADS_POSTS = [
   ],
   "imgs": [],
   "links": [],
-  "video": false,
-  "likes": 8
+  "video": false
  },
  {
   "id": "DZSqkvkk8gb",
@@ -1727,7 +1762,6 @@ window.THREADS_POSTS = [
    "http://yu-0312.github.io/apcs-judge",
    "https://github.com/Yu-0312/apcs-judge"
   ],
-  "video": false,
-  "likes": 394
+  "video": false
  }
 ];

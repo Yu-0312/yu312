@@ -40,7 +40,9 @@ Yu（王宇錡 · [@yuqi._.0313](https://www.threads.com/@yuqi._.0313)）的個�
 4. 較舊貼文與人工標的 `tag` 會保留，不會被覆蓋
 5. 有變更才 commit / push，GitHub Pages 自動部署
 
-> 補充：公開頁未登入時 Threads 只顯示最前面幾則（登入牆），所以每天抓主要是「增量收新貼文」。若之後設定 `THREADS_ACCESS_TOKEN`，會自動改走官方 API 並補齊完整歷史。
+**多段貼文（thread / 續文）會合併成一張卡片**：Threads 的續文各自有獨立 post id，但在頁面內嵌 JSON（`data-sjs` script 與 GraphQL 回應）中會放在同一個 `thread_items` 陣列。同步以此為依據，把整個 thread 併入第一則（root），每段續文變成 `parts` 的一個元素，並在資料中記錄 `thread` 成員 id——之後的同步不會把續文再拆成獨立卡片，舊的續文連結（`posts.html#<續文id>`）也會導向合併後的卡片。
+
+> 補充：公開頁未登入時 Threads 只顯示最前面幾則（登入牆），所以每天抓主要是「增量收新貼文」。若之後設定 `THREADS_ACCESS_TOKEN`，會自動改走官方 API 並補齊完整歷史（注意：官方 API 拿不到 thread 分組，續文合併只在瀏覽器抓取路徑生效）。
 
 ### 本機執行
 

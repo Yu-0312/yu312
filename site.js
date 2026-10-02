@@ -405,8 +405,10 @@
     const likesHTML = p.likes != null && Number.isFinite(likes)
       ? `<span class="post-likes" title="Threads 按讚數">${svg("heart")}${likes.toLocaleString()}</span>`
       : "";
+    // 多段貼文的續文也保留錨點，舊的子貼文連結仍能導到這張卡片
+    const anchors = (p.thread || []).filter((id) => id && id !== p.id).map((id) => `<span id="${esc(id)}"></span>`).join("");
     return `
-      <article class="card post rise" id="${p.id}" data-id="${p.id}">
+      <article class="card post rise" id="${p.id}" data-id="${p.id}">${anchors}
         <header class="post-head">
           <img src="./assets/profile.jpg" alt="">
           <div><div class="who">${esc(P.name)} <span class="muted" style="font-weight:500">@${esc(P.handle)}</span></div>
@@ -542,10 +544,10 @@
     function goHash() {
       const id = decodeURIComponent(location.hash.slice(1));
       if (!id) return;
-      const i = list.findIndex((p) => p.id === id);
+      const i = list.findIndex((p) => p.id === id || (Array.isArray(p.thread) && p.thread.includes(id)));
       if (i < 0) return;
       if (i >= shown) { shown = i + 1; paint(); }
-      const el = document.getElementById(id);
+      const el = document.getElementById(list[i].id);
       if (!el) return;
       el.classList.remove("is-clamped");
       const b = $(".post-more", el); if (b && !b.hidden) b.textContent = "收合";
