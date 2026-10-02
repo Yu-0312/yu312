@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-02T06:45:53.581Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-02T20:42:43.759Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -319,11 +319,11 @@ window.THREADS_POSTS = [
    "https://ytustartuphouse.com.tr/en/blog/free-ai-training-for-undergraduates-ytu-startup-house-and-meta-open-applications-for-the-student-hackathon-training-series?utm_source=chatgpt.com"
   ],
   "video": false,
+  "likes": 44,
   "thread": [
    "Dd-l9MDFLcq",
    "Dd-l9m-FPAV"
-  ],
-  "likes": 17
+  ]
  },
  {
   "id": "Dd87NDGk-x9",
@@ -360,11 +360,11 @@ window.THREADS_POSTS = [
    "https://youtube.com/playlist?list=PLoROMvodv4rPOWA-omMM6STXaWW4FvJT8"
   ],
   "video": false,
+  "likes": 63,
   "thread": [
    "Dd87NDGk-x9",
    "Dd87Nitk74W"
-  ],
-  "likes": 51
+  ]
  },
  {
   "id": "Dd85JZcEz44",
