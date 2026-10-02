@@ -149,7 +149,7 @@
 
     /* ===== profile ===== */
     .profile-card {
-      flex: 1.55 1 0;
+      flex: 0 1 auto;
       display: flex;
       flex-direction: column;
     }
@@ -379,7 +379,7 @@
 
     /* ===== recommend ===== */
     .rec-card {
-      flex: 0.95 1 0;
+      flex: 0 1 auto;
     }
     .rec-body {
       display: grid;
@@ -467,7 +467,7 @@
 
     /* ===== calendar ===== */
     .cal-card {
-      flex: 1.35 1 0;
+      flex: 0 1 auto;
     }
     .cal-head {
       margin-bottom: 10px;
@@ -755,7 +755,7 @@
       .greet-card h1 { font-size: 22px; }
       .lcd { padding: 14px 10px; }
       .lcd-time { font-size: 34px; }
-      .cal-card { flex: 1 1 0; }
+      .cal-card { flex: 0 1 auto; }
       .rec-body h3 { font-size: 17px; }
       .write-btn { min-height: 42px; font-size: 14px; }
     }
@@ -765,6 +765,7 @@
       body { overflow: auto; }
       .stage { height: auto; min-height: 100dvh; }
       .board { grid-template-columns: 1fr 1fr; }
+      .art-card, .greet-card { flex: 0 1 auto; }
       .col-right { grid-column: 1 / -1; }
       .write-row { justify-content: flex-start; margin-bottom: 4px; }
     }
