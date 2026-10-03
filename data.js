@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-02T20:42:43.759Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-03T19:14:11.935Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -299,6 +299,77 @@ window.PROJECT_ITEMS = [
 ];
 window.THREADS_POSTS = [
  {
+  "id": "DeB9J_ykyMT",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeB9J_ykyMT",
+  "time": "2026-10-03T11:30:09.000Z",
+  "tag": "",
+  "parts": [
+   "不是大家別急啊！！！一年一度的 GitHub Game Off 2026 要來了！\n最近看到台北GTA、風起澀谷等遊戲在 threads 上發表，推薦大家去沖一波！🔥\nGame Off 是 GitHub 每年舉辦的全球 Game Jam，給你一個月、一個主題自己做一款遊戲！\n\n條件：\n🔥 必須把遊戲放進公開 GitHub Repo\n🔥 可以使用各種引擎、Library 和工具\n🔥 大家互相試玩、評分\n\n最終會從這些維度評選：\n🎮 Gameplay\n🎨 Graphics\n🎵 Audio\n💡 Innovation\n🎯 Theme Interpretation\n🏆 Overall\n\n去年 Game Off 2025 一共收到了 700+ 遊戲，今年肯定會更多更競爭，有想法或想組隊的歡迎在底下留言或找我一起！\n\n不要再只寫 Demo 了，11 月讓自己從 0 → 1 做一款真正能玩的遊戲吧\n\n👉 現在可以先報名： https://itch.io/jam/game-off-2026"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DeB9J_ykyMT-0.png",
+    "w": 315,
+    "h": 250,
+    "alt": "Game Off 2026"
+   }
+  ],
+  "links": [
+   "https://itch.io/jam/game-off-2026"
+  ],
+  "video": false,
+  "likes": 12
+ },
+ {
+  "id": "DeBqSftE4lU",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeBqSftE4lU",
+  "time": "2026-10-03T08:45:17.000Z",
+  "tag": "",
+  "parts": [
+   "DeepSeek Harness 現在有桌面版了！\nDeepSeek Harness for Desktop 在兩天前正式上線\nEverything is a plugin：模型、工具、Skills、Session、Sandbox、Storage、Workflow，甚至 UI 都可以自由組合\n\n4 種模式：\n🔹 Standard：完整 Coding Agent\n🔹 Code：讓模型通過 SDK 自己編排多輪工具調用\n🔹 Minimal：極簡環境，專門拿來測試模型能力\n🔹 Creator：直接創建、組合自己的 Agent Preset\n\n而且 DeepSeek Harness 在 Github 上開源：可以自己部署、修改、擴展！\n官方推特： https://x.com/DeepSeekHarness/status/2105330281389662575?s=20"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DeBqSftE4lU-0.webp",
+    "w": 2048,
+    "h": 819,
+    "alt": "DeepSeek Harness (@DeepSeekHarness) on X"
+   }
+  ],
+  "links": [
+   "https://x.com/DeepSeekHarness/status/2105330281389662575?s=20"
+  ],
+  "video": false,
+  "likes": 2
+ },
+ {
+  "id": "DeBZM_nE6Ip",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeBZM_nE6Ip",
+  "time": "2026-10-03T06:15:59.000Z",
+  "tag": "",
+  "parts": [
+   "想在 2027 年開始做自己的 AI Project，甚至挑戰國際 Hackathon 嗎？\n這是一個從 AI 實作 → Prototype → 國際競賽 → Startup 的完整機會！\n\n🟢 Global AI Hackathon｜第 8 屆\n📅 時間：2027/1/30～1/31\n💻 參加方式：Online 線上＋線下 Hubs\n🎟️ Free to Enter\n\n官方提供不同的 AI Challenge，直接選擇 Challenge、找隊友並開始 Build！\n\n🔵 Build｜48 小時內完成 AI Project\n🟣 Global Hubs｜全球 15+ 線下據點\n目前官方列出的據點包含：\n🇺🇸 Harvard/MIT/Stanford/NYC\n🇬🇧 London\n🇩🇪 Munich\n🇨🇭 ETH Zurich\n⚠️ 線下名額有限，需要申請\n如果人在台灣，直接 Online 參加就好啦！\n\n💰 Prize｜獎勵\n冠軍 $30,000+\n有提供參與者使用 AI 工具與開發資源，還有機會獲邀加入 Hack-Nation Venture Lab",
+   "連結： https://hack-nation.ai/?utm_source=luma"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DeBZM_nE6Ip-0.jpg",
+    "w": 800,
+    "h": 420,
+    "alt": "Hack-Nation 8th Global AI Hackathon · Luma"
+   }
+  ],
+  "links": [
+   "https://hack-nation.ai/?utm_source=luma"
+  ],
+  "video": false,
+  "thread": [
+   "DeBZM_nE6Ip",
+   "DeBZNfFE0J6"
+  ],
+  "likes": 32
+ },
+ {
   "id": "Dd-l9MDFLcq",
   "url": "https://www.threads.com/@yuqi._.0313/post/Dd-l9MDFLcq",
   "time": "2026-10-02T04:09:42.000Z",
@@ -319,7 +390,7 @@ window.THREADS_POSTS = [
    "https://ytustartuphouse.com.tr/en/blog/free-ai-training-for-undergraduates-ytu-startup-house-and-meta-open-applications-for-the-student-hackathon-training-series?utm_source=chatgpt.com"
   ],
   "video": false,
-  "likes": 44,
+  "likes": 49,
   "thread": [
    "Dd-l9MDFLcq",
    "Dd-l9m-FPAV"
