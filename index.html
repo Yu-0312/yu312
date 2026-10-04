@@ -119,6 +119,9 @@
       flex-direction: column;
       gap: clamp(16px, 2vw, 32px);
     }
+    @media (min-width: 981px) {
+      .col-left { margin-top: max(0px, min(12vh, calc(100dvh - 765px))); }
+    }
 
     .card {
       min-height: 0;
