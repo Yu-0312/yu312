@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-05T22:37:57.276Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-06T20:59:27.867Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -298,6 +298,28 @@ window.PROJECT_ITEMS = [
  }
 ];
 window.THREADS_POSTS = [
+ {
+  "id": "DeJTqFhE4rx",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeJTqFhE4rx",
+  "time": "2026-10-06T08:01:27.000Z",
+  "tag": "",
+  "parts": [
+   "台北又有 Claude Meetup 了，主題：「Claude × Gaming」\n\n如果你有在玩：AI Coding、Claude Code、遊戲開發、Vibecoding 非常值得去看看！\n\n這次聚焦在「AI 正在怎麼改變遊戲開發」👇\n1️⃣ Warrick Buchanan：做過《Stronghold》《刺客教條系列》《Candy Crush》，會分享 AI Agent 怎麼拿來做遊戲和即將推出的免費 AI 遊戲製作工具 Vibemaker\n\n2️⃣ Jack Kelly：這次會介紹自己的 Side Project「Naisu」\n\n3️⃣ Eric Khun：直接 Demo Claude Code 怎麼做 SEO、社群媒體＋影片生成和 Coding Agent 怎麼處理那些「很煩但又不得不做」的事情\n\n📍 台北・大安區\n🎤 Demo 全程英文\n👥 Open Mixer（可以直接跟台北正在用 AI 做遊戲的人交流）\n👉 活動資訊： https://luma.com/claude-taipei-11"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DeJTqFhE4rx-0.jpg",
+    "w": 800,
+    "h": 420,
+    "alt": "Taipei | Claude Meetup x Gaming · Luma"
+   }
+  ],
+  "links": [
+   "https://luma.com/claude-taipei-11"
+  ],
+  "video": false,
+  "likes": 5
+ },
  {
   "id": "DeB9J_ykyMT",
   "url": "https://www.threads.com/@yuqi._.0313/post/DeB9J_ykyMT",
