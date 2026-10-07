@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-06T20:59:27.867Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-07T21:18:09.583Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -298,6 +298,28 @@ window.PROJECT_ITEMS = [
  }
 ];
 window.THREADS_POSTS = [
+ {
+  "id": "DeLBJFXE4ua",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeLBJFXE4ua",
+  "time": "2026-10-06T23:58:09.000Z",
+  "tag": "",
+  "parts": [
+   "大家趕快去支持一票啊！ Tibo 說不定要在第二天發重置了，目前投票還剩一小時！\n連結：https://x.com/thsottiaux/status/2107575657014468879"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DeLBJFXE4ua-0.png",
+    "w": 1200,
+    "h": 630,
+    "alt": "Tibo (@thsottiaux) on X"
+   }
+  ],
+  "links": [
+   "https://x.com/thsottiaux/status/2107575657014468879"
+  ],
+  "video": false,
+  "likes": 1
+ },
  {
   "id": "DeJTqFhE4rx",
   "url": "https://www.threads.com/@yuqi._.0313/post/DeJTqFhE4rx",
