@@ -700,7 +700,7 @@ window.EN.ui = {
   "標籤（逗號分隔）": "Tags (comma-separated)",
   "預覽": "Preview",
   "已發布": "Published",
-  "輸入發布密碼後，文章會加密送進 GitHub，由 Actions 用倉庫密鑰解密再寫入網站。密碼本身不會出現在程式碼或 Actions 輸入欄。": "After you enter the publishing password, the article is encrypted and sent to GitHub, where Actions decrypts it with a repository secret and writes it to the site. The password itself never appears in the code or in Actions inputs.",
+  "只有站主能發布文章。輸入發布密碼後，文章會加密送進 GitHub，由 Actions 用倉庫密鑰解密再寫入網站。密碼本身不會出現在程式碼或 Actions 輸入欄。": "Only the site owner can publish. After you enter the publishing password, the article is encrypted and sent to GitHub, where Actions decrypts it with a repository secret and writes it to the site. The password itself never appears in the code or in Actions inputs.",
   "發布密碼": "Publishing password",
   "GitHub Token（只存在這台瀏覽器，用來把加密檔送進倉庫）": "GitHub Token (stored only in this browser, used to send the encrypted file to the repository)",
   "fine-grained：這個 repo 的 Contents 寫入": "fine-grained: Contents write access for this repo",

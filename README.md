@@ -43,6 +43,14 @@ npm run translate-new  # 用 Claude API 把缺的貼文翻成英文（寫進 i18
 
 **新貼文自動翻譯**：每日同步（`sync-threads.yml`）抓到新貼文後，會接著跑 `scripts/translate_new.mjs` 翻譯缺的貼文，再重建 `data.en.js` 一起 commit。需要在 repo 的 Settings → Secrets and variables → Actions 新增 `ANTHROPIC_API_KEY`；沒設就自動略過（英文模式顯示中文原文）。想修自動翻的句子，直接改 `i18n/posts.en.auto.txt` 對應那則即可，不會被覆蓋。可用環境變數 `TRANSLATE_MODEL` 換模型。
 
+## 筆記只有站主能發布
+
+筆記頁的文章都是站主（Yu）的，其他人無法發布：
+
+- 發布需要同時有 `WRITE_PASSWORD`（只存在 GitHub Secrets）與一個對此 repo 有寫入權限的 GitHub Token；兩樣都沒人拿到就送不進去
+- `publish-note.yml` 另外加了 `github.actor == github.repository_owner` 的檢查：即使別人（含協作者）把加密檔推進 `notes/inbox/`，或手動觸發 workflow，也不會發布
+- 想徹底鎖死：不要把 `WRITE_PASSWORD` 或你的 token 給任何人，也別把其他人加成這個 repo 的協作者
+
 ## 資料
 
 所有內容集中在 `data.js`：`PROFILE`、`THREADS_POSTS`（Threads 貼文，圖片在 `assets/threads/`）、`PROJECT_ITEMS`、`SHARE_ITEMS`、`FRIEND_LINKS`。

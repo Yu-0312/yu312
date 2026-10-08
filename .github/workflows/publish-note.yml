@@ -22,6 +22,8 @@ concurrency:
 
 jobs:
   publish:
+    # 只有 repo 擁有者本人觸發的才會執行；其他人（含協作者）推進 notes/inbox 或手動觸發都不會發布
+    if: github.actor == github.repository_owner
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
