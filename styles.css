@@ -223,6 +223,7 @@ img { max-width: 100%; }
   background: linear-gradient(145deg, var(--card-strong), var(--brand-soft));
   border: 1px solid var(--line);
 }
+[data-lang="en"] .thumb { font-size: 0.66rem; letter-spacing: -0.01em; padding: 0 3px; overflow: hidden; }
 .thumb img { width: 100%; height: 100%; object-fit: cover; }
 .thumb.has-img { padding: 0; }
 
@@ -239,6 +240,22 @@ img { max-width: 100%; }
 }
 .theme-toggle:hover { color: var(--brand); transform: rotate(18deg); }
 .theme-toggle svg { width: 17px; height: 17px; }
+
+.lang-toggle {
+  height: 36px;
+  padding: 0 0.75rem 0 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--card-strong);
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  flex: 0 0 auto;
+  color: var(--ink-2);
+  font: inherit; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+}
+.lang-toggle:hover { color: var(--brand); transform: translateY(-1px); }
+.lang-toggle svg { width: 16px; height: 16px; }
 
 /* ===== 首頁 bento ===== */
 .stage { width: min(1140px, calc(100% - 2rem)); margin: 0 auto; padding: 2.2rem 0 3rem; }
@@ -598,6 +615,7 @@ img { max-width: 100%; }
 .top-nav .home img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
 .top-nav .home { padding: 0.18rem; flex: 0 0 auto; }
 .top-nav .theme-toggle { width: 32px; height: 32px; flex: 0 0 auto; margin-left: 0.2rem; }
+.top-nav .lang-toggle { height: 32px; margin-left: 0.2rem; }
 
 .page-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; margin-bottom: 1.35rem; }
 .page-head h1 { margin: 0; font-family: var(--font-display); font-size: clamp(1.75rem, 3.5vw, 2.35rem); line-height: 1.18; font-weight: 700; }
@@ -629,6 +647,7 @@ img { max-width: 100%; }
 .post-head .who { font-weight: 700; font-size: 0.93rem; line-height: 1.25; }
 .post-head .when { font-size: 0.76rem; color: var(--ink-3); }
 .post-head .chip { margin-left: auto; }
+.post-untranslated { margin: 0 0 0.6rem; padding: 0.35rem 0.7rem; border-radius: 10px; background: var(--brand-soft); color: var(--ink-2); font-size: 0.78rem; font-weight: 600; }
 .post-text {
   font-size: 0.96rem;
   line-height: 1.78;
@@ -833,6 +852,9 @@ img { max-width: 100%; }
   .post-media.n3, .post-media.n4 { grid-template-columns: 1fr 1fr; }
   .post-media.many { grid-auto-columns: 70%; }
   .top-nav { width: 100%; justify-content: flex-start; }
+  /* 手機上導覽列會橫向捲動，把語言按鈕排在頭像後面，免得被擠到看不見 */
+  .top-nav .home { order: -2; }
+  .top-nav .lang-toggle { order: -1; margin-left: 0; }
   .top-nav a { padding: 0.48rem 0.78rem; }
   .page-head .search { width: 100%; }
   .polaroids { min-height: 145px; }

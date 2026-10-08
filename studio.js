@@ -5,6 +5,7 @@
 (() => {
   "use strict";
 
+  const I = window.I18N || { isEn: false, locale: "zh-TW", t: (s) => s, note: (n) => n, profile: (x) => x };
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const esc = (s) =>
@@ -644,7 +645,7 @@
         title: title.value, body: body.value, slug: slug.value,
         tags: tags.value, cat: cat.value, cover: cover.value,
       });
-      status.textContent = `草稿已存 · ${new Date().toLocaleTimeString("zh-TW")}`;
+      status.textContent = `草稿已存 · ${new Date().toLocaleTimeString(I.locale)}`;
     };
 
     function paintPreview() {
@@ -662,7 +663,7 @@
     function paintPublished() {
       const box = $("#wPublished");
       if (!box) return;
-      const list = window.NOTES || [];
+      const list = (window.NOTES || []).map((n) => I.note(n));
       box.innerHTML = list.length
         ? list.slice(0, 8).map((n) => `<a class="notes-mini-item" href="./notes.html?slug=${encodeURIComponent(n.slug)}"><strong>${esc(n.title)}</strong><span>${esc(n.cat || "")} · ${esc((n.time || "").slice(0, 10))}</span></a>`).join("")
         : `<p class="muted">還沒有發布過的文章。寫完後按「發布到網站」。</p>`;
@@ -744,7 +745,7 @@
     });
 
     $("#wClear")?.addEventListener("click", () => {
-      if (!confirm("清除目前草稿？")) return;
+      if (!confirm(I.t("清除目前草稿？"))) return;
       store.del("yu-draft");
       title.value = body.value = slug.value = tags.value = cover.value = "";
       cat.value = "未分類";
@@ -878,7 +879,7 @@
   function setupNotes() {
     const view = $("#notesView");
     if (!view) return;
-    const notes = (window.NOTES || []).slice().sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
+    const notes = (window.NOTES || []).map((n) => I.note(n)).sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
     const search = $("#notesSearch");
     const count = $("#notesCount");
     const slug = new URLSearchParams(location.search).get("slug");
@@ -888,7 +889,7 @@
 
     function openNote(n) {
       const tags = (n.tags || []).map((t) => `<span>#${esc(t)}</span>`).join("");
-      document.title = `${n.title} · 筆記`;
+      document.title = I.t(`${n.title} · 筆記`);
       if (search) search.hidden = true;
       if (count) count.textContent = "";
       view.innerHTML = `

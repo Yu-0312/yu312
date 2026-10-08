@@ -1,0 +1,86 @@
+## DdGoP9am7YU
+Sharing the founders' panel from Boba Tech, themed on how Asian founders go global
+Speaker backgrounds:
+· Kevin Lin (林肯威): co-founder and COO of Twitch, stayed 12 and a half years, sold to Amazon in 2014; moved to Taiwan at the end of 2020 and now runs the game studio MetaSeries, an early-stage fund, and the accelerator Ikigai (US$100,000 for 8%, 11 companies invested in so far)
+· Jimmy Huang: founder of PicPet, part of Ikigai's first batch of teams
+· Peggy Wang: founder of SparkChat by Digipals; Stanford graduate, former AI engineer at Meta Reality Labs, on her second startup
+· Moderator Tina Cheng (鄭文婷): partner at Bonhope Capital and managing partner of GVA Global Venture Accelerator
+Key takeaways:
+
+· 25-year-old Kevin Lin was driving a forklift: at 25 he wasn't in tech at all — he was driving a forklift (unlicensed, though he joked he was very good at it) in the warehouse of a functional-beverage company in San Francisco. He started at 3 a.m. every day, moving two or three thousand boxes and driving deliveries to grocery stores and restaurants. In 2008 a college friend asked him to join Justin.tv, and his first reaction was: "I work in a warehouse, I studied ecology, and I know nothing about tech."
+btw: that's how Twitch's COO got into the industry — this is probably what an "atypical background" means
+
+· "Global from day one" means two different things in Asia and in San Francisco (Peggy): this was her first time in Taiwan, and her observation is that Asian founders tend to "go local first, then expand outward," whereas in San Francisco everyone opens with "we're going to be the next unicorn," so the default scale is global. Also, Asia is more interested in consumer than the US is, but has relatively less AI adoption.
+
+· The only way to go global is to go talk to people (Kevin): Twitch went the other way around: learning outward from a US perspective, it discovered that Europe isn't "one culture" and that consumer behavior in Taiwan is completely different from Japan and Korea. "You have to actually go to that place and talk to people, and that's exactly what most founders least want to do." Then hire locals who know the place better than you. He also complained that "going global" is a vague term: most people who say it really mean "go to the US," and the US is extremely crowded and AI makes the competition even worse. Don't globalize all at once; first go to one bigger place, then ask clearly where your audience is, how they'll pay you, and what their behavior is.
+
+· Taiwan's real market advantage (Kevin): Taiwanese people use apps and play games more often than people in most countries, and they're willing to install new apps (if they see someone recommend one on Threads, they'll download and try it), whereas people in most countries are more skeptical. So Taiwan is well suited to building an initial user base, but then you have to ask, "Can this be replicated in other markets?"
+
+· Community (Kevin): AI has greatly weakened software's defensibility, so community has become the moat. The approach is to start very small, get to know specific people, and grow nodes; these people will grow their own communities around your product and become your advocates. The team setup he suggested: one person at home building feedback into the product, and one person out in the field collecting feedback. "Doing user feedback well is building trust, and trust grows exponentially."
+
+· In consumer social products, what you look for isn't a problem but an emotion (Jimmy): the dogma tells you to "find a problem," but in consumer social what you're looking for is a feeling. "The product has to be provocative and have an attitude, almost like art. The worst thing isn't making it bad, it's making it boring." He was also very frank: "I'm a loser, I've never held a job, and I still live with my parents — that feeling is how I got here."
+
+· 4 human employees + hundreds of AI agents (Peggy): back at Meta, doing AR/VR meant building models yourself; now you tell an agent to do it in natural language, so the team can stay extremely small. But she has a clear opinion about form: treating an AI agent as a character in a group chat is not good design. When people see AI content on IG or Threads they just scroll past; what truly resonates is always other "people." "So the question should be: how do we use AI to strengthen connections between people, rather than stuffing AI into the conversation."
+
+· One-line advice:
+Kevin: Go back to your users. The biggest enemy is confirmation bias; keep your questions as objective as possible, share the raw feedback directly with the team, and don't assume the questions you want to ask are all there is.
+Jimmy: "Come join us" (pitching Ikigai — the most honest line of the whole event)
+Peggy: Go play with the latest AI tools; vibe coding lets even people who can't code turn their ideas into products
+
+Q&A: "How do you focus?"
+Kevin: Go for the big ideas. Making a small idea and making a big idea take the same amount of time. AI makes distraction even worse, because you can build ten products for ten kinds of customers overnight, but that will just turn into a decent small business. Answer honestly: how big is the market? Why will you win? What do you need to be true in order to win? Can you capture 1% in the short term? And that 1% had better be worth several hundred million dollars.
+
+## DdGjq8VGzKX
+Sharing the opening panel from Boba Tech: "What Were You Doing at 25?"
+Speaker backgrounds:
+· Pua Khein-Seng (潘健成): co-founder and CEO of Phison Electronics; from Malaysia, came to Taiwan to study at NCTU (now NYCU), started out building memory controllers, and has been in Taiwan for 33 years
+· Hank Huang (黃俊郎): Vice President of National Yang Ming Chiao Tung University; founded his first company in New Jersey, USA, and now also invests in and helps alumni entrepreneurs
+Key takeaways:
+
+· Starting a company is a chain of accidents, not a plan (Pua): his reasons for coming to Taiwan were very practical: study abroad, work part-time, get a degree, go back to Malaysia and pay off debts (he joked that anyone with money would of course go to the US instead of Taiwan 🤭). The turning point was when a professor asked him to develop a memory controller, at a monthly salary of 5,000. Later, when he wanted to quit and change jobs, he couldn't get a work permit because of his Malaysian nationality, so he negotiated with his former employer and set up a company himself in order to transfer his work permit — and that's how Phison grew. "From day one I never thought of starting a company; being an employee was actually happier."
+btw: when he was offered a book deal in 2010 he initially refused, for a very Taiwanese reason: "There's a tradition here: whoever's business does well and publishes a book, their company goes under the next year."
+
+· Why NCTU produces so many entrepreneurs (Hank): (joking that it's because everyone at NTU went abroad 🤭) NCTU people stayed and grew up together with Taiwan, so the entrepreneurs are all from the NCTU gang. The real reasons are an alumni network that pulls each other up, hiring that doesn't look at major or ranking, and a culture diverse enough that "no limits" is itself a source of innovation.
+
+· Should young people do hardware? The two gave opposite answers
+Pua leans negative: in the US a 26-year-old founder can raise tens of millions of dollars, but in Asia you can't: "If you come ask me for $1 million, OK; if you ask for $10 million, I'll ask a lot of questions." And an advanced-process chip costs $300 million from development to mass production, and even getting to a sample takes $50–70 million. Unless your family is rich, go with software: raising $2–5 million is more than enough.
+Hank added the other side: if you're inside the university system, hardware actually gives you opportunities — donations, research funding, and industry–academia collaboration are all there. Taiwan is so strong in semiconductors that as long as you're connected to it in some way (including IP design), someone is willing to try it; but if you say you want to do software, they walk away, saying you lack experience, the market is too small, and you have no global vision.
+btw: the same "Taiwan's semiconductors are strong" is a barrier in one person's eyes and a resource in another's
+
+· The market has to grow under your feet (Pua): Asians are hardworking, but you have to first confirm where the market is: "I don't believe you can do chip design in New Zealand." Manufacturing is still in Asia, and most big AI projects are in China (because it has a complete AI cloud industry). Look back at how big your home market is and whether it's reliable.
+
+· Before looking for a manufacturing partner, think through your core value (Hank): Taiwan's manufacturing partners can make anything for you. "You don't need to be afraid, but you need to be able to say why your idea is different and what you can create for them — otherwise you just become their employee."
+
+## DdGcbrVm1gU
+At BOBA TECH I listened to a keynote + live demo by Thomas Jeng, head of startups for Asia-Pacific at OpenAI. In one sentence: "What you can build depends on your insight, not on the technology itself."
+He said we're living in an era of lightning-fast evolution — for example, the new image model (Image 2.5) released just this morning, which even he hasn't had time to test yet.
+Key takeaways ⤵️
+📊 Capability: in three and a half years there have been many "10-point jumps" — on the AI capability composite index (ECI), roughly every 10 points is a step change. Going from GPT-4 to o1 was one step change, and in just 3.5 years such jumps have happened N times. GPT-6 Astra, released just last week, was another significant leap.
+btw: take synthetic benchmark metrics with a grain of salt
+
+💸 Cost: the per-task cost of agentic coding tasks has been cut in half over the past few months: GPT-6 Astra (medium reasoning) ≈ the output quality of GPT-5.6 Codex-max, but 56% cheaper. Thomas said that if you can remember only one thing today, it's that "cost per token" is already an outdated metric — what you should measure is "output quality ÷ overall task cost."
+
+🌍 Globalization: Higgsfield (a video-generation platform from Kazakhstan) was global from day one the moment it launched, and is now the leader in this space. Their recipe: OpenAI models + their own technology + deep insight into the creator community (especially online traders). "Many founders say going global is too hard and tell you to start in a familiar market first. That's not wrong, but you'll miss the real opportunity of the AI era."
+
+🏗️ The new reality of fundraising: raising money in Taiwan/Asia is objectively harder than in Silicon Valley, but as long as models become more efficient and teams can be smaller, "you now need much less capital than before." Technology leaps plus falling costs are, for startups, a new economy of scale.
+
+🔄 Persistent Agents — the evolution path of AI interaction:
+2022 ChatGPT → a toy with text in and text out (he used it to write bedtime stories for his kids)
+2025 Coding Agents → text that can write software and operate computers
+Now → general knowledge-work agents (finance, marketing, all kinds of file formats)
+Next → persistent agents that are always on, strong enough, cheap enough, and have memory. The enabling technologies are already being built: multimodal interaction, long-running tasks across interfaces, memory and contextual continuity, and policy compliance. "Under this new paradigm, a wave of opportunities will explode."
+
+🛡️ How to balance capability and safety?
+→ Mission side: bring AI to the world to benefit humanity; "if AI goes out of control, it's of no benefit to humanity."
+→ Engineering side: alignment is largely an engineering problem: build the right sandboxes, APIs, and harnesses, guard against prompt injection, and keep the AI focused on what it should be doing.
+
+🎯 Three pieces of advice for founders:
+1. Rethink "what's possible": dive in and test the models today
+2. Build on top of the models: everyone has models; the moat is your thinking and insight
+3. Global from day one: face the world from the very first day
+
+Q&A:
+When will AGI arrive: "The definition of AGI keeps moving; instead of guessing a date, focus on the product in front of you."
+OpenAI's robotics plans: "I know nothing about it, and it's kept strictly confidential — even if I wanted to say something I couldn't," but he admitted that Astra is very likely already the leading model on various robotics-intelligence leaderboards
+
+Closing: "You can assume the technology will be there, and you can assume the capital will be there. So in this new world, what are you going out to build?"

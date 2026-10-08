@@ -1,0 +1,103 @@
+## Dd85JZcEz44
+My reasons for not joining the military:
+1. Without a minimap I'd get lost
+2. What if I get matched with absurd teammates
+3. Teammates don't drop anything when they die
+4. There's no respawn mechanic
+5. Mobility is too low
+6. There's no third-person view
+
+## Dd8XNHJE7H4
+Got taught a hard lesson today by an interview with NTU Professor Hung-yi Lee
+He asked his students, "If resources were unlimited, what would you want to do?"
+Students who usually complain about not having enough resources couldn't answer 😅
+In the age of AI agents, "learning AI" is actually a vague phrase — the line between who can code and who understands the technology keeps blurring
+To get AI to do things well for you, practice these 3 abilities 👇
+1️⃣ Problem-setting: turn the fuzzy idea in your head into a clear goal
+2️⃣ Acceptance: know what counts as an acceptable result — you set the standard, not the AI
+3️⃣ Oversight: keep watching the AI as it revises, so it doesn't drift further and further off course just to game the metrics
+Link: bnext.com.tw/artic…
+@alt 0 NTU Professor Hung-yi Lee: In the Age of AI Agents, These 3 Abilities Are What Students Should Practice Most
+
+## Dd21zc8E6qu
+What happens when you let an AI be the lead observer on duty for a night?
+GOSIM Sky-Survey Agent Hackathon: every 15 minutes, decide which patch of sky the telescope should look at
+Online only, free, open to individuals, no astronomy degree needed — run the starter kit and you get a baseline score, tweak the strategy and you can make the leaderboard
+Prize pool of US$5,500, online competition runs 10/5–10/7, and you can still sign up now!
+Link: create.gosim.org/surve…
+
+## Dd2prQcE1p5
+🚨Official NVIDIA announcement: the "Open Agent Safety Platform" officially goes live on September 28!
+
+🔹Core change: there's no new model — the agent "moat" is being pushed down into enforcement at the "software + chip" level. OpenShell is open-sourced to manage boundaries, and Sentry runs on BlueField-4 and cuts off out-of-bounds actions within milliseconds
+🔹Scope: Claude Code / Codex / Cursor can apply it directly; 100+ companies, including Anthropic, SpaceXAI, SAP, Microsoft, and CrowdStrike, have already integrated it, extending to robotics, banking, and energy — but pure chat applications aren't affected much
+---
+Papa Huang (Jensen Huang)'s X post: https://x.com/JensenHuang/status/2104499465055023424
+Official news: https://nvidianews.nvidia.com/news/open-agent-safety-platform
+
+## Dd0smhtm4p4
+🚨ZCode launches a "trust patch" campaign to win back user trust!
+1. Cloud data from the incident has been deleted (the company says it passed third-party verification)
+2. Pledge: nothing will be uploaded to the cloud without authorization
+3. Open-source and official versions released in sync
+4. Handing out 9 reset cards like crazy
+5. All users: 100 million tokens (can be claimed now)
+Wonder if copying Tibo's token giveaways and resets can win back trust 😏
+
+## DdnOjx0E5kx
+This time it's really kind of absurd!
+Claude Opus 5.5 Medium has already surpassed GPT-6 Astra Max on the GDPval-AA knowledge-work leaderboard!
+Not marketing talk — look straight at the data 👇
+• Opus 5.5 Max: 1846 Elo
+• Opus 5.5 Medium: 1576 Elo
+• GPT-6 Astra Max: 1542 Elo
+Simply put, the score represents relative strength, so there's no need to max it out: on this knowledge-work benchmark, Opus 5.5 Medium already beats Astra Max
+It gets even more brutal on other tests:
+💻 Terminal-Bench 4.0 (AI's ability to complete tasks)
+66.4% vs 57.9%
+🧠 Humanity's Last Exam (how much hard-core knowledge it has)
+67.7% vs 57.2%
+Of course, as always, don't treat a single benchmark as "total domination"
+Related link: artificialanalysis.ai/es/mo…
+
+## Ddk1dZkkwsn
+Xiaomi's MiMo-V2.6 is really not as simple as an ordinary "model upgrade" this time!
+Why was MiMo-V2.6 able to improve so dramatically?
+
+1️⃣ MixRL: truly scaling up RL
+Capabilities such as coding, agents, vision, and safety are no longer trained completely separately, but are tackled together through mixed RL; complex, ultra-long, hard-to-verify tasks are trained on their own and then merged into the model's capabilities with MOPD.
+
+2️⃣ Fully asynchronous GRPO at 1568×16
+Per-step scale is pushed to 1568×16, with a cumulative 3.5B+ RL tokens and support for up to 1M context.
+
+3️⃣ The reward mechanism is scaled too
+GRS does within-group comparative scoring and GAR redistributes advantages, making the reward signal more effective.
+
+4️⃣ Specifically targeting reward hacking
+A frozen MoE router + multiple layers of protection address reward gaming, the problem that large-scale RL runs into most easily.
+
+5️⃣ A comprehensive upgrade of the training recipe
+Adam for pre-training, Muon + Row-Norm (Muown) for mid-training, combined with Hybrid SWA/GA + MTP.
+
+📊 The model scale is also staggering:
+Pro: 1.02T parameters / 42B active
+Flash: 310B parameters / 15B active
+
+The most noteworthy point: it's fully open source!!!
+
+📦 Weights
+📦 Technical report
+📦 7K+ RL environments
+📦 A complete RL training framework
+📦 RL-trajectory distilled models
+
+Xiaomi team lead Luo Fuli said bluntly:
+
+The research innovation and engineering challenges behind MiMo-V2.6 exceed those of DeepSeek R1.
+As scaling pre-training gets harder and harder, could scaling RL become the key to improving AI intelligence in the next stage?
+
+## Ddkdz_XGjmD
+Around 5 p.m. yesterday I got word that Xiaomi was about to release a model, but compared with Claude or Codex it still has quite a few problems.
+In the closed-beta version, mp3 and mp4 uploads are limited to 10 minutes at most. There are also some language issues: for example, if you set the language to Chinese, it will randomly switch to English in its output. It also blocks certain keywords — in my tests, topics related to sea freight and national policy were blocked.
+As for strengths, I think it has an edge over other AIs at browsing Chinese media information, and for experimental modeling I had to adjust it fewer times than I did with Opus 4.8; as for how it compares with Astra, I'm not sure yet.
+Finally, on cost-effectiveness, it really does beat well-known models like Grok 4.6 and GLM 5.3, so if you're a beginner who wants to use AI, or you call APIs often, I think it's worth a try!

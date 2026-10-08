@@ -1,0 +1,102 @@
+## Ddih8R4k6yr
+AutoClaw Token Rush is back! 🔥🔥🔥
+This week GLM-5.3-Flash quotas are being boosted like crazy, and every user can claim them!!!
+📅 9/21: 200 million tokens
+📅 9/22: 300 million tokens
+That's 500 million tokens in just two days! Note that they expire at 23:59 every night!
+Even better, from 9/24 to 9/26 paid members (it costs less than a boxed lunch) can keep claiming tokens every day!
+I've claimed today's 200 million tokens, and there are three more consecutive days of member quota to come — time to milk it for all it's worth 😎
+Link: https://autoclaw.z.ai/
+
+## DdiKhwYk_rG
+🚨Latest: Zhipu open-sourced ZCode today!
+In response to the earlier controversy over silently uploading users' code, Zhipu has open-sourced ZCode so developers can inspect it freely, and has brought in CAICT (China Academy of Information and Communications Technology) and NSFOCUS for third-party verification to win back user trust.
+Github : https://github.com/zai-org/ZCode
+
+## Ddh_PX5k-G2
+Jev, which blew up recently, is finally open to everyone!
+No more waiting — it feels great~
+And you get 120 million tokens just for logging in!
+Official link: https://console.typesafe.ai/login
+
+## Ddh1c8Ik6bq
+Meet the strongest open-source image-generation model right now: Qwen-Image-2.1!
+Highlights:
+1. Compact and blazing fast: a lightweight 7B architecture that outperforms most closed-source models and greatly speeds up inference with multi-image input.
+2. Native transparency: natively generates and edits RGBA layers, enabling seamless compositing and text editing within transparent images.
+3. Versatile, high-fidelity editing: supports up to 10 reference images and precise local control, while preserving strict fidelity for portraits and products.
+4. Broad coverage and striking aesthetics: excels at panoramas, infographics, and virtual try-on, delivering realistic textures and elegant typography.
+Github: https://github.com/QwenLM/Qwen-Image-2.1
+Model Scope: https://www.modelscope.cn/models/Qwen/Qwen-Image-2.1
+
+## DdgV7U3E2iT
+Is the image-generation space about to heat up?
+Alibaba has open-sourced Qwen-Image 2.1
+Official positioning: efficient creation and flexible editing, with support for local edits and diverse inputs and outputs
+Get ready to test it tonight!
+👉 Link: https://modelscope.cn/models/Qwen/Qwen-Image-2.1
+
+## Ddcz31oE9zP
+A hot international VC panel: should Asian founders rush to Silicon Valley?
+Speaker backgrounds:
+· Jamie Lin (林之晨): President of Taiwan Mobile Group; Chairman and Partner of the AppWorks accelerator (returned to Taiwan to found it in 2010, has invested in 472 startups and manages a NT$6 billion fund); a serial entrepreneur since 1999.
+· Chris Yeh: entrepreneur, investor, and co-author of *Blitzscaling* (co-written with LinkedIn founder Reid Hoffman, explaining how Amazon- and Alibaba-scale companies expand at high speed); a veteran and mentor of the Silicon Valley ecosystem.
+· Tiffany: a senior VC (15+ years, mainly investing in AI) with a Taiwan–US background, who runs a Taiwanese founders' community in the US together with Caleb.
+More highlights ⤵️
+Q1: Should you go to Silicon Valley from Day 1?
+
+· Chris Yeh (blogger, entrepreneur, co-author of *Blitzscaling*): If you're building an international, VC-backed global company, it's much easier to do it in Silicon Valley. Even if you don't end up settling there, going for a while on day one and seeing what's happening at the frontier of the ecosystem will be useful no matter where you start your company.
+
+· Jamie Lin (林之晨): I'm deliberately playing devil's advocate 😅! "I used to take groups of Taiwanese CEOs to Silicon Valley for two weeks. When they got back, everyone started renovating their offices and offering free snacks — they only learned the surface." → You have to stay long enough to learn the essence of Silicon Valley, and you have to be honest with yourself: if you're not a local, you're naturally at a huge disadvantage and must be far stronger than your local peers. Unless you're Shohei Ohtani or Chien-Ming Wang, don't go just because a panel speaker tells you to: "You need to know your why."
+
+Q2: Should you go straight to Silicon Valley to raise money?
+
+· Jamie's data bomb: "About 3,000 companies get VC funding in the US each year — sounds like a lot? About 500,000 startups are founded in the US each year, so your odds are under 1%. And to get a Silicon Valley VC to invest in a company that doesn't do business in the US, you have to be far stronger than your local peers."
+
+· Chris's pragmatic version: it's true you should go to Silicon Valley to raise early, but you need to build traction first. By the way, "bootstrapping in Asia is much cheaper than in Silicon Valley."
+
+· Tiffany (VC) on the importance of the cap table: "Founders from all over the world come to me to raise money, and I take one look at the cap table: I can't save this. (99% of VCs won't step in to clean up your equity structure for you.)" → If you want Silicon Valley money, you have to get the foundation of your company structure (e.g., a Delaware C-Corp) right first.
+btw: most Silicon Valley startups are actually founded by immigrants, and the place is friendlier to outsiders than you might think.
+
+For those under 21 there's the Gen Z Gap Year program (US$1 million in free funding, no equity taken), AppWorks (takes 20–30 teams every six months), individual angels, and even Shark Tank Taiwan
+
+## DdbvPAAE3Zi
+Jamie Lin keynote: How to Get Stronger
+Speaker background:
+· Jamie Lin (林之晨): President of Taiwan Mobile Group (took over in 2019, the youngest president in the telecom industry) and Chairman and Partner of the AppWorks accelerator. In 2010 he gave up his green card and life in the US to return to Taiwan and found AppWorks; the ecosystem has invested in 472 startups with combined annual revenue of over NT$450 billion, and he also manages AppWorks Funds with NT$6 billion under management. An internet-startup veteran since 1999, a National Taiwan University chemistry graduate, and he has been writing the Mr. Jamie blog since age 31.
+More highlights ⤵️
+· On entrepreneurship: He started a company at 21, became Greater China CEO at 24, and flew all over China to do deals with IBM and HP. The first dot-com bubble wiped out his B2C business, so he pivoted to B2B: single-handedly he wrote code, listed products, set prices, negotiated with suppliers, acted as PM, and even drove to Hsinchu Science Park to do sales. "Starting a company is like an extremely intense NBA training camp — whatever the company needs, you have to do it, and if you can't, you learn until you can."
+
+· Founding AppWorks: coached over 300 startups with a combined value of US$4 billion and annual revenue of US$3 billion → raised US$150 million for its third fund in 2018 → all these experiences added up are what gave him the confidence to take on Taiwan Mobile
+btw: "Being young isn't the problem; having no experience is the problem." A startup may succeed or fail, but what you learn along the way carries over to the next one.
+
+· How to get stronger fast: "The secret to getting stronger isn't doing what's 'useful to you,' but doing what you 'truly love.'" → It's like a book you bought and left on your bedside table without ever reading: you know rationally that it matters, but if you don't emotionally want to touch it, you won't. So find that one thing you "want so badly you can't stand it," and only then will the flywheel turn: the more you do, the more you want; the more you want, the more you learn; the more you learn, the stronger you get.
+
+· Closing: "Part of growing up is unlearning what school taught you, listening again to the voice of the little monster inside you, living with it, and letting its power carry you far away." "No one can define your success. You're an adult now — it's for you to define it yourself."
+
+btw: "Writing is thinking" — you only truly think things through once you've written them out clearly; and if you write long enough, you can become an opinion leader in your industry (his 100,000 followers never cost him a cent of marketing spend)
+
+## Ddbk7m1k9bq
+1517 Fund's Danielle Strachman: Don't Let Schooling Get in the Way of Your Education
+Speaker background:
+· Danielle Strachman: co-founder and General Partner of 1517 Fund, founding director of the Thiel Fellowship (joined the founding team in 2010 when Peter Thiel launched the program; now a Senior Advisor); for 16 years she has focused on investing in and mentoring young entrepreneurs.
+Philosophy:
+· "Being educated is great, but being educated has almost nothing to do with 'going to school.'" The Thiel Fellowship was originally called 20 Under 20 (it backs only young people under 20 who are neither in school nor working, and who pursue their dreams with extreme drive and ambition)
+The research:
+· 100 years ago, the average age of a "first invention" was 23 and the peak invention came at 30. Today they've been pushed back to 31 and 40 respectively. → The whole system is systematically suppressing innovation. This is also why they like people who "step outside the system to build things."
+More highlights ⤵️
+Three cases:
+
+Lambda Labs: they wrote its first check. The founder, Stephen, joined the community as a volunteer at 23 (he was too old to apply, so he became a mentor!), going from the odd guy in a camera hat, to reselling deep-learning workstations (the first one sold for $10,000 to a random passer-by in Cupertino), to today's GPU-cloud giant preparing for an IPO. "Sometimes the way to get involved is to volunteer first."
+Laura Deming: founded her first longevity research fund at 17. "She has a kind of hyperfluency: she can explain her field to anyone in a way that gets you excited."
+Loom: after being turned down for investment by 1517 twice, it ended up becoming their first check; during the pandemic it became infrastructure, and it was finally sold to Atlassian for nearly US$1 billion.
+→ What they have in common: they start from a concrete application and dig all the way down to the infrastructure layer (GPU cloud, research capital, communication platform); they started young and have high agency (acting outside the noise).
+
+The boba story: a few students came to office hours saying they wanted to open a boba shop
+Danielle: "Where's the boba?"
+Students: "We haven't sold any yet, but we have a spreadsheet (construction costs, ingredient costs — very academic)!"
+Danielle: "You don't need a spreadsheet; you need a table and a bucket of boba. I'm not meeting with you again until you've actually gone out and sold some."
+Two weeks later: there was a line of 70–100 people in front of their stall in the campus plaza, the boba sold out, and the girls started bagging the pearls on the spot and kept selling them at $2 a bag. "A spreadsheet isn't reality; a spreadsheet is a hypothesis. Hypotheses have to be tested in the field."
+btw: Her 1517 Fund I (not counting Lambda — Luminar + Loom alone) has already returned 4.5x, putting it in the top decile; after Lambda's IPO, returns are expected to exceed US$1 billion.
+
+Conclusion: choosing the right ecosystem for talent and capital is one of the most important pieces of homework for a founder

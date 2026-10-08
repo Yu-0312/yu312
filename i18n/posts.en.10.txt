@@ -1,0 +1,65 @@
+## Db_8Kt8E1uU
+DeepSeek is making up a belated lesson: Harness
+In early July, Jensen Huang had a 26-minute conversation with LangChain founder Harrison Chase in which GPUs never came up once — he talked about a single word: Harness.
+He said a company's future competitiveness lies not in model size but in the engineering system built around the model. LangChain ran an experiment with Nemotron 3 Ultra: without changing the model weights, just tuning the system prompt, tool descriptions, and middleware, the score climbed from its original level to 0.86, only 0.01 short of the top score of 0.87, while the cost per run was cut from US$43.48 to US$4.48. The model didn't change; what changed was everything around the model.
+This is exactly the piece DeepSeek has been missing.
+In early May, American independent developer Hunter Bown built a terminal coding agent, "DeepSeek-TUI," on DeepSeek-V4, which shot to the top of GitHub Trending and passed 10,000 stars within a few days. This shows that overseas developers had long since taken the model to build their own ecosystem, while DeepSeek itself was a step slow at this layer. Developers could previously call DeepSeek's models and plug them into Claude Code and OpenCode, but the Harness layer that truly determines the experience was in someone else's hands.
+---
+On 6/21, Harness team lead Cui Tianyi (崔添翼) posted a job listing to recruit
+On 8/1 he publicly called for open-source projects to integrate — with no demo and no images, yet nearly a thousand projects poured in to sign up
+On 8/5 he laid out clear directions: plugin, skill, MCP, orchestrator, aggregator, UI — covering almost the full stack of agent engineering
+On 8/11–8/12, the DeepSeek Harness team's WeChat official account completed registration and verification, with a black whale as its logo, but it has not yet published anything; many media outlets generally read this as a sign the product is about to be released, rather than the product itself going live
+On the model side, cost-effectiveness has long since been proven: V4-Flash's official release entered public beta on 7/31, and in the latest week (8/3–8/9) its call volume reached 8.83 trillion tokens, up 570% week over week, topping the global AI-model call-volume ranking. But V4-Flash's impressive results were achieved with the "not-yet-released DeepSeek Harness" at max reasoning effort, not the performance of the bare model.
+In other words: DeepSeek has pushed model cost-effectiveness to the extreme, and the question it now has to answer is how to turn this capability into real, usable workflows in a stable, sustained, low-cost way.
+In this battle, the target is very likely Claude Code and Codex.
+
+## Db_7rADk_LX
+Test data for the official release of DeepSeek V4 Pro, from 0813 yesterday, is out
+Straight to the conclusion: it has crushed GLM-5.2, low-tier Kimi, and a whole batch of other "marginal-and-below" models to the point of having no commercial significance
+Below, ten third-party agent/reasoning benchmarks will walk you through exactly where it's strong
+---
+HLE — Humanity's Last Exam
+PhD-level cross-disciplinary Q&A: the ceiling for measuring a model's knowledge and reasoning ability, tested in two modes: "without tools" and "with tools"
+With tools it made a qualitative breakthrough, scoring 60.0 — second only to Fable 5's 63.0, and ahead of Opus-4.8, GLM, and Kimi.
+
+## DbnzGmdE91J
+Unity has released an official CLI tool, so game development can finally be handled entirely from the terminal
+Many people may think this is just a small experimental update, nothing special, but it's Unity officially paving the way for AI to drive development directly
+Looking back at Unity development so far, it has all revolved around manual operation. In the earlier AI-assisted Unity workflow, the AI wrote code, and you opened Unity by hand, waited for it to finish, then tested, and kept looping by copying console errors back to the AI to fix. That is exactly the biggest significance of the Unity CLI: in the future it will automatically run tests, read runtime state in real time, and automatically diagnose problems and iterate on optimizations
+Let me introduce the two main features:
+One-stop management of the Unity development environment:
+Installing versions and modules used to require opening Unity Hub and clicking around by hand; now one command does it
+Real-time control of and interaction with a running Unity editor:
+1. After the AI changes the code, it goes straight into Play mode
+2. It automatically captures console errors and fixes them
+👇 Below are the features summarized by AI
+---
+📦 Editor and module management
+unity editors shows which Unity versions are currently installed, and unity modules list 6000.2.10f1 directly lists the installable module IDs for that version — no more opening the Hub and clicking around
+🚀 Opening projects
+unity open automatically detects and opens the project with the correct version of the Editor, with no manual switching even if the versions don't match
+🔐 Login and manual-free authorization for CI
+unity auth login is the normal login; when running on a headless build agent, you can authenticate automatically with service-account environment variables — no browser and no manual intervention at all, which is a great fit for dropping into a CI pipeline
+@alt 2 Meet the Unity CLI: manage Unity from your terminal
+
+## DbIyJ6nE7tf
+Note-takers rejoice — there's finally an open-source project that can beat paid note apps❗️
+Tolaria is, simply put, a "desktop note-taking app" that lets you organize your notes and knowledge into one system. It has 18.8k stars on GitHub and is a tool many big names use
+📝 Notes are plain text files (Markdown): your data is always yours and never locked inside an app
+🔌 Uses Git for version history: it automatically saves your history, so if you edit or delete something by mistake you can recover the older version, with no worry about slip-ups
+🛜 Works offline, no account sign-up, no subscription, and all data is stored locally
+🪄 Can be used with AI tools: if you use an AI assistant like ChatGPT, Tolaria lets the AI read your notes directly as reference material
+⌨️ Smooth keyboard operation: many actions are bound to shortcuts, so you don't have to click around with the mouse
+It supports Mac, Windows, and Linux, and it's completely free and open source — anyone can update it with the features they need
+Link🔗: tolaria.md
+
+## DbFgDgoE3V3
+If you have the recently viral Kimi K3 in hand but don't know what to do with it?
+Someone has organized 89 "source-backed" real-world Kimi K3 test cases into a GitHub repo that you can use to explore
+🎮 Interactive games and 3D: a playable voxel racing game generated from one sentence, an aircraft carrier built with Three.js, a V8 engine model built in one go with Blender MCP
+🎨 Front end and motion design: motion ads with music and effects synced directly in code, black-hole physics simulations, complex particle and shader effects
+💻 Programming and integration: a virtual MacBook desktop simulation, a complete game made with an agent toolchain plus asset generation
+🧪 Evaluation and limits: comparing the differences between models on the same prompt, cases where statistical audits need human re-checking, and where narrative writing fails
+It doesn't make things up or flatter — it even spells out clearly "what the model can't do." Compared with browsing a pile of fragmentary screenshots or hype posts, this list is more like taking experiments others have already run as your starting point
+If you want to know whether K3 suits game prototypes, dynamic web pages, or 3D modeling, look at the cases here first — much faster than blind-testing on your own
+🔗 github.com/Evoli…

@@ -12,6 +12,14 @@
   const NOTES = (window.NOTES || []).slice().sort((a, b) => String(b.time || "").localeCompare(String(a.time || "")));
   const page = document.body.dataset.page || "home";
 
+  /* 語言切換（i18n.js）。若它沒載入成功就退回中文行為 */
+  const I = window.I18N || {
+    isEn: false, locale: "zh-TW", t: (s) => s, tag: (t) => t,
+    post: (p) => ({ parts: p.parts, tag: p.tag || "", alts: (p.imgs || []).map((i) => i.alt || ""), translated: true }),
+    share: (x) => x, project: (x) => x, profile: (x) => x, note: (x) => x,
+    button: () => document.createDocumentFragment(),
+  };
+
   /* ---------- 小工具 ---------- */
   const $ = (s, r = document) => r.querySelector(s);
   const esc = (s) =>
@@ -31,7 +39,7 @@
     if (s < 86400 * 7) return `${Math.round(s / 86400)} 天前`;
     return fmtDate(iso);
   }
-  const firstLine = (p) => (p.parts[0] || "").split("\n").find((l) => l.trim()) || "";
+  const firstLine = (p) => (I.post(p).parts[0] || "").split("\n").find((l) => l.trim()) || "";
   const postImgs = (p) => p.imgs || [];
   const LANG_COLORS = { JavaScript: "#f1e05a", TypeScript: "#3178c6", HTML: "#e34c26", Python: "#3572A5", Kotlin: "#A97BFF", PLpgSQL: "#336790", CSS: "#563d7c" };
 
@@ -109,6 +117,7 @@
         NAV.filter((n) => n.key !== "home")
           .map((n) => `<a href="${n.href}"${n.key === page ? ' class="is-active" aria-current="page"' : ""}>${esc(n.label)}</a>`)
           .join("");
+      top.appendChild(I.button());
       top.appendChild(themeButton());
     }
     const side = $("#sideNav");
@@ -119,7 +128,7 @@
       ).join("");
     }
     const slot = $("#themeSlot");
-    if (slot) slot.appendChild(themeButton());
+    if (slot) { slot.appendChild(I.button()); slot.appendChild(themeButton()); }
   }
 
   /* ---------- 貼文文字：保留換行、把網址變連結 ---------- */
@@ -191,12 +200,13 @@
     const box = $("#latest");
     if (!box || !POSTS.length) return;
     const p = POSTS[0];
+    const L = I.post(p);
     const imgs = postImgs(p).slice(0, 2);
     box.innerHTML = `
       <div class="latest-body">
         <div>
-          <div class="latest-meta">${p.tag ? `<span class="chip">${esc(p.tag)}</span>` : ""}<time datetime="${p.time}">${ago(p.time)}</time></div>
-          <p class="latest-text">${esc(p.parts.join("\n\n"))}</p>
+          <div class="latest-meta">${p.tag ? `<span class="chip">${esc(L.tag)}</span>` : ""}<time datetime="${p.time}">${ago(p.time)}</time></div>
+          <p class="latest-text">${esc(L.parts.join("\n\n"))}</p>
         </div>
         ${imgs.length ? `<div class="latest-imgs">${imgs.map((i) => `<img src="${i.src}" alt="${esc(i.alt)}" loading="lazy">`).join("")}</div>` : ""}
       </div>
@@ -227,8 +237,8 @@
     const card = $("#recCard");
     if (!card) return;
     const pool = [
-      ...SHARE.map((s) => ({ title: s.title, desc: s.desc, url: s.site || s.url, badge: s.cats[0] })),
-      ...PROJECTS.map((s) => ({ title: s.name, desc: s.desc, url: s.site || s.url, badge: s.tags[0] })),
+      ...SHARE.map((s) => { const x = I.share(s); return { title: x.title, desc: x.desc, url: s.site || s.url, badge: s.cats[0] }; }),
+      ...PROJECTS.map((s) => { const x = I.project(s); return { title: s.name, desc: x.desc, url: s.site || s.url, badge: s.tags[0] }; }),
     ];
     let last = -1;
     const pick = () => {
@@ -398,8 +408,9 @@
     const imgs = postImgs(p);
     const n = imgs.length;
     const cls = n === 0 ? "" : n <= 4 ? `n${n}` : "many";
-    const total = p.parts.length;
-    const body = p.parts
+    const L = I.post(p);
+    const total = L.parts.length;
+    const body = L.parts
       .map((t, i) => `<div class="post-part">${total > 1 ? `<span class="post-part-label">${i + 1} / ${total}</span>` : ""}<div class="post-text">${linkify(t, p.links)}</div></div>`)
       .join("");
     const shownLinks = p.links.filter((l) => !/threads\.com|l\.threads/.test(l)).slice(0, 4);
@@ -414,12 +425,13 @@
         <header class="post-head">
           <img src="./assets/profile.jpg" alt="">
           <div><div class="who">${esc(P.name)} <span class="muted" style="font-weight:500">@${esc(P.handle)}</span></div>
-          <time class="when" datetime="${p.time}" title="${new Date(p.time).toLocaleString("zh-TW")}">${ago(p.time) === fmtDate(p.time) ? fmtDate(p.time) : `${fmtDate(p.time)} · ${ago(p.time)}`}</time></div>
-          ${p.tag ? `<span class="chip">${esc(p.tag)}</span>` : ""}
+          <time class="when" datetime="${p.time}" title="${new Date(p.time).toLocaleString(I.locale)}">${ago(p.time) === fmtDate(p.time) ? fmtDate(p.time) : `${fmtDate(p.time)} · ${ago(p.time)}`}</time></div>
+          ${p.tag ? `<span class="chip">${esc(L.tag)}</span>` : ""}
         </header>
+        ${I.isEn && !L.translated ? `<p class="post-untranslated" data-no-i18n>Not yet translated into English — original text shown below.</p>` : ""}
         <div class="post-body">${body}</div>
         <button class="post-more" type="button" hidden>展開全文</button>
-        ${n ? `<div class="post-media ${cls}">${imgs.map((im, i) => `<button type="button" data-i="${i}" aria-label="放大圖片 ${i + 1}"><img src="${im.src}" alt="${esc(im.alt)}" loading="lazy" width="${im.w}" height="${im.h}"></button>`).join("")}</div>` : ""}
+        ${n ? `<div class="post-media ${cls}">${imgs.map((im, i) => `<button type="button" data-i="${i}" aria-label="放大圖片 ${i + 1}"><img src="${im.src}" alt="${esc(L.alts[i])}" loading="lazy" width="${im.w}" height="${im.h}"></button>`).join("")}</div>` : ""}
         ${shownLinks.length ? `<div class="post-links">${shownLinks.map((l) => `<a href="${esc(l)}" target="_blank" rel="noopener">${svg("link", 'width="13" height="13"')}${esc(strip(l).split("?")[0].slice(0, 48))}</a>`).join("")}</div>` : ""}
         <footer class="post-foot">${likesHTML}<a href="${p.url}" target="_blank" rel="noopener">在 Threads 查看 ${svg("ext")}</a></footer>
       </article>`;
@@ -490,7 +502,7 @@
         if (tag === "有圖片" && !postImgs(p).length) return false;
         if (tag !== "全部" && tag !== "有圖片" && (p.tag || "日常雜談") !== tag) return false;
         if (month && !fmtDate(p.time).replace("/", "-").startsWith(month)) return false;
-        if (q && !p.parts.join(" ").toLowerCase().includes(q)) return false;
+        if (q && !`${p.parts.join(" ")} ${I.post(p).parts.join(" ")}`.toLowerCase().includes(q)) return false;
         return true;
       });
       paint();
@@ -583,7 +595,8 @@
     </div>`;
   }
 
-  function shareCard(it, i) {
+  function shareCard(it0, i) {
+    const it = I.share(it0);
     return `<article class="card item-card" style="animation-delay:${Math.min(i, 10) * 0.04}s">
       <div class="item-head"><div class="thumb">${esc(it.cats[0])}</div><div><h3>${esc(it.title)}</h3><span class="repo">${esc(it.name)}</span></div></div>
       <div class="item-tags">${it.cats.map((c) => `<span class="chip chip--plain">${esc(c)}</span>`).join("")}</div>
@@ -592,7 +605,8 @@
       ${footHTML(it)}
     </article>`;
   }
-  function projCard(it, i, featured) {
+  function projCard(it0, i, featured) {
+    const it = I.project(it0);
     return `<article class="card item-card" style="animation-delay:${Math.min(i, 10) * 0.04}s">
       <div class="item-head"><div class="thumb">${esc(it.tags[0])}</div><div><h3>${esc(it.name)}</h3><span class="repo">github.com/Yu-0312</span></div></div>
       ${featured ? `<div class="big-star">★ ${it.stars}<small>stars</small></div>` : ""}
@@ -611,7 +625,7 @@
     filters.innerHTML = cats.map((c, i) => `<button type="button" class="chip-btn${i === 0 ? " is-active" : ""}" data-cat="${esc(c)}">${esc(c)}</button>`).join("");
     let cat = "全部", q = "";
     const paint = () => {
-      const list = SHARE.filter((it) => (cat === "全部" || it.cats.includes(cat)) && (!q || `${it.title} ${it.name} ${it.desc}`.toLowerCase().includes(q)));
+      const list = SHARE.filter((it) => (cat === "全部" || it.cats.includes(cat)) && (!q || `${it.title} ${it.name} ${it.desc} ${I.share(it).title} ${I.share(it).desc}`.toLowerCase().includes(q)));
       grid.innerHTML = list.length ? list.map(shareCard).join("") : `<div class="empty">沒有符合的項目</div>`;
     };
     filters.addEventListener("click", (e) => {
@@ -668,7 +682,7 @@
     if (topics) {
       const c = {};
       POSTS.forEach((p) => { if (p.tag) c[p.tag] = (c[p.tag] || 0) + 1; });
-      topics.innerHTML = Object.keys(c).sort((a, b) => c[b] - c[a]).map((t) => `<a class="chip" href="./posts.html">${esc(t)} · ${c[t]}</a>`).join("");
+      topics.innerHTML = Object.keys(c).sort((a, b) => c[b] - c[a]).map((t) => `<a class="chip" href="./posts.html">${esc(I.tag(t))} · ${c[t]}</a>`).join("");
     }
   }
 

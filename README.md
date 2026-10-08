@@ -23,6 +23,26 @@ Yu（王宇錡 · [@yuqi._.0313](https://www.threads.com/@yuqi._.0313)）的個�
 - **番茄鐘／網站按讚**：首頁番茄鐘可設定 1–120 分鐘；心心按讚與主畫面數字即時同步，且不會連動 Threads。按讚資料保存在使用者的瀏覽器中。
 - 設定全部存在瀏覽器 `localStorage`，純靜態、不打後端
 
+## 語言切換（中文 / English）
+
+每頁右上角的 🌐 按鈕可在中文與英文間切換（選擇存在瀏覽器；網址加 `?lang=en` 也可直接開英文版）。預設是中文。
+
+- `i18n.js`：切換邏輯。英文模式下把畫面文字換成英文，沒翻到的字串會原樣（中文）顯示，不會壞
+- `i18n/ui.en.js`：介面字典（中文原文 → 英文），要補介面文字就在這裡加一行
+- `i18n/content.en.js`：個人簡介、專案 / 教學資源簡介、寫作台文章的英文版
+- `i18n/posts.en.*.txt`：**Threads 貼文的英文翻譯**（格式見 `scripts/build_i18n.mjs` 開頭的說明；一則貼文一個 `## <貼文 id>`，多段貼文用單獨一行的 `---` 分段）
+- `data.en.js`：由上面幾個來源組出來的檔案，網站實際讀它。**不要手改**，改來源後執行 `npm run build-i18n`
+
+翻譯獨立於 `data.js`，所以每天的 Threads 自動同步不會把翻譯洗掉。新貼文進來後還沒翻譯時，英文模式會顯示原文並標註「Not yet translated」。
+
+```bash
+npm run i18n:missing   # 列出還沒翻譯的貼文
+npm run build-i18n     # 把 i18n/ 的來源檔組成 data.en.js（會檢查段數、id 是否對得上）
+npm run translate-new  # 用 Claude API 把缺的貼文翻成英文（寫進 i18n/posts.en.auto.txt）
+```
+
+**新貼文自動翻譯**：每日同步（`sync-threads.yml`）抓到新貼文後，會接著跑 `scripts/translate_new.mjs` 翻譯缺的貼文，再重建 `data.en.js` 一起 commit。需要在 repo 的 Settings → Secrets and variables → Actions 新增 `ANTHROPIC_API_KEY`；沒設就自動略過（英文模式顯示中文原文）。想修自動翻的句子，直接改 `i18n/posts.en.auto.txt` 對應那則即可，不會被覆蓋。可用環境變數 `TRANSLATE_MODEL` 換模型。
+
 ## 資料
 
 所有內容集中在 `data.js`：`PROFILE`、`THREADS_POSTS`（Threads 貼文，圖片在 `assets/threads/`）、`PROJECT_ITEMS`、`SHARE_ITEMS`、`FRIEND_LINKS`。

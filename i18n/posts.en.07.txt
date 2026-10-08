@@ -1,0 +1,75 @@
+## DdGZlDTG2wo
+This prompt is incredibly strong!!!
+Image: limitless
+---
+Full prompt ⤵️
+
+Based on the photo I uploaded, generate a 3:4 vertical two-panel poster, split strictly 1:1 top and bottom with each taking 50%, no multi-image collage.
+
+The top half must be based on the original photo: keep the person's facial features, expression, hairstyle, clothing, pose, composition, background, and lighting as unchanged as possible, do not redesign the person, and only apply a light, premium-feeling color grade.
+
+In the bottom half, redraw the same person in a minimalist black-and-white style of thick crayon / charcoal / dry-brush hand drawing, focusing on preserving the most recognizable expression, hairstyle, pose, and facial outline of the original photo. You may moderately exaggerate memorable features such as the eyes, mouth, and head, but do not make it a realistic sketch and do not mechanically trace.
+
+The bottom half uses only black + an off-white paper background, with large areas of blank space, preserving rough brushstrokes, broken lines, bare patches, paper texture, and irregular edges. No color, grayscale gradients, smooth vector lines, or 3D effects.
+
+The overall style should be like an "old black-and-white children's picture book × high-end indie magazine": playful, humorous, restrained, and artistic.
+
+Add a small amount of English typography: No.01 + a short English title of 2–4 words + one very short line of small English text. The text is generated automatically from the person's expression and mood in the photo, placed in the blank area, small and restrained, and must not cover the person.
+
+## DdFpa-9E0rm
+Sharing Boba Tech's panel on blitzscaling and the AI revolution
+Speaker backgrounds:
+· Sega Cheng (程世嘉): co-founder and chairman of iKala; Stanford MS in Computer Science; software engineer at Google from 2006 to 2012, left to start a company before turning 30
+· Andy Lin (林志鴻): founder and CEO of Yo-Kai Express; AI automated ramen machines, across about 7 countries' markets; started his company after 12 years working in semiconductors
+· Tina Cheng (鄭文婷): partner at Bonhope Capital and managing partner of GVA Global Venture Accelerator; has started 6 businesses (a nightclub, a spa, Taiwan's largest postpartum care center), USC MBA
+Key takeaways:
+
+· The essence of entrepreneurship is "solving your own problem": each of Tina's businesses came from a pain point she personally ran into (nightclub → spa → postpartum care center); the pitfalls you hit as a consumer become your next business. Founders need first-hand "knowledge as a consumer" of the pain point (because you are that consumer).
+btw: an engineer's logical problem-solving mind can be applied to starting a company, and even to something as abstract as fundraising
+
+· A mindset for the AI era (Sega): in the AI era, don't start from the technology — you can't keep up with it. Start from the customer and work backwards; the opportunity now is in recombining "different technologies × different industries," staying agile and finding new value (what the market and customers want — build the product according to your judgment of the market).
+
+· Why he gave up Google and came back to Asia (Sega): he saw that the gap between the West and Asia is an opportunity; plus his growth at Google had peaked, and he wanted to leave and start a company before 30: "It wasn't a calculated decision, but it was worth it."
+
+· The US vs. Asian markets (Tina):
+1. The US competes on speed and scale, while Asia values profitability → people badly underestimate the cost and competitive intensity of starting up in the US: "No matter what you do, there's a competitor bigger than you with more money."
+2. If you start a company in the US, never try to please everyone. In the US you have to niche down. The US = 50 Taiwans; if you do one small niche to the extreme, that market may be bigger than your home country. Take the beachhead market first and then expand. "If you want to sell to everyone, you belong to no one."
+btw: the question VCs love to ask most is: who is your target audience (TA)?
+
+· Yo-Kai started from being "hungry": Andy couldn't find the life he was used to in the US — restaurants closed before 9 p.m., and he couldn't even buy a drink late at night → so he built a 24-hour AI automated ramen machine → later customers gave feedback: "the ramen is a bit heavy to finish, I'd like a drink" → so a smart beverage machine grew out of it. A pain point extends into the next product — that's "solving your own problem" in practice.
+
+· How to evaluate a new market (Andy): do in-depth research first, talk with locals, and gain the trust of benchmark brands before entering. He first went to Japan (the most mature vending-machine culture) to train, and only came back after benchmark food-and-beverage brands were willing to cooperate and the market trusted his technology. "Entering a new market without market research and back-end support will quickly fail."
+
+· Advice to his 21-year-old self: Don't quit, start early, don't be afraid of failure but fail fast & move on, stay resilient, and always come back.
+
+## DdD1E-ik_uv
+The world's first mathematics hackathon!
+This fall, math enthusiasts from around the world will gather at Caltech and, over 40 hours, with the help of frontier AI models, try to solve open math problems, propose new mathematical theories, and fully explain and re-derive their results to a panel of mathematician judges.
+They want to explore two questions:
+1️⃣ How much can AI speed up the process of math research, from idea to peer-reviewed publication?
+2️⃣ What will happen to the role of mathematicians as AI gets better and better at finding proofs?
+📌 Event information
+· Dates: October 30 – November 1, 2026
+· Location: California Institute of Technology
+· Format: 40 hours
+· Resources: over US$2 million in AI credits and frontier models
+· Supporters: OpenAI, Anthropic, DARPA expMath, Cognition, Cloudflare, a16z, YC, and others
+👩‍🏫 Invitation for judges and guests
+Round-trip airfare, accommodation during the event, and appearance fees for invited judges are covered by the organizers; an official invitation letter can also be provided if a visa is needed.
+🔗 Participant and judge applications: mathathonchallenge.com/apply…
+🔗 Official website: mathathonchallenge.com
+
+## Dc-5LEcE-O-
+This prompt is just invincible!
+Photo source: Wind's Viewfinder
+---
+Skill link: github.com/never…
+Full prompt ⤵️
+
+Please turn each photo I upload into its own separate premium designed poster — no multi-image collages; output each photo individually. Use an overall 3:4 vertical composition, with the two areas, top and bottom, split strictly 1:1 in height, each taking 50% of the frame.
+The top half keeps the original photo, preserving the subject's identity, structure, pose, real texture, natural light and shadow, and the original color atmosphere, with only a light premium color grade so that it has the feel of an art magazine, independent publication, and exhibition image. To fit the frame, the surrounding environment may be extended naturally, but the subject must not be stretched, distorted, or altered.
+For the bottom half, first understand the **core theme, subject relationships, structural flow, mood, and visual metaphor** most worth remembering in the original photo, then reconstruct it as a **pastel crayon doodle illustration with a vintage paper texture**. Do not copy the photo object by object, and do not redraw everything in full; keep only the outline, pose, direction, and visual memory points that best represent the original, and through deletion, summarizing, slight exaggeration, and recombination, let people feel the correspondence with the photo above at a glance.
+Draw the subject with a **coarse-grained chalk / crayon-style hand-drawn outline**: lines slightly thick, loose, and dry, with powdery grain, intermittent drop-outs of color, slight tremor, and edges that don't fully close, and naturally blunt, rounded stroke ends. Inside the subject, add only a very small amount of pastel color blocks, simple grids, stripes, dots, or casual scribbles, using the least information to suggest structure, with no realistic volume or full detail.
+The small surrounding elements use **the same line language** as the subject, but are further compressed into doodle symbols recognizable in one or a few strokes. Stars, flowers, plants, objects, environmental clues, or abstract symbols should all be simple, naive, open, and not fully closed, mainly single-line outlines with very little fill. Do not draw them as refined icons, stickers, or standalone small illustrations.
+Keep the composition in a relationship of **small-scale stamp-like marks and large areas of blank space**, arranging positions freely according to the subject's own direction, proportions, and visual center of gravity — it may be off-center, hug an edge, float, or be partially cropped. The subject and a very small number of doodle symbols form a loose but clear visual cluster, and the rest of the space is deliberately left empty. **The blank space itself is the main compositional element**, creating a sense of breathing, distance, and pause through the contrast of empty and solid, gathered and scattered, large and small, and asymmetry; better to draw too little than to fill it up.
+The background must use an **extremely light, bright, clean paper color**, such as cream white, ivory, light beige-white, pale apricot-white, very light gray-white, or a near-white paper color smartly matched to the overall color temperature of the original image. The paper retains only very slight fibers and grain and must not look brownish, yellowish, grayish, or aged. **The background's brightness must be clearly higher than the subject's lines and color blocks, ensuring all crayon outlines, small symbols, and text are clearly visible and do not blur into the background.**

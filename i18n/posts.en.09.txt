@@ -1,0 +1,94 @@
+## DcawHs7G_Ui
+I never thought the day would come when I'd be sharing prompts too!
+Let's create your very own 3D paper-cut travel postcard!
+Prompt:
+[Destination]
+A highly detailed, realistic-style, Instagram-ready 3D diorama of a [Destination] travel postcard, viewed from a slightly elevated angle. A real vintage postcard sits in the foreground, with rounded corners, paper texture, a postage stamp, handwritten travel notes, and a postmark. An intricate 3D paper-cut world emerges from the postcard, showcasing the most iconic elements of [Destination], built from layered paper-cut terrain, buildings, landmarks, vegetation, and coastline.
+A stylized, collectible-grade traveler character stands naturally in the paper-cut scene, designed to match the atmosphere and culture of the destination. The character has a high-end cinematic look, an expressive pose, realistic proportions, a fashionable travel outfit, and subtle storytelling accessories, and blends seamlessly into this miniature world.
+The background is a soft-focus, blurred real-life scene of [Destination], creating depth and a link between reality and imagination. The postcard stays crisp and sharp, while the background has a creamy bokeh.
+(continued in the comments)
+---
+The handwritten text on the postcard is personal, poetic, and specific to the destination, expressing discovery, wonder, and hidden-gem travel. An elegant postmark, destination stamps, and delicate ink illustrations complement the composition without making it look cluttered.
+Visual hierarchy: blurred real destination → real postcard → emerging paper-cut landscape → traveler character.
+Luxury travel-magazine aesthetic, warm natural light, shallow depth of field, premium paper texture, cinematic color grading, realistic shadows, handcrafted details, ultra-fine paper-cut structure, collectible-figurine quality, travel-magazine-cover quality, highly shareable social-media aesthetic, realistic photo, 8K, masterpiece.
+
+## DcP4Sz4E3rL
+OpenAI is playing an important card in the enterprise market: even when using the most powerful frontier models, enterprises don't have to give up control over their confidential data
+The more a model can run long workflows and work autonomously across many interactions, the more security risk is likely to hide in a chain of requests rather than in a single conversation. OpenAI's solution is Private Safety Processing: it lets automated systems recognize patterns of abuse across interactions, without OpenAI staff directly seeing the enterprise's prompts and responses.
+The enterprise keeps control of its data, and OpenAI receives only limited safety alerts.
+But don't get the wrong idea: this doesn't mean the conversations of all ChatGPT users instantly become "zero data retention." For now it mainly targets eligible, approved API/enterprise customers.
+This isn't just a privacy policy — it's a race for trust in enterprise AI: who can make enterprises dare to hand over their most important data while the models get more powerful?
+
+## DcP4REnE6Jz
+Is DeepSeek about to get "slain"? Don't rush to a conclusion yet
+With GLM-5.3's debut, what's really worth noting isn't just that it didn't replace GLM-5.2's base model, but that it pushed performance up through post-training
+Among the 6 comparable benchmarks self-reported by Z.ai, GLM-5.3 wins 4 and DeepSeek-V4-Pro-0813 wins 2
+Conclusion: GLM-5.3 may be stronger and faster; DeepSeek may be cheaper
+
+## DcOXTaJE4__
+Sharing something from lvy, a Microsoft heavyweight: how to get cutting-edge AI information
+You can go follow her: lvyovo-wiki.tech
+· Blogs shared
+1. Official company blogs: OpenAI, Anthropic, Cursor…
+2. Individual researchers: Su Shen (蘇神), Lilian Weng, Zhang Junlin, Eugene Yan…
+3. Industry interview and news platforms: Latent Space, Hacker News…
+4. Columns from open-source evaluation organizations: TML, LangChain, LMSys…
+5. Scattered personal sites and podcasts, with uneven quality — check as needed
+· Some AI companies she likes
+1. ElevenLabs: full-stack AI audio creation and voice generation, with a strong human feel, elegant and professional
+2. CS153
+3. Taste Labs: Taste Layer, a foundational infrastructure for AI aesthetics — end AI slop
+4. Linear: a human–agent collaboration tool
+5. Luma: a 3D-generation AI tool, product Dream Machine, with a more refined quality, and the company feels like it has quite a humanistic atmosphere
+
+## DcNIuSik9AA
+Anthropic upgraded its features in the early hours of today❗️
+The previous Gmail connector
+· could only search and read emails, and write replies as drafts into Gmail
+New features added now
+· Claude can now directly send, reply to, and forward emails in Gmail, and by default it asks whether you approve before every action
+
+## DcNHaOHk2aP
+OpenAI announced yesterday (8/18) that it has paused reinforcement-learning (RL) training for some of its frontier models
+Because the models have become too powerful and the risks have grown along with them — even the "internal testing" environment itself could become an attack surface — they want to first strengthen monitoring, alignment, and containment measures before daring to continue.
+
+## DcCjMnemanu
+Knowledge transfer is being completely upended in the age of AI. The thread below is going to take a slice of AI instructors' cake — savor it with care
+Traditional knowledge transfer and learning always go like this: listen to the teacher's lecture ➔ go home with an empty head ➔ when you actually need to use it, there's too much information to grasp the key points
+The real beginning of learning has never been what you hear in class, but "the moment you apply what you learned to your own situation."
+The biggest change in the AI era is that the cost of personalization has dropped dramatically. In the past, limited by manpower, it wasn't possible to provide personalized service to everyone.
+The biggest pain points in delivering knowledge are:
+1. One-on-one coaching of learners ➔ can't be delivered at scale
+2. Content is generic, sprinkled thin like pepper powder over everyone ➔ learners can't actually learn it
+How does the AI era solve this? Personalization can run through every stage of learning
+1️⃣ Personalized learning materials
+When signing up for events and courses abroad, learners provide information such as their professional background and job content. Based on this information, AI can generate a customized initial set of learning materials for each person.
+Everyone's starting point is no longer the same; each person begins learning from where they actually stand
+Even the tools learners are used to are taken into account in the personalization
+Not everyone is on the same starting line, which makes it easier for learners to apply and understand
+---
+2️⃣ Personalized guidance during the course
+In the past it was impossible to assign every learner a customized teaching assistant:
+1. TAs are hard to train
+2. Abilities are uneven
+3. They'd have to learn the whole course first
+The AI-era solution: the course's methodology is internalized directly into a "skill," which is simply installed in the learner's own workbench. When learners practice, the AI on their own computer can give personalized guidance and answers in real time, acting as a personal teaching assistant.
+This forms a "three-teacher model":
+Lead instructor ➔ teaches the course overall
+The AI on the learner's own computer ➔ personal, individualized guidance
+The instructor-side agent ➔ keeps track in real time of the whole class's progress and sticking points, and judges whether a human TA needs to step in to help
+3️⃣ What's delivered shifts from "teaching materials" to "results"
+In the past, after training you took home handouts, notes, and videos, and then had to digest them yourself and turn them into something actually usable
+Now, during the course, learners directly build an AI workflow for their own business based on their own work
+What they take away at the end is:
+✅ A pre-installed system that works right out of the box
+✅ A dedicated user manual explaining the directions in which this workflow can be extended
+
+## DcAa70NE0mS
+The AI watermark war has now spread to OpenAI and Gemini!
+The open-source GitHub tool watermarks-remover is live
+It claims to clean up the invisible watermark traces of the three big vendors — Claude, Gemini SynthID, and OpenAI
+Breaking them down in one go: invisible Unicode characters, C2PA metadata, and statistical sampling signals
+But the author himself admits that to completely wash out the statistical watermark you'd have to rewrite sentence by sentence, at the cost of writing style, tone, and precision all taking a hit, and no tool can guarantee it will truly evade the official detectors
+There's no such thing as a free lunch, and this time is no exception
+github.com/guill…

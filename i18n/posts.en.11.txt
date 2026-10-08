@@ -1,0 +1,170 @@
+## DbBEknTk7gM
+I've given my own open-source Claude skill a big update
+ppt-creator-skills: turns messy documents (meeting transcripts, experiment data, papers, financial reports) into HTML slide decks ready to present
+The biggest difference from one-click generation tools:
+✅ It first takes inventory of the content and intercepts sensitive data, and only lets it through after you confirm
+✅ 34 style templates for you to choose from, rather than the AI deciding on its own
+✅ All charts are recalculated from the raw data, and it even catches numbers written wrongly in the source text, to avoid human typos
+This update integrates the "anti-AI-look" design guidelines of taste-skill: banning the AI purple gradient, canned fonts, fake-precise numbers, and em-dash decoration. It also adds a design assessment before generation, and a verification step that scans a taste checklist item by item before delivery
+MIT open source, free to use 👇
+github.com/Yu-03…
+@alt 1 GitHub - Yu-0312/ppt-creator-skills: PPT creator skill for Claude Code
+
+## DbAQJTJE8up
+Are you still treating ChatGPT as just a "slightly smarter chatbot"?
+In fact, AI can now become your work partner directly: handling tasks for you, building workflows, and even quickly turning the ideas in your head into something you can show off
+On the evening of 7/22 (Wed), CVC Taiwan will hold a hands-on Codex workshop, taking everyone from zero to understand:
+✦ Which kinds of work are suited to Codex
+✦ How to build your own AI workflow
+✦ How to save time with AI agents
+✦ How to quickly turn ideas into demonstrable results
+It's not just sitting and listening: you'll install, demo, and work hands-on on-site, and in the end you can swap and discuss what everyone made!
+The event has a special guest, Jane, who has 14.9K subscribers on her YT channel and is also a Codex Ambassador
+Registration fees:
+Sign up before noon on 7/22 for only NT$500
+After noon and at the door it's NT$700
+(both include a meal and non-alcoholic drinks)
+If you want to level up from "knowing how to ask AI" to "getting AI to finish the work for you," this event is well worth attending
+📍 No. 184, Chaozhou St., Da'an District, Taipei City (next to Shida Night Market)
+🔗 accupass.com/event…
+@alt 1 CVC Taiwan x Codex Workshop: Getting Started with Codex (From Chat Tool to Work Partner: Make AI Truly Start Working for You)｜ACCUPASS
+
+## DZ-MAbuE4Qr
+After two weeks, I've expanded the features again❗️❗️❗️
+📚 Tutorial pages:
+Python applications: web scraping, data analysis, chatbots, game development
+8 chapters each of dedicated tutorials for C++ / C / Java
+Not only can you switch between Chinese / English with one click, it also explains why it was designed this way
+🎯 APCS problem bank:
+300 solutions completed across four languages (Python / C++ / C / Java)
+Beginner 36 problems / Intermediate 84 problems / Upper-intermediate 53 problems / Advanced 127 problems
+🔍 Code reading:
+There are now 1,000+ quick multiple-choice code-reading exercises
+You can choose language → difficulty → question type for targeted practice, and there's a mistake notebook to review your blind spots
+🔗 Links: github.com/Yu-03…、
+
+## DZztwi6Gxfn
+A few posts ago I taught everyone how to turn a terrible document into a presentation-ready slide deck with 6 prompts, but prompts get forgotten, pasted incompletely, and redone from scratch every time. Now I just type one sentence: "Turn this into a presentation for me." It takes inventory on its own, intercepts personal data, recalculates the figures to catch errors, generates, and outputs a perfect PPT — that is a skill
+ppt-creator skill: github.com/Yu-03…
+Takeaway ①: What is a skill?
+A skill "saves" a professional's thinking steps, triggered with one sentence and applied automatically
+Takeaway ②: The basic design
+It opens with a questionnaire, and once you've filled it in, it runs all the way through
+After you drop in your files, it first gives you a short setup questionnaire:
+1. Material source: ① existing documents ② only a topic (it searches the web for you) ③ continue from the last progress
+2. Who it's for
+3. What occasion it will be used for
+4. Presentation-style or reading-style
+5. Canvas size (16:9 / portrait / A4…)
+6. Whether there's a brand style ("make it look nicer" is garbage-in, and the skill automatically translates it into specs: a one-line mood, color codes (≤2 accents per page), serif headings + sans-serif body text, layouts matched to content, no tables)
+7. Whether you want to see the design spec first
+Once you've filled it in, it runs straight to the end and doesn't keep turning back to bother you at every step.
+---
+Takeaway ③: Designs that keep it stable and error-free
+The questionnaire is only the entrance; what really makes it "stable" is the following designs:
+① Filter content → define specs → lay out and output: finish one layer before moving to the next. The AI most easily starts laying things out before it has understood the content (forced layering is there to prevent this)
+② "Hard stops" where it should stop: certain steps are set as hard stops that must wait for your response before continuing — the AI isn't allowed to make things up and keep going, nor to sneak-write HTML during the planning stage. This is the key to why it won't "go off on its own and finish a deck you didn't want at all"
+③ Three points are marked as "not for the AI to decide," such as whether to reveal the holding area, how to handle inconsistent data, and acceptance of the visual result. These three are matters of judgment, responsibility, and outcomes, but we still keep the bottom line of "AI mass-produces, a human gatekeeps"
+④ By default, names, salaries, and non-compete clauses are intercepted into the holding area to ensure information security, and every block of the original text must be tagged with where it went — no content is allowed to silently disappear. It would rather ask more questions and let you decide than quietly leak anything.
+@alt 0 GitHub - Yu-0312/ppt-creator-skills: PPT creator skill for Claude Code
+
+## DZpu6RvE1NU
+A four-stage touchstone test, run on ChatGPT / Gemini / Claude at the same time
+I built a "touchstone" test suite
+The same instructions, the same file, and the same grading criteria, thrown at ChatGPT, Gemini, and Claude at the same time, running four stages:
+① Inventory and sensitive-data interception
+② Style specification
+③ Generation quality
+④ Chart and data verification
+First, I gave them a lab report claiming "activation energy = 48.2" (with the full 100 raw data points attached). The passing standard was to recompute from those 100 raw data points before drawing the chart, which reveals that the activation energy is actually 45.7, a gap of as much as 2.5 from the claimed value; they needed to catch it, flag it, not silently change it, and not make things up
+🟣 Claude: recomputed 45.7 and flagged "45.7 vs. report's 48.2, needs checking before publication" — successfully caught it and did not tamper with the data
+🟢 ChatGPT: recomputed with Python and likewise got 45.7, and also pointed out that the formula's units didn't match — equally honest and effective, but the downside is…
+🔵 Gemini: calculated 48.25 and reported it as "matching," so it not only failed to catch the error but went on to invent a fake 19.53% error, and finally, because R² was too high, made a precise-sounding guess that the author may have "deliberately polished" the data (possibly because I'm not a paying user, so the result was below expectations)
+---
+Next, I fed them two reports at the same time: one a messy, disorganized handwritten-notes report, with arguments, new proposals, and solutions interspersed; the other a game-development report simulating a large game company, containing users' personal information and data
+Claude and Gemini did very solid work on personal-data interception, but when ChatGPT made the PPT, it put private personal information such as names, spending data, and online data onto the slides
+When producing the game-development report PPT with different AIs, the workflow can be unified, but you can't blindly trust the platform — especially for presentations that will be delivered on stage and contain data
+Below are two different versions from ChatGPT
+
+## DZoFMp-k6qp
+"In the AI era, what can someone who can't code possibly use to compete with engineers?"
+A 3-minute rundown of this underdog's playbook
+My last post covered "how to write a precise prompt"
+But having to write something this complete every time → exhausting, I can't remember the format, and copying it every time is a hassle
+So this thread covers only one thing: how to make AI stronger on its own
+Takeaway ①: α and Ω — let your prompts evolve themselves
+You only need two fixed instructions:
+α (the generator): a prompt that specializes in "generating" other prompts
+For example:
+"You are a prompt engineer. I will give you a task requirement, and you must output a high-quality, ready-to-use prompt.
+Requirements:
+1. Begin by defining the role and the goal
+2. List clear steps
+3. Specify the output format
+4. Add boundary conditions (what not to do)
+My requirement: ＿＿＿＿ "
+Ω (the optimizer): a prompt that specializes in "optimizing" other prompts
+For example:
+"You are a prompt review expert. I will give you a prompt.
+Please:
+1. Point out its 3 weaknesses (vague, missing role, no format constraints…)
+2. Give a complete revised new version
+3. Explain why each change is better
+The prompt to optimize: ＿＿＿＿ "
+---
+The way to play is a loop:
+1️⃣ Have the AI first write initial versions of α and Ω for you
+2️⃣ Use Ω to optimize α → get a stronger α
+3️⃣ Use the new α to generate all the prompts you use day to day
+4️⃣ Feed the results back in and optimize another round
+Every time you run a cycle, your prompt library automatically levels up. You're no longer writing prompts — you're raising a prompt factory that evolves on its own
+Takeaway ②: 7 AI house rules for beginners
+1. If you're unsure, ask me; do not guess my intent
+2. For complex tasks, first list a TODO list and work on one item at a time
+3. Follow the "understand → plan → execute → verify" loop, and don't skip steps
+4. Look at what already exists first; don't start from scratch out of thin air
+5. Before changing anything, explain the purpose and the impact
+6. Prioritize technical correctness; don't pander to me (the AI's biggest flaw is going along with whatever you say — this rule cures it at the root) 7. Keep answers concise, with no pleasantries or filler
+
+## DZjpDB_G9he
+Zero background, can't code, and you can still get AI to finish an entire job for you
+Learn in 3 minutes to write the most precise prompts
+You've definitely run into this:
+Tell the AI "make me a report" → it gives you a useless lump
+Tell the AI "write me a website" → after the 10th round of edits you just collapse
+And the final conclusion: "AI isn't good"
+The problem isn't the AI, it's your prompt
+In the next 7 posts, I'll break it down into methods you can use today 👇
+---
+Takeaway ①: Garbage in, garbage out
+First principle: context is everything. Garbage in, garbage out
+The AI can't read minds. Your need has 100 points of detail in your head, you only say 10 of them, and the AI makes up the other 90 with imagination — then you blame it for making things up.
+So the essence of a precise prompt isn't "wording tricks" — it's fully moving the context in your head over to the AI.
+Remember this sentence; everything that follows revolves around it.
+Takeaway ②: The 4 components of a precise prompt
+The methodology condensed into one formula, applicable to any kind of work:
+Precise prompt = Goal + Non-goals + Boundaries + Acceptance criteria
+🎯 Goal: say in one sentence what you want 　"Write me a weekly report for my manager, focusing on progress and risks"
+🚫 Non-goals: say explicitly what you don't want 　"No more than 300 words, no pleasantries"
+🧱 Boundaries: what can be touched and what can't 　"Only edit the second paragraph and leave the other paragraphs as they are"
+✅ Acceptance criteria: what counts as done 　"When finished, list which 3 places you changed"
+Missing any one component gives the AI that much more room to freelance.
+
+## DZSqkvkk8gb
+I've open-sourced a programming tutorial website that takes you from zero background to being able to write small projects, all done inside the browser.
+🔗 yu-0312.github.io/apcs…
+It started because I wanted to practice for the APCS and couldn't find a convenient online site, so I just built one myself. As I kept writing, it turned into a complete teaching system.
+Contents:
+・36 chapters of tutorials, divided into three stages: APCS exam preparation, practical programs, and building projects
+・95 problems, graded by difficulty, with solutions in four languages: Python / C++ / C / Java
+・One programming exercise per chapter, with automatic right/wrong checking
+・When your program crashes, English error messages are automatically translated into Chinese
+Completely free, no sign-up required, purely front-end and running in the browser.
+Suitable for: high school students preparing for the APCS, beginners who want to teach themselves programming, and university students reviewing data structures and algorithms.
+If you find bugs or have suggestions, you're welcome to open an issue on GitHub.
+
+yu-0312.github.io
+APCS Practice Problem Bank | Four-Language Example Checks
+---
+github.com/Yu-03…
+@alt 0 GitHub - Yu-0312/apcs-judge: APCS multi-language grading system - one single page supporting Python/C++/C/Java, 58 problems covering beginner/intermediate/advanced, with solution-approach hints

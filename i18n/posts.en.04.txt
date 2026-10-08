@@ -1,0 +1,56 @@
+## Ddafoylk2B4
+MOPCON 2026 is coming! 🔥🔥🔥
+This year's theme is "From AI to Reality" — let's bring AI, software, and cutting-edge technology into the real world together and witness the limitless reach of software!
+📅 2026/10/31 (Sat)
+📍 Activity Center, Nanzi Campus, National Kaohsiung University of Science and Technology (100 m on foot from Houjing MRT Station)
+Speaker lineup ⤵️
+Kao Chien-Lung (高見龍): head of Five Times Academy 五倍學院 (website: kaochenlong.com )
+zonble: well-known software engineer (website: zonble.net )
+Let's head south of the Zhuoshui River and join in together!
+
+## DdQ4jy2kz6O
+At Boba Tech I listened to a talk by iKala co-founder Sega Cheng (程世嘉), titled "Build Your Own Sovereign AI"
+In one sentence: "Everyone is good at getting answers from AI, but getting insight is hard."
+Speaker background:
+· Sega Cheng: co-founder and CEO of iKala; Stanford MS in Computer Science; at Google he worked on Google Maps, Transit, Translate, Search, and Android; after leaving he returned to Taiwan to start a company, pivoted to enterprise AI adoption in 2015, and plans to go public next year
+Key takeaways ⤵️
+🧩 When friction disappears, insight disappears too: AI has removed all the friction, but it's exactly that friction that lets you understand "why it gave this answer." There are two side effects: people can now solve problems in fields where they have absolutely zero knowledge, and even experts have a hard time verifying what AI generates. So besides pushing AI toward superhuman, we should step back and ask: besides throwing the problem at AI, what else should we be doing?
+
+🏛️ Sovereign AI will be the main theme of the next three to five years: the industry is all doing forward deployment right now, but the real trend is "owning your own AI." The point isn't AI getting stronger through self-evolution (that's what OpenAI is doing), but how organizations that originally had no AI capability grow their own — for example, by forming a data closed loop inside the company. This applies at the national, corporate, and even personal level: what's your AI closed-loop strategy?
+
+📚 They released the world's largest Traditional Chinese dataset: for AI evaluation, safety, and agent alignment. It took two years to build and has been adopted by Google and included in its evaluation framework. His argument: alignment is the big problem for superhuman AI, and the point isn't getting the answer but whether the AI finishes the job in the way you expect — and all of this has to start from datasets and evaluation.
+btw: if you want to start a company, look at cybersecurity — the spread of AI has thrown this industry badly out of balance
+
+🏝️ Taiwan is going from an "island of engineering" to an "island of capital": money is flowing in, hardware giants are beginning to invest overseas, and they're trying to move upstream from making chips and computers to models and data. The number he gave: about 90% of the world's distributed computing equipment is made in Taiwan.
+
+👶 Taiwan has the lowest fertility rate in the world (lower than Korea): fewer than 100,000 babies were born this year, but there are over 3 million cats and dogs. His conclusion: "You can't build a consumer market in Taiwan — you'd have to build it for the cats." Every company loses talent and also has trouble finding people, so don't be limited by Taiwan's capital, talent, and structural constraints. What he himself is doing now is working with the US government and going abroad to help countries build their own sovereign AI.
+
+Closing words: "The more powerful AI gets, the more we need trust, the more we need technical knowledge, the more we need education, and the more we need to open the black box — and that is exactly what Taiwan is good at."
+
+## DdQXuwpE8Kp
+Boba Tech Day 2 opening panel!
+Speaker backgrounds:
+· Steve Chen (陳士駿): co-founder and former CTO of YouTube. Born in Taipei, moved to the US at age 8, studied computer science at UIUC; in 1999 he followed Max Levchin to join PayPal (a member of the PayPal Mafia); in 2005 he co-founded YouTube with Chad Hurley and Jawed Karim, sold it to Google in 2006 for US$1.65 billion, and then worked at Google; since 2019 he has lived in Taiwan, focusing on bridging the Taiwan and US startup ecosystems.
+· Johnny Chang: co-founder and CEO of Modo, Stanford CS master's; leads cutting-edge AI agent research at Stanford and has worked with professors such as Andrew Ng to teach several flagship AI courses; also founded the AI x Education think tank (a community of 9,000+ educators); Modo was part of two cohorts, PearX W26 and StartX F25.
+· Tiffany: a senior VC (15+ years, mainly investing in AI) with a Taiwan–US background, who runs a Taiwanese founders' community in the US together with Caleb.
+The moments most worth remembering 👇
+· The origin of YouTube: in 2003–2004 it was originally a "video dating site," but five days after launch not a single video had been uploaded, so the team decisively pivoted into a general video platform — and everyone knows the rest of the story.
+· PayPal's beginning was even more absurd: an app for sending money between Palm Pilots (Elon, Peter Thiel, and David Sacks all thought the idea was awesome). It took off on the eBay ecosystem after moving to a web version.
+→ These two points show that most successful companies have pivoted. A founder needs "confidence," but also "humility and flexibility," and the willingness to admit that the idea you've put everything into may not be the right one.
+
+· How does Steve recruit engineering talent? He tells candidates frankly: "In six months the company might not exist, and you might have to interview again. But I can promise these six months will be the most thrilling roller coaster of your life, because our traffic, sign-ups, and uploads are doubling every two weeks." This also shows the difference in mindset between Taiwan and Silicon Valley: in Taiwan people want to make sure they still have a job in six months; Silicon Valley is buying the journey.
+
+· Johnny on the influence of environment: three of his Stanford professors have gone off to start companies, and friends took leaves of absence within a few weeks of the semester starting: "At Stanford, taking a leave is cooler than graduating." When the people around you don't take the typical path, that's when you dare to start building your own thing — that's the power of environment.
+
+· Why not build a "Taiwan version of Silicon Valley"?: Steve said he spent six years trying to recreate Silicon Valley in Taiwan, and later realized — take the US$1.65B YouTube acquisition: back then he met Jerry Yang (Yahoo) and Google back-to-back within three days, and got the legal and M&A work done within a week — none of which could happen in Taiwan. The right answer isn't to copy it, but to "collaborate" with Silicon Valley (Singapore, Israel, and Dubai all take this route). In November they're bringing Y Combinator and Garry Tan to Taiwan.
+
+· Johnny on choosing investors: money is the baseline, and what he looks at is "who can bring customer introductions"; their best investors were already helping introduce corporate executives before they signed the check.
+btw: another neat trick: ask that investor, "How did you treat the founders you invested in during their hardest moments?"
+
+· Asked "What motivates you after achieving financial freedom?", Steve answered: "I want to help build a bridge between Taiwan and Silicon Valley. If I can make a real difference for the next generation of Asian entrepreneurs, that's as valuable as anything I've done in the past." Steve's advice to Gen Z is super blunt: "Starting a company gets much harder after you get married and have kids, so if you want to do it, do it now. Even if it doesn't end up a unicorn, you can't get this experience anywhere else in any career."
+
+## DdGwI87mwtM
+Thanks to Big Daddy Xiaomi for the unlimited closed-beta access
+Everyone is welcome to apply on the official site: mimo.mi.com
+---
+The only catch is that it gets updated very frequently

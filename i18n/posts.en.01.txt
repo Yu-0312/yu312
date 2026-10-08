@@ -1,0 +1,128 @@
+## DeLBJFXE4ua
+Everyone, hurry up and cast a vote! Tibo might issue the reset the next day — there's only one hour left in the poll!
+Link: https://x.com/thsottiaux/status/2107575657014468879
+
+## DeJTqFhE4rx
+There's another Claude Meetup in Taipei, themed "Claude × Gaming"!
+
+If you're into AI coding, Claude Code, game development, or vibe coding, it's well worth checking out!
+
+This one focuses on "how AI is changing game development" 👇
+1️⃣ Warrick Buchanan: has worked on *Stronghold*, the *Assassin's Creed* series, and *Candy Crush*. He'll share how AI agents can be used to make games, plus Vibemaker, a free AI game-making tool that's about to launch
+
+2️⃣ Jack Kelly: will introduce his own side project, "Naisu"
+
+3️⃣ Eric Khun: will do a live demo of how Claude Code handles SEO, social media + video generation, and how a coding agent deals with those "annoying but unavoidable" chores
+
+📍 Da'an District, Taipei
+🎤 Demos will be entirely in English
+👥 Open Mixer (chat directly with people in Taipei who are building games with AI)
+👉 Event info: https://luma.com/claude-taipei-11
+
+## DeB9J_ykyMT
+Hold your horses, everyone!!! The annual GitHub Game Off 2026 is coming!
+Lately I've seen games like Taipei GTA and 風起澀谷 ("Wind Rises in Shibuya") posted on Threads — I recommend everyone go give it a shot! 🔥
+Game Off is GitHub's yearly global game jam: you get one month and one theme to make a game on your own!
+
+Requirements:
+🔥 The game must be put in a public GitHub repo
+🔥 You can use any engine, library, and tools
+🔥 Everyone plays and rates each other's games
+
+The final judging covers these dimensions:
+🎮 Gameplay
+🎨 Graphics
+🎵 Audio
+💡 Innovation
+🎯 Theme Interpretation
+🏆 Overall
+
+Last year's Game Off 2025 received 700+ games, and this year will surely be bigger and more competitive. If you have ideas or want to form a team, leave a comment below or join me!
+
+Stop only writing demos — this November, go from 0 → 1 and build a game that's actually playable.
+
+👉 You can sign up now: https://itch.io/jam/game-off-2026
+
+## DeBqSftE4lU
+DeepSeek Harness now has a desktop version!
+DeepSeek Harness for Desktop officially launched two days ago
+Everything is a plugin: models, tools, Skills, Sessions, Sandbox, Storage, Workflows, and even the UI can be freely combined
+
+4 modes:
+🔹 Standard: a full coding agent
+🔹 Code: lets the model orchestrate multi-round tool calls on its own through the SDK
+🔹 Minimal: a bare-bones environment built specifically for testing model capability
+🔹 Creator: directly create and combine your own Agent Presets
+
+And DeepSeek Harness is open source on GitHub: you can deploy it yourself, modify it, and extend it!
+Official X account: https://x.com/DeepSeekHarness/status/2105330281389662575?s=20
+
+## DeBZM_nE6Ip
+Want to start your own AI project in 2027 — or even take on an international hackathon?
+This is a complete path from hands-on AI → prototype → international competition → startup!
+
+🟢 Global AI Hackathon | 8th edition
+📅 Date: 2027/1/30–1/31
+💻 Format: Online + in-person Hubs
+🎟️ Free to Enter
+
+The organizers provide a range of AI Challenges — just pick a Challenge, find teammates, and start building!
+
+🔵 Build | Complete an AI project within 48 hours
+🟣 Global Hubs | 15+ in-person locations worldwide
+Hubs currently listed by the organizers include:
+🇺🇸 Harvard/MIT/Stanford/NYC
+🇬🇧 London
+🇩🇪 Munich
+🇨🇭 ETH Zurich
+⚠️ In-person spots are limited and require an application
+If you're in Taiwan, just join online!
+
+💰 Prize | Rewards
+First place $30,000+
+Participants get access to AI tools and development resources, and may also be invited to join the Hack-Nation Venture Lab
+---
+Link: https://hack-nation.ai/?utm_source=luma
+
+## Dd-l9MDFLcq
+Applications are open for the Meta × YTU Startup House AI Builders Türkiye Student Hackathon!
+Want to learn AI from scratch and actually build your own AI project?
+This is a complete path from learning AI → developing a project → an international hackathon!
+
+🟢 Phase 1: AI 101 Training (online)
+Free AI training provided by the organizers:
+✅ Held online, with recordings provided
+✅ Taught by Meta-accredited trainers
+✅ No LLM or AI development experience required
+✅ Attend at least 3 of the 4 modules to receive a certificate of participation
+
+🔴 Phase 2: Student Hackathon (in person, in Türkiye)
+After completing the training you can apply to enter the main hackathon
+📍 Location: YTU Startup House, Istanbul, Türkiye
+💰 Total prize pool: 6,000 USD
+---
+Link: https://ytustartuphouse.com.tr/en/blog/free-ai-training-for-undergraduates-ytu-startup-house-and-meta-open-applications-for-the-student-hackathon-training-series?utm_source=chatgpt.com
+
+## Dd87NDGk-x9
+🔥 Stanford's free AI courses — I've dug up all the links for you!
+
+1️⃣ CS221 Artificial Intelligence | Search, Logic, MDPs
+https://youtube.com/playlist?list=PLoROMvodv4rMeDqwS1yFl3j3sR_-MQNEN
+2️⃣ CS229 Machine Learning | the classic must-take on ML
+https://youtube.com/playlist?list=PLaqpC4kq8Gpw
+3️⃣ CS230 Deep Learning | taught by Andrew Ng himself
+https://youtube.com/playlist?list=PLoROMvodv4rNRRGdS0rBbXOUGA0wjdh1X
+4️⃣ CS229M Machine Learning Theory | watch this if you want to understand why it works
+https://youtube.com/playlist?list=PLoROMvodv4rP8nAmISxFINlGKSK4rbLKh
+5️⃣ CS234 Reinforcement Learning | the pinnacle of RL intros
+https://youtube.com/playlist?list=PLoROMvodv4rN4wG6Nk6sNpTEbuOSosZdX
+👉 (continued in the comments) Watch it all without liking or sharing = failed at freeloading
+---
+6️⃣ CS224N NLP × DL | Manning's legendary course
+https://youtube.com/playlist?list=PLoROMvodv4rOaMFbaqxPDoLWjDaRAdP9D
+7️⃣ CS224U Natural Language Understanding | the semantics track
+https://youtube.com/playlist?list=PLoROMvodv4rPt5D0zs3YhbWSZA8Q_DyiJ
+8️⃣ CME295 Large Models | Transformers & LLMs
+https://youtube.com/playlist?list=PLoROMvodv4rObv1FMizXqumgVVdzX4_05
+9️⃣ CS236 Deep Generative Models | VAE · GAN · Diffusion
+https://youtube.com/playlist?list=PLoROMvodv4rPOWA-omMM6STXaWW4FvJT8

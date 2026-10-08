@@ -47,11 +47,20 @@ jobs:
           THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
         run: node scripts/sync_threads.mjs
 
+      # 新貼文自動翻成英文（需要 repo secret ANTHROPIC_API_KEY；沒設就略過，英文模式會顯示中文原文）
+      - name: Translate new posts to English
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          node scripts/translate_new.mjs
+          node scripts/build_i18n.mjs --lenient
+
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data.js assets/threads
+          git add data.js assets/threads data.en.js i18n
           if git diff --staged --quiet; then
             echo "No changes"
             exit 0
