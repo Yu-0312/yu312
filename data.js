@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-07T21:18:09.583Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-08T21:19:15.121Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -299,6 +299,72 @@ window.PROJECT_ITEMS = [
 ];
 window.THREADS_POSTS = [
  {
+  "id": "DeOA-ahk0W5",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeOA-ahk0W5",
+  "time": "2026-10-08T03:54:25.000Z",
+  "tag": "",
+  "parts": [
+   "🚨 重磅！Google 開始讓全世界一起「抓 AI」了！\nGoogle 剛宣布：SynthID Detector 全球開放\n現在你可以直接丟一個圖片、影片、音訊進去檢查它是不是由 AI 生成\n而且這次不只是 Google 自家模型，OpenAI、NVIDIA、Kakao 已經參與合作，即將加入的還有 Apple 。核心技術就是不可見的 AI 水印，透過 Detector 掃描後就能判斷內容是否帶有 SynthID 水印。\n\n更誇張的是 Google 已經給超過 1800 億張圖片＋影片加上水印！\n很多時候根本區分不出 AI生成？AI改過？的東西，現在內容本身會帶著自己的身分證，意義非常大！\n\n👉 Google SynthID Detector 官方介紹： https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synth-id-ai-content/?utm_source=chatgpt.com"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DeOA-ahk0W5-0.png",
+    "w": 1440,
+    "h": 810,
+    "alt": "We're making it easier to identify AI-generated content globally."
+   }
+  ],
+  "links": [
+   "https://blog.google/innovation-and-ai/models-and-research/google-deepmind/synth-id-ai-content/?utm_source=chatgpt.com"
+  ],
+  "video": false,
+  "likes": 3
+ },
+ {
+  "id": "DeNuauUE96n",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeNuauUE96n",
+  "time": "2026-10-08T01:12:15.000Z",
+  "tag": "",
+  "parts": [
+   "🚨 馬斯克直接把 Grok Bot 的玩法改了！\n以後不再是「自家模型優先」了，而是哪個模型最適合這項任務，就用哪個！\n覆雜推理 → Claude Opus 5.5\n圖片生成 → MidJourney\n音樂生成 → Suno\n其他任務 → 其他領先 API\n\n這意味著 Grok Bot 正在從：「一個模型包打天下」轉向「AI Agent + 多模型調度」，感覺越來越有 Agent 味了\n\n連結： https://x.com/elonmusk/status/2107724314451878104?s=20"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DeNuauUE96n-0.png",
+    "w": 1200,
+    "h": 630,
+    "alt": "Elon Musk (@elonmusk) on X"
+   }
+  ],
+  "links": [
+   "https://x.com/elonmusk/status/2107724314451878104?s=20"
+  ],
+  "video": false,
+  "likes": 2
+ },
+ {
+  "id": "DeNtP8ik__u",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeNtP8ik__u",
+  "time": "2026-10-08T01:02:02.000Z",
+  "tag": "",
+  "parts": [
+   "🚨 速度白嫖！OpenCode 又丟了一個神秘免費模型：Exo Free！\n\n目前能確認的信息：\n🔹 限時完全免費\n🔹 支持 文本 + 圖像\n🔹 數據可能會被用於改進模型\n🔹 沒有公開具體是哪家廠商的模型\n\n👉 直接去 OpenCode： https://opencode.ai/"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DeNtP8ik__u-0.png",
+    "w": 1280,
+    "h": 721,
+    "alt": "OpenCode | The open source AI coding agent"
+   }
+  ],
+  "links": [
+   "https://opencode.ai/"
+  ],
+  "video": false,
+  "likes": 8
+ },
+ {
   "id": "DeLBJFXE4ua",
   "url": "https://www.threads.com/@yuqi._.0313/post/DeLBJFXE4ua",
   "time": "2026-10-06T23:58:09.000Z",
@@ -551,11 +617,11 @@ window.THREADS_POSTS = [
    "https://nvidianews.nvidia.com/news/open-agent-safety-platform"
   ],
   "video": false,
+  "likes": 7,
   "thread": [
    "Dd2prQcE1p5",
    "Dd2prrKE0Pf"
-  ],
-  "likes": 7
+  ]
  },
  {
   "id": "Dd0smhtm4p4",
