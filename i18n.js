@@ -41,6 +41,7 @@
     [/^(\d+) 小時前$/, (m, n) => `${n} hr ago`],
     [/^(\d+) 天前$/, (m, n) => `${n} day${n === "1" ? "" : "s"} ago`],
     [/^(\d{4}\/\d{2}\/\d{2}) · (.+)$/, (m, d, rest) => `${d} · ${tr(rest)}`],
+    [/^(\d{4}) 年$/, (m, y) => y],
     [/^(\d{4}) 年 (\d{1,2}) 月$/, (m, y, mo) => `${MON[Number(mo) - 1] || mo} ${y}`],
     [/^(\d{1,2}) 月 (\d{1,2}) 日 · 週(.)$/, (m, mo, d, w) => `${DOW[w] || w}, ${MON[Number(mo) - 1] || mo} ${d}`],
     [/^(\d{4})\/(\d{1,2})\/(\d{1,2}) 週(.)$/, (m, y, mo, d, w) => `${DOW[w] || w}, ${MON[Number(mo) - 1] || mo} ${d}, ${y}`],
@@ -136,15 +137,25 @@
   }
 
   /* ---------- 內容資料（貼文 / 專案 / 簡介 …）的英文版 ---------- */
+  // 貼文分類：由 AI 依內容判斷（data.cats.js），定義在 categories.js；沒有分類結果就回 null，不會預設成「日常」
+  function cat(p) {
+    const c = (window.POST_CATS || {})[p.id];
+    const d = c && (window.CAT_DEFS || []).find((x) => x.id === c.c);
+    return d ? { id: d.id, label: isEn ? d.en : d.zh, topics: c.t || [] } : null;
+  }
+  function cats() {
+    return (window.CAT_DEFS || []).map((d) => ({ id: d.id, label: isEn ? d.en : d.zh }));
+  }
   function post(p) {
-    const base = { parts: p.parts, tag: p.tag || "", alts: (p.imgs || []).map((i) => i.alt || ""), translated: !isEn };
+    const ct = cat(p);
+    const base = { parts: p.parts, tag: ct ? ct.label : "", alts: (p.imgs || []).map((i) => i.alt || ""), translated: !isEn };
     if (!isEn) return base;
     const t = (EN.posts || {})[p.id];
     // 段數對不上（例如之後同步時續文被併進來）就退回原文，免得段落錯位
     if (!t || !Array.isArray(t.parts) || t.parts.length !== p.parts.length) return base;
     return {
       parts: t.parts,
-      tag: tagLabel(p.tag),
+      tag: ct ? ct.label : "",
       alts: (p.imgs || []).map((im, i) => (t.alts && t.alts[i]) || im.alt || ""),
       translated: true,
     };
@@ -205,6 +216,8 @@
     apply,
     post,
     tag: tagLabel,
+    cat,
+    cats,
     share,
     project,
     profile,

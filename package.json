@@ -8,7 +8,8 @@
     "sync-threads:dry": "node scripts/sync_threads.mjs --dry-run",
     "build-i18n": "node scripts/build_i18n.mjs",
     "i18n:missing": "node scripts/build_i18n.mjs --missing",
-    "translate-new": "node scripts/translate_new.mjs"
+    "translate-new": "node scripts/translate_new.mjs",
+    "classify": "node scripts/classify_posts.mjs"
   },
   "devDependencies": {
     "playwright": "^1.49.1"

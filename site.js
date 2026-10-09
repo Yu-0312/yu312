@@ -15,7 +15,8 @@
   /* 語言切換（i18n.js）。若它沒載入成功就退回中文行為 */
   const I = window.I18N || {
     isEn: false, locale: "zh-TW", t: (s) => s, tag: (t) => t,
-    post: (p) => ({ parts: p.parts, tag: p.tag || "", alts: (p.imgs || []).map((i) => i.alt || ""), translated: true }),
+    cat: () => null, cats: () => [],
+    post: (p) => ({ parts: p.parts, tag: "", alts: (p.imgs || []).map((i) => i.alt || ""), translated: true }),
     share: (x) => x, project: (x) => x, profile: (x) => x, note: (x) => x,
     button: () => document.createDocumentFragment(),
   };
@@ -58,6 +59,7 @@
     link: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>',
     play: '<path fill="currentColor" stroke="none" d="M8 5v14l11-7z"/>',
     pause: '<path fill="currentColor" stroke="none" d="M7 5h4v14H7zM13 5h4v14h-4z"/>',
+    image: '<rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="1.6"/><path d="M21 16l-5-5-8 8"/>',
     shuffle: '<path d="M16 4h4v4M20 4l-6 6M4 20l6-6M16 20h4v-4M20 20l-5.5-5.5M4 4l5 5"/>',
   };
   const svg = (name, extra = "") =>
@@ -205,7 +207,7 @@
     box.innerHTML = `
       <div class="latest-body">
         <div>
-          <div class="latest-meta">${p.tag ? `<span class="chip">${esc(L.tag)}</span>` : ""}<time datetime="${p.time}">${ago(p.time)}</time></div>
+          <div class="latest-meta">${L.tag ? `<span class="chip">${esc(L.tag)}</span>` : ""}<time datetime="${p.time}">${ago(p.time)}</time></div>
           <p class="latest-text">${esc(L.parts.join("\n\n"))}</p>
         </div>
         ${imgs.length ? `<div class="latest-imgs">${imgs.map((i) => `<img src="${i.src}" alt="${esc(i.alt)}" loading="lazy">`).join("")}</div>` : ""}
@@ -426,7 +428,7 @@
           <img src="./assets/profile.jpg" alt="">
           <div><div class="who">${esc(P.name)} <span class="muted" style="font-weight:500">@${esc(P.handle)}</span></div>
           <time class="when" datetime="${p.time}" title="${new Date(p.time).toLocaleString(I.locale)}">${ago(p.time) === fmtDate(p.time) ? fmtDate(p.time) : `${fmtDate(p.time)} · ${ago(p.time)}`}</time></div>
-          ${p.tag ? `<span class="chip">${esc(L.tag)}</span>` : ""}
+          ${L.tag ? `<span class="chip">${esc(L.tag)}</span>` : ""}
         </header>
         ${I.isEn && !L.translated ? `<p class="post-untranslated" data-no-i18n>Not yet translated into English — original text shown below.</p>` : ""}
         <div class="post-body">${body}</div>
@@ -437,137 +439,184 @@
       </article>`;
   }
 
+  /* ==========================================================
+     動態頁：時間軸列表（日 / 週 / 月 / 年 / 分類）＋ 點一下就地展開整則貼文
+     ========================================================== */
   function initPosts() {
-    const feed = $("#feed");
-    if (!feed) return;
-    const filters = $("#filters");
+    const box = $("#timeline");
+    if (!box) return;
+    const tabs = $("#viewTabs");
+    const filters = $("#catFilters");
     const search = $("#search");
-    const months = $("#months");
-    const more = $("#loadMore");
     const count = $("#feedCount");
-    const rangeBox = $("#rangeTabs");
-    const PAGE = 10;
 
-    let range = "";
-    if (rangeBox) {
-      rangeBox.innerHTML = ["全部", "今日", "本週", "本月", "今年"]
-        .map((r, i) => `<button type="button" class="chip-btn${i === 0 ? " is-active" : ""}" data-range="${i === 0 ? "" : r}">${r}</button>`)
-        .join("");
-      rangeBox.addEventListener("click", (e) => {
-        const b = e.target.closest("[data-range]");
-        if (!b) return;
-        range = b.dataset.range;
-        rangeBox.querySelectorAll("[data-range]").forEach((x) => x.classList.toggle("is-active", x === b));
-        shown = PAGE;
-        apply();
-      });
-    }
+    // 這幾個單字（日 / 週 / 月）和行事曆的字重複，不走字典，直接在這裡給中英文
+    const MODES = [["day", I.isEn ? "Day" : "日"], ["week", I.isEn ? "Week" : "週"], ["month", I.isEn ? "Month" : "月"], ["year", I.isEn ? "Year" : "年"], ["cat", I.isEn ? "Category" : "分類"]];
+    tabs.setAttribute("data-no-i18n", "");
+    let mode = store.get("yu-posts-view", "month");
+    if (!MODES.some(([k]) => k === mode)) mode = "month";
+    let catF = "", q = "";
+    const opened = new Set();
+    let read = new Set();
+    try { read = new Set(JSON.parse(store.get("yu-posts-read", "[]"))); } catch { read = new Set(); }
+    const saveRead = () => store.set("yu-posts-read", JSON.stringify([...read].slice(-500)));
 
-    function inRange(p) {
-      if (!range) return true;
-      const d = new Date(p.time);
-      const now = new Date();
-      if (range === "今日") return d.toDateString() === now.toDateString();
-      if (range === "本週") {
-        const start = new Date(now);
-        start.setDate(now.getDate() - now.getDay());
-        start.setHours(0, 0, 0, 0);
-        return d >= start;
-      }
-      if (range === "本月") return d.getFullYear() === now.getFullYear() && d.getMonth() === now.getMonth();
-      if (range === "今年") return d.getFullYear() === now.getFullYear();
-      return true;
-    }
+    tabs.innerHTML = MODES.map(([k, label]) =>
+      `<button type="button" role="tab" aria-selected="${k === mode}" class="${k === mode ? "is-active" : ""}" data-mode="${k}">${label}</button>`).join("");
 
-    const tagCount = {};
-    POSTS.forEach((p) => { const t = p.tag || "日常雜談"; tagCount[t] = (tagCount[t] || 0) + 1; });
-    const tags = ["全部", ...Object.keys(tagCount).sort((a, b) => tagCount[b] - tagCount[a]), "有圖片"];
-    filters.innerHTML = tags
-      .map((t, i) => `<button type="button" class="chip-btn${i === 0 ? " is-active" : ""}" data-tag="${esc(t)}">${esc(t)}<small>${t === "全部" ? POSTS.length : t === "有圖片" ? POSTS.filter((p) => postImgs(p).length).length : tagCount[t]}</small></button>`)
-      .join("");
+    const defs = I.cats();
+    const catOf = (p) => I.cat(p);
+    const catCount = {};
+    let uncategorized = 0;
+    POSTS.forEach((p) => { const c = catOf(p); if (c) catCount[c.id] = (catCount[c.id] || 0) + 1; else uncategorized++; });
+    const imgCount = POSTS.filter((p) => postImgs(p).length).length;
+    const chips = [["", "全部", POSTS.length], ...defs.filter((d) => catCount[d.id]).map((d) => [d.id, d.label, catCount[d.id]])];
+    if (uncategorized) chips.push(["__none", "未分類", uncategorized]);
+    chips.push(["__img", "有圖片", imgCount]);
+    filters.innerHTML = chips.map(([k, label, n]) =>
+      `<button type="button" class="chip-btn${k === catF ? " is-active" : ""}" data-cat="${esc(k)}">${esc(label)}<small>${n}</small></button>`).join("");
 
-    const monthCount = {};
-    POSTS.forEach((p) => { const d = new Date(p.time); const k = `${d.getFullYear()}-${pad(d.getMonth() + 1)}`; monthCount[k] = (monthCount[k] || 0) + 1; });
-    months.innerHTML =
-      `<button type="button" class="is-active" data-month="">全部月份<span>${POSTS.length}</span></button>` +
-      Object.keys(monthCount).sort().reverse()
-        .map((k) => `<button type="button" data-month="${k}">${k.replace("-", " 年 ").replace(/^(\d+ 年 )0?/, "$1")} 月<span>${monthCount[k]}</span></button>`)
-        .join("");
-
-    let tag = "全部", month = "", q = "", shown = PAGE, list = POSTS;
-
-    function apply() {
-      list = POSTS.filter((p) => {
-        if (!inRange(p)) return false;
-        if (tag === "有圖片" && !postImgs(p).length) return false;
-        if (tag !== "全部" && tag !== "有圖片" && (p.tag || "日常雜談") !== tag) return false;
-        if (month && !fmtDate(p.time).replace("/", "-").startsWith(month)) return false;
-        if (q && !`${p.parts.join(" ")} ${I.post(p).parts.join(" ")}`.toLowerCase().includes(q)) return false;
+    function visible() {
+      return POSTS.filter((p) => {
+        const c = catOf(p);
+        if (catF === "__img" && !postImgs(p).length) return false;
+        if (catF === "__none" && c) return false;
+        if (catF && catF !== "__img" && catF !== "__none" && (!c || c.id !== catF)) return false;
+        if (q && !`${p.parts.join(" ")} ${I.post(p).parts.join(" ")} ${c ? c.topics.join(" ") : ""}`.toLowerCase().includes(q)) return false;
         return true;
       });
-      paint();
     }
+
+    function groupKey(p) {
+      const d = new Date(p.time);
+      if (mode === "day") return { key: dayKey(d), title: `${d.getFullYear()}/${d.getMonth() + 1}/${d.getDate()} ${WEEK[d.getDay()]}` };
+      if (mode === "week") {
+        const mon = new Date(d); mon.setHours(0, 0, 0, 0); mon.setDate(d.getDate() - ((d.getDay() + 6) % 7));
+        const sun = new Date(mon); sun.setDate(mon.getDate() + 6);
+        return { key: dayKey(mon), title: `${mon.getFullYear()}/${pad(mon.getMonth() + 1)}/${pad(mon.getDate())} – ${pad(sun.getMonth() + 1)}/${pad(sun.getDate())}` };
+      }
+      if (mode === "month") return { key: `${d.getFullYear()}-${pad(d.getMonth() + 1)}`, title: `${d.getFullYear()} 年 ${d.getMonth() + 1} 月` };
+      if (mode === "year") return { key: String(d.getFullYear()), title: `${d.getFullYear()} 年` };
+      const c = catOf(p);
+      return { key: c ? c.id : "__none", title: c ? c.label : "未分類", order: c ? defs.findIndex((x) => x.id === c.id) : 999 };
+    }
+
+    function dateLabel(p) {
+      const d = new Date(p.time);
+      if (mode === "day") return `${pad(d.getHours())}:${pad(d.getMinutes())}`;
+      if (mode === "cat") return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+      return `${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+    }
+
+    function rowHTML(p) {
+      const c = catOf(p);
+      const title = firstLine(p).replace(/^[\p{Extended_Pictographic}\s🚨🔥]+/u, "").trim() || firstLine(p);
+      const isOpen = opened.has(p.id);
+      const tags = c ? c.topics.slice(0, 2).map((t) => `#${esc(t)}`).join(" ") : "";
+      return `
+        <div class="tl-item${isOpen ? " is-open" : ""}" data-id="${p.id}">
+          <button type="button" class="tl-row" aria-expanded="${isOpen}">
+            <span class="tl-date">${dateLabel(p)}</span><i class="tl-dot" aria-hidden="true"></i>
+            <span class="tl-title">${esc(title.slice(0, 80))}${title.length > 80 ? "…" : ""}${read.has(p.id) ? `<em class="tl-read">已閱讀</em>` : ""}</span>
+            <span class="tl-meta">
+              ${postImgs(p).length ? `<span class="tl-ico" title="有圖片">${svg("image", 'width="14" height="14"')}</span>` : ""}
+              ${c && mode !== "cat" ? `<span class="chip chip--plain">${esc(c.label)}</span>` : ""}
+              ${tags ? `<span class="tl-tags">${tags}</span>` : ""}
+            </span>
+          </button>
+          <div class="tl-panel"${isOpen ? "" : " hidden"}>${isOpen ? postHTML(p) : ""}</div>
+        </div>`;
+    }
+
     function paint() {
-      const slice = list.slice(0, shown);
-      feed.innerHTML = slice.length ? slice.map(postHTML).join("") : `<div class="card empty">沒有符合的貼文</div>`;
-      more.hidden = list.length <= shown;
+      const list = visible();
       count.textContent = `共 ${list.length} 則`;
-      feed.querySelectorAll(".post").forEach((el) => {
-        const body = $(".post-body", el);
-        if (body.scrollHeight > 400) {
-          el.classList.add("is-clamped");
-          const b = $(".post-more", el);
-          b.hidden = false;
-          b.addEventListener("click", () => {
-            const open = el.classList.toggle("is-clamped");
-            b.textContent = open ? "展開全文" : "收合";
-            if (open) el.scrollIntoView({ block: "nearest" });
-          });
-        }
-      });
+      if (!list.length) { box.innerHTML = `<div class="card empty">沒有符合的貼文</div>`; return; }
+      const groups = new Map();
+      for (const p of list) {
+        const g = groupKey(p);
+        if (!groups.has(g.key)) groups.set(g.key, { ...g, items: [] });
+        groups.get(g.key).items.push(p);
+      }
+      const ordered = [...groups.values()].sort((a, b) =>
+        mode === "cat" ? a.order - b.order : b.key.localeCompare(a.key));
+      box.innerHTML = ordered.map((g) => `
+        <section class="card tl-group">
+          <h2 class="tl-head">${esc(g.title)}<span class="tl-count">${g.items.length} 則貼文</span></h2>
+          <div class="tl-list">${g.items.map(rowHTML).join("")}</div>
+        </section>`).join("");
     }
-    feed.addEventListener("click", (e) => {
-      const b = e.target.closest(".post-media button");
+
+    function toggle(item, force) {
+      const id = item.dataset.id;
+      const p = POSTS.find((x) => x.id === id);
+      if (!p) return;
+      const open = force ?? !opened.has(id);
+      const panel = $(".tl-panel", item);
+      if (open) {
+        opened.add(id);
+        if (!panel.firstElementChild) panel.innerHTML = postHTML(p);
+        if (!read.has(id)) {
+          read.add(id); saveRead();
+          if (!$(".tl-read", item)) $(".tl-title", item).insertAdjacentHTML("beforeend", `<em class="tl-read">已閱讀</em>`);
+        }
+      } else opened.delete(id);
+      panel.hidden = !open;
+      item.classList.toggle("is-open", open);
+      $(".tl-row", item).setAttribute("aria-expanded", String(open));
+    }
+
+    box.addEventListener("click", (e) => {
+      const m = e.target.closest(".post-media button");
+      if (m) {
+        const p = POSTS.find((x) => x.id === m.closest(".post").dataset.id);
+        lightbox.open(postImgs(p), Number(m.dataset.i));
+        return;
+      }
+      const row = e.target.closest(".tl-row");
+      if (row) toggle(row.closest(".tl-item"));
+    });
+    tabs.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-mode]");
       if (!b) return;
-      const p = POSTS.find((x) => x.id === b.closest(".post").dataset.id);
-      lightbox.open(postImgs(p), Number(b.dataset.i));
+      mode = b.dataset.mode;
+      store.set("yu-posts-view", mode);
+      tabs.querySelectorAll("[data-mode]").forEach((x) => { const on = x === b; x.classList.toggle("is-active", on); x.setAttribute("aria-selected", String(on)); });
+      paint();
     });
     filters.addEventListener("click", (e) => {
-      const b = e.target.closest("[data-tag]");
+      const b = e.target.closest("[data-cat]");
       if (!b) return;
-      tag = b.dataset.tag;
-      filters.querySelectorAll("[data-tag]").forEach((x) => x.classList.toggle("is-active", x === b));
-      shown = PAGE; apply();
-    });
-    months.addEventListener("click", (e) => {
-      const b = e.target.closest("[data-month]");
-      if (!b) return;
-      month = b.dataset.month;
-      months.querySelectorAll("[data-month]").forEach((x) => x.classList.toggle("is-active", x === b));
-      shown = PAGE; apply();
+      catF = b.dataset.cat;
+      filters.querySelectorAll("[data-cat]").forEach((x) => x.classList.toggle("is-active", x === b));
+      paint();
     });
     let timer;
     search.addEventListener("input", () => {
       clearTimeout(timer);
-      timer = setTimeout(() => { q = search.value.trim().toLowerCase(); shown = PAGE; apply(); }, 150);
+      timer = setTimeout(() => { q = search.value.trim().toLowerCase(); paint(); }, 150);
     });
-    more.addEventListener("click", () => { shown += PAGE; paint(); });
 
-    apply();
+    paint();
 
+    // 舊連結 posts.html#<貼文id>（含合併進來的續文 id）：展開並捲到那則
     function goHash() {
       const id = decodeURIComponent(location.hash.slice(1));
       if (!id) return;
-      const i = list.findIndex((p) => p.id === id || (Array.isArray(p.thread) && p.thread.includes(id)));
-      if (i < 0) return;
-      if (i >= shown) { shown = i + 1; paint(); }
-      const el = document.getElementById(list[i].id);
-      if (!el) return;
-      el.classList.remove("is-clamped");
-      const b = $(".post-more", el); if (b && !b.hidden) b.textContent = "收合";
-      el.classList.add("is-target");
-      setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
-      setTimeout(() => el.classList.remove("is-target"), 2600);
+      const p = POSTS.find((x) => x.id === id || (Array.isArray(x.thread) && x.thread.includes(id)));
+      if (!p) return;
+      if (!visible().includes(p)) {
+        catF = ""; q = ""; search.value = "";
+        filters.querySelectorAll("[data-cat]").forEach((x) => x.classList.toggle("is-active", x.dataset.cat === ""));
+      }
+      opened.add(p.id);
+      paint();
+      const item = box.querySelector(`.tl-item[data-id="${CSS.escape(p.id)}"]`);
+      if (!item) return;
+      toggle(item, true);
+      item.classList.add("is-target");
+      setTimeout(() => item.scrollIntoView({ behavior: "smooth", block: "start" }), 60);
+      setTimeout(() => item.classList.remove("is-target"), 2600);
     }
     window.addEventListener("hashchange", goHash);
     goHash();
@@ -681,8 +730,8 @@
     const topics = $("#topics");
     if (topics) {
       const c = {};
-      POSTS.forEach((p) => { if (p.tag) c[p.tag] = (c[p.tag] || 0) + 1; });
-      topics.innerHTML = Object.keys(c).sort((a, b) => c[b] - c[a]).map((t) => `<a class="chip" href="./posts.html">${esc(I.tag(t))} · ${c[t]}</a>`).join("");
+      POSTS.forEach((p) => { const k = I.cat(p); if (k) c[k.label] = (c[k.label] || 0) + 1; });
+      topics.innerHTML = Object.keys(c).sort((a, b) => c[b] - c[a]).map((t) => `<a class="chip" href="./posts.html">${esc(t)} · ${c[t]}</a>`).join("");
     }
   }
 

@@ -19,34 +19,18 @@
     <header class="page-head">
       <div>
         <h1>動態</h1>
-        <p>同步自我的 Threads：AI 新知、提示詞分享、活動筆記與日常雜談。<span id="feedCount"></span></p>
+        <p>同步自我的 Threads，由 AI 依內容自動分類。<span id="feedCount"></span></p>
       </div>
       <input class="search" id="search" type="search" placeholder="搜尋貼文內容…" aria-label="搜尋貼文">
     </header>
-    <div class="filters" id="filters" role="toolbar" aria-label="主題篩選"></div>
-    <div class="range-tabs" id="rangeTabs" role="toolbar" aria-label="時間範圍"></div>
-    <div class="feed-layout">
-      <div class="feed-col">
-        <div class="feed" id="feed" aria-live="polite"></div>
-        <div style="text-align:center;margin-top:1.2rem"><button class="btn btn--ghost load-more" id="loadMore" type="button" hidden>載入更多</button></div>
-      </div>
-      <aside class="feed-aside">
-        <div class="card aside-profile">
-          <img src="./assets/profile.jpg" alt="Yu 的頭像">
-          <h2>Yu</h2>
-          <div class="handle">@yuqi._.0313</div>
-          <p>好吧其實我是一名普通的學生<br>會更新日常 / 實用工具 / AI 新知。雜更～</p>
-          <a class="btn" href="https://www.threads.com/@yuqi._.0313" target="_blank" rel="noopener">在 Threads 追蹤</a>
-        </div>
-        <div class="card">
-          <h2 class="mini-title">依月份</h2>
-          <div class="month-list" id="months"></div>
-        </div>
-      </aside>
-    </div>
+    <div class="view-tabs" id="viewTabs" role="tablist" aria-label="檢視方式"></div>
+    <div class="filters tl-filters" id="catFilters" role="toolbar" aria-label="分類篩選"></div>
+    <div class="timeline" id="timeline" aria-live="polite"></div>
     <p class="foot-note">© 2026 Yu · 貼文版權屬原作者，點「在 Threads 查看」可看原文與留言</p>
   </div>
   <script src="./data.js" defer></script>
+  <script src="./categories.js" defer></script>
+  <script src="./data.cats.js" defer></script>
   <script src="./data.en.js" defer></script>
   <script src="./i18n.js" defer></script>
   <script src="./notes.js" defer></script>
