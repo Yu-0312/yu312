@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-09T20:53:21.814Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-10T20:04:20.709Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -298,6 +298,45 @@ window.PROJECT_ITEMS = [
  }
 ];
 window.THREADS_POSTS = [
+ {
+  "id": "DeUA_xbEyKf",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeUA_xbEyKf",
+  "time": "2026-10-10T11:50:02.000Z",
+  "tag": "",
+  "parts": [
+   "💥 浙大開源 nanoMuse：一個有記憶、能操作你設備的個人 AI Agent！\n\n最近看到 nanoMuse 這個專案，我就想說怎麼跟最近 Meta 的 Muse 這麼像，沒想到 Ｍuse 的開源挑戰者就出現了！\n\nnanoMuse 是一個開源的個人 Agent，主打跨設備協作、工具調用、電腦操作與高風險行為授權\n\nGitHub： https://github.com/nano-muse/nano\n官網： https://nanomuse.cn\n論文： https://arxiv.org/abs/2610.08699\n\n最值得研究的技術亮點整理如下👇"
+  ],
+  "imgs": [],
+  "links": [
+   "https://github.com/nano-muse/nano",
+   "https://nanomuse.cn",
+   "https://arxiv.org/abs/2610.08699"
+  ],
+  "video": false,
+  "likes": 4
+ },
+ {
+  "id": "DeThVHCEwzp",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeThVHCEwzp",
+  "time": "2026-10-10T07:13:20.000Z",
+  "tag": "",
+  "parts": [
+   "🚨 AI 虛擬試衣已經進化到實時換裝了？！\n發現一個超有意思的 Chrome 功能：Anywear by Decart\n\n以前 AI 試衣通常是上傳照片 → 等待生成 → 看一張換裝圖\n最近也有很多試衣 APP，但 Anywear 更方便！\n\n🔥 實時 AI 虛擬試衣！\n1️⃣ 選擇 Chrome 插件\n2️⃣ 打開任意服裝購物網站\n3️⃣ 把想試的衣服拖進窗口\n4️⃣ 直接在自己的攝像頭畫面里看上身效果！\n\n最關鍵的是：\n👕 不只是生成一張靜態照片\n🎥 可以實時觀察動作和衣服的變化\n🧵 衣服會隨著移動模擬布料效果\n🛍️ 直接在購物頁面就可嘗試\n♾️ 免費且無限使用次數\n\n以後網購衣服，可能真的不用只看模特圖了！😎\n\n👉 官方演示：\nhttps://anywear.decart.ai/live-virtual-try-on"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DeThVHCEwzp-0.jpg",
+    "w": 600,
+    "h": 337,
+    "alt": "Live Virtual Try-On — Real-Time, No Photo Upload | Anywear"
+   }
+  ],
+  "links": [
+   "https://anywear.decart.ai/live-virtual-try-on"
+  ],
+  "video": false,
+  "likes": 4
+ },
  {
   "id": "DeOA-ahk0W5",
   "url": "https://www.threads.com/@yuqi._.0313/post/DeOA-ahk0W5",
