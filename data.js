@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-14T20:13:01.583Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-15T19:53:48.794Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -298,6 +298,62 @@ window.PROJECT_ITEMS = [
  }
 ];
 window.THREADS_POSTS = [
+ {
+  "id": "DegtPznk6Uw",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DegtPznk6Uw",
+  "time": "2026-10-15T10:07:35.000Z",
+  "tag": "",
+  "parts": [
+   "一個禮拜爆衝 250k stars 的項目 REA（Reverse Engineer Anything）\n\n讓你的 AI Agent 去逆向那些拿不到源代碼的 APP、網頁，還能根據分析結果在自己的項目中復刻功能\n\n我個人認為如果未來 AI Agent 足夠強的話這個項目反而會成為累贅，每次調用都需要很多工具，然後結果也必須使用它設置的工具進行返回、復刻，所以未來模型足夠強就會失去作用\n\n雖然對目前還是對收費 APP 有一定的殺傷力，但這不代表它能一鍵還原原始源碼，也不代表能自動覆制整個商業軟件\n\n目前支持：\nClaude Code\nClaude Desktop\nOpenAI Codex\nCursor\nGemini CLI\nWindsurf\n\n🔗 GitHub： https://github.com/morluto/rea\n🌐 官網： https://rea.tools"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DegtPznk6Uw-0.png",
+    "w": 1200,
+    "h": 630,
+    "alt": "REA — Reverse Engineering for Your Coding Agent"
+   }
+  ],
+  "links": [
+   "https://github.com/morluto/rea",
+   "https://rea.tools"
+  ],
+  "video": false,
+  "likes": 5
+ },
+ {
+  "id": "DeghmZSnJrg",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeghmZSnJrg",
+  "time": "2026-10-15T08:27:25.000Z",
+  "tag": "",
+  "parts": [
+   "在 AI 時代獲得影響力的方式就是做出自己的代表作！\n老實說之前代理原神都沒有這麼震撼，這已經是我心中的神作了",
+   "推文： https://x.com/Saccc_c/status/2109962425512734739?s=20"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DeghmZSnJrg-0.jpg",
+    "w": 640,
+    "h": 360,
+    "alt": ""
+   },
+   {
+    "src": "assets/threads/DeghykvEzzf-0.png",
+    "w": 1200,
+    "h": 630,
+    "alt": "Sac (@Saccc_c) on X"
+   }
+  ],
+  "links": [
+   "https://x.com/Saccc_c/status/2109962425512734739?s=20"
+  ],
+  "video": true,
+  "thread": [
+   "DeghmZSnJrg",
+   "DeghykvEzzf"
+  ],
+  "likes": 9
+ },
  {
   "id": "DeUA_xbEyKf",
   "url": "https://www.threads.com/@yuqi._.0313/post/DeUA_xbEyKf",
