@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-15T19:53:48.794Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-16T19:34:26.007Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -319,7 +319,7 @@ window.THREADS_POSTS = [
    "https://rea.tools"
   ],
   "video": false,
-  "likes": 5
+  "likes": 6
  },
  {
   "id": "DeghmZSnJrg",
@@ -348,11 +348,11 @@ window.THREADS_POSTS = [
    "https://x.com/Saccc_c/status/2109962425512734739?s=20"
   ],
   "video": true,
+  "likes": 9,
   "thread": [
    "DeghmZSnJrg",
    "DeghykvEzzf"
-  ],
-  "likes": 9
+  ]
  },
  {
   "id": "DeUA_xbEyKf",
@@ -636,7 +636,7 @@ window.THREADS_POSTS = [
    "https://youtube.com/playlist?list=PLoROMvodv4rPOWA-omMM6STXaWW4FvJT8"
   ],
   "video": false,
-  "likes": 63,
+  "likes": 64,
   "thread": [
    "Dd87NDGk-x9",
    "Dd87Nitk74W"
