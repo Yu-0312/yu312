@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-16T19:34:26.007Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-17T18:29:06.069Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -568,7 +568,7 @@ window.THREADS_POSTS = [
    "https://hack-nation.ai/?utm_source=luma"
   ],
   "video": false,
-  "likes": 65,
+  "likes": 66,
   "thread": [
    "DeBZM_nE6Ip",
    "DeBZNfFE0J6"
@@ -1184,7 +1184,7 @@ window.THREADS_POSTS = [
    "https://github.com/nevertoday/xxd-panel-116"
   ],
   "video": false,
-  "likes": 1679
+  "likes": 1678
  },
  {
   "id": "Dc5wjZ0k4NO",
