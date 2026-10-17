@@ -1465,12 +1465,10 @@ img { max-width: 100%; }
 .tl-meta { display: inline-flex; align-items: center; gap: 0.5rem; justify-content: flex-end; color: var(--ink-3); font-size: 0.82rem; white-space: nowrap; }
 .tl-meta .chip { font-size: 0.74rem; padding: 2px 9px; }
 .tl-ico { display: inline-flex; }
-.tl-tags { color: var(--ink-3); }
 .tl-panel { padding: 0.2rem 0 0.9rem 0; }
 .tl-panel .post { box-shadow: none; border: 1px solid var(--line); margin: 0; }
 @media (max-width: 700px) {
   .tl-group { padding: 1.05rem 0.9rem 0.8rem; }
   .tl-row { grid-template-columns: 3.6rem 12px minmax(0, 1fr); row-gap: 0.25rem; padding: 0.6rem 0.3rem; }
   .tl-meta { grid-column: 3; justify-content: flex-start; flex-wrap: wrap; white-space: normal; }
-  .tl-tags { display: none; }
 }

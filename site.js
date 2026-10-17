@@ -469,19 +469,16 @@
     const catCount = {};
     let uncategorized = 0;
     POSTS.forEach((p) => { const c = catOf(p); if (c) catCount[c.id] = (catCount[c.id] || 0) + 1; else uncategorized++; });
-    const imgCount = POSTS.filter((p) => postImgs(p).length).length;
     const chips = [["", "全部", POSTS.length], ...defs.filter((d) => catCount[d.id]).map((d) => [d.id, d.label, catCount[d.id]])];
     if (uncategorized) chips.push(["__none", "未分類", uncategorized]);
-    chips.push(["__img", "有圖片", imgCount]);
     filters.innerHTML = chips.map(([k, label, n]) =>
       `<button type="button" class="chip-btn${k === catF ? " is-active" : ""}" data-cat="${esc(k)}">${esc(label)}<small>${n}</small></button>`).join("");
 
     function visible() {
       return POSTS.filter((p) => {
         const c = catOf(p);
-        if (catF === "__img" && !postImgs(p).length) return false;
         if (catF === "__none" && c) return false;
-        if (catF && catF !== "__img" && catF !== "__none" && (!c || c.id !== catF)) return false;
+        if (catF && catF !== "__none" && (!c || c.id !== catF)) return false;
         if (q && !`${p.parts.join(" ")} ${I.post(p).parts.join(" ")} ${c ? c.topics.join(" ") : ""}`.toLowerCase().includes(q)) return false;
         return true;
       });
@@ -512,7 +509,6 @@
       const c = catOf(p);
       const title = firstLine(p).replace(/^[\p{Extended_Pictographic}\s🚨🔥]+/u, "").trim() || firstLine(p);
       const isOpen = opened.has(p.id);
-      const tags = c ? c.topics.slice(0, 2).map((t) => `#${esc(t)}`).join(" ") : "";
       return `
         <div class="tl-item${isOpen ? " is-open" : ""}" data-id="${p.id}">
           <button type="button" class="tl-row" aria-expanded="${isOpen}">
@@ -521,7 +517,6 @@
             <span class="tl-meta">
               ${postImgs(p).length ? `<span class="tl-ico" title="有圖片">${svg("image", 'width="14" height="14"')}</span>` : ""}
               ${c && mode !== "cat" ? `<span class="chip chip--plain">${esc(c.label)}</span>` : ""}
-              ${tags ? `<span class="tl-tags">${tags}</span>` : ""}
             </span>
           </button>
           <div class="tl-panel"${isOpen ? "" : " hidden"}>${isOpen ? postHTML(p) : ""}</div>
