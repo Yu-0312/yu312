@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-17T18:29:06.069Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-18T18:38:36.586Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -298,6 +298,21 @@ window.PROJECT_ITEMS = [
  }
 ];
 window.THREADS_POSTS = [
+ {
+  "id": "DeotGbQE3WT",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeotGbQE3WT",
+  "time": "2026-10-18T12:40:14.000Z",
+  "tag": "",
+  "parts": [
+   "🔥 Qoder 大使計畫開放申請！全年免費 Credits＋官方活動支持！\n\n先介紹一下 Qoder 是什麼？\nQoder 是一款以 AI Agent 為核心的開發工具\n你可以直接用自然語言描述需求，讓 AI Agent 理解專案、規劃工作、修改多個檔案、執行指令，並根據結果持續調整\n\n例如：\n🔹 開發新功能、建立網站或應用程式\n🔹 Debug、寫測試\n🔹 透過 MCP、skills 擴展工作流程\n\n如果你平常就會使用 AI Coding 工具、開發自己的專案，或想要經營開發者社群，可以嘗試看看，門檻相對比 codex, claude 低一些，而且不用擔心先前大使搶名額，全部人都要重新申請！\n\n🔗 立即申請： https://ambassador-program-6pmlhfuf2fg.qoder.website/?lang=en"
+  ],
+  "imgs": [],
+  "links": [
+   "https://ambassador-program-6pmlhfuf2fg.qoder.website/?lang=en"
+  ],
+  "video": false,
+  "likes": 2
+ },
  {
   "id": "DegtPznk6Uw",
   "url": "https://www.threads.com/@yuqi._.0313/post/DegtPznk6Uw",
@@ -865,7 +880,7 @@ window.THREADS_POSTS = [
    "https://www.modelscope.cn/models/Qwen/Qwen-Image-2.1"
   ],
   "video": false,
-  "likes": 188
+  "likes": 189
  },
  {
   "id": "DdgV7U3E2iT",
