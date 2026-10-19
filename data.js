@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-18T18:38:36.586Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-19T21:03:52.181Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -311,7 +311,7 @@ window.THREADS_POSTS = [
    "https://ambassador-program-6pmlhfuf2fg.qoder.website/?lang=en"
   ],
   "video": false,
-  "likes": 2
+  "likes": 3
  },
  {
   "id": "DegtPznk6Uw",
@@ -1875,7 +1875,7 @@ window.THREADS_POSTS = [
    "https://tolaria.md/"
   ],
   "video": false,
-  "likes": 132
+  "likes": 133
  },
  {
   "id": "DbFgDgoE3V3",
