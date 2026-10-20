@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-19T21:03:52.181Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-20T20:01:04.574Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -298,6 +298,88 @@ window.PROJECT_ITEMS = [
  }
 ];
 window.THREADS_POSTS = [
+ {
+  "id": "Det4jRUE3LH",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Det4jRUE3LH",
+  "time": "2026-10-20T12:56:30.000Z",
+  "tag": "",
+  "parts": [
+   "Threads 居然能夠在電腦上支持最高同時瀏覽三個畫面，酷喔！"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/Det4jRUE3LH-0.jpg",
+    "w": 2880,
+    "h": 1634,
+    "alt": ""
+   }
+  ],
+  "links": [],
+  "video": false,
+  "likes": 0
+ },
+ {
+  "id": "Det4GQhE1TN",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Det4GQhE1TN",
+  "time": "2026-10-20T12:52:32.000Z",
+  "tag": "",
+  "parts": [
+   "🔥 高雄也有 Codex 社群活動了！\n這次活動由 Harry Ng 主辦，本人非常熱心。之前跟他交流時，他會認真傾聽你的想法，然後會從不一樣的角度給你想法和建議，像是我就學到了一些 codex 的使用方法以及 UI/UX 設計的精髓。\n\n🗓️ 日期：2026 年 11 月 5 日（四）\n⏰ 時間：18:30～21:00\n📍 地點：高雄棧叁庫 Pier F\n\n🔹 DevDay 重點回顧 ：網路上對於 DevDay 的說法眾說紛紜， Tibo 究盡還有沒有招能夠繼續更新 30 天呢？可以來到線下聽聽專家的想法，一起討論 OpenAI DevDay 的新發表，以及這些更新對開發者意味著什麼。\n\n🔹 Codex 實戰示範：透過實際 Demo 看看如何運用 Codex 協助開發軟體，之前在 meetup 時最常被問到你是如何選模型的？在 Pro 訂閱之下該如何省 token？這些他都能夠回答。\n\n🔹 自由實作與作品交流：帶著自己的點子或專案來現場動手做，也可以尋找合作夥伴。\n\n🚨 參加者有機會獲得合計最高 150 美元額度！",
+   "🔗 報名連結： https://luma.com/gxlcaluh"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/Det4GQhE1TN-0.jpg",
+    "w": 800,
+    "h": 420,
+    "alt": "DevDay Exchange Community: Kaohsiung · Luma"
+   },
+   {
+    "src": "assets/threads/Det4GyNkzoJ-0.jpg",
+    "w": 800,
+    "h": 420,
+    "alt": "DevDay Exchange Community: Kaohsiung · Luma"
+   }
+  ],
+  "links": [
+   "https://luma.com/gxlcaluh"
+  ],
+  "video": false,
+  "thread": [
+   "Det4GQhE1TN",
+   "Det4GyNkzoJ"
+  ],
+  "likes": 1
+ },
+ {
+  "id": "Deszl6KE7Q7",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Deszl6KE7Q7",
+  "time": "2026-10-20T02:53:55.000Z",
+  "tag": "",
+  "parts": [
+   "GitHub 官方文章：AI 正在重寫工程師的職涯階梯！\n未來最有競爭力的開發者不再是寫程式最快的人，而是最懂得如何駕馭 AI 的人，並且提出了開發者現在最值得培養的 3 個能力。\n\n1. 不只使用 AI，而是學會指揮 AI Agent\n\n以前接到需求：自己寫程式 → 執行測試 → 修復錯誤 → 提交 PR\n\n未來的工作流程可能變成：\nAgent 1：實作功能\nAgent 2：撰寫文件\nAgent 3：建立測試\n開發者負責定義問題、提供上下文、分配任務、審查結果，以及決定哪些內容可以正式上線。\n\n2. 不要盲目信任 AI 的第一個答案\n\nGitHub 建議讓第二個 AI 模型審查第一個模型的成果\n\n例如生成 SQL 查詢後第二個模型可能發現：\n・沒有處理重複的時間戳記\n・缺少索引方面的建議\n・資料量變大後可能出現效能問題\n\n開發者仍然需要具備足夠的技術判斷力才能分辨兩個模型各自的盲點",
+   "3. 把 AI 省下的時間拿去解決更大的問題\n\n當 AI 可以協助實作功能、生成測試、更新文件時，工程師就能把更多時間用在：\n🔹 理解使用者真正需要什麼\n🔹 評估不同架構的優缺點\n🔹 思考安全性與無障礙設計\n🔹 定義產品成功的衡量指標\n🔹 判斷自己到底應該解決什麼問題\n\n使用者真的需要這個功能嗎？架構是否合理？無障礙體驗是否完善？上線後要用什麼指標衡量成效？\n這些問題不能只靠生成程式碼來回答\n\n個人認為 AI 不一定讓程式設計變得不重要，但是當越來越多人都能透過 AI 寫出程式時，這點就不會成為最大的優勢，現在的文理科區分也是一樣。真正的優勢應該會是理解問題、協調 AI，以及判斷結果好壞的能力。如果你連一個 AI 都不會用，那你怎麼使用多個 AI Agent？如果不會使用 AI Agent，你怎麼好好帶領一個團隊？所以對於正在學習程式的新手來說，把大問題拆解反而是現在應該要練習的能力。",
+   "🔗 原文： https://github.blog/ai-and-ml/ai-is-rewriting-the-developer-career-ladder-heres-how-to-stand-out/"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/Deszmx7E7SM-0.png",
+    "w": 2402,
+    "h": 1263,
+    "alt": "AI is changing developer work. Here are three skills to strengthen."
+   }
+  ],
+  "links": [
+   "https://github.blog/ai-and-ml/ai-is-rewriting-the-developer-career-ladder-heres-how-to-stand-out/"
+  ],
+  "video": false,
+  "thread": [
+   "Deszl6KE7Q7",
+   "DeszmTxE9ZF",
+   "Deszmx7E7SM"
+  ],
+  "likes": 20
+ },
  {
   "id": "DeotGbQE3WT",
   "url": "https://www.threads.com/@yuqi._.0313/post/DeotGbQE3WT",
@@ -1199,7 +1281,7 @@ window.THREADS_POSTS = [
    "https://github.com/nevertoday/xxd-panel-116"
   ],
   "video": false,
-  "likes": 1678
+  "likes": 1677
  },
  {
   "id": "Dc5wjZ0k4NO",
