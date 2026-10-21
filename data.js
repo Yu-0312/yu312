@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-20T20:01:04.574Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-21T20:09:11.546Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -345,11 +345,11 @@ window.THREADS_POSTS = [
    "https://luma.com/gxlcaluh"
   ],
   "video": false,
+  "likes": 1,
   "thread": [
    "Det4GQhE1TN",
    "Det4GyNkzoJ"
-  ],
-  "likes": 1
+  ]
  },
  {
   "id": "Deszl6KE7Q7",
@@ -373,12 +373,12 @@ window.THREADS_POSTS = [
    "https://github.blog/ai-and-ml/ai-is-rewriting-the-developer-career-ladder-heres-how-to-stand-out/"
   ],
   "video": false,
+  "likes": 21,
   "thread": [
    "Deszl6KE7Q7",
    "DeszmTxE9ZF",
    "Deszmx7E7SM"
-  ],
-  "likes": 20
+  ]
  },
  {
   "id": "DeotGbQE3WT",
