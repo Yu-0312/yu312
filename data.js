@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-21T20:09:11.546Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-22T20:06:20.662Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -298,6 +298,43 @@ window.PROJECT_ITEMS = [
  }
 ];
 window.THREADS_POSTS = [
+ {
+  "id": "DezN5Opkycd",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DezN5Opkycd",
+  "time": "2026-10-22T14:39:12.000Z",
+  "tag": "",
+  "parts": [
+   "影視颶風的Tim加入推特了，準備在72小時之內抽100台iphone 18，只要訂閱、按讚、分享就有機會抽到，剛好我也想換手機了😏\n\n連結： https://x.com/mediastorm_en/status/2113263456090763450?s=20"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DezN5Opkycd-0.jpg",
+    "w": 878,
+    "h": 798,
+    "alt": ""
+   }
+  ],
+  "links": [
+   "https://x.com/mediastorm_en/status/2113263456090763450?s=20"
+  ],
+  "video": false,
+  "likes": 2
+ },
+ {
+  "id": "DeyU6bCk-M-",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DeyU6bCk-M-",
+  "time": "2026-10-22T06:21:17.000Z",
+  "tag": "",
+  "parts": [
+   "智譜 GLM Coding Plan 免費 7 天體驗卡！\n沒有訂閱過 AI、不想花錢訂閱的可以嘗試看看！\n\n🎁 這次有什麼福利？\n・體驗期限：7 天\n・適用對象：從未訂閱過套餐的使用者\n・串接工具：Claude, WorkBuddy等\n\n🔗 官方領取： https://bigmodel.cn/activity/trial-card/PU9MTWG0PM"
+  ],
+  "imgs": [],
+  "links": [
+   "https://bigmodel.cn/activity/trial-card/PU9MTWG0PM"
+  ],
+  "video": false,
+  "likes": 4
+ },
  {
   "id": "Det4jRUE3LH",
   "url": "https://www.threads.com/@yuqi._.0313/post/Det4jRUE3LH",
