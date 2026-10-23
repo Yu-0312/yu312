@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-22T20:06:20.662Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-23T19:59:03.944Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -298,6 +298,28 @@ window.PROJECT_ITEMS = [
  }
 ];
 window.THREADS_POSTS = [
+ {
+  "id": "De1hbfTkwUV",
+  "url": "https://www.threads.com/@yuqi._.0313/post/De1hbfTkwUV",
+  "time": "2026-10-23T12:08:23.000Z",
+  "tag": "",
+  "parts": [
+   "Zcode 又發福利了，真的是想做中國的 Tibo，上線就能領 5 億Token\n連結： https://zcode.z.ai/cn"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/De1hbfTkwUV-0.jpg",
+    "w": 1098,
+    "h": 1212,
+    "alt": ""
+   }
+  ],
+  "links": [
+   "https://zcode.z.ai/cn"
+  ],
+  "video": false,
+  "likes": 3
+ },
  {
   "id": "DezN5Opkycd",
   "url": "https://www.threads.com/@yuqi._.0313/post/DezN5Opkycd",
