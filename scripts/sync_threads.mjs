@@ -199,6 +199,29 @@ function extractLinks(text) {
 
 /* ---------- 內嵌 JSON：解析 thread（續文）分組 ---------- */
 
+// 「文字附件」貼文（media_type 19）：方框內容放在 snippet_attachment_info，
+// 不在 caption 裡；只取 caption 會讓方框文字整段消失。
+function textFromFragments(fragments) {
+  if (!Array.isArray(fragments)) return "";
+  return fragments
+    .map((f) => (typeof f?.plaintext === "string" ? f.plaintext : ""))
+    .join("")
+    .split("\n")
+    .map((l) => l.replace(/^[ \t]+|[ \t]+$/g, ""))
+    .join("\n")
+    .replace(/\n{3,}/g, "\n\n")
+    .trim();
+}
+
+function postTextFromJson(post) {
+  const caption = post.caption?.text || "";
+  const attachment = textFromFragments(
+    post.text_post_app_info?.snippet_attachment_info?.text_fragments?.fragments,
+  );
+  if (!attachment || caption.includes(attachment)) return caption;
+  return [caption, attachment].filter(Boolean).join("\n\n");
+}
+
 // 從頁面內嵌 JSON 找出所有 thread_items 陣列（同一 thread 的各段在同一陣列）
 function collectThreadPayload(jsonText, acc) {
   let data;
@@ -224,7 +247,7 @@ function collectThreadPayload(jsonText, acc) {
         if (!acc.items.has(post.code)) {
           acc.items.set(post.code, {
             takenAt: Number(post.taken_at) || 0,
-            text: post.caption?.text || "",
+            text: postTextFromJson(post),
             imgs: imgsFromApiPost(post),
             video: post.media_type === 2 || Array.isArray(post.video_versions) && post.video_versions.length > 0,
           });
