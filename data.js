@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-24T18:49:07.192Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-25T19:02:04.113Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -306,7 +306,14 @@ window.THREADS_POSTS = [
   "parts": [
    "🔥 DeepSeek-V4.1-Flash-1017 繼續免費！\n\n如果你最近 Astra 模型用完了，或是想測試不同模型的實際編程表現，現在可以繼續抓住這個免費窗口，繼續開工！\n\n🔗 Qoder 官方： https://qoder.com/"
   ],
-  "imgs": [],
+  "imgs": [
+   {
+    "src": "assets/threads/De3n3s_k_In-0.webp",
+    "w": 2400,
+    "h": 1260,
+    "alt": "Qoder - AI Coding Assistant | Autonomous Development IDE"
+   }
+  ],
   "links": [
    "https://qoder.com/"
   ],
