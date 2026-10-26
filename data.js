@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-10-25T19:02:04.113Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-10-26T21:02:38.216Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -299,6 +299,21 @@ window.PROJECT_ITEMS = [
 ];
 window.THREADS_POSTS = [
  {
+  "id": "De8lWSAE57E",
+  "url": "https://www.threads.com/@yuqi._.0313/post/De8lWSAE57E",
+  "time": "2026-10-26T05:57:18.000Z",
+  "tag": "",
+  "parts": [
+   "刷屏推特的 Grok Bot Token 永動機是真的假的！？\n\n結論：一個自制的省錢技能包不是必備外掛\n\n裝進 Grok Bot 後它會把髒活累活外包給 OpenRouter 上標價 0 元的免費模型，所以本質上不是使用 Grok Bot 的模型，Grok Bot 只是一個外殼！\n\n缺點：\n🔸 不充值 OpenRouter 每天只有 50 次請求，花錢後可以有 1000 次請求\n🔸 免費模型 = 質量打折＋排隊超久\n🔸 項目還在 MVP 全自動根本不存在\n🔸 免費名單天天變說失效就失效\n🔸 最關鍵：API key 直接貼進聊天很明顯的資安問題\n\n個人使用後的推薦程度：\n✔️ 每天跑定時自動化任務 → ㄅ級分\n✔️ 想學 agent 架構的 → 應該可以練手看看（如果有人從零開始可以跟我分享一下心得）\n❌ 日常聊天、追求質量 → 超級不推薦\n\n連結： https://github.com/limin112/min-skill"
+  ],
+  "imgs": [],
+  "links": [
+   "https://github.com/limin112/min-skill"
+  ],
+  "video": false,
+  "likes": 11
+ },
+ {
   "id": "De3n3s_k_In",
   "url": "https://www.threads.com/@yuqi._.0313/post/De3n3s_k_In",
   "time": "2026-10-24T07:43:08.000Z",
@@ -497,7 +512,7 @@ window.THREADS_POSTS = [
    "https://rea.tools"
   ],
   "video": false,
-  "likes": 6
+  "likes": 7
  },
  {
   "id": "DeghmZSnJrg",
