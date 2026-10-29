@@ -1,6 +1,15 @@
 /* 貼文分類：c = 分類 id（見 categories.js），t = 主題標籤。由 scripts/classify_posts.mjs 以 AI 依內容判斷；
    可手動修改，已有的項目不會被覆蓋（除非用 --all）。獨立於 data.js，所以每日 Threads 同步不會洗掉。 */
 window.POST_CATS = {
+  "De8lWSAE57E": {"c":"tools","t":["Grok Bot","OpenRouter","Review"]},
+  "De3n3s_k_In": {"c":"tools","t":["DeepSeek","Qoder","Free Credits"]},
+  "De1hbfTkwUV": {"c":"tools","t":["Zcode","Free Tokens"]},
+  "DezN5Opkycd": {"c":"events","t":["Giveaway","iPhone"]},
+  "DeyU6bCk-M-": {"c":"tools","t":["GLM","Free Trial","Coding Plan"]},
+  "Det4jRUE3LH": {"c":"voice","t":["Threads"]},
+  "Det4GQhE1TN": {"c":"events","t":["Codex","Kaohsiung","Meetup"]},
+  "Deszl6KE7Q7": {"c":"news","t":["GitHub","AI Agent","Career"]},
+  "DeotGbQE3WT": {"c":"events","t":["Qoder","Ambassador Program"]},
   "DegtPznk6Uw": {"c":"tools","t":["REA","Reverse Engineering","Open Source"]},
   "DeghmZSnJrg": {"c":"voice","t":["Influence","Builder"]},
   "DeUA_xbEyKf": {"c":"tools","t":["nanoMuse","AI Agent","Open Source"]},

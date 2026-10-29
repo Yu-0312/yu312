@@ -2,6 +2,67 @@
    獨立於 data.js，所以每日的 Threads 同步不會把翻譯洗掉。 */
 window.EN = window.EN || {};
 window.EN.posts = {
+ "De8lWSAE57E": {
+  "parts": [
+   "Is the Grok Bot Token \"perpetual motion machine\" flooding X real or fake!?\n\nVerdict: a homemade money-saving skill pack is not a must-have add-on\n\nOnce installed in Grok Bot, it outsources the dirty work to free models priced at $0 on OpenRouter. So you're essentially not using Grok Bot's model at all — Grok Bot is just a shell!\n\nDownsides:\n🔸 Without topping up OpenRouter you only get 50 requests a day; after paying you get 1,000\n🔸 Free models = discounted quality + very long queues\n🔸 The project is still an MVP, and \"fully automatic\" doesn't really exist\n🔸 The free list changes every day and models stop working without notice\n🔸 Most critical: pasting your API key straight into the chat is an obvious security problem\n\nMy recommendation after trying it myself:\n✔️ Scheduled automation tasks that run every day → C-tier\n✔️ Want to learn agent architecture → probably fine to tinker with (if anyone starts from scratch, I'd love to hear how it goes)\n❌ Everyday chat, or if you care about quality → strongly not recommended\n\nLink: https://github.com/limin112/min-skill"
+  ],
+  "alts": {
+   "0": "GitHub - limin112/min-skill"
+  }
+ },
+ "De3n3s_k_In": {
+  "parts": [
+   "🔥 DeepSeek-V4.1-Flash-1017 is still free!\n\nIf you've run out of Astra model quota lately, or want to test how different models actually perform at coding, you can grab this free window and keep building!\n\n🔗 Qoder official: https://qoder.com/"
+  ],
+  "alts": {
+   "0": "Qoder - AI Coding Assistant | Autonomous Development IDE"
+  }
+ },
+ "De1hbfTkwUV": {
+  "parts": [
+   "Zcode is handing out perks again — they really want to be China's Tibo. You get 500M tokens as soon as you sign up\nLink: https://zcode.z.ai/cn"
+  ]
+ },
+ "DezN5Opkycd": {
+  "parts": [
+   "Tim from Mediastorm has joined X and plans to give away 100 iPhone 18s within 72 hours. Just subscribe, like and share for a chance to win — I happen to be looking to switch phones 😏\n\nLink: https://x.com/mediastorm_en/status/2113263456090763450?s=20"
+  ]
+ },
+ "DeyU6bCk-M-": {
+  "parts": [
+   "Zhipu GLM Coding Plan free 7-day trial card!\nIf you've never subscribed to an AI service and don't want to pay, give it a try!\n\n🎁 What's in it this time?\n・Trial period: 7 days\n・Eligibility: users who have never subscribed to a plan\n・Compatible tools: Claude, WorkBuddy, etc.\n\n🔗 Claim it here: https://bigmodel.cn/activity/trial-card/PU9MTWG0PM"
+  ]
+ },
+ "Det4jRUE3LH": {
+  "parts": [
+   "Threads on desktop can now show up to three columns at once. Cool!"
+  ]
+ },
+ "Det4GQhE1TN": {
+  "parts": [
+   "🔥 Kaohsiung now has a Codex community event too!\nThis one is hosted by Harry Ng, who is very kind. When I talked with him before, he listened carefully to my ideas and then offered ideas and suggestions from a different angle — I picked up some Codex usage tips and the essence of UI/UX design from him.\n\n🗓️ Date: Thursday, November 5, 2026\n⏰ Time: 18:30–21:00\n📍 Venue: Pier F, Kaohsiung\n\n🔹 DevDay recap: People online are saying all sorts of things about DevDay. Does Tibo still have moves left to keep shipping updates for 30 more days? Come hear what the experts think offline, and discuss OpenAI's new DevDay announcements and what these updates mean for developers.\n\n🔹 Hands-on Codex demo: See in a live demo how Codex can help build software. The question most often asked at the meetup was how he picks models, and how to save tokens on a Pro subscription — he can answer those too.\n\n🔹 Free build and project showcase: Bring your own idea or project to work on in person, or find collaborators.\n\n🚨 Attendees can win up to $150 in credits in total!",
+   "🔗 Sign up: https://luma.com/gxlcaluh"
+  ],
+  "alts": {
+   "0": "DevDay Exchange Community: Kaohsiung · Luma",
+   "1": "DevDay Exchange Community: Kaohsiung · Luma"
+  }
+ },
+ "Deszl6KE7Q7": {
+  "parts": [
+   "GitHub's official post: AI is rewriting the engineer career ladder!\nThe most competitive developers of the future won't be the fastest coders, but the ones who best know how to harness AI. It also names 3 skills developers are best off building right now.\n\n1. Don't just use AI — learn to direct AI agents\n\nBefore, when a requirement came in: write the code yourself → run tests → fix bugs → submit a PR\n\nThe future workflow might look like:\nAgent 1: implement the feature\nAgent 2: write the docs\nAgent 3: build the tests\nThe developer defines the problem, provides context, assigns tasks, reviews the results, and decides what is ready to ship.\n\n2. Don't blindly trust AI's first answer\n\nGitHub suggests having a second AI model review the first model's work\n\nFor example, after generating a SQL query, the second model might spot:\n・Duplicate timestamps aren't handled\n・Missing index recommendations\n・Possible performance problems as data volume grows\n\nDevelopers still need enough technical judgment to tell where each model's blind spots are",
+   "3. Spend the time AI saves you on bigger problems\n\nWhen AI can help implement features, generate tests and update docs, engineers can spend more time on:\n🔹 Understanding what users really need\n🔹 Weighing the trade-offs of different architectures\n🔹 Thinking about security and accessibility\n🔹 Defining metrics for product success\n🔹 Deciding what problem you should actually be solving\n\nDo users really need this feature? Is the architecture sound? Is the accessibility experience complete? What metrics will measure success after launch?\nThese questions can't be answered by generating code alone\n\nPersonally, I don't think AI necessarily makes programming unimportant, but when more and more people can write code with AI, that stops being the biggest edge — much like the arts/sciences divide today. The real edge will probably be understanding the problem, coordinating AI, and judging whether results are good or bad. If you can't even use one AI, how will you use multiple AI agents? If you can't use AI agents, how will you lead a team well? So for beginners learning to code, breaking big problems down is actually the skill to practice now.",
+   "🔗 Original: https://github.blog/ai-and-ml/ai-is-rewriting-the-developer-career-ladder-heres-how-to-stand-out/"
+  ],
+  "alts": {
+   "0": "AI is changing developer work. Here are three skills to strengthen."
+  }
+ },
+ "DeotGbQE3WT": {
+  "parts": [
+   "🔥 Qoder Ambassador Program is now open for applications! A full year of free credits + official event support!\n\nFirst, what is Qoder?\nQoder is a development tool built around AI agents\nYou can describe what you need in natural language, and the AI agent understands the project, plans the work, edits multiple files, runs commands, and keeps adjusting based on the results\n\nFor example:\n🔹 Build new features, websites or apps\n🔹 Debug and write tests\n🔹 Extend workflows through MCP and skills\n\nIf you already use AI coding tools, build your own projects, or want to run a developer community, give it a try. The barrier is relatively lower than Codex or Claude, and you don't need to worry about previous ambassadors grabbing all the spots — everyone has to re-apply!\n\n🔗 Apply now: https://ambassador-program-6pmlhfuf2fg.qoder.website/?lang=en"
+  ]
+ },
  "DegtPznk6Uw": {
   "parts": [
    "REA (Reverse Engineer Anything), a project that shot up to 250k stars in a single week\n\nIt lets your AI agent reverse-engineer apps and web pages whose source code you can't get, and then recreate their features in your own project based on the analysis\n\nPersonally, I think that if AI agents become strong enough in the future, this project will actually turn into a burden: every call needs a lot of tools, and the results also have to be returned and recreated through the tools it sets up, so once models are strong enough it will lose its purpose\n\nIt's still a real threat to paid apps for now, but that doesn't mean it can restore the original source code in one click, nor that it can automatically copy an entire commercial software product\n\nCurrently supported:\nClaude Code\nClaude Desktop\nOpenAI Codex\nCursor\nGemini CLI\nWindsurf\n\n🔗 GitHub: https://github.com/morluto/rea\n🌐 Website: https://rea.tools"
