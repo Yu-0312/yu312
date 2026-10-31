@@ -630,11 +630,9 @@
     const v = window.YU?.views;
     if (!v) return "";
     const views = v.get(id);
-    const marks = v.markCount(id);
     const on = v.marked(id);
-    return `<div class="views-row" data-id="${esc(id)}">
-      <span>Views: ${views.toLocaleString()}</span>
-      <span class="marks">Marks: ${marks.toLocaleString()}</span>
+    return `<div class="views-row" data-id="${esc(id)}" title="只記錄在你的瀏覽器">
+      <span>你看過 ${views.toLocaleString()} 次</span>
       <button type="button" class="mark-btn${on ? " is-on" : ""}" data-mark="${esc(id)}">${on ? "★ 已收藏" : "☆ 收藏"}</button>
     </div>`;
   }
@@ -693,7 +691,7 @@
       const row = b.closest(".views-row");
       if (row) {
         const m = $(".marks", row);
-        if (m) m.textContent = `Marks: ${v.markCount(id).toLocaleString()}`;
+        if (m) m.textContent = on ? "已收藏" : "";
       }
     });
     paint();

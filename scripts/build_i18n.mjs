@@ -29,6 +29,32 @@ const DIR = path.join(ROOT, "i18n");
 const MISSING_ONLY = process.argv.includes("--missing");
 const LENIENT = process.argv.includes("--lenient"); // 自動流程用：有問題的貼文略過，其餘照常輸出
 
+// 物件字面值裡重複的 key 會被後面那個默默蓋掉；手寫字典很容易發生，build 時直接擋下來。
+function assertNoDuplicateKeys(file) {
+  // 只比對每個 window.EN.xxx = { … } 物件第一層的 key（不同物件可以有同名 key）。
+  let seen = new Map();
+  let depth = 0;
+  const dupes = [];
+  fs.readFileSync(file, "utf8").split("\n").forEach((line, index) => {
+    if (/^\s*window\.EN\.\w+\s*=/.test(line)) seen = new Map();
+    const m = /^\s*("(?:[^"\\]|\\.)*")\s*:/.exec(line);
+    if (m && depth === 1) {
+      const key = JSON.parse(m[1]);
+      if (seen.has(key)) dupes.push(`${key}（第 ${seen.get(key)} 與 ${index + 1} 行）`);
+      else seen.set(key, index + 1);
+    }
+    const code = line.replace(/"(?:[^"\\]|\\.)*"/g, '""');
+    depth += (code.match(/\{/g) || []).length - (code.match(/\}/g) || []).length;
+  });
+  if (dupes.length) {
+    throw new Error(`${path.relative(ROOT, file)} 有重複的 key：\n  ${dupes.join("\n  ")}`);
+  }
+}
+for (const name of ["ui.en.js", "content.en.js"]) {
+  const file = path.join(DIR, name);
+  if (fs.existsSync(file)) assertNoDuplicateKeys(file);
+}
+
 function loadPosts() {
   const code = fs.readFileSync(path.join(ROOT, "data.js"), "utf8");
   const sandbox = { window: {} };

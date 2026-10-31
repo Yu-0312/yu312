@@ -85,7 +85,7 @@
     return `rgba(${r},${g},${b},${a})`;
   }
 
-  /* ---------- 瀏覽計數（localStorage 模擬 Views/Marks） ---------- */
+  /* ---------- 本機瀏覽紀錄與收藏（只存在這個瀏覽器，不是全站統計） ---------- */
   const views = {
     key: (id) => `yu-view:${id}`,
     bump(id) {
@@ -94,8 +94,9 @@
       store.set(k, String(n));
       return n;
     },
+    // 只回傳這個瀏覽器自己的開啟次數；以前會加上依 id 雜湊出來的假基數（80–479），看起來像全站瀏覽數。
     get(id) {
-      return Number(store.get(this.key(id), "0")) + hashSeed(id) % 400 + 80;
+      return Number(store.get(this.key(id), "0"));
     },
     mark(id) {
       const k = `yu-mark:${id}`;
@@ -104,14 +105,8 @@
       store.set(k, "1"); return true;
     },
     marked(id) { return store.get(`yu-mark:${id}`) === "1"; },
-    markCount(id) { return hashSeed(id + "m") % 90 + (this.marked(id) ? 12 : 5); },
+    markCount(id) { return this.marked(id) ? 1 : 0; },
   };
-  function hashSeed(s) {
-    let h = 0;
-    for (let i = 0; i < s.length; i++) h = (h * 31 + s.charCodeAt(i)) >>> 0;
-    return h;
-  }
-
   // 立刻掛上，讓 site.js 畫卡片時就拿得到
   window.YU = window.YU || {};
   window.YU.views = views;
@@ -753,8 +748,11 @@
       status.textContent = "草稿已清除";
     });
 
+    // GitHub token 只留在這個頁面的記憶體：yu-0312.github.io 底下的所有專案頁共用同一個 origin，
+    // 存進 localStorage 等於讓每個專案頁的腳本都讀得到。重新整理或關閉分頁後需要再貼一次。
+    let sessionToken = "";
+    store.del("yu-write-gh-token"); // 清掉舊版留在 localStorage 的 token
     const tokenInput = $("#wGhToken");
-    if (tokenInput) tokenInput.value = store.get("yu-write-gh-token", "");
 
     function openPublish() {
       if (dlg) dlg.hidden = false;
@@ -781,7 +779,7 @@
 
     $("#wPublishGo")?.addEventListener("click", async () => {
       const password = $("#wPassword")?.value || "";
-      const token = ($("#wGhToken")?.value || "").trim();
+      const token = ($("#wGhToken")?.value || "").trim() || sessionToken;
       if (!password) { toast("請輸入發布密碼"); return; }
       if (!token) { toast("請貼上 GitHub Token"); return; }
       maybeConvertHtmlField();
@@ -817,7 +815,8 @@
           const err = await res.json().catch(() => ({}));
           throw new Error(err.message || `GitHub ${res.status}`);
         }
-        store.set("yu-write-gh-token", token);
+        sessionToken = token;
+        if (tokenInput) tokenInput.value = "";
         closePublish();
         toast("已送出。密碼對的話，約一分鐘後會出現在筆記頁");
         status.textContent = "已送出加密稿，等待 GitHub Actions 發布";

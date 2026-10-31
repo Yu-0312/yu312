@@ -552,7 +552,6 @@ window.EN.ui = {
   "友鏈": "Friends",
   "筆記": "Notes",
   "檢視方式": "View by",
-  "分類篩選": "Filter by category",
   "已閱讀": "Read",
   "同步自我的 Threads，由 AI 依內容自動分類。": "Synced from my Threads, automatically categorized by AI based on content.",
   "寫作台": "Writing Desk",

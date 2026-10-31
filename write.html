@@ -85,8 +85,8 @@
       <h2 id="wPubDlgTitle">發布到網站</h2>
       <p class="hint">只有站主能發布文章。輸入發布密碼後，文章會加密送進 GitHub，由 Actions 用倉庫密鑰解密再寫入網站。密碼本身不會出現在程式碼或 Actions 輸入欄。</p>
       <label class="field"><span>發布密碼</span><input id="wPassword" type="password" autocomplete="current-password" required></label>
-      <label class="field"><span>GitHub Token（只存在這台瀏覽器，用來把加密檔送進倉庫）</span><input id="wGhToken" type="password" autocomplete="off" placeholder="fine-grained：這個 repo 的 Contents 寫入"></label>
-      <p class="muted" style="font-size:12px">到 GitHub → Settings → Developer settings → Fine-grained tokens，新增一個只給 <code>Yu-0312/yu312</code>、<strong>Contents: Read and write</strong> 的 token。</p>
+      <label class="field"><span>GitHub Token（只留在這個頁面的記憶體，重新整理後要再貼一次；用來把加密檔送進倉庫）</span><input id="wGhToken" type="password" autocomplete="off" placeholder="fine-grained：這個 repo 的 Contents 寫入"></label>
+      <p class="muted" style="font-size:12px">到 GitHub → Settings → Developer settings → Fine-grained tokens，新增一個只給 <code>Yu-0312/yu312</code>、<strong>Contents: Read and write</strong>、並設定到期日的 token。</p>
       <div class="write-modal-actions">
         <button type="button" class="btn btn--ghost" id="wPublishCancel">取消</button>
         <button type="button" class="btn" id="wPublishGo">加密並發布</button>
