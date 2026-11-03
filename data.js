@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-11-02T23:31:26.222Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-11-03T21:46:15.556Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -1384,7 +1384,7 @@ window.THREADS_POSTS = [
    "https://github.com/nevertoday/xxd-panel-116"
   ],
   "video": false,
-  "likes": 1677
+  "likes": 1676
  },
  {
   "id": "Dc5wjZ0k4NO",
