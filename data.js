@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-11-11T22:42:29.769Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-11-12T22:16:29.645Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -2298,6 +2298,6 @@ window.THREADS_POSTS = [
    "https://github.com/Yu-0312/apcs-judge"
   ],
   "video": false,
-  "likes": 394
+  "likes": 393
  }
 ];
