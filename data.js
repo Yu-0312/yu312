@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-11-12T22:16:29.645Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-11-13T21:59:34.294Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -2260,7 +2260,7 @@ window.THREADS_POSTS = [
   "imgs": [],
   "links": [],
   "video": false,
-  "likes": 50
+  "likes": 49
  },
  {
   "id": "DZjpDB_G9he",
