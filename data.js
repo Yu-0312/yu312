@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-11-13T21:59:34.294Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-11-14T20:43:08.636Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -298,6 +298,33 @@ window.PROJECT_ITEMS = [
  }
 ];
 window.THREADS_POSTS = [
+ {
+  "id": "DftHJ7fE-dd",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DftHJ7fE-dd",
+  "time": "2026-11-14T02:16:16.000Z",
+  "tag": "",
+  "parts": [
+   "OpenAI 正式推出 ChatGPT Wallet！\n\n官方介紹： https://openai.com/index/introducing-chatgpt-wallet/\n\nChatGPT Wallet 到底是什麼？\n簡單來說 Agent 接手了消費中的更多流程\n① 告訴 AI 你想買什麼\n② Agent 搜索並挑選商品\n③ 確認商品、價格與配送資訊\n④ 使用 ChatGPT Wallet 發起付款\n⑤ 你完成安全驗證\n⑥ Agent 協助完成結賬\n\n未來甚至可以讓 AI 自主采購嗎？\n預先設定好：消費金額上限、允許購買的商品類別、授權購買的時間範圍，應該是可行的\nex. 「每個月幫我采購一次生活用品，預算不超過 100 美元，只能購買日用品。」",
+   "值得關注的變化：\n\n1️⃣ 電商入口改變：本身學的不是電商，但是有收到電商公司的 offer，讓我斗膽分享一下見解，未來消費者應該不用自己瀏覽網站，而是直接讓 Agent 包辦整套流程\n\n2️⃣ 支付系統升級：金融機構必須開始思考如何識別 AI Agent 發起的合法交易，同時避免誤判與詐騙。最近資安問題相當嚴重，你把信用卡給電商平台，就算被盜刷XXX萬，平台也不會承認，所以金融機構要更注意\n\n3️⃣ 趨勢？：這也代表未來競爭的不只哪個 AI 模型更聰明，而是誰能夠建立完整的 Agent 生態系"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DftHJ7fE-dd-0.png",
+    "w": 1600,
+    "h": 900,
+    "alt": "Introducing ChatGPT Wallet"
+   }
+  ],
+  "links": [
+   "https://openai.com/index/introducing-chatgpt-wallet/"
+  ],
+  "video": false,
+  "thread": [
+   "DftHJ7fE-dd",
+   "DftHKdVkyZu"
+  ],
+  "likes": 3
+ },
  {
   "id": "De8lWSAE57E",
   "url": "https://www.threads.com/@yuqi._.0313/post/De8lWSAE57E",
@@ -1384,7 +1411,7 @@ window.THREADS_POSTS = [
    "https://github.com/nevertoday/xxd-panel-116"
   ],
   "video": false,
-  "likes": 1676
+  "likes": 1675
  },
  {
   "id": "Dc5wjZ0k4NO",
