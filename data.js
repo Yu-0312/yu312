@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-11-14T20:43:08.636Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-11-15T21:03:05.333Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -299,6 +299,33 @@ window.PROJECT_ITEMS = [
 ];
 window.THREADS_POSTS = [
  {
+  "id": "DfwRKvGnWVu",
+  "url": "https://www.threads.com/@yuqi._.0313/post/DfwRKvGnWVu",
+  "time": "2026-11-15T07:49:37.000Z",
+  "tag": "",
+  "parts": [
+   "分享一下這週五會在 Meet Taipei 演示的 APP！\n五勝法：\n1. 每個功能都導入了 AI 遇到問題時就能直接發問\n2. 寫下投資日誌 AI 幫你進行診斷\n3. 幫你分析時事新聞讓你知道新聞到底代表了什麼\n4. 和好友一起在聯賽競爭吧\n5. 個人化路線、成就勳章、弱點分析\n歡迎來體驗～～～",
+   "https://levelvest-plus.vercel.app/"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/DfwRKvGnWVu-0.jpg",
+    "w": 640,
+    "h": 1140,
+    "alt": ""
+   }
+  ],
+  "links": [
+   "https://levelvest-plus.vercel.app/"
+  ],
+  "video": true,
+  "thread": [
+   "DfwRKvGnWVu",
+   "DfwSGxPE04x"
+  ],
+  "likes": 4
+ },
+ {
   "id": "DftHJ7fE-dd",
   "url": "https://www.threads.com/@yuqi._.0313/post/DftHJ7fE-dd",
   "time": "2026-11-14T02:16:16.000Z",
@@ -319,11 +346,11 @@ window.THREADS_POSTS = [
    "https://openai.com/index/introducing-chatgpt-wallet/"
   ],
   "video": false,
+  "likes": 4,
   "thread": [
    "DftHJ7fE-dd",
    "DftHKdVkyZu"
-  ],
-  "likes": 3
+  ]
  },
  {
   "id": "De8lWSAE57E",
@@ -2325,6 +2352,6 @@ window.THREADS_POSTS = [
    "https://github.com/Yu-0312/apcs-judge"
   ],
   "video": false,
-  "likes": 393
+  "likes": 392
  }
 ];
