@@ -1,3 +1,29 @@
+## DftHJ7fE-dd
+OpenAI officially launches ChatGPT Wallet!
+
+Official introduction: https://openai.com/index/introducing-chatgpt-wallet/
+
+So what exactly is ChatGPT Wallet?
+Put simply, the agent takes over more of the steps in the purchasing process
+① Tell the AI what you want to buy
+② The agent searches and picks out products
+③ Confirm the product, price, and delivery details
+④ Start the payment with ChatGPT Wallet
+⑤ You complete the security verification
+⑥ The agent helps finish checkout
+
+Could AI even do the purchasing on its own in the future?
+Pre-set a spending cap, the product categories it's allowed to buy, and the time window it's authorized to shop in — that should be feasible
+e.g. “Buy me household supplies once a month, budget no more than US$100, daily necessities only.”
+---
+Changes worth watching:
+
+1️⃣ The e-commerce entry point shifts: I didn't study e-commerce myself, but I did get an offer from an e-commerce company, so let me boldly share a view — in the future consumers probably won't browse websites themselves, but will just let the agent handle the entire flow end to end
+
+2️⃣ Payment systems level up: financial institutions must start figuring out how to recognize legitimate transactions initiated by AI agents, while avoiding false positives and fraud. Security problems have been pretty serious lately — you hand your credit card to an e-commerce platform, and even if it gets racked up with fraudulent charges in the hundreds of thousands, the platform won't admit it, so financial institutions need to pay even closer attention
+
+3️⃣ Trend?: this also means future competition isn't just about which AI model is smarter, but about who can build out a complete agent ecosystem
+
 ## De8lWSAE57E
 Is the Grok Bot Token "perpetual motion machine" flooding X real or fake!?
 

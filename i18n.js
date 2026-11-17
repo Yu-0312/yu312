@@ -49,6 +49,7 @@
     [/^讚 · (.+)$/, (m, n) => `Like · ${n}`],
     [/^正在播放 · (.+)$/, (m, s) => `Playing · ${tr(s)}`],
     [/^放大圖片 (\d+)$/, (m, n) => `Enlarge image ${n}`],
+    [/^你看過 ([\d,]+) 次$/, (m, n) => `Viewed ${n} time${n === "1" ? "" : "s"}`],
     [/^（共 (\d+) 篇）$/, (m, n) => `(${n} note${n === "1" ? "" : "s"})`],
     [/^草稿已存 · (.+)$/, (m, t) => `Draft saved · ${t}`],
     [/^已匯入並轉成 Markdown：(.+)$/, (m, s) => `Imported and converted to Markdown: ${s}`],
@@ -57,14 +58,18 @@
   ];
 
   /* ---------- 翻譯一段字串（只在英文模式有效；找不到就原樣回傳） ---------- */
+  // 字典是自己的物件，但直接 UI[key] 仍會沿 prototype chain 找到 constructor / toString，
+  // 那些值會是函式而不是譯文，所以一律用 hasOwn 判斷。
+  const hasOwn = (obj, key) => Object.prototype.hasOwnProperty.call(obj || {}, key);
+
   function tr(s) {
     if (!isEn || typeof s !== "string") return s;
     const trimmed = s.trim();
     if (!trimmed) return s;
-    let out = UI[trimmed];
+    let out = hasOwn(UI, trimmed) ? UI[trimmed] : undefined;
     if (out === undefined) {
       const flat = trimmed.replace(/\s+/g, " ");
-      if (flat !== trimmed) out = UI[flat];
+      if (flat !== trimmed && hasOwn(UI, flat)) out = UI[flat];
     }
     if (out === undefined) {
       for (const [re, fn] of RULES) {
@@ -139,7 +144,7 @@
   /* ---------- 內容資料（貼文 / 專案 / 簡介 …）的英文版 ---------- */
   // 貼文分類：由 AI 依內容判斷（data.cats.js），定義在 categories.js；沒有分類結果就回 null，不會預設成「日常」
   function cat(p) {
-    const c = (window.POST_CATS || {})[p.id];
+    const c = hasOwn(window.POST_CATS, p.id) ? window.POST_CATS[p.id] : null;
     const d = c && (window.CAT_DEFS || []).find((x) => x.id === c.c);
     return d ? { id: d.id, label: isEn ? d.en : d.zh, topics: c.t || [] } : null;
   }
@@ -150,7 +155,7 @@
     const ct = cat(p);
     const base = { parts: p.parts, tag: ct ? ct.label : "", alts: (p.imgs || []).map((i) => i.alt || ""), translated: !isEn };
     if (!isEn) return base;
-    const t = (EN.posts || {})[p.id];
+    const t = hasOwn(EN.posts, p.id) ? EN.posts[p.id] : null;
     // 段數對不上（例如之後同步時續文被併進來）就退回原文，免得段落錯位
     if (!t || !Array.isArray(t.parts) || t.parts.length !== p.parts.length) return base;
     return {
@@ -163,22 +168,27 @@
   function tagLabel(tag) {
     if (!isEn) return tag;
     const m = EN.tags || {};
-    return m[tag || ""] !== undefined ? m[tag || ""] : tr(tag);
+    return hasOwn(m, tag || "") ? m[tag || ""] : tr(tag);
   }
   function share(it) {
-    const t = isEn && (EN.share || {})[it.name];
+    const t = isEn && hasOwn(EN.share, it.name) ? EN.share[it.name] : null;
     return t ? { ...it, title: t.title || it.title, desc: t.desc || it.desc } : it;
   }
   function project(it) {
-    const t = isEn && (EN.projects || {})[it.name];
+    const t = isEn && hasOwn(EN.projects, it.name) ? EN.projects[it.name] : null;
     return t ? { ...it, desc: t.desc || it.desc } : it;
+  }
+  function friend(it) {
+    // 友鏈以 url 為 key：名字是專有名詞，換站名也不用重翻。
+    const t = isEn && hasOwn(EN.friends, it.url) ? EN.friends[it.url] : null;
+    return t ? { ...it, name: t.name || it.name, desc: t.desc || it.desc, kind: t.kind || it.kind } : it;
   }
   function profile(P) {
     const t = isEn && EN.profile;
     return t ? { ...P, bio: t.bio || P.bio, intro: t.intro || P.intro, notes: t.notes || P.notes } : P;
   }
   function note(n) {
-    const t = isEn && (EN.notes || {})[n.slug];
+    const t = isEn && hasOwn(EN.notes, n.slug) ? EN.notes[n.slug] : null;
     return t ? { ...n, title: t.title || n.title, cat: t.cat || n.cat, tags: t.tags || n.tags, body: t.body || n.body } : n;
   }
 
@@ -201,9 +211,11 @@
     b.type = "button";
     b.className = "lang-toggle";
     b.setAttribute("data-no-i18n", "");
+    const visible = isEn ? "中文" : "EN";
     b.title = isEn ? "切換為中文 · Switch to Chinese" : "Switch to English · 切換為英文";
-    b.setAttribute("aria-label", isEn ? "切換為中文 (Switch to Chinese)" : "Switch to English (切換為英文)");
-    b.innerHTML = `${GLOBE}<span>${isEn ? "中文" : "EN"}</span>`;
+    // aria-label 必須以可見文字開頭（WCAG label-content-name-mismatch）。
+    b.setAttribute("aria-label", isEn ? `${visible} · Switch to Chinese` : `${visible} · Switch to English`);
+    b.innerHTML = `${GLOBE}<span>${visible}</span>`;
     b.addEventListener("click", () => setLang(isEn ? "zh" : "en"));
     return b;
   }
@@ -220,6 +232,7 @@
     cats,
     share,
     project,
+    friend,
     profile,
     note,
     setLang,

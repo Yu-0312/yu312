@@ -2,6 +2,12 @@
    獨立於 data.js，所以每日的 Threads 同步不會把翻譯洗掉。 */
 window.EN = window.EN || {};
 window.EN.posts = {
+ "DftHJ7fE-dd": {
+  "parts": [
+   "OpenAI officially launches ChatGPT Wallet!\n\nOfficial introduction: https://openai.com/index/introducing-chatgpt-wallet/\n\nSo what exactly is ChatGPT Wallet?\nPut simply, the agent takes over more of the steps in the purchasing process\n① Tell the AI what you want to buy\n② The agent searches and picks out products\n③ Confirm the product, price, and delivery details\n④ Start the payment with ChatGPT Wallet\n⑤ You complete the security verification\n⑥ The agent helps finish checkout\n\nCould AI even do the purchasing on its own in the future?\nPre-set a spending cap, the product categories it's allowed to buy, and the time window it's authorized to shop in — that should be feasible\ne.g. “Buy me household supplies once a month, budget no more than US$100, daily necessities only.”",
+   "Changes worth watching:\n\n1️⃣ The e-commerce entry point shifts: I didn't study e-commerce myself, but I did get an offer from an e-commerce company, so let me boldly share a view — in the future consumers probably won't browse websites themselves, but will just let the agent handle the entire flow end to end\n\n2️⃣ Payment systems level up: financial institutions must start figuring out how to recognize legitimate transactions initiated by AI agents, while avoiding false positives and fraud. Security problems have been pretty serious lately — you hand your credit card to an e-commerce platform, and even if it gets racked up with fraudulent charges in the hundreds of thousands, the platform won't admit it, so financial institutions need to pay even closer attention\n\n3️⃣ Trend?: this also means future competition isn't just about which AI model is smarter, but about who can build out a complete agent ecosystem"
+  ]
+ },
  "De8lWSAE57E": {
   "parts": [
    "Is the Grok Bot Token \"perpetual motion machine\" flooding X real or fake!?\n\nVerdict: a homemade money-saving skill pack is not a must-have add-on\n\nOnce installed in Grok Bot, it outsources the dirty work to free models priced at $0 on OpenRouter. So you're essentially not using Grok Bot's model at all — Grok Bot is just a shell!\n\nDownsides:\n🔸 Without topping up OpenRouter you only get 50 requests a day; after paying you get 1,000\n🔸 Free models = discounted quality + very long queues\n🔸 The project is still an MVP, and \"fully automatic\" doesn't really exist\n🔸 The free list changes every day and models stop working without notice\n🔸 Most critical: pasting your API key straight into the chat is an obvious security problem\n\nMy recommendation after trying it myself:\n✔️ Scheduled automation tasks that run every day → C-tier\n✔️ Want to learn agent architecture → probably fine to tinker with (if anyone starts from scratch, I'd love to hear how it goes)\n❌ Everyday chat, or if you care about quality → strongly not recommended\n\nLink: https://github.com/limin112/min-skill"
@@ -300,7 +306,7 @@ window.EN.posts = {
  },
  "Dc4oHAyE_ks": {
   "parts": [
-   "Keeping the 牛來 (Niúlái, Ox Alpha) wave going 🔥🔥🔥\nThis time it's a straight 300 million 牛來 GLM-5.3-Flash tokens!\n300 million tokens free per person, first come, first served! 😍\nClaiming opens at 9:00 this morning\nOpen ZCode → find the event card at the bottom left\nDon't see it? → Restart the app! 😉\nGlobal Build will run until September 20!\nGet your tasks ready tonight! These 300 million tokens are free for the taking 😎"
+   "Keeping the 牛來 (Niúlái, Ox Alpha) wave going 🔥🔥🔥\nThis time it's a straight 300 million Niúlái GLM-5.3-Flash tokens!\n300 million tokens free per person, first come, first served! 😍\nClaiming opens at 9:00 this morning\nOpen ZCode → find the event card at the bottom left\nDon't see it? → Restart the app! 😉\nGlobal Build will run until September 20!\nGet your tasks ready tonight! These 300 million tokens are free for the taking 😎"
   ]
  },
  "Dc3UHAwE4SA": {
@@ -329,7 +335,7 @@ window.EN.posts = {
  },
  "DcmefHPE0Bb": {
   "parts": [
-   "Wow! The recently viral 牛來 (Niúlái) Ox Alpha model is running a holiday event!\nUsers can claim 300 million 牛來 tokens before 8/31!\nManus's free period just ended, so hurry online and claim yours!\nNew users also have a chance to get a quota of 20 million tokens!",
+   "Wow! The recently viral 牛來 (Niúlái) Ox Alpha model is running a holiday event!\nUsers can claim 300 million Niúlái tokens before 8/31!\nManus's free period just ended, so hurry online and claim yours!\nNew users also have a chance to get a quota of 20 million tokens!",
    "Update: I just found out this is limited — today's event allotment was snapped up by users in mainland China right at midnight"
   ]
  },
@@ -499,6 +505,19 @@ window.EN.tags = {
   "": "Daily chatter"
 };
 
+window.EN.friends = {
+  "https://lvyovo-wiki.tech": { name: "lvy-neko", desc: "Moshi moshi — come say hi.", kind: "Friend" },
+  "https://antfu.me/": { desc: "Vue core team; makes the hardest things look effortless.", kind: "Legend" },
+  "https://innei.in/": { name: "Innei · Quiet Forest", desc: "Cheering on this very prolific blogger, meow.", kind: "Legend" },
+  "https://www.cassie.codes/": { name: "Cassie Evans's Blog", desc: "The wizard behind those GSAP and SVG animations.", kind: "Friend" },
+  "https://ameow.xyz/": { name: "Catfish Weekly", desc: "Happily coasting along.", kind: "Friend" },
+  "https://blog.ahzoo.cn/": { name: "Nineteen Eighty-Seven", desc: "Backend | Z-dimension ovo", kind: "Friend" },
+  "https://efjerryyang.github.io/": { desc: "Rust | All in", kind: "Friend" },
+  "https://www.vanishcode.com/": { desc: "The full-stack senior.", kind: "Legend" },
+  "https://tonsky.me": { desc: "The geek whose site is very, very bright.", kind: "Legend" },
+  "https://blog.chiyo.uk": { name: "Sky and Sea", desc: "Even if living has no meaning, good things still happen now and then.", kind: "Friend" }
+};
+
 window.EN.share = {
   "apcs-judge": {
     title: "Interactive Coding Classroom × APCS Practice",
@@ -627,6 +646,10 @@ window.EN.ui = {
   "優秀博客": "Great Blogs",
   "最新文章": "Latest Post",
   "雜更中": "Posting randomly",
+  "Claude Opus 5.5 超過 GPT-6": "Claude Opus 5.5 overtakes GPT-6",
+  "紀念在知識工作榜的一次轉折": "A turning point on the knowledge-work leaderboard",
+  "互動程式教室 × APCS 練習": "Interactive Coding Classroom × APCS Practice",
+  "四語言 101 章互動教學，300 題範例練習，加上 AI 解題與錯題本。": "101 chapters of interactive lessons in four languages, 300 worked practice problems, plus AI problem-solving help and a mistake notebook.",
   "社群連結": "Social links",
   "寫動態": "Write a post",
 
@@ -654,6 +677,7 @@ window.EN.ui = {
   "教學資源 · Yu": "Tutorials · Yu",
   "Yu 做的互動式教學網站：程式、AI、統計、物理與英文": "Interactive tutorial sites by Yu: programming, AI, statistics, physics, and English",
   "友鏈 · Yu": "Friends · Yu",
+  "Yu 的朋友們與喜歡的部落格": "Yu's friends and favorite blogs",
   "筆記 · Yu": "Notes · Yu",
   "Yu 寫作台發布的 Markdown 筆記": "Markdown notes published from Yu's writing desk",
   "寫作台 · Yu": "Writing Desk · Yu",
@@ -680,11 +704,14 @@ window.EN.ui = {
   "依月份": "By month",
   "全部月份": "All months",
   "在 Threads 追蹤": "Follow on Threads",
+  "篇動態": "posts",
+  "個專案": "projects",
   "在 Threads 查看": "View on Threads",
   "閱讀全文": "Read more",
   "展開全文": "Show more",
   "收合": "Collapse",
   "沒有符合的貼文": "No matching posts",
+  "只記錄在你的瀏覽器": "Recorded only in your browser",
   "Threads 按讚數": "Likes on Threads",
   "關閉": "Close",
   "上一張": "Previous",
@@ -745,6 +772,7 @@ window.EN.ui = {
   "開啟": "Open",
   "★ 已收藏": "★ Saved",
   "☆ 收藏": "☆ Save",
+  "已收藏": "Saved",
   "© 2026 Yu · 有問題或想法歡迎到 GitHub 開 issue": "© 2026 Yu · Questions or ideas? Feel free to open an issue on GitHub",
 
   /* ---- 友鏈 ---- */
@@ -753,6 +781,7 @@ window.EN.ui = {
   "搜尋友鏈": "Search friend links",
   "類型篩選": "Type filter",
   "朋友": "Friend",
+  "大神": "Legend",
   "沒有符合的友鏈": "No matching links",
   "© 2026 Yu · 友鏈僅代表個人喜好": "© 2026 Yu · Links reflect personal taste only",
 
@@ -765,6 +794,7 @@ window.EN.ui = {
   "還沒有筆記。到寫作台寫一篇吧！": "No notes yet. Head to the Writing Desk and write one!",
   "← 回筆記列表": "← Back to notes",
   "未分類": "Uncategorized",
+  "分類": "Category",
   "工具": "Tools",
   "日常": "Daily life",
 
@@ -802,12 +832,12 @@ window.EN.ui = {
   "已發布": "Published",
   "只有站主能發布文章。輸入發布密碼後，文章會加密送進 GitHub，由 Actions 用倉庫密鑰解密再寫入網站。密碼本身不會出現在程式碼或 Actions 輸入欄。": "Only the site owner can publish. After you enter the publishing password, the article is encrypted and sent to GitHub, where Actions decrypts it with a repository secret and writes it to the site. The password itself never appears in the code or in Actions inputs.",
   "發布密碼": "Publishing password",
-  "GitHub Token（只存在這台瀏覽器，用來把加密檔送進倉庫）": "GitHub Token (stored only in this browser, used to send the encrypted file to the repository)",
+  "GitHub Token（只留在這個頁面的記憶體，重新整理後要再貼一次；用來把加密檔送進倉庫）": "GitHub Token (kept only in this page's memory — paste it again after a refresh; used to send the encrypted file to the repository)",
   "fine-grained：這個 repo 的 Contents 寫入": "fine-grained: Contents write access for this repo",
   "貼上任何格式，或直接寫 Markdown…\n\n# 小標題\n- 清單\n**粗體** 與 *斜體*\n```code```": "Paste in any format, or just write Markdown…\n\n# Heading\n- List\n**Bold** and *italic*\n```code```",
   "到 GitHub → Settings → Developer settings → Fine-grained tokens，新增一個只給": "Go to GitHub → Settings → Developer settings → Fine-grained tokens and create a token scoped to only",
   "、": ", with ",
-  "的 token。": " access.",
+  "、並設定到期日的 token。": ", and an expiration date set.",
   "取消": "Cancel",
   "加密並發布": "Encrypt & publish",
   "© 2026 Yu · 發布密碼存在 GitHub Actions Secrets，不會寫在網頁原始碼": "© 2026 Yu · The publishing password lives in GitHub Actions Secrets and is never written into the page source",

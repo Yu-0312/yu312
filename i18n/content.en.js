@@ -23,6 +23,19 @@ window.EN.tags = {
   "": "Daily chatter"
 };
 
+window.EN.friends = {
+  "https://lvyovo-wiki.tech": { name: "lvy-neko", desc: "Moshi moshi — come say hi.", kind: "Friend" },
+  "https://antfu.me/": { desc: "Vue core team; makes the hardest things look effortless.", kind: "Legend" },
+  "https://innei.in/": { name: "Innei · Quiet Forest", desc: "Cheering on this very prolific blogger, meow.", kind: "Legend" },
+  "https://www.cassie.codes/": { name: "Cassie Evans's Blog", desc: "The wizard behind those GSAP and SVG animations.", kind: "Friend" },
+  "https://ameow.xyz/": { name: "Catfish Weekly", desc: "Happily coasting along.", kind: "Friend" },
+  "https://blog.ahzoo.cn/": { name: "Nineteen Eighty-Seven", desc: "Backend | Z-dimension ovo", kind: "Friend" },
+  "https://efjerryyang.github.io/": { desc: "Rust | All in", kind: "Friend" },
+  "https://www.vanishcode.com/": { desc: "The full-stack senior.", kind: "Legend" },
+  "https://tonsky.me": { desc: "The geek whose site is very, very bright.", kind: "Legend" },
+  "https://blog.chiyo.uk": { name: "Sky and Sea", desc: "Even if living has no meaning, good things still happen now and then.", kind: "Friend" }
+};
+
 window.EN.share = {
   "apcs-judge": {
     title: "Interactive Coding Classroom × APCS Practice",

@@ -9,6 +9,9 @@
 <meta property="og:title" content="人可夢 HUMANMON · 捕獲人類的開放世界">
 <meta property="og:description" content="人類成了等待被發現的神奇生物。在霓虹市區、螢火森林、夜市巷弄與中央公園裡，摸索不同的捕捉方式，組建專屬隊伍。">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='27' fill='%23f4f6fb' stroke='%2320242e' stroke-width='5'/%3E%3Cpath d='M5 32a27 27 0 0 1 54 0z' fill='%23ff5c5c'/%3E%3Cline x1='5' y1='32' x2='59' y2='32' stroke='%2320242e' stroke-width='5'/%3E%3Ccircle cx='32' cy='32' r='9' fill='%23f4f6fb' stroke='%2320242e' stroke-width='5'/%3E%3C/svg%3E">
+<script src="../i18n/ui.en.js"></script>
+<script src="./i18n.en.js"></script>
+<script src="../i18n.js"></script>
 <style>
   :root{
     --bg:#070a12;
@@ -29,6 +32,9 @@
   canvas#game{position:fixed;inset:0;display:block;cursor:none}
   .hidden{display:none!important}
   button{font-family:inherit}
+  #humanmon-language{position:fixed;right:18px;bottom:18px;z-index:200;pointer-events:auto}
+  #humanmon-language .lang-toggle{display:flex;align-items:center;gap:7px;padding:9px 12px;border-radius:11px;cursor:pointer;background:rgba(15,19,32,.92);border:1px solid var(--line);color:var(--text);font-size:12px;backdrop-filter:blur(12px)}
+  #humanmon-language .lang-toggle svg{width:17px;height:17px}
 
   /* ---------------- HUD ---------------- */
   #hud{position:fixed;inset:0;pointer-events:none;z-index:10}
@@ -102,7 +108,7 @@
 
   /* start */
   .start{text-align:center}
-  .logo{font-size:clamp(52px,8vw,92px);font-weight:900;letter-spacing:.14em;line-height:1;
+  .logo{margin:0;font-size:clamp(52px,8vw,92px);font-weight:900;letter-spacing:.14em;line-height:1;
     background:linear-gradient(180deg,#fff6d8 10%,#ffcb47 55%,#ff8a3c 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
     filter:drop-shadow(0 12px 38px rgba(255,160,60,.28))}
@@ -206,11 +212,12 @@
 </head>
 <body>
 
+<div id="humanmon-language" aria-label="Language"></div>
 <canvas id="game"></canvas>
 
 <div id="hud" class="hidden">
   <div class="hud-tl panel">
-    <div class="dex-line"><span class="dot"></span>圖鑑 <b id="dexCount">0</b> <span>/</span> <span id="dexTotal">17</span></div>
+    <div class="dex-line"><span class="dot"></span><span data-i18n>圖鑑</span> <b id="dexCount">0</b> <span>/</span> <span id="dexTotal">17</span></div>
     <div class="party" id="party"></div>
   </div>
 
@@ -220,9 +227,9 @@
   </div>
 
   <div class="hud-tr">
-    <button class="hud-btn" data-act="dex">圖鑑 <kbd>Tab</kbd></button>
-    <button class="hud-btn" data-act="mute">音效 <kbd>M</kbd></button>
-    <button class="hud-btn" data-act="pause">暫停 <kbd>Esc</kbd></button>
+    <button class="hud-btn" data-act="dex"><span>圖鑑</span> <kbd>Tab</kbd></button>
+    <button class="hud-btn" data-act="mute"><span>音效</span> <kbd>M</kbd></button>
+    <button class="hud-btn" data-act="pause"><span>暫停</span> <kbd>Esc</kbd></button>
   </div>
 
   <canvas id="minimap" width="180" height="132"></canvas>
@@ -230,34 +237,34 @@
   <div class="hud-hint" id="hint"></div>
 </div>
 
-<div id="toasts"></div>
+<div id="toasts" aria-live="polite"></div>
 
 <!-- 開始畫面 -->
 <div class="overlay" id="start">
   <div class="inner start">
-    <div class="logo">人可夢</div>
+    <h1 class="logo">人可夢</h1>
     <div class="logo-sub">HUMANMON</div>
     <p class="tagline">
-      在這裡，人類才是等待被發現的神奇生物。<br>
-      穿梭霓虹市區、螢火森林、夜市巷弄與中央公園，<br>
-      <b>摸索每個人的弱點</b>，把他們收進你的隊伍裡。
+      <span>在這裡，人類才是等待被發現的神奇生物。</span><br>
+      <span>穿梭霓虹市區、螢火森林、夜市巷弄與中央公園，</span><br>
+      <b>摸索每個人的弱點</b><span> — </span><span>把他們收進你的隊伍裡。</span>
     </p>
     <div class="ctrls">
-      <div class="ctrl"><span class="key">WASD／方向鍵</span>移動（Shift 快跑）</div>
-      <div class="ctrl"><span class="key">滑鼠</span>瞄準</div>
-      <div class="ctrl"><span class="key">點擊 / 空白</span>投出捕人球</div>
-      <div class="ctrl"><span class="key">E</span>送出道具・拉近好感</div>
-      <div class="ctrl"><span class="key">1 – 8</span>切換道具</div>
-      <div class="ctrl"><span class="key">Tab</span>圖鑑與隊伍</div>
-      <div class="ctrl"><span class="key">Esc</span>暫停</div>
-      <div class="ctrl"><span class="key">M</span>音效開關</div>
+      <div class="ctrl"><span class="key">WASD／方向鍵</span><span>移動（Shift 快跑）</span></div>
+      <div class="ctrl"><span class="key">滑鼠</span><span>瞄準</span></div>
+      <div class="ctrl"><span class="key">點擊 / 空白</span><span>投出捕人球</span></div>
+      <div class="ctrl"><span class="key">E</span><span>送出道具・拉近好感</span></div>
+      <div class="ctrl"><span class="key">1 – 8</span><span>切換道具</span></div>
+      <div class="ctrl"><span class="key">Tab</span><span>圖鑑與隊伍</span></div>
+      <div class="ctrl"><span class="key">Esc</span><span>暫停</span></div>
+      <div class="ctrl"><span class="key">M</span><span>音效開關</span></div>
     </div>
     <div class="cast" id="startCast"></div>
     <div class="start-actions">
       <button class="btn" id="btnStart">開始冒險</button>
       <button class="btn ghost" id="btnWipe">清除紀錄</button>
     </div>
-    <div class="tiny">電腦版專屬 · 建議全螢幕 · 進度自動儲存</div>
+    <div class="tiny"><span>電腦版專屬 · 建議全螢幕 · 進度自動儲存</span></div>
   </div>
 </div>
 
@@ -275,8 +282,8 @@
     </div>
     <div class="dex-grid" id="dexGrid"></div>
     <p style="margin:18px 0 0;font-size:11px;color:#5c647c;line-height:1.8">
-      ※ 灰色為尚未遇見的人類。提示＝出沒地點與時段；每種人類都有偏好的道具，送對道具再投球會容易很多。<br>
-      ※ 點擊上方隊伍頭像可讓該成員回家（圖鑑紀錄會保留）。
+      <span>※ 灰色為尚未遇見的人類。提示＝出沒地點與時段；每種人類都有偏好的道具，送對道具再投球會容易很多。</span><br>
+      <span>※ 點擊上方隊伍頭像可讓該成員回家（圖鑑紀錄會保留）。</span>
     </p>
   </div>
 </div>
@@ -327,6 +334,8 @@
 
 <script>
 'use strict';
+const T = (value) => window.I18N ? window.I18N.t(value) : value;
+const TF = (template, ...args) => T(template).replace(/\{(\d+)\}/g, (_, i) => String(args[Number(i)] ?? ''));
 /* =====================================================================
    人可夢 HUMANMON — 捕獲人類的開放世界
    單檔 Canvas 遊戲：程式化繪圖、無外部素材
@@ -2046,15 +2055,25 @@ function drawBuilding(g, b) {
 
   // 招牌
   if (b.sign) {
-    const sw2 = Math.min(b.w - 30, 30 + b.sign.length * 22);
+    const signText = T(b.sign);
+    const signFont = '"PingFang TC","Microsoft JhengHei",sans-serif';
+    const maxTextWidth = Math.max(0, b.w - 52);
+    g.font = `700 12px ${signFont}`;
+    const naturalTextWidth = g.measureText(signText).width;
+    const signFontSize = naturalTextWidth > maxTextWidth && naturalTextWidth > 0
+      ? Math.max(8, 12 * maxTextWidth / naturalTextWidth)
+      : 12;
+    g.font = `700 ${signFontSize}px ${signFont}`;
+    const textW = g.measureText(signText).width + 22;
+    const minW = Math.min(b.w - 30, 30 + [...b.sign].length * 22);
+    const sw2 = Math.min(b.w - 30, Math.max(minW, textW));
     const sx2 = b.x + (b.w - sw2) / 2, sy2 = ay - 21;
     g.fillStyle = 'rgba(12,14,24,.92)';
     rr(g, sx2, sy2, sw2, 18, 5); g.fill();
     g.strokeStyle = 'rgba(255,203,71,.5)'; g.lineWidth = 1; g.stroke();
     g.fillStyle = '#ffd98a';
-    g.font = '700 12px "PingFang TC","Microsoft JhengHei",sans-serif';
     g.textAlign = 'center'; g.textBaseline = 'middle';
-    g.fillText(b.sign, b.x + b.w / 2, sy2 + 9);
+    g.fillText(signText, b.x + b.w / 2, sy2 + 9, maxTextWidth);
     neonSigns.push({ x: sx2, y: sy2, w: sw2, h: 18, color: '#ffcb47' });
 
     if (b.h > 230) {
@@ -2065,8 +2084,20 @@ function drawBuilding(g, b) {
       g.fillStyle = '#9fd8ff';
       g.font = '700 11px "PingFang TC",sans-serif';
       g.textAlign = 'center'; g.textBaseline = 'middle';
-      for (let i = 0; i < b.sign.length && i < 5; i++) {
-        g.fillText(b.sign[i], vx + vw / 2, vy + 14 + i * 16);
+      // 中文直排；英譯則旋轉整個字串，避免只畫出前幾個字元。
+      if (/[\u4e00-\u9fff]/.test(signText)) {
+        const signLines = [...signText];
+        const lineHeight = Math.min(16, (vh - 8) / Math.max(1, signLines.length));
+        for (let i = 0; i < signLines.length; i++) {
+          g.fillText(signLines[i], vx + vw / 2, vy + 4 + lineHeight * (i + 0.5));
+        }
+      } else {
+        g.save();
+        g.translate(vx + vw / 2, vy + vh / 2);
+        g.rotate(-Math.PI / 2);
+        g.font = '700 11px "PingFang TC",sans-serif';
+        g.fillText(signText, 0, 0, Math.max(0, vh - 8));
+        g.restore();
       }
       neonSigns.push({ x: vx, y: vy, w: vw, h: vh, color: '#7ec8ff' });
     }
@@ -2177,13 +2208,20 @@ function drawStall(g, s) {
   g.fillRect(s.x, s.y + 15, s.w, 4);
   // 招牌
   if (s.sign) {
-    const sw = s.sign.length * 14 + 12;
+    const signText = T(s.sign);
+    const signAvailableWidth = Math.max(0, s.w - 12);
+    g.font = '600 11px "PingFang TC","Microsoft JhengHei",sans-serif';
+    const naturalWidth = g.measureText(signText).width;
+    const fontSize = naturalWidth > signAvailableWidth && naturalWidth > 0
+      ? Math.max(7, 11 * signAvailableWidth / naturalWidth)
+      : 11;
+    g.font = `600 ${fontSize}px "PingFang TC","Microsoft JhengHei",sans-serif`;
+    const sw = Math.min(s.w - 4, Math.max(24, g.measureText(signText).width + 12));
     g.fillStyle = 'rgba(12,10,16,.9)';
     rr(g, s.x + (s.w - sw) / 2, s.y + 26, sw, 16, 4); g.fill();
     g.fillStyle = '#ffe6a6';
-    g.font = '600 11px "PingFang TC","Microsoft JhengHei",sans-serif';
     g.textAlign = 'center'; g.textBaseline = 'middle';
-    g.fillText(s.sign, s.x + s.w / 2, s.y + 34);
+    g.fillText(signText, s.x + s.w / 2, s.y + 34);
   }
   g.restore();
 }
@@ -3546,11 +3584,11 @@ function perks() {
 }
 function perkText(p) {
   const out = [];
-  if (p.spd) out.push('移動速度 +' + Math.round(p.spd * 100) + '%');
-  if (p.arc) out.push('捕捉圈 +' + Math.round(p.arc * 100) + '%');
-  if (p.lure) out.push('警戒範圍 -' + Math.round(p.lure * 100) + '%');
-  if (p.need) out.push('所需命中 -' + p.need);
-  return out.join('・') || '無被動';
+  if (p.spd) out.push(TF('移動速度 +{0}%', Math.round(p.spd * 100)));
+  if (p.arc) out.push(TF('捕捉圈 +{0}%', Math.round(p.arc * 100)));
+  if (p.lure) out.push(TF('警戒範圍 -{0}%', Math.round(p.lure * 100)));
+  if (p.need) out.push(TF('所需命中 -{0}', p.need));
+  return out.join(T('・')) || T('無被動');
 }
 
 function updatePlayer(dt) {
@@ -3786,7 +3824,7 @@ function trySpawn() {
     if (near) continue;
     spawnHuman(chosen.id, x, y);
     if (chosen.legend) {
-      toast('⚠ 傳說目擊：' + chosen.name + ' 出現在' + zone.name, 'gold');
+      toast(TF('⚠ 傳說目擊：{0} 出現在{1}', T(chosen.name), T(zone.name)), 'gold');
       SFX.catch();
     }
     return;
@@ -4000,11 +4038,11 @@ function finishCapture(win) {
     let extra = '';
     if (state.party.length < 6) {
       state.party.push(h.sid);
-      extra = '已加入隊伍 · 被動：' + perkText(SPECIES_BY_ID[h.sid].perk);
+      extra = TF('已加入隊伍 · 被動：{0}', perkText(SPECIES_BY_ID[h.sid].perk));
     } else {
-      extra = '隊伍已滿（6 隻）· 已記錄於圖鑑。點擊隊伍頭像可讓成員回家。';
+      extra = T('隊伍已滿（6 隻）· 已記錄於圖鑑。點擊隊伍頭像可讓成員回家。');
     }
-    if (state.dex[h.sid] === 1) extra += '<br>圖鑑新增：' + SPECIES_BY_ID[h.sid].name;
+    if (state.dex[h.sid] === 1) extra += '<br>' + TF('圖鑑新增：{0}', T(SPECIES_BY_ID[h.sid].name));
 
     showSplash(SPECIES_BY_ID[h.sid], extra);
     saveGame();
@@ -4019,9 +4057,9 @@ function finishCapture(win) {
 
 function showSplash(sp, extra) {
   clearKeys();
-  el.sName.textContent = sp.name;
+  el.sName.textContent = T(sp.name);
   el.sStars.textContent = '★★★★★'.slice(0, sp.rarity) + '☆☆☆☆☆'.slice(0, 5 - sp.rarity);
-  el.sDesc.textContent = sp.desc;
+  el.sDesc.textContent = T(sp.desc);
   el.sExtra.innerHTML = extra;
   el.splash.classList.remove('hidden');
   paintPortrait(document.getElementById('sPortrait'), sp, 'full');
@@ -4053,7 +4091,7 @@ function useItem() {
   if (!sp.weak) {
     best.alert = 1.2;
     best.state = 'flee'; best.timer = 2;
-    toast(sp.name + '對' + item.name + '毫無興趣，還被嚇到了…', 'bad');
+    toast(TF('{0}對{1}毫無興趣，還被嚇到了…', T(sp.name), T(item.name)), 'bad');
     SFX.nope();
     return;
   }
@@ -4063,7 +4101,7 @@ function useItem() {
     best.state = 'wander';
     best.tgt = null;
     burst(best.x, best.y - 20, '#ff8fb0', 12, 70);
-    toast('♥ ' + sp.name + '很喜歡' + item.name + '！現在投球會容易很多', 'good');
+    toast(TF('♥ {0}很喜歡{1}！現在投球會容易很多', T(sp.name), T(item.name)), 'good');
     SFX.feed();
   } else {
     best.alert = 1.4;
@@ -4071,13 +4109,13 @@ function useItem() {
     best.x += Math.cos(a) * 16;
     best.y += Math.sin(a) * 16;
     resolveCollision(best, 9);
-    toast(sp.name + '看了一眼' + item.name + '，默默退後兩步…（提示：' + itemHint(sp) + '）', 'bad');
+    toast(TF('{0}看了一眼{1}，默默退後兩步…（提示：{2}）', T(sp.name), T(item.name), itemHint(sp)), 'bad');
     SFX.nope();
   }
 }
 function itemHint(sp) {
-  if (!sp.weak) return '據說牠什麼都不收';
-  return '試試' + ITEM_BY_ID[sp.weak].emoji + ITEM_BY_ID[sp.weak].name;
+  if (!sp.weak) return T('據說牠什麼都不收');
+  return TF('試試{0}{1}', ITEM_BY_ID[sp.weak].emoji, T(ITEM_BY_ID[sp.weak].name));
 }
 
 /* =====================================================================
@@ -4114,7 +4152,7 @@ function updateParticles(dt) {
 
 let lastToast = 0;
 function toast(msg, type) {
-  nowToast(msg, type);
+  nowToast(T(msg), type);
   lastToast = performance.now();
 }
 function nowToast(msg, type) {
@@ -4282,7 +4320,7 @@ function drawEntities() {
         ctx.save();
         ctx.textAlign = 'center';
         ctx.font = '700 9px "PingFang TC","Microsoft JhengHei",sans-serif';
-        const label = sp.name;
+        const label = T(sp.name);
         const w = ctx.measureText(label).width + 12;
         ctx.fillStyle = 'rgba(8,10,18,.75)';
         rr(ctx, h.x - w / 2, h.y - 68, w, 15, 7); ctx.fill();
@@ -4541,7 +4579,7 @@ function drawTargetReticle() {
       ctx.fillStyle = 'rgba(255,92,122,.9)';
       ctx.font = '600 11px "PingFang TC",sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('太遠了', sx, sy - 26);
+      ctx.fillText(T('太遠了'), sx, sy - 26);
     }
     ctx.restore();
   }
@@ -4573,7 +4611,7 @@ function drawCaptureUI() {
   ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
   ctx.font = '700 11px "PingFang TC","Microsoft JhengHei",sans-serif';
   ctx.fillStyle = 'rgba(255,255,255,.42)';
-  ctx.fillText('捕 捉 中', px + 28, py + 30);
+  ctx.fillText(T('捕 捉 中'), px + 28, py + 30);
 
   /* 左：環 */
   const cx = px + 158, cy = py + 168;
@@ -4640,7 +4678,7 @@ function drawCaptureUI() {
   ctx.textAlign = 'left';
   ctx.font = '800 25px "PingFang TC","Microsoft JhengHei",sans-serif';
   ctx.fillStyle = '#fff';
-  ctx.fillText(c.sp.name, ix, iy);
+  ctx.fillText(T(c.sp.name), ix, iy);
 
   // 星星
   ctx.font = '13px sans-serif';
@@ -4653,12 +4691,12 @@ function drawCaptureUI() {
   ctx.fillStyle = 'rgba(106,168,255,.14)';
   rr(ctx, ix + 82, iy + 8, tw, 19, 9); ctx.fill();
   ctx.fillStyle = '#8fc0ff';
-  ctx.fillText(c.sp.type, ix + 91, iy + 22);
+  ctx.fillText(T(c.sp.type), ix + 91, iy + 22);
 
   // 進度點
   ctx.font = '600 10px "PingFang TC",sans-serif';
   ctx.fillStyle = 'rgba(255,255,255,.42)';
-  ctx.fillText('捕獲進度', ix, iy + 58);
+  ctx.fillText(T('捕獲進度'), ix, iy + 58);
   for (let i = 0; i < c.need; i++) {
     const x = ix + i * 26, y = iy + 70;
     ctx.beginPath();
@@ -4675,7 +4713,7 @@ function drawCaptureUI() {
 
   // 失誤
   ctx.fillStyle = 'rgba(255,255,255,.42)';
-  ctx.fillText('機會', ix, iy + 110);
+  ctx.fillText(T('機會'), ix, iy + 110);
   const left = c.maxMiss - c.misses;
   for (let i = 0; i < c.maxMiss; i++) {
     ctx.beginPath();
@@ -4687,24 +4725,24 @@ function drawCaptureUI() {
   if (c.weak) {
     ctx.font = '600 11.5px "PingFang TC",sans-serif';
     ctx.fillStyle = '#5ddc8a';
-    ctx.fillText(c.itemEmoji + ' ' + ITEM_BY_ID[c.sp.weak].name + '・弱點命中', ix, iy + 158);
+    ctx.fillText(c.itemEmoji + ' ' + T(ITEM_BY_ID[c.sp.weak].name) + T('・弱點命中'), ix, iy + 158);
   }
   if (c.lured) {
     ctx.font = '600 11.5px "PingFang TC",sans-serif';
     ctx.fillStyle = '#ff9ab4';
-    ctx.fillText('♥ 好感度上升中', ix, iy + (c.weak ? 178 : 158));
+    ctx.fillText(T('♥ 好感度上升中'), ix, iy + (c.weak ? 178 : 158));
   }
 
   ctx.font = '600 11px "PingFang TC",sans-serif';
   ctx.fillStyle = 'rgba(255,255,255,.34)';
-  ctx.fillText('指針進入綠色區塊時', px + 28, py + ch - 40);
+  ctx.fillText(T('指針進入綠色區塊時'), px + 28, py + ch - 40);
   ctx.fillStyle = 'rgba(255,255,255,.8)';
   ctx.font = '700 12px "PingFang TC",sans-serif';
-  ctx.fillText('點擊 / 空白鍵', px + 28, py + ch - 22);
+  ctx.fillText(T('點擊 / 空白鍵'), px + 28, py + ch - 22);
 
   ctx.fillStyle = 'rgba(255,255,255,.34)';
   ctx.font = '600 11px "PingFang TC",sans-serif';
-  ctx.fillText('送禮（E）可以在投球前提高好感', px + 300, py + ch - 22);
+  ctx.fillText(T('送禮（E）可以在投球前提高好感'), px + 300, py + ch - 22);
 
   // 粒子
   for (const p of c.pops) {
@@ -4725,7 +4763,7 @@ function drawCaptureUI() {
     ctx.fillStyle = c.result === 'win' ? '#5ddc8a' : '#ff5c7a';
     ctx.shadowColor = c.result === 'win' ? 'rgba(93,220,138,.7)' : 'rgba(255,92,122,.7)';
     ctx.shadowBlur = 30;
-    ctx.fillText(c.result === 'win' ? '捕獲！' : '逃走了…', VW / 2, VH / 2 + ch / 2 - 10);
+    ctx.fillText(T(c.result === 'win' ? '捕獲！' : '逃走了…'), VW / 2, VH / 2 + ch / 2 - 10);
     ctx.restore();
   }
   ctx.restore();
@@ -4746,7 +4784,7 @@ function updateHUD() {
       const id = state.party[i];
       if (id) {
         const sp = SPECIES_BY_ID[id];
-        html += `<div class="slot filled" data-idx="${i}" title="${sp.name} · ${perkText(sp.perk)}（點擊讓牠回家）"><canvas class="pslot"></canvas></div>`;
+        html += `<div class="slot filled" data-idx="${i}" title="${TF('{0} · {1}（點擊讓牠回家）', T(sp.name), perkText(sp.perk))}"><canvas class="pslot"></canvas></div>`;
       } else {
         html += `<div class="slot"></div>`;
       }
@@ -4761,7 +4799,7 @@ function updateHUD() {
         const id = state.party[i];
         if (!id) return;
         state.party.splice(i, 1);
-        toast(SPECIES_BY_ID[id].name + ' 回家了（圖鑑紀錄保留）', 'gold');
+        toast(TF('{0} 回家了（圖鑑紀錄保留）', T(SPECIES_BY_ID[id].name)), 'gold');
         saveGame();
         updateHUD();
       });
@@ -4772,22 +4810,22 @@ function updateHUD() {
   if (hudCache.zone !== z.id) {
     const first = hudCache.zone !== '' && hudCache.zone !== undefined;
     hudCache.zone = z.id;
-    el.zoneName.textContent = z.name;
+    el.zoneName.textContent = T(z.name);
     const now = performance.now();
     if (first && state.mode === 'play' && (!state.zoneToastAt || now - state.zoneToastAt > 6000)) {
       state.zoneToastAt = now;
       const sub = { city: '霓虹與打卡機的聲音', forest: '螢火蟲與泥土味', alley: '燈籠、油煙與人聲', park: '草皮與廣場舞的低音' }[z.id];
-      toast('進入 ' + z.name + ' · ' + sub, 'gold');
+      toast(TF('進入 {0} · {1}', T(z.name), T(sub)), 'gold');
     }
   }
 
   const hh = hourLabel(state.time);
-  if (hudCache.clock !== hh) { hudCache.clock = hh; el.clock.textContent = hh; el.period.textContent = periodName(state.time); }
+  if (hudCache.clock !== hh) { hudCache.clock = hh; el.clock.textContent = hh; el.period.textContent = T(periodName(state.time)); }
 
   // 道具列
   if (el.items.children.length === 0) {
     el.items.innerHTML = ITEMS.map((it, i) =>
-      `<div class="item" data-i="${i}" title="${it.name}"><span class="k">${i + 1}</span><span>${it.emoji}</span><span class="nm">${it.name}</span></div>`
+      `<div class="item" data-i="${i}" title="${T(it.name)}"><span class="k">${i + 1}</span><span>${it.emoji}</span><span class="nm">${T(it.name)}</span></div>`
     ).join('');
     el.items.querySelectorAll('.item').forEach(node => {
       node.addEventListener('click', () => selectItem(+node.dataset.i));
@@ -4810,12 +4848,12 @@ function updateHUD() {
     const sp = SPECIES_BY_ID[near.sid];
     const dw = Math.round(nd / 12);   // 12px ≈ 1m，跟投球距離（400px ≈ 33m）同一個尺度
     el.hint.innerHTML =
-      `<div class="nm">${sp.emoji} ${sp.name}</div>` +
-      `<div class="row"><span class="badge">${sp.type}</span>${'★'.repeat(sp.rarity)}</div>` +
-      `<div class="row">弱點：<span class="weak">${itemHint(sp)}</span></div>` +
-      `<div class="row">距離 ${dw} m ${near.lured > 0 ? '・<span style="color:#ff9ab4">♥ 已上鉤</span>' : ''} ${near.state === 'flee' ? '・<span style="color:#ff7d93">警戒中</span>' : ''}</div>`;
+      `<div class="nm">${sp.emoji} ${T(sp.name)}</div>` +
+      `<div class="row"><span class="badge">${T(sp.type)}</span>${'★'.repeat(sp.rarity)}</div>` +
+      `<div class="row">${T('弱點：')}<span class="weak">${itemHint(sp)}</span></div>` +
+      `<div class="row">${TF('距離 {0} m', dw)} ${near.lured > 0 ? `・<span style="color:#ff9ab4">♥ ${T('已上鉤')}</span>` : ''} ${near.state === 'flee' ? `・<span style="color:#ff7d93">${T('警戒中')}</span>` : ''}</div>`;
   } else {
-    el.hint.innerHTML = `<div class="nm">🔍 尋找附近的人類</div><div class="row">WASD／方向鍵移動 · 靠近後點擊投球</div><div class="row">按 E 送禮可提高捕捉率</div>`;
+    el.hint.innerHTML = `<div class="nm">🔍 ${T('尋找附近的人類')}</div><div class="row">${T('WASD／方向鍵移動 · 靠近後點擊投球')}</div><div class="row">${T('按 E 送禮可提高捕捉率')}</div>`;
   }
   }
 
@@ -4871,21 +4909,21 @@ function drawMinimap() {
    ===================================================================== */
 function renderDex() {
   const dexN = Object.keys(state.dex).length;
-  el.dexSub.textContent = `已記錄 ${dexN} / ${SPECIES.length} 種人類`;
+  el.dexSub.textContent = TF('已記錄 {0} / {1} 種人類', dexN, SPECIES.length);
   let lastNew = state.lastNew;
   let html = '';
   for (const sp of SPECIES) {
     const n = state.dex[sp.id] || 0;
     const caught = n > 0;
-    const zones = sp.zones.map(id => ZONE_BY_ID[id].name).join('・');
+    const zones = sp.zones.map(id => T(ZONE_BY_ID[id].name)).join(T('・'));
     const tl = timeHint(sp.hours);
     const stars = '★'.repeat(sp.rarity) + '☆'.repeat(5 - sp.rarity);
     html += `<div class="card ${caught ? '' : 'locked'} ${lastNew === sp.id ? 'new' : ''}" style="--c:${sp.color}">
       <div class="p-wrap"><canvas class="p-dex" data-id="${sp.id}"></canvas></div>
-      <div class="nm">${caught ? sp.name : '？？？'}</div>
-      <div class="ty">${caught ? sp.type : '尚未遇見'}</div>
+      <div class="nm">${caught ? T(sp.name) : '???'}</div>
+      <div class="ty">${caught ? T(sp.type) : T('尚未遇見')}</div>
       <div class="st">${stars}</div>
-      <div class="hint">${caught ? '弱點：' + itemHint(sp) : zones + '・' + tl}</div>
+      <div class="hint">${caught ? TF('弱點：{0}', itemHint(sp)) : zones + T('・') + tl}</div>
       ${caught ? `<div class="cnt">×${n}</div>` : ''}
     </div>`;
   }
@@ -4903,8 +4941,8 @@ function timeHint(hours) {
   if (has(1)) tags.push('深夜');
   if (has(6)) tags.push('清晨');
   const uniq = [...new Set(tags)];
-  if (uniq.length >= 4) return '全天';
-  return uniq.join('・') || '全天';
+  if (uniq.length >= 4) return T('全天');
+  return uniq.map(T).join(T('・')) || T('全天');
 }
 
 function openDex() {
@@ -4970,7 +5008,7 @@ function selectItem(i) {
   state.itemIdx = clamp(i, 0, ITEMS.length - 1);
   updateHUD();
   const it = ITEMS[state.itemIdx];
-  toast('已選擇 ' + it.emoji + ' ' + it.name, 'gold');
+  toast(TF('已選擇 {0} {1}', it.emoji, T(it.name)), 'gold');
   beep(720, 0.05, 'sine', 0.03);
 }
 
@@ -5178,6 +5216,7 @@ document.querySelectorAll('[data-act]').forEach(btn => {
     if (a === 'mute') {
       state.muted = !state.muted;
       toast(state.muted ? '音效已關閉' : '音效已開啟', 'gold');
+      btn.querySelector('span')?.replaceChildren(document.createTextNode(T('音效')));
     }
   });
 });
@@ -5219,7 +5258,7 @@ function buildStartCast() {
 
 function updateStartButton() {
   const has = Object.keys(state.dex).length > 0 || state.party.length > 0;
-  document.getElementById('btnStart').textContent = has ? '繼續冒險' : '開始冒險';
+  document.getElementById('btnStart').textContent = T(has ? '繼續冒險' : '開始冒險');
 }
 
 function startGame() {
@@ -5242,6 +5281,13 @@ function startGame() {
    初始化
    ===================================================================== */
 function init() {
+  if (window.I18N) {
+    const slot = document.getElementById('humanmon-language');
+    if (slot) slot.appendChild(I18N.button());
+    document.documentElement.lang = I18N.isEn ? 'en' : 'zh-Hant-TW';
+    document.title = T('人可夢 HUMANMON · 捕獲人類的開放世界');
+    I18N.apply(document.body);
+  }
   // 電腦版限制
   const coarse = window.matchMedia('(pointer: coarse)').matches;
   const fine = window.matchMedia('(pointer: fine)').matches;
