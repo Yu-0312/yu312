@@ -32,26 +32,31 @@ const LENIENT = process.argv.includes("--lenient"); // 自動流程用：有問�
 // 物件字面值裡重複的 key 會被後面那個默默蓋掉；手寫字典很容易發生，build 時直接擋下來。
 function assertNoDuplicateKeys(file) {
   // 只比對每個 window.EN.xxx = { … } 物件第一層的 key（不同物件可以有同名 key）。
+  // 支援單引號與雙引號的 key（humanmon/i18n.en.js 用單引號）。
   let seen = new Map();
   let depth = 0;
   const dupes = [];
+  const unquote = (single, double) => {
+    const body = single !== undefined ? single.replace(/\\'/g, "'").replace(/"/g, '\\"') : double;
+    return JSON.parse(`"${body}"`);
+  };
   fs.readFileSync(file, "utf8").split("\n").forEach((line, index) => {
     if (/^\s*window\.EN\.\w+\s*=/.test(line)) seen = new Map();
-    const m = /^\s*("(?:[^"\\]|\\.)*")\s*:/.exec(line);
+    const m = /^\s*(?:'((?:[^'\\]|\\.)*)'|"((?:[^"\\]|\\.)*)")\s*:/.exec(line);
     if (m && depth === 1) {
-      const key = JSON.parse(m[1]);
+      const key = unquote(m[1], m[2]);
       if (seen.has(key)) dupes.push(`${key}（第 ${seen.get(key)} 與 ${index + 1} 行）`);
       else seen.set(key, index + 1);
     }
-    const code = line.replace(/"(?:[^"\\]|\\.)*"/g, '""');
+    // 去掉字串後再數括號，避免字串裡的 { } 影響深度
+    const code = line.replace(/"(?:[^"\\]|\\.)*"/g, '""').replace(/'(?:[^'\\]|\\.)*'/g, "''");
     depth += (code.match(/\{/g) || []).length - (code.match(/\}/g) || []).length;
   });
   if (dupes.length) {
     throw new Error(`${path.relative(ROOT, file)} 有重複的 key：\n  ${dupes.join("\n  ")}`);
   }
 }
-for (const name of ["ui.en.js", "content.en.js"]) {
-  const file = path.join(DIR, name);
+for (const file of [path.join(DIR, "ui.en.js"), path.join(DIR, "content.en.js"), path.join(ROOT, "humanmon", "i18n.en.js")]) {
   if (fs.existsSync(file)) assertNoDuplicateKeys(file);
 }
 
@@ -87,8 +92,24 @@ function parseTxt(file) {
 
 const posts = loadPosts();
 const files = fs.readdirSync(DIR).filter((f) => /^posts\.en\..*\.txt$/.test(f)).sort();
+// 自動翻譯檔先讀，手翻檔後讀：同一個 id 若兩邊都有，以手翻為準
+// （舊版依檔名排序，auto 會默默蓋掉後來新增的手翻檔）。
+const orderedFiles = [
+  ...files.filter((f) => /auto/.test(f)),
+  ...files.filter((f) => !/auto/.test(f)),
+];
 const tr = {};
-for (const f of files) Object.assign(tr, parseTxt(path.join(DIR, f)));
+const trFrom = new Map();
+for (const f of orderedFiles) {
+  const parsed = parseTxt(path.join(DIR, f));
+  for (const id of Object.keys(parsed)) {
+    if (trFrom.has(id)) {
+      console.warn(`  ! ${id} 同時出現在 ${trFrom.get(id)} 與 ${f}，以手翻的 ${f} 為準`);
+    }
+    tr[id] = parsed[id];
+    trFrom.set(id, f);
+  }
+}
 
 const problems = [];
 const missing = [];

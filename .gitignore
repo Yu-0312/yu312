@@ -1,2 +1,5 @@
 node_modules/
 .playwright-cli/
+
+# 另一個獨立的 git repo（自己的作品，不屬於這個站）
+/levelvest-plus/

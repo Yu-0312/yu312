@@ -30,6 +30,7 @@ import os from "node:os";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { chromium } from "playwright";
+import { cleanPostText, splitParts } from "./lib/thread_text.mjs";
 
 function findChromium() {
   if (process.env.PLAYWRIGHT_CHROMIUM_PATH && fs.existsSync(process.env.PLAYWRIGHT_CHROMIUM_PATH)) {
@@ -70,6 +71,8 @@ const PROFILE_URL = `https://www.threads.com/@${HANDLE}`;
 const DRY_RUN = process.argv.includes("--dry-run");
 const MAX_POSTS = 80;
 const MAX_SCROLL = 8;
+// 讚數抓取的總時間預算（毫秒）。workflow 的 timeout 是 10 分鐘，留給抓貼文與圖片。
+const LIKES_BUDGET_MS = 6 * 60 * 1000;
 
 /* ---------- data.js 讀寫 ---------- */
 function loadExisting() {
@@ -78,119 +81,47 @@ function loadExisting() {
   // data.js 只有 window.X = ... 指派，可安全地用 Function 取值
   const fn = new Function("window", `${src}\nreturn window;`);
   const win = fn(sandbox.window);
+  // 這裡列出的每一個 global 都必須被 writeDataJs 寫回；漏掉就會在下次同步時消失
+  // （window.FRIEND_LINKS 就是這樣在 2026-10-01 被洗掉的）。
   return {
     profile: win.PROFILE || {},
     share: win.SHARE_ITEMS || [],
     projects: win.PROJECT_ITEMS || [],
     posts: win.THREADS_POSTS || [],
+    friends: win.FRIEND_LINKS || [],
   };
 }
 
-function writeDataJs({ profile, share, projects, posts, syncedAt }) {
+/* 寫回 data.js 前一定要涵蓋的 global；新增資料種類時兩邊一起改。 */
+const DATA_GLOBALS = ["PROFILE", "SHARE_ITEMS", "PROJECT_ITEMS", "THREADS_POSTS", "FRIEND_LINKS"];
+
+// header 每天都會換時間戳，比對內容時要忽略它，否則「有變更才 commit」永遠成立。
+function payloadOf(src) {
+  const text = String(src);
+  const end = text.indexOf("*/");
+  return (end === -1 ? text : text.slice(end + 2)).replace(/^\n+/, "");
+}
+
+function writeDataJs({ profile, share, projects, posts, friends, syncedAt }) {
   const header = `/* 網站資料 — 由 Threads (@${HANDLE}) 與 GitHub (Yu-0312) 實際內容整理而來
    Threads 同步於 ${syncedAt}（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */`;
   const dump = (name, value) => `window.${name} = ${JSON.stringify(value, null, 1)};`;
-  const body = [
-    header,
-    dump("PROFILE", profile),
-    dump("SHARE_ITEMS", share),
-    dump("PROJECT_ITEMS", projects),
-    dump("THREADS_POSTS", posts),
-    "",
-  ].join("\n");
-  if (!DRY_RUN) fs.writeFileSync(DATA_JS, body);
-}
-
-/* ---------- 文字清理（對齊上次人工匯出的結果） ---------- */
-const NOISE_LINES = [
-  /^Translate$/i,
-  /^翻譯$/,
-  /^See more$/i,
-  /^Show more$/i,
-  /^查看更多$/,
-  /^View \d+ more$/i,
-  /^\d+(\.\d+)?[kKmM]?$/,
-  /^Follow$/i,
-  /^Following$/i,
-  /^Follow back$/i,
-  /^追蹤$/,
-  /^已追蹤$/,
-  /^Mention$/i,
-  /^Send$/i,
-  /^Copy link$/i,
-  /^Report$/i,
-  /^Not interested$/i,
-  /^Who can reply\?$/i,
-  /^(Threads|Replies|Reposts|Media|Quotes)$/i,
-  /^[\d.,]+[kKmM]? ?(likes?|replies|reposts|views|shares|quotes)$/i,
-  /^(like|reply|repost|share|quote|bookmark|heart)s?$/i,
-  /^讀取更多$/i,
-  /^收合$/i,
-];
-
-function isNoiseLine(line) {
-  const t = line.trim();
-  if (!t) return false; // 空行保留，用來分段
-  return NOISE_LINES.some((re) => re.test(t));
-}
-
-function cleanPostText(raw) {
-  const lines = String(raw || "")
-    .replace(/\r\n/g, "\n")
-    .split("\n")
-    .map((l) => l.replace(/\s+$/g, ""))
-    .filter((l) => !isNoiseLine(l));
-
-  // 移除開頭的 username / 相對時間（1h、3d、2w…）
-  while (lines.length) {
-    const l = lines[0].trim();
-    if (l === HANDLE || /^@?yuqi\._\.0313$/i.test(l)) {
-      lines.shift();
-      continue;
-    }
-    if (
-      /^\d+[mhdwMy]$/.test(l) ||
-      /^\d+\s*(minute|hour|day|week|month|year)s?$/i.test(l) ||
-      /^\d+\s*(分鐘|小時|天|週|個月|年)前?$/.test(l) ||
-      /^(剛剛|昨天|前天)$/.test(l)
-    ) {
-      lines.shift();
-      continue;
-    }
-    break;
+  const payload = DATA_GLOBALS.map((name) => dump(name, { PROFILE: profile, SHARE_ITEMS: share, PROJECT_ITEMS: projects, THREADS_POSTS: posts, FRIEND_LINKS: friends || [] }[name]))
+    .concat("")
+    .join("\n");
+  if (DRY_RUN) return false;
+  let prev = "";
+  try {
+    prev = fs.readFileSync(DATA_JS, "utf8");
+  } catch {
+    /* 第一次建立 */
   }
-
-  // 結尾的互動列（數字或純英文短詞）
-  while (lines.length) {
-    const l = lines[lines.length - 1].trim();
-    if (!l) {
-      lines.pop();
-      continue;
-    }
-    if (
-      /^\d+(\.\d+)?[kKmM]?$/.test(l) ||
-      /^(Reply|Like|Repost|Share|Quote|Send|View all \d+ comments)$/i.test(l) ||
-      /^(全部|查看全部)留言$/.test(l)
-    ) {
-      lines.pop();
-      continue;
-    }
-    break;
-  }
-
-  return lines.join("\n").replace(/\n{3,}/g, "\n\n").trim();
+  if (prev && payloadOf(prev) === payload) return false;
+  fs.writeFileSync(DATA_JS, `${header}\n${payload}`);
+  return true;
 }
 
-function splitParts(text) {
-  if (!text) return [""];
-  // 單則貼文內的續文標記：「…（留言續）」或 「(continued)」
-  const byMarker = text.split(/\n(?=[^\n]*(?:留言續|continued|以下接續|↓\s*$))/i);
-  if (byMarker.length > 1) {
-    return byMarker.map((s) => s.replace(/\n?(?:留言續|continued|以下接續)\s*$/i, "").trim()).filter(Boolean);
-  }
-  return [text];
-}
-
+/* ---------- 文字清理（純函式位於 scripts/lib/thread_text.mjs） ---------- */
 function extractLinks(text) {
   const re = /https?:\/\/[^\s，。、）)」』]+/g;
   const found = text.match(re) || [];
@@ -586,6 +517,11 @@ async function refreshLikes(posts) {
   const likes = new Map();
   if (!pending.length) return likes;
 
+  // 每則要開一次 embed 頁，全部跑完可能超過 workflow 的 10 分鐘；
+  // 給一個總體預算，超過就保留舊的讚數（不是錯誤，隔天再補）。
+  const deadline = Date.now() + LIKES_BUDGET_MS;
+  let timedOut = false;
+
   const executablePath = findChromium();
   const browser = await chromium.launch({ headless: true, ...(executablePath ? { executablePath } : {}) });
   const context = await browser.newContext({
@@ -598,6 +534,11 @@ async function refreshLikes(posts) {
   try {
     for (const p of pending) {
       if (likes.has(p.id)) continue; // 逛別則的 thread 頁時已經順手抓到
+      if (Date.now() > deadline) {
+        if (!timedOut) console.warn(`  ! 讚數更新超過時間預算（${LIKES_BUDGET_MS / 1000}s），其餘保留舊值`);
+        timedOut = true;
+        continue;
+      }
       try {
         await page.goto(`https://www.threads.com/@${HANDLE}/post/${p.id}/embed`, {
           waitUntil: "domcontentloaded",
@@ -844,17 +785,21 @@ async function main() {
   }
 
   const syncedAt = new Date().toISOString();
-  writeDataJs({
+  const wrote = writeDataJs({
     profile: existing.profile,
     share: existing.share,
     projects: existing.projects,
     posts,
+    friends: existing.friends,
     syncedAt,
   });
 
   const added = nextPosts.filter((p) => !existingById.has(p.id)).length;
   const mergedThreads = nextPosts.filter((p) => p.thread && p.thread.length > 1).length;
-  console.log(`完成（${method}）：新增 ${added}、合併 thread ${mergedThreads} 組、總計 ${posts.length}`);
+  console.log(
+    `完成（${method}）：新增 ${added}、合併 thread ${mergedThreads} 組、總計 ${posts.length}` +
+      (wrote ? "、已寫入 data.js" : "、內容無變化（未寫入）"),
+  );
   if (DRY_RUN) console.log("（dry-run，未寫入檔案）");
 }
 

@@ -48,7 +48,10 @@ function save(cats, posts) {
 
 const posts = load("data.js", "THREADS_POSTS") || [];
 const defs = load("categories.js", "CAT_DEFS") || [];
-const cats = ALL ? {} : { ...(load("data.cats.js", "POST_CATS") || {}) };
+// 注意：--all 只代表「連已分類的也重分」，不能先把既有結果清空。
+// 每次執行只處理 CLASSIFY_MAX 則，先清空的話其餘貼文會永久變成未分類
+// （實測 81 筆會剩 30 筆）。--all 是分批覆蓋，跑幾次就全部重分完。
+const cats = { ...(load("data.cats.js", "POST_CATS") || {}) };
 
 if (seedIdx > 0) {
   Object.assign(cats, JSON.parse(fs.readFileSync(process.argv[seedIdx + 1], "utf8")));
@@ -86,9 +89,13 @@ async function classify(post) {
   return { c: j.c, t };
 }
 
-const todo = posts.filter((p) => !cats[p.id]);
+const todo = ALL ? posts : posts.filter((p) => !cats[p.id]);
 if (!todo.length) { console.log("所有貼文都已分類。"); process.exit(0); }
-console.log(`有 ${todo.length} 則貼文還沒分類${todo.length > MAX ? `，本次先處理 ${MAX} 則` : ""}。`);
+console.log(
+  ALL
+    ? `重新分類全部 ${todo.length} 則${todo.length > MAX ? `，本次先處理 ${MAX} 則，其餘保留原分類` : ""}。`
+    : `有 ${todo.length} 則貼文還沒分類${todo.length > MAX ? `，本次先處理 ${MAX} 則` : ""}。`,
+);
 if (DRY) { for (const p of todo.slice(0, MAX)) console.log("  ", p.id, (p.parts[0] || "").slice(0, 30).replace(/\n/g, " ")); process.exit(0); }
 if (!KEY) { console.log("沒有設定 ANTHROPIC_API_KEY，略過自動分類（這些貼文會先顯示在「未分類」）。"); process.exit(0); }
 
@@ -103,4 +110,4 @@ for (const p of todo.slice(0, MAX)) {
   }
 }
 if (ok) save(cats, posts);
-console.log(`自動分類完成 ${ok}/${Math.min(todo.length, MAX)} 則。`);
+console.log(`自動分類完成 ${ok}/${Math.min(todo.length, MAX)} 則。${todo.length > MAX ? "（還有未處理的，再跑一次可續）" : ""}`);

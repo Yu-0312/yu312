@@ -63,6 +63,10 @@ jobs:
           node scripts/translate_new.mjs
           node scripts/build_i18n.mjs --lenient
 
+      # 寫回前先驗資料形狀（漏寫 global、貼文缺欄位、翻譯段數不符都會擋下來）
+      - name: Validate data.js
+        run: node scripts/check_data.mjs
+
       - name: Commit and push if changed
         run: |
           git config user.name "github-actions[bot]"
@@ -73,4 +77,11 @@ jobs:
             exit 0
           fi
           git commit -m "Sync Threads posts $(date -u +%Y-%m-%d)"
+          # 若同時有人手動 push，rebase 後重試；衝突時讓 workflow 失敗，不要硬推蓋掉別人的 commit
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            git pull --rebase --autostash || exit 1
+            sleep $((i * 5))
+          done
           git push
+

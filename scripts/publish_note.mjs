@@ -36,8 +36,11 @@ function normalizeNote(raw) {
 async function loadNotes() {
   const src = await readFile(NOTES_FILE, "utf8");
   const match = src.match(/window\.NOTES\s*=\s*(\[[\s\S]*\])\s*;?\s*$/);
-  if (!match) return [];
-  return JSON.parse(match[1]);
+  // 讀不懂就要擋下來：默默回空陣列的話，下一次 saveNotes() 會把既有筆記全部洗掉。
+  if (!match) throw new Error(`${NOTES_FILE} 格式不符（找不到結尾的 window.NOTES = [...]），拒絕覆寫`);
+  const list = JSON.parse(match[1]);
+  if (!Array.isArray(list)) throw new Error(`${NOTES_FILE} 的 NOTES 不是陣列，拒絕覆寫`);
+  return list;
 }
 
 async function saveNotes(list) {

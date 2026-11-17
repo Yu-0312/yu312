@@ -36,7 +36,7 @@ Yu（王宇錡 · [@yuqi._.0313](https://www.threads.com/@yuqi._.0313)）的個�
 
 - `categories.js`：分類定義，刻意只留 5 類（AI 新知 / 工具與資源 / 活動與機會 / 我的作品 / 想法與日常），想增減分類改這裡，再跑 `node scripts/classify_posts.mjs --all` 重分
 - `data.cats.js`：每則貼文的分類與主題標籤（`c` 分類、`t` 標籤）。獨立於 `data.js`，每日同步不會洗掉；可手動改，已有的項目不會被覆蓋
-- `scripts/classify_posts.mjs`（`npm run classify`）：用 Claude API 幫還沒分類的貼文分類；`--dry-run` 只看會處理哪些，`--all` 全部重分
+- `scripts/classify_posts.mjs`（`npm run classify`）：用 Claude API 幫還沒分類的貼文分類；`--dry-run` 只看會處理哪些，`--all` 連已分類的也重分。一次只處理 `CLASSIFY_MAX`（預設 30）則，沒處理到的會保留原分類，再跑一次就繼續往下
 - 每日同步（`sync-threads.yml`）會在抓到新貼文後自動跑這支，需要 repo secret `ANTHROPIC_API_KEY`；沒設就略過，新貼文會先顯示在「未分類」
 
 ## 語言切換（中文 / English）
@@ -70,6 +70,8 @@ npm run translate-new  # 用 Claude API 把缺的貼文翻成英文（寫進 i18
 ## 資料
 
 所有內容集中在 `data.js`：`PROFILE`、`THREADS_POSTS`（Threads 貼文，圖片在 `assets/threads/`）、`PROJECT_ITEMS`、`SHARE_ITEMS`、`FRIEND_LINKS`。
+
+同步腳本只會改寫它認得的 global，所以新增資料種類時要同時更新 `scripts/sync_threads.mjs` 的 `loadExisting()` / `DATA_GLOBALS`，否則下次同步會把新資料洗掉（`FRIEND_LINKS` 就曾因此消失）。改完資料可以跑 `npm run check` 檢查形狀：global 是否齊全、貼文欄位、圖片檔存不存在、分類與英文翻譯是否對得上。
 純靜態網頁，無框架、無追蹤碼，支援深色模式與 `prefers-reduced-motion`。
 
 ## Threads 自動同步
@@ -82,7 +84,7 @@ npm run translate-new  # 用 Claude API 把缺的貼文翻成英文（寫進 i18
 2. 新貼文併入 `data.js` 的 `THREADS_POSTS`，圖片存到 `assets/threads/`
 3. 逐則開公開 embed 頁，把每則貼文的實際按讚數存進 `likes`（首頁 ♥ 總和與動態頁卡片都用它）
 4. 較舊貼文與人工標的 `tag` 會保留，不會被覆蓋
-5. 有變更才 commit / push，GitHub Pages 自動部署
+5. 內容真的有不一樣才 commit / push（header 的時間戳不會單獨造成 commit），GitHub Pages 自動部署
 
 **多段貼文（thread / 續文）會合併成一張卡片**：Threads 的續文各自有獨立 post id，但在頁面內嵌 JSON（`data-sjs` script 與 GraphQL 回應）中會放在同一個 `thread_items` 陣列。同步以此為依據，把整個 thread 併入第一則（root），每段續文變成 `parts` 的一個元素，並在資料中記錄 `thread` 成員 id——之後的同步不會把續文再拆成獨立卡片，舊的續文連結（`posts.html#<續文id>`）也會導向合併後的卡片。
 

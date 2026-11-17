@@ -51,4 +51,11 @@ jobs:
             exit 0
           fi
           git commit -m "Publish writing-desk note"
+          # 若同時有人手動 push，rebase 後重試；衝突時讓 workflow 失敗，不要硬推蓋掉別人的 commit
+          for i in 1 2 3; do
+            if git push; then exit 0; fi
+            git pull --rebase --autostash || exit 1
+            sleep $((i * 5))
+          done
           git push
+
