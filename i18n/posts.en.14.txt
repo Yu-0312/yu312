@@ -1,0 +1,11 @@
+## DfwRKvGnWVu
+Sharing the app I'll be demoing this Friday at Meet Taipei!
+Five wins:
+1. AI is built into every feature, so you can ask questions right when you hit a problem
+2. Keep an investment journal and AI helps diagnose it
+3. It analyzes current events so you know what the news actually means
+4. Compete with friends in leagues
+5. Personalized paths, achievement badges, and weakness analysis
+Come try it out———
+---
+https://levelvest-plus.vercel.app/

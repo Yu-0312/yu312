@@ -1,6 +1,7 @@
 /* 貼文分類：c = 分類 id（見 categories.js），t = 主題標籤。由 scripts/classify_posts.mjs 以 AI 依內容判斷；
    可手動修改，已有的項目不會被覆蓋（除非用 --all）。獨立於 data.js，所以每日 Threads 同步不會洗掉。 */
 window.POST_CATS = {
+  "DfwRKvGnWVu": {"c":"mine","t":["LevelVest","Meet Taipei","Side Project"]},
   "DftHJ7fE-dd": {"c":"news","t":["OpenAI","ChatGPT Wallet"]},
   "De8lWSAE57E": {"c":"tools","t":["Grok Bot","OpenRouter","Review"]},
   "De3n3s_k_In": {"c":"tools","t":["DeepSeek","Qoder","Free Credits"]},

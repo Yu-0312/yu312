@@ -2,6 +2,12 @@
    獨立於 data.js，所以每日的 Threads 同步不會把翻譯洗掉。 */
 window.EN = window.EN || {};
 window.EN.posts = {
+ "DfwRKvGnWVu": {
+  "parts": [
+   "Sharing the app I'll be demoing this Friday at Meet Taipei!\nFive wins:\n1. AI is built into every feature, so you can ask questions right when you hit a problem\n2. Keep an investment journal and AI helps diagnose it\n3. It analyzes current events so you know what the news actually means\n4. Compete with friends in leagues\n5. Personalized paths, achievement badges, and weakness analysis\nCome try it out———",
+   "https://levelvest-plus.vercel.app/"
+  ]
+ },
  "DftHJ7fE-dd": {
   "parts": [
    "OpenAI officially launches ChatGPT Wallet!\n\nOfficial introduction: https://openai.com/index/introducing-chatgpt-wallet/\n\nSo what exactly is ChatGPT Wallet?\nPut simply, the agent takes over more of the steps in the purchasing process\n① Tell the AI what you want to buy\n② The agent searches and picks out products\n③ Confirm the product, price, and delivery details\n④ Start the payment with ChatGPT Wallet\n⑤ You complete the security verification\n⑥ The agent helps finish checkout\n\nCould AI even do the purchasing on its own in the future?\nPre-set a spending cap, the product categories it's allowed to buy, and the time window it's authorized to shop in — that should be feasible\ne.g. “Buy me household supplies once a month, budget no more than US$100, daily necessities only.”",
