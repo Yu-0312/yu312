@@ -4,9 +4,11 @@
    ========================================================== */
 
 :root {
-  --brand: #c45c26;
+  --brand: #b8551f;
+  /* 主色當背景時的文字色：暖爐配白字 4.8:1。studio.js 會依實際主色換成黑或白（六套配色都 ≥4.8:1）。 */
+  --on-brand: #ffffff;
   --brand-2: #e07a5f;
-  --brand-soft: rgba(196, 92, 38, 0.16);
+  --brand-soft: rgba(184, 85, 31, 0.16);
   --ink: #2c2418;
   --ink-2: #6b5c4c;
   --ink-3: #9a8b7a;
@@ -178,8 +180,9 @@ img { max-width: 100%; }
   transition: background 0.2s, color 0.2s, transform 0.2s, border-color 0.2s;
 }
 .chip-btn:hover { transform: translateY(-1px); color: var(--ink); }
-.chip-btn.is-active { background: var(--brand); border-color: var(--brand); color: #fff; }
+.chip-btn.is-active { background: var(--brand); border-color: var(--brand); color: var(--on-brand, #fff); }
 .chip-btn small { opacity: 0.7; margin-left: 0.2rem; }
+.chip-btn.is-active small { opacity: 1; }   /* 選中時底色是主色，半透明會掉到 AA 以下 */
 
 .btn {
   display: inline-flex;
@@ -192,11 +195,11 @@ img { max-width: 100%; }
   font-size: 0.88rem;
   font-weight: 600;
   background: var(--brand);
-  color: #fff;
+  color: var(--on-brand, #fff);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 8px 18px -10px rgba(53, 191, 171, 0.55);
   transition: transform 0.2s, filter 0.2s;
 }
-.btn:hover { color: #fff; transform: translateY(-1px); filter: brightness(1.04); }
+.btn:hover { color: var(--on-brand, #fff); transform: translateY(-1px); filter: brightness(1.04); }
 .btn--ghost {
   background: var(--card-strong);
   color: var(--ink);
@@ -322,7 +325,7 @@ img { max-width: 100%; }
 }
 .side-nav a:hover { background: var(--card-strong); color: var(--ink); transform: translateX(2px); }
 .side-nav a.is-active { background: var(--card-strong); }
-.side-nav a.is-active .nav-ico { background: var(--brand); color: #fff; }
+.side-nav a.is-active .nav-ico { background: var(--brand); color: var(--on-brand, #fff); }
 .side-nav a .count { margin-left: auto; font-size: 0.75rem; color: var(--ink-3); font-weight: 500; }
 .nav-ico {
   width: 30px; height: 30px; border-radius: 10px;
@@ -434,8 +437,8 @@ img { max-width: 100%; }
   width: 4px; height: 4px; margin-left: -2px; border-radius: 50%;
   background: var(--brand);
 }
-.cal-grid .day.is-today { background: var(--brand); color: #fff; font-weight: 700; }
-.cal-grid .day.is-today::after { background: #fff; }
+.cal-grid .day.is-today { background: var(--brand); color: var(--on-brand, #fff); font-weight: 700; }
+.cal-grid .day.is-today::after { background: var(--on-brand, #fff); }
 .cal-grid .day.is-empty { visibility: hidden; }
 
 /* 最新貼文 — 時間軸列表 */
@@ -511,8 +514,8 @@ img { max-width: 100%; }
 .soc svg { width: 18px; height: 18px; }
 .soc--dark { background: #1f2426; border-color: #1f2426; color: #fff; }
 .soc--dark:hover { color: #fff; filter: brightness(1.2); }
-.soc--brand { background: var(--brand); border-color: transparent; color: #fff; }
-.soc--brand:hover { color: #fff; }
+.soc--brand { background: var(--brand); border-color: transparent; color: var(--on-brand, #fff); }
+.soc--brand:hover { color: var(--on-brand, #fff); }
 
 /* 隨機推薦 */
 .rec-row { display: flex; gap: 0.95rem; align-items: center; }
@@ -611,7 +614,7 @@ img { max-width: 100%; }
   transition: background 0.2s, color 0.2s;
 }
 .top-nav a:hover { color: var(--ink); background: var(--card-strong); }
-.top-nav a.is-active { background: var(--brand); color: #fff; }
+.top-nav a.is-active { background: var(--brand); color: var(--on-brand, #fff); }
 .top-nav .home img { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; }
 .top-nav .home { padding: 0.18rem; flex: 0 0 auto; }
 .top-nav .theme-toggle { width: 32px; height: 32px; flex: 0 0 auto; margin-left: 0.2rem; }
@@ -767,8 +770,8 @@ img { max-width: 100%; }
   font-size: 0.78rem; font-weight: 600; color: var(--ink);
 }
 .item-links a:hover { color: var(--brand); }
-.item-links a.primary { background: var(--brand); border-color: var(--brand); color: #fff; }
-.item-links a.primary:hover { color: #fff; filter: brightness(1.04); }
+.item-links a.primary { background: var(--brand); border-color: var(--brand); color: var(--on-brand, #fff); }
+.item-links a.primary:hover { color: var(--on-brand, #fff); filter: brightness(1.04); }
 
 .proj-feature {
   display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.2rem; margin-bottom: 1.2rem;
@@ -1145,7 +1148,7 @@ img { max-width: 100%; }
 .chip-btn.is-active {
   background: var(--brand);
   border-color: transparent;
-  color: #fff;
+  color: var(--on-brand, #fff);
 }
 .chip-btn small {
   margin-left: 6px;
@@ -1379,12 +1382,12 @@ img { max-width: 100%; }
   border-radius: 12px;
   border: 1px solid transparent;
   background: var(--brand);
-  color: #fff;
+  color: var(--on-brand, #fff);
   font-size: 14px;
   font-weight: 800;
   cursor: pointer;
 }
-.btn:hover { filter: brightness(1.05); color: #fff; }
+.btn:hover { filter: brightness(1.05); color: var(--on-brand, #fff); }
 .btn--ghost {
   background: var(--card-strong);
   border-color: var(--hair);
@@ -1422,7 +1425,7 @@ img { max-width: 100%; }
   right: 18px;
 }
 .studio-fab--drag.is-on {
-  color: #fff;
+  color: var(--on-brand, #fff);
   background: var(--brand);
 }
 @media (max-width: 640px) {
@@ -1439,7 +1442,7 @@ img { max-width: 100%; }
   padding: 6px 16px; border-radius: 999px; cursor: pointer; transition: background .2s, color .2s;
 }
 .view-tabs button:hover { color: var(--ink); }
-.view-tabs button.is-active { background: var(--brand); color: #fff; }
+.view-tabs button.is-active { background: var(--brand); color: var(--on-brand, #fff); }
 .tl-filters { justify-content: center; margin-bottom: 1.2rem; }
 .timeline { display: flex; flex-direction: column; gap: 1.1rem; max-width: 860px; margin: 0 auto; }
 .tl-group { padding: 1.3rem 1.5rem 1rem; }

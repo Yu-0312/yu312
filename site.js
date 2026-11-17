@@ -152,225 +152,6 @@
   }
 
   /* ==========================================================
-     首頁
-     ========================================================== */
-  function greetWord(h = new Date().getHours()) {
-    if (h < 5) return "Good Night";
-    if (h < 11) return "Good Morning";
-    if (h < 18) return "Good Afternoon";
-    if (h < 22) return "Good Evening";
-    return "Good Night";
-  }
-
-  function tickClock() {
-    const el = $("#clock");
-    if (!el) return;
-    const d = new Date();
-    el.innerHTML = `${pad(d.getHours())}<span class="colon">:</span>${pad(d.getMinutes())}`;
-    const sub = $("#clockSub");
-    if (sub) sub.textContent = `${d.getMonth() + 1} 月 ${d.getDate()} 日 · ${WEEK[d.getDay()]}`;
-  }
-
-  function renderCalendar() {
-    const title = $("#calTitle");
-    const grid = $("#calendar");
-    if (!title || !grid) return;
-    const now = new Date();
-    const y = now.getFullYear();
-    const m = now.getMonth();
-    title.textContent = `${y} / ${m + 1}`;
-    const byDay = {};
-    POSTS.forEach((p) => { const k = dayKey(new Date(p.time)); (byDay[k] = byDay[k] || []).push(p); });
-    const monthCount = POSTS.filter((p) => { const d = new Date(p.time); return d.getFullYear() === y && d.getMonth() === m; }).length;
-    const note = $("#calNote");
-    if (note) note.textContent = monthCount ? `本月發文 ${monthCount} 則` : "本月還沒發文";
-    const start = (new Date(y, m, 1).getDay() + 6) % 7;
-    const days = new Date(y, m + 1, 0).getDate();
-    let html = ["一", "二", "三", "四", "五", "六", "日"].map((d) => `<div class="dow">${d}</div>`).join("");
-    for (let i = 0; i < start; i++) html += `<div class="day is-empty"></div>`;
-    for (let d = 1; d <= days; d++) {
-      const k = `${y}-${pad(m + 1)}-${pad(d)}`;
-      const cls = `day${d === now.getDate() ? " is-today" : ""}${byDay[k] ? " has-post" : ""}`;
-      html += byDay[k]
-        ? `<a class="${cls}" href="./posts.html#${byDay[k][0].id}" title="${byDay[k].length} 則貼文">${d}</a>`
-        : `<div class="${cls}">${d}</div>`;
-    }
-    grid.innerHTML = html;
-  }
-
-  function renderLatest() {
-    const box = $("#latest");
-    if (!box || !POSTS.length) return;
-    const p = POSTS[0];
-    const L = I.post(p);
-    const imgs = postImgs(p).slice(0, 2);
-    box.innerHTML = `
-      <div class="latest-body">
-        <div>
-          <div class="latest-meta">${L.tag ? `<span class="chip">${esc(L.tag)}</span>` : ""}<time datetime="${p.time}">${ago(p.time)}</time></div>
-          <p class="latest-text">${esc(L.parts.join("\n\n"))}</p>
-        </div>
-        ${imgs.length ? `<div class="latest-imgs">${imgs.map((i) => `<img src="${i.src}" alt="${esc(i.alt)}" loading="lazy">`).join("")}</div>` : ""}
-      </div>
-      <div class="latest-foot">
-        <a class="btn" href="./posts.html#${p.id}">閱讀全文</a>
-        <a class="btn btn--ghost" href="${p.url}" target="_blank" rel="noopener">在 Threads 查看 ${svg("ext")}</a>
-      </div>
-      <ul class="latest-list">
-        ${POSTS.slice(1, 5).map((q) => `<li><a href="./posts.html#${q.id}"><time>${fmtDate(q.time).slice(5)}</time><span>${esc(firstLine(q))}</span></a></li>`).join("")}
-      </ul>`;
-  }
-
-  function renderPolaroids() {
-    const box = $("#polaroids");
-    if (!box) return;
-    const picks = [];
-    for (const p of POSTS) {
-      const img = postImgs(p).find((i) => i.h >= i.w * 0.9);
-      if (img) picks.push({ p, img });
-      if (picks.length === 3) break;
-    }
-    box.innerHTML = picks
-      .map(({ p, img }) => `<a class="polaroid" href="./posts.html#${p.id}" title="${esc(firstLine(p))}"><img src="${img.src}" alt="${esc(img.alt || firstLine(p))}" loading="lazy"></a>`)
-      .join("");
-  }
-
-  function setupRecommend() {
-    const card = $("#recCard");
-    if (!card) return;
-    const pool = [
-      ...SHARE.map((s) => { const x = I.share(s); return { title: x.title, desc: x.desc, url: s.site || s.url, badge: s.cats[0] }; }),
-      ...PROJECTS.map((s) => { const x = I.project(s); return { title: s.name, desc: x.desc, url: s.site || s.url, badge: s.tags[0] }; }),
-    ];
-    let last = -1;
-    const pick = () => {
-      let i;
-      do { i = Math.floor(Math.random() * pool.length); } while (pool.length > 1 && i === last);
-      last = i;
-      const it = pool[i];
-      card.href = it.url;
-      $("#recThumb").textContent = it.badge;
-      $("#recTitle").textContent = it.title;
-      $("#recDesc").textContent = it.desc;
-    };
-    pick();
-    const btn = $("#recShuffle");
-    if (btn) btn.addEventListener("click", pick);
-  }
-
-  /* 專注白噪音（Web Audio 即時合成，不需任何音檔） */
-  function setupNoise() {
-    const box = $("#noise");
-    if (!box) return;
-    const btn = $("#noiseBtn");
-    const label = $("#noiseLabel");
-    const TYPES = { rain: "雨聲", brown: "棕噪音", white: "白噪音" };
-    let type = "rain";
-    let ctx, src, gain, playing = false;
-
-    function buffer(kind) {
-      const len = ctx.sampleRate * 4;
-      const b = ctx.createBuffer(1, len, ctx.sampleRate);
-      const d = b.getChannelData(0);
-      let last = 0;
-      for (let i = 0; i < len; i++) {
-        const w = Math.random() * 2 - 1;
-        if (kind === "white") d[i] = w * 0.35;
-        else { last = (last + 0.02 * w) / 1.02; d[i] = last * (kind === "brown" ? 3.2 : 2.2); }
-        if (kind === "rain" && Math.random() < 0.0009) d[i] += (Math.random() - 0.5) * 0.9;
-      }
-      return b;
-    }
-    function start() {
-      ctx = ctx || new (window.AudioContext || window.webkitAudioContext)();
-      src = ctx.createBufferSource();
-      src.buffer = buffer(type);
-      src.loop = true;
-      const filter = ctx.createBiquadFilter();
-      filter.type = type === "rain" ? "highpass" : "lowpass";
-      filter.frequency.value = type === "rain" ? 400 : type === "brown" ? 900 : 9000;
-      gain = ctx.createGain();
-      gain.gain.value = 0;
-      gain.gain.linearRampToValueAtTime(0.6, ctx.currentTime + 0.8);
-      src.connect(filter).connect(gain).connect(ctx.destination);
-      src.start();
-    }
-    function stop() {
-      if (!src) return;
-      const s = src;
-      gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
-      setTimeout(() => s.stop(), 350);
-      src = null;
-    }
-    function paint() {
-      box.classList.toggle("is-playing", playing);
-      btn.innerHTML = svg(playing ? "pause" : "play");
-      btn.setAttribute("aria-label", playing ? "暫停" : "播放");
-      label.textContent = playing ? `正在播放 · ${TYPES[type]}` : "點擊播放，陪你專注";
-    }
-    btn.addEventListener("click", () => {
-      playing = !playing;
-      if (playing) start(); else stop();
-      paint();
-    });
-    box.querySelectorAll("[data-noise]").forEach((b) =>
-      b.addEventListener("click", () => {
-        type = b.dataset.noise;
-        box.querySelectorAll("[data-noise]").forEach((x) => x.classList.toggle("is-active", x === b));
-        if (playing) { stop(); start(); }
-        paint();
-      })
-    );
-    paint();
-  }
-
-  /* 番茄鐘 */
-  function setupPomodoro() {
-    const t = $("#pomoTime");
-    const btn = $("#pomoBtn");
-    if (!t || !btn) return;
-    const FULL = 25 * 60;
-    let left = FULL, timer = null;
-    const paint = () => {
-      t.textContent = `${pad(Math.floor(left / 60))}:${pad(left % 60)}`;
-      btn.textContent = timer ? "暫停" : left === FULL ? "開始" : "繼續";
-    };
-    btn.addEventListener("click", () => {
-      if (timer) { clearInterval(timer); timer = null; }
-      else {
-        timer = setInterval(() => {
-          left -= 1;
-          if (left <= 0) { clearInterval(timer); timer = null; left = FULL; document.title = "⏰ 休息一下！"; }
-          paint();
-        }, 1000);
-      }
-      paint();
-    });
-    t.addEventListener("dblclick", () => { clearInterval(timer); timer = null; left = FULL; paint(); });
-    paint();
-  }
-
-  /* 讚／收藏：首頁 ♥ 由 studio.js 的 setupLikeDaily 顯示 Threads 讚數總和 */
-
-  function initHome() {
-    const g = $("#greetPart");
-    if (g) g.textContent = greetWord();
-    const st = $("#stats");
-    if (st) {
-      const stars = PROJECTS.reduce((s, p) => s + (p.stars || 0), 0);
-      st.innerHTML = `<div class="stat"><b>${POSTS.length}</b><span>篇動態</span></div><div class="stat"><b>${PROJECTS.length + SHARE.filter((s) => !PROJECTS.some((p) => p.name === s.name)).length}</b><span>個專案</span></div><div class="stat"><b>${stars}</b><span>GitHub ★</span></div>`;
-    }
-    tickClock();
-    setInterval(tickClock, 10000);
-    renderCalendar();
-    renderLatest();
-    renderPolaroids();
-    setupRecommend();
-    setupNoise();
-    setupPomodoro();
-  }
-
-  /* ==========================================================
      動態頁
      ========================================================== */
   const lightbox = (() => {
@@ -632,7 +413,7 @@
     const views = v.get(id);
     const on = v.marked(id);
     return `<div class="views-row" data-id="${esc(id)}" title="只記錄在你的瀏覽器">
-      <span>你看過 ${views.toLocaleString()} 次</span>
+      <span class="views-count">你看過 ${views.toLocaleString()} 次</span>
       <button type="button" class="mark-btn${on ? " is-on" : ""}" data-mark="${esc(id)}">${on ? "★ 已收藏" : "☆ 收藏"}</button>
     </div>`;
   }
@@ -678,7 +459,21 @@
       paint();
     });
     search.addEventListener("input", () => { q = search.value.trim().toLowerCase(); paint(); });
+    // 點「開啟／GitHub」才算是真的看過一次：累計到 yu-view:<id>，並就地更新數字
+    // （views.bump 之前沒有任何地方呼叫，所以「你看過 N 次」永遠是 0）。
     grid.addEventListener("click", (e) => {
+      const link = e.target.closest(".item-links a");
+      if (link) {
+        const row = link.closest(".item-card")?.querySelector(".views-row");
+        const id = row?.dataset.id;
+        const v = window.YU?.views;
+        if (id && v) {
+          const n = v.bump(id);
+          const c = row.querySelector(".views-count");
+          if (c) c.textContent = I.t(`你看過 ${n.toLocaleString()} 次`);
+        }
+        return;
+      }
       const b = e.target.closest("[data-mark]");
       if (!b) return;
       e.preventDefault();
@@ -687,12 +482,7 @@
       if (!v) return;
       const on = v.mark(id);
       b.classList.toggle("is-on", on);
-      b.textContent = on ? "★ 已收藏" : "☆ 收藏";
-      const row = b.closest(".views-row");
-      if (row) {
-        const m = $(".marks", row);
-        if (m) m.textContent = on ? "已收藏" : "";
-      }
+      b.textContent = I.t(on ? "★ 已收藏" : "☆ 收藏");
     });
     paint();
   }
@@ -729,7 +519,6 @@
   }
 
   mountChrome();
-  if (page === "home") initHome();
   if (page === "posts") initPosts();
   if (page === "share") initShare();
   if (page === "projects") initProjects();

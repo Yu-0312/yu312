@@ -39,7 +39,7 @@
 
   const PALETTES = {
     mint: { name: "薄荷", accent: "#3cbfa8", accent2: "#2fa893", bg: "#e6e7e6", wash1: "rgba(232,232,236,0.95)", wash2: "rgba(242,242,238,0.9)", wash3: "rgba(214,216,140,0.95)", wash4: "rgba(186,212,186,0.95)", ink: "#3d4f48", ink2: "#6f8179", ink3: "#93a69c" },
-    ember: { name: "暖爐", accent: "#c45c26", accent2: "#e07a5f", bg: "#f6efe3", wash1: "rgba(224,122,95,0.22)", wash2: "rgba(255,248,235,0.9)", wash3: "rgba(129,178,154,0.28)", wash4: "rgba(244,198,120,0.32)", ink: "#2c2418", ink2: "#6b5c4c", ink3: "#9a8b7a" },
+    ember: { name: "暖爐", accent: "#b8551f", accent2: "#e07a5f", bg: "#f6efe3", wash1: "rgba(224,122,95,0.22)", wash2: "rgba(255,248,235,0.9)", wash3: "rgba(129,178,154,0.28)", wash4: "rgba(244,198,120,0.32)", ink: "#2c2418", ink2: "#6b5c4c", ink3: "#9a8b7a" },
     sage: { name: "苔綠", accent: "#3d7a5c", accent2: "#81b29a", bg: "#eef2ea", wash1: "rgba(129,178,154,0.3)", wash2: "rgba(255,255,250,0.85)", wash3: "rgba(196,92,38,0.18)", wash4: "rgba(168,196,140,0.32)", ink: "#243028", ink2: "#5c6b60", ink3: "#8a988c" },
     plum: { name: "李子", accent: "#7b3d5b", accent2: "#c47b9a", bg: "#f4eef1", wash1: "rgba(196,123,154,0.24)", wash2: "rgba(255,250,252,0.88)", wash3: "rgba(122,140,180,0.22)", wash4: "rgba(220,180,160,0.28)", ink: "#2e2230", ink2: "#6b5568", ink3: "#9a8498" },
     ocean: { name: "深海", accent: "#1f6f8b", accent2: "#3d9bb8", bg: "#eaf1f4", wash1: "rgba(61,155,184,0.22)", wash2: "rgba(250,253,255,0.88)", wash3: "rgba(232,168,96,0.22)", wash4: "rgba(120,180,190,0.3)", ink: "#1c2e36", ink2: "#546872", ink3: "#8aa0aa" },
@@ -73,6 +73,10 @@
     root.style.setProperty("--wash-2", p.wash2);
     root.style.setProperty("--wash-3", p.wash3);
     root.style.setProperty("--wash-4", p.wash4);
+    // 主色當背景時的文字色（按鈕、選中的分類、今天的日期…）。
+    // 薄荷 #3cbfa8 配白字只有 2.28:1、夜航 #e8a87c 只有 2.03:1，都不符 WCAG AA；
+    // 依主色亮度自動選黑或白，使用者自訂主色也一樣受惠。
+    root.style.setProperty("--on-brand", readableInk(accent));
     root.dataset.palette = key;
     root.dataset.theme = key === "night" ? "dark" : root.dataset.theme || "light";
     if (key === "night") root.dataset.theme = "dark";
@@ -83,6 +87,30 @@
     const n = h.length === 3 ? h.split("").map((c) => c + c).join("") : h;
     const r = parseInt(n.slice(0, 2), 16), g = parseInt(n.slice(2, 4), 16), b = parseInt(n.slice(4, 6), 16);
     return `rgba(${r},${g},${b},${a})`;
+  }
+
+  function relLum(hex) {
+    const h = String(hex || "").replace("#", "");
+    const n = h.length === 3 ? h.split("").map((c) => c + c).join("") : h;
+    if (n.length !== 6) return 1;
+    const [r, g, b] = [0, 2, 4]
+      .map((i) => parseInt(n.slice(i, i + 2), 16) / 255)
+      .map((c) => (c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4)));
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+  }
+
+  function contrastRatio(a, b) {
+    const l1 = relLum(a), l2 = relLum(b);
+    return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+  }
+
+  // 挑對比高的那個；自訂主色落在中間灰時，至少不會比另一種更糟。
+  function readableInk(bg) {
+    const onWhite = contrastRatio("#ffffff", bg);
+    const onInk = contrastRatio("#14231f", bg);
+    if (onWhite >= 4.5) return "#ffffff";
+    if (onInk >= 4.5) return "#14231f";
+    return onWhite >= onInk ? "#ffffff" : "#14231f";
   }
 
   /* ---------- 本機瀏覽紀錄與收藏（只存在這個瀏覽器，不是全站統計） ---------- */
@@ -180,9 +208,14 @@
     let dragEl = null;
     board.classList.add("can-drag");
     $$(".board > *").forEach((el) => {
-      el.draggable = true;
+      // 只有進入「佈局編輯」模式才能拖；否則滑鼠不小心拖到卡片就會改掉順序並存檔。
+      el.draggable = false;
       el.dataset.dragLabel = dragLabel(el);
       el.addEventListener("dragstart", (e) => {
+        if (!board.classList.contains("layout-mode")) {
+          e.preventDefault();
+          return;
+        }
         dragEl = el;
         el.classList.add("is-dragging");
         e.dataTransfer.effectAllowed = "move";
@@ -482,34 +515,97 @@
   }
 
   /* ---------- Markdown 預覽（寫作台 / 筆記頁共用） ---------- */
+  // 寫作台 / 筆記頁共用的極簡 Markdown → HTML。
+  // 先把整段 esc() 過再組 HTML，所以不會有注入問題；連結／圖片只允許安全 scheme。
+  const MD_SAFE_URL = /^(?:https?:\/\/|mailto:|\/|\.\/|\.\.\/|#)/i;
+
+  function mdInline(text) {
+    // code span 先抽出來，避免裡面的 * 被粗斜體規則改到
+    const codes = [];
+    let s = text.replace(/`([^`]+)`/g, (m, code) => {
+      codes.push(code);
+      return `\u0000${codes.length - 1}\u0000`;
+    });
+    s = s
+      .replace(/!\[([^\]]*)\]\(([^)\s]+)\)/g, (m, alt, url) =>
+        MD_SAFE_URL.test(url) ? `<img src="${url}" alt="${alt}" loading="lazy" decoding="async">` : m,
+      )
+      .replace(/\[([^\]]+)\]\(([^)\s]+)\)/g, (m, label, url) =>
+        MD_SAFE_URL.test(url) ? `<a href="${url}" target="_blank" rel="noopener">${label}</a>` : m,
+      )
+      .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+      .replace(/(^|[^*])\*([^*\n]+)\*/g, "$1<em>$2</em>");
+    return s.replace(/\u0000(\d+)\u0000/g, (m, i) => `<code>${codes[Number(i)]}</code>`);
+  }
+
+  // 支援：標題、無序／有序清單、blockquote、code fence、粗體、斜體、code、連結、圖片。
+  // 表格刻意不支援（寫作台只需要夠用的渲染），但未支援的語法會原樣顯示，不會消失。
   function mdToHtml(md) {
-    const lines = esc(md).split(/\n/);
-    let html = "", inCode = false, inList = false;
-    for (const line of lines) {
-      if (line.startsWith("```")) {
-        if (inCode) { html += "</code></pre>"; inCode = false; }
-        else { html += "<pre><code>"; inCode = true; }
+    const lines = esc(md).split(/\r?\n/);
+    const out = [];
+    let list = null;      // 'ul' | 'ol' | null
+    let inCode = false;
+    let codeBuf = [];
+    const closeList = () => {
+      if (list) { out.push(`</${list}>`); list = null; }
+    };
+    const cells = (l) => l.trim().replace(/^\|/, "").replace(/\|$/, "").split("|").map((c) => c.trim());
+    const alignOf = (c) => (c.startsWith(":") && c.endsWith(":") ? "center" : c.endsWith(":") ? "right" : c.startsWith(":") ? "left" : "");
+    for (let i = 0; i < lines.length; i++) {
+      const line = lines[i];
+      if (line.trimStart().startsWith("```")) {
+        if (inCode) { out.push(`<pre><code>${codeBuf.join("\n")}</code></pre>`); codeBuf = []; inCode = false; }
+        else { closeList(); inCode = true; }
         continue;
       }
-      if (inCode) { html += line + "\n"; continue; }
-      if (/^#{1,3}\s/.test(line)) {
-        const level = line.match(/^#+/)[0].length;
-        html += `<h${level}>${line.replace(/^#+\s/, "")}</h${level}>`;
+      if (inCode) { codeBuf.push(line); continue; }
+      // GFM 表格：表頭 + 分隔列（|---|---:|）。turndown-gfm 匯入時就會產生，少了這段會變成一堆直線。
+      const sep = lines[i + 1];
+      const sepCells = sep && line.includes("|") ? cells(sep) : [];
+      if (sepCells.length && cells(line).length === sepCells.length && sepCells.every((c) => /^:?-+:?$/.test(c))) {
+        closeList();
+        const head = cells(line);
+        const aligns = sepCells.map(alignOf);
+        let html = "<table><thead><tr>";
+        head.forEach((c, k) => { html += `<th${aligns[k] ? ` style="text-align:${aligns[k]}"` : ""}>${mdInline(c)}</th>`; });
+        html += "</tr></thead><tbody>";
+        let j = i + 2;
+        while (j < lines.length && lines[j].trim() && lines[j].includes("|")) {
+          html += "<tr>";
+          cells(lines[j]).forEach((c, k) => { html += `<td${aligns[k] ? ` style="text-align:${aligns[k]}"` : ""}>${mdInline(c)}</td>`; });
+          html += "</tr>";
+          j++;
+        }
+        out.push(html + "</tbody></table>");
+        i = j - 1;
         continue;
       }
-      if (/^[-*]\s/.test(line)) {
-        if (!inList) { html += "<ul>"; inList = true; }
-        html += `<li>${line.replace(/^[-*]\s/, "")}</li>`;
+      if (/^\s*#{1,3}\s/.test(line)) {
+        closeList();
+        const level = line.match(/^\s*(#+)/)[1].length;
+        out.push(`<h${level}>${mdInline(line.replace(/^\s*#+\s*/, ""))}</h${level}>`);
         continue;
       }
-      if (inList) { html += "</ul>"; inList = false; }
-      if (/^&gt;\s?/.test(line)) { html += `<blockquote>${line.replace(/^&gt;\s?/, "")}</blockquote>`; continue; }
-      if (!line.trim()) { html += ""; continue; }
-      html += `<p>${line.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>").replace(/\*(.+?)\*/g, "<em>$1</em>").replace(/`(.+?)`/g, "<code>$1</code>")}</p>`;
+      const ul = /^\s*[-*]\s+(.*)$/.exec(line);
+      if (ul) {
+        if (list !== "ul") { closeList(); out.push("<ul>"); list = "ul"; }
+        out.push(`<li>${mdInline(ul[1])}</li>`);
+        continue;
+      }
+      const ol = /^\s*\d+\.\s+(.*)$/.exec(line);
+      if (ol) {
+        if (list !== "ol") { closeList(); out.push("<ol>"); list = "ol"; }
+        out.push(`<li>${mdInline(ol[1])}</li>`);
+        continue;
+      }
+      closeList();
+      if (/^&gt;\s?/.test(line)) { out.push(`<blockquote>${mdInline(line.replace(/^&gt;\s?/, ""))}</blockquote>`); continue; }
+      if (!line.trim()) continue;
+      out.push(`<p>${mdInline(line)}</p>`);
     }
-    if (inList) html += "</ul>";
-    if (inCode) html += "</code></pre>";
-    return html;
+    closeList();
+    if (inCode) out.push(`<pre><code>${codeBuf.join("\n")}</code></pre>`);
+    return out.join("");
   }
   window.YU = window.YU || {};
   window.YU.mdToHtml = mdToHtml;
@@ -651,7 +747,7 @@
           ${cover.value ? `<img class="draft-cover" src="${esc(cover.value)}" alt="">` : ""}
           <h1>${esc(t)}</h1>
           <div class="draft-meta"><span class="chip">${esc(cat.value || "未分類")}</span>${tagList.map((x) => `<span class="chip chip--plain">#${esc(x)}</span>`).join("")}</div>
-          <div class="draft-body">${mdToHtml(body.value) || "<p class='muted'>（內容預覽）</p>"}</div>
+          <div class="draft-body">${mdToHtml(body.value) || `<p class="muted">${window.I18N ? I18N.t("（內容預覽）") : "（內容預覽）"}</p>`}</div>
         </article>`;
     }
 
@@ -835,7 +931,8 @@
   function setupFriends() {
     const grid = $("#friendsGrid");
     if (!grid) return;
-    const list = window.FRIEND_LINKS || [];
+    const I = window.I18N || {};
+    const list = (window.FRIEND_LINKS || []).map((f) => (I.friend ? I.friend(f) : f));
     const q = $("#friendSearch");
     const cats = $("#friendFilters");
     const kinds = ["全部", ...new Set(list.map((f) => f.kind || "朋友"))];
@@ -850,18 +947,18 @@
       grid.innerHTML = items.length
         ? items.map((f, i) => `
           <a class="card friend-card" href="${esc(f.url)}" target="_blank" rel="noopener" style="animation-delay:${Math.min(i, 10) * 0.04}s">
-            <div class="friend-avatar" style="background:${f.color || "var(--brand-soft)"}">${esc((f.name || "?").slice(0, 1))}</div>
+            <div class="friend-avatar" style="background:${f.color || "var(--brand-soft)"}">${esc([...(f.name || "?")][0])}</div>
             <div>
               <h3>${esc(f.name)}</h3>
               <p>${esc(f.desc || "")}</p>
               <span class="friend-url">${esc(f.url.replace(/^https?:\/\//, ""))}</span>
             </div>
           </a>`).join("")
-        : `<div class="empty">沒有符合的友鏈</div>`;
+        : `<div class="empty">${esc(I.t ? I.t("沒有符合的友鏈") : "沒有符合的友鏈")}</div>`;
     }
 
     if (cats) {
-      cats.innerHTML = kinds.map((k, i) => `<button type="button" class="chip-btn${i === 0 ? " is-active" : ""}" data-kind="${esc(k)}">${esc(k)}</button>`).join("");
+      cats.innerHTML = kinds.map((k, i) => `<button type="button" class="chip-btn${i === 0 ? " is-active" : ""}" data-kind="${esc(k)}">${esc(I.t ? I.t(k) : k)}</button>`).join("");
       cats.addEventListener("click", (e) => {
         const b = e.target.closest("[data-kind]");
         if (!b) return;
