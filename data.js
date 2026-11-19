@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-11-18T22:58:40.100Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-11-19T23:04:20.131Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -299,6 +299,46 @@ window.PROJECT_ITEMS = [
 ];
 window.THREADS_POSTS = [
  {
+  "id": "Df5zIe1E7A8",
+  "url": "https://www.threads.com/@yuqi._.0313/post/Df5zIe1E7A8",
+  "time": "2026-11-19T00:31:26.000Z",
+  "tag": "",
+  "parts": [
+   "當你要上 Meet Taipei 但是你的 Demo 還沒做完，應該要怎麼辦？\n1. 繼續睡今天就還沒開始\n2. 牛來～跟評審吹牛！\n3. 開啟 GTA VI 逃避 Meet Taipei\n求求各位當一次8萬塊，做做數據吧🧎‍♂️\nhttps://levelvest-plus.vercel.app/"
+  ],
+  "imgs": [
+   {
+    "src": "assets/threads/Df5zIe1E7A8-0.webp",
+    "w": 1080,
+    "h": 2340,
+    "alt": ""
+   },
+   {
+    "src": "assets/threads/Df5zIe1E7A8-1.webp",
+    "w": 1080,
+    "h": 2340,
+    "alt": ""
+   },
+   {
+    "src": "assets/threads/Df5zIe1E7A8-2.webp",
+    "w": 1080,
+    "h": 2340,
+    "alt": ""
+   },
+   {
+    "src": "assets/threads/Df5zIe1E7A8-3.webp",
+    "w": 1080,
+    "h": 2340,
+    "alt": ""
+   }
+  ],
+  "links": [
+   "https://levelvest-plus.vercel.app/"
+  ],
+  "video": false,
+  "likes": 4
+ },
+ {
   "id": "DfwRKvGnWVu",
   "url": "https://www.threads.com/@yuqi._.0313/post/DfwRKvGnWVu",
   "time": "2026-11-15T07:49:37.000Z",
@@ -319,7 +359,7 @@ window.THREADS_POSTS = [
    "https://levelvest-plus.vercel.app/"
   ],
   "video": true,
-  "likes": 6,
+  "likes": 7,
   "thread": [
    "DfwRKvGnWVu",
    "DfwSGxPE04x"
