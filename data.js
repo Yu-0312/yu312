@@ -1,5 +1,5 @@
 /* 網站資料 — 由 Threads (@yuqi._.0313) 與 GitHub (Yu-0312) 實際內容整理而來
-   Threads 同步於 2026-11-19T23:04:20.131Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
+   Threads 同步於 2026-11-21T21:39:56.095Z（scripts/sync_threads.mjs，GitHub Actions 每天自動更新） */
 window.PROFILE = {
  "name": "Yu",
  "handle": "yuqi._.0313",
@@ -1159,7 +1159,7 @@ window.THREADS_POSTS = [
    "https://www.modelscope.cn/models/Qwen/Qwen-Image-2.1"
   ],
   "video": false,
-  "likes": 190
+  "likes": 189
  },
  {
   "id": "DdgV7U3E2iT",
